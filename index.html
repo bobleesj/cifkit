@@ -561,8 +561,13 @@
 
 
 <h1 id="getting-started">Getting started</h1>
-<p>The purpose of this guide is to illustrate some of the main features that <code>cifkit</code> provides. It assumes a very basic knowledge of Python.</p>
-<p><code>cifkit</code> is an open source CIF library that supports supercell generation and provide tools for high-throuhgput analysis. It also provides various tools for determining coordination numbers, plotting polyhedrons from each site based on the coordination numbers, bond fractions, move and copy <code>.cif</code> files based on a set of attributes, and determine atomic mixing information in 2-3 lines of code.</p>
+<p>The purpose of this guide is to illustrate some of the main features that
+<code>cifkit</code> provides. It assumes a very basic knowledge of Python.</p>
+<p><code>cifkit</code> is an open source CIF library that supports supercell generation and
+provide tools for high-throuhgput analysis. It also provides various tools for
+determining coordination numbers, plotting polyhedrons from each site based on
+the coordination numbers, bond fractions, move and copy <code>.cif</code> files based on a
+set of attributes, and determine atomic mixing information in 2-3 lines of code.</p>
 <h2 id="installation">Installation</h2>
 <p>Install <code>cifkit</code> via:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>cifkit
@@ -570,9 +575,12 @@
 <p>You may need to download other dependencies:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>cifkit<span class="w"> </span>pyvista<span class="w"> </span>gemmi
 </code></pre></div>
-<p><code>gemmi</code> is used for parsing <code>.cif</code> files. <code>pyvista</code> is used for plotting polyhedrons.</p>
+<p><code>gemmi</code> is used for parsing <code>.cif</code> files. <code>pyvista</code> is used for plotting
+polyhedrons.</p>
 <h2 id="start-with-cifensemble">Start with CifEnsemble</h2>
-<p><code>cifkit</code> offers a class called <code>CifEnsemble</code> which handles many <code>.cif</code> files in a high-throuhgput way. You can initialize the object using the folder path containing <code>.cif</code> files shown below.</p>
+<p><code>cifkit</code> offers a class called <code>CifEnsemble</code> which handles many <code>.cif</code> files in
+a high-throuhgput way. You can initialize the object using the folder path
+containing <code>.cif</code> files shown below.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">CifEnsemble</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Initialize</span>
@@ -585,7 +593,8 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">cif_folder_path</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># &quot;tests/data/cif/ensemble_test&quot;</span>
 </code></pre></div>
-<p>If you do not have <code>.cif</code> files for testing, <code>cifkit</code> also provides a set of <code>.cif</code> files accessible.</p>
+<p>If you do not have <code>.cif</code> files for testing, <code>cifkit</code> also provides a set of
+<code>.cif</code> files accessible.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">Example</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
@@ -593,7 +602,8 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn_big_folder_path</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="get-unique-attributes">Get unique attributes</h3>
-<p>Use the <code>ensemble</code> object to get unique attributes such as elements, formulas, etc.</p>
+<p>Use the <code>ensemble</code> object to get unique attributes such as elements, formulas,
+etc.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Unique formulas</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_formulas</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># {&quot;EuIr2Ge2&quot;, &quot;CeRu2Ge2&quot;, &quot;LaRu2Ge2&quot;, &quot;Mo&quot;}</span>
@@ -619,7 +629,8 @@
 <a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="c1"># {&quot;hex&quot;, &quot;rt&quot;, &quot;rt_hex&quot;, &quot;&quot;}</span>
 </code></pre></div>
 <h3 id="get-distances-and-supercell-size-per-file">Get distances and supercell size per file</h3>
-<p>The following computes the size of each supercell and the minimum distance per file.</p>
+<p>The following computes the size of each supercell and the minimum distance per
+file.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Get min distance per file</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">minimum_distances</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># [(&quot;tests/data/cif/ensemble_test/250709.cif&quot;, 2.725),</span>
@@ -649,7 +660,9 @@
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">filter_by_space_group_numbers</span><span class="p">([</span><span class="mi">139</span><span class="p">])</span>
 </code></pre></div>
 <h3 id="move-and-copy-files">Move and copy files</h3>
-<p>Now you have a set of file paths with example below, you can copy and move files to a specific directroy. For high-throuhgout analysis, you might be interested in separating files based on tags, elements, coordination numbers, etc.</p>
+<p>Now you have a set of file paths with example below, you can copy and move files
+to a specific directroy. For high-throuhgout analysis, you might be interested
+in separating files based on tags, elements, coordination numbers, etc.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">file_paths</span> <span class="o">=</span> <span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="s2">&quot;tests/data/cif/ensemble_test/300169.cif&quot;</span><span class="p">,</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="s2">&quot;tests/data/cif/ensemble_test/300171.cif&quot;</span><span class="p">,</span>
@@ -663,11 +676,19 @@
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">copy_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="are-you-ready">Are you ready?</h2>
-<p>Now, if you are interested in working with individual <code>.cif</code> files and learn more about all features in <code>cifkit</code>, let's visit the <code>Example notebooks</code> section <a href="https://bobleesj.github.io/cifkit/notebooks/00_Intro/">here</a>!</p>
+<p>Now, if you are interested in working with individual <code>.cif</code> files and learn
+more about all features in <code>cifkit</code>, let's visit the <code>Example notebooks</code> section
+<a href="https://bobleesj.github.io/cifkit/notebooks/00_Intro/">here</a>!</p>
 <h2 id="research-projects-using-cifkit">Research projects using <code>cifkit</code></h2>
 <ul>
-<li>CIF Bond Analyzer (CBA) - extract and visualize bonding patterns - <a href="https://doi.org/10.1016/j.jallcom.2023.173241">DOI</a> | <a href="https://github.com/bobleesj/cif-bond-analyzer">GitHub</a></li>
-<li>Structure Analysis/Featurizer (SAF) - build geometric features for binary, ternary compounds - <a href="https://github.com/bobleesj/structure-analyzer-featurizer">GitHub</a></li>
+<li>CIF Bond Analyzer (CBA) - extract and visualize bonding patterns -
+  <a href="https://doi.org/10.1016/j.jallcom.2023.173241">DOI</a> |
+  <a href="https://github.com/bobleesj/cif-bond-analyzer">GitHub</a></li>
+<li>CIF Cleaner - move, copy .cif files based on attributes -
+  <a href="https://github.com/bobleesj/cif-cleaner">GitHub</a></li>
+<li>Structure Analysis/Featurizer (SAF) - build geometric features for binary,
+  ternary compounds -
+  <a href="https://github.com/bobleesj/structure-analyzer-featurizer">GitHub</a></li>
 </ul>
 
 
