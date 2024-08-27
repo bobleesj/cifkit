@@ -1,5 +1,6 @@
-from cifkit.data.mendeleeve_handler import get_mendeleev_nums_from_pair_tuple
 from itertools import product
+
+from cifkit.data.mendeleeve_handler import get_mendeleev_nums_from_pair_tuple
 
 
 def get_bond_pairs(labels: list[str]) -> set[tuple]:

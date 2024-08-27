@@ -1,17 +1,19 @@
-import pytest
-from pathlib import Path
 import os
+from pathlib import Path
+
+import pytest
+
+from cifkit.utils.error_messages import FileError
 from cifkit.utils.folder import (
-    get_file_path,
-    get_file_count,
-    get_file_paths,
-    make_output_folder,
     check_file_exists,
     check_file_not_empty,
-    move_files,
     copy_files,
+    get_file_count,
+    get_file_path,
+    get_file_paths,
+    make_output_folder,
+    move_files,
 )
-from cifkit.utils.error_messages import FileError
 
 
 def test_get_file_count(cif_folder_path_test):

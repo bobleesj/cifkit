@@ -1,8 +1,6 @@
-from cifkit.preprocessors.environment_util import (
-    flat_site_connections,
-)
-
 import pytest
+
+from cifkit.preprocessors.environment_util import flat_site_connections
 
 
 @pytest.mark.fast

@@ -1,8 +1,10 @@
 import os
 import shutil
+
 import pytest
+
 from cifkit.preprocessors.error import move_files_based_on_errors
-from cifkit.utils.folder import get_file_paths, get_file_count
+from cifkit.utils.folder import get_file_count, get_file_paths
 
 
 @pytest.mark.fast

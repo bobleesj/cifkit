@@ -1,4 +1,5 @@
 import numpy as np
+
 from cifkit.utils.string_parser import get_atom_type_from_label
 
 

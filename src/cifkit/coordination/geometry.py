@@ -1,5 +1,6 @@
-from cifkit.utils.unit import round_dict_values
 import numpy as np
+
+from cifkit.utils.unit import round_dict_values
 
 
 def get_polyhedron_coordinates_labels(

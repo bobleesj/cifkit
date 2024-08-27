@@ -1,11 +1,10 @@
-import pytest
+import os
 import shutil
 import tempfile
-import os
 
-from cifkit.preprocessors.format import (
-    preprocess_label_element_loop_values,
-)
+import pytest
+
+from cifkit.preprocessors.format import preprocess_label_element_loop_values
 from cifkit.utils import cif_parser, folder, string_parser
 
 

@@ -2,93 +2,78 @@
 Import statements placed bottom to avoid cluttering.
 """
 
+import logging
+
 # Polyhedron
 import os
-import logging
-from cifkit.figures import polyhedron
-from cifkit.utils.unit import round_dict_values
-from cifkit.utils.log_messages import CifLog
-
-# Parser .cif file
-from cifkit.utils.cif_parser import (
-    get_cif_block,
-    get_loop_values,
-    get_unitcell_lengths,
-    get_unitcell_angles_rad,
-    get_unique_site_labels,
-    get_unique_elements_from_loop,
-    get_formula_structure_weight_s_group,
-    get_tag_from_third_line,
-    parse_atom_site_occupancy_info,
-)
-
-# Edit .cif file
-from cifkit.preprocessors.format import (
-    preprocess_label_element_loop_values,
-)
-from cifkit.utils.cif_editor import remove_author_loop
-from cifkit.utils.cif_parser import (
-    check_unique_atom_site_labels,
-)
-
-# Supercell generation
-from cifkit.preprocessors.supercell import get_supercell_points
-from cifkit.preprocessors.supercell_util import get_cell_atom_count
-from cifkit.preprocessors.environment import (
-    get_site_connections,
-)
-
-
-# Radius
-from cifkit.data.radius_handler import (
-    get_is_radius_data_available,
-    get_radius_values_per_element,
-    compute_radius_sum,
-)
-
-# Coordination number
-from cifkit.preprocessors.environment_util import (
-    flat_site_connections,
-)
-from cifkit.coordination.composition import (
-    get_bond_counts,
-    get_bond_fractions,
-    compute_avg_CN,
-    get_unique_CN_values,
-)
-from cifkit.coordination.method import compute_CN_max_gap_per_site
-from cifkit.coordination.filter import (
-    find_best_polyhedron,
-    get_CN_connections_by_min_dist_method,
-)
-
-from cifkit.coordination.connection import (
-    get_CN_connections_by_best_methods,
-)
 
 # Bond pair
 from cifkit.coordination.bond_distance import (
     get_shortest_distance_per_bond_pair,
 )
+from cifkit.coordination.composition import (
+    compute_avg_CN,
+    get_bond_counts,
+    get_bond_fractions,
+    get_unique_CN_values,
+)
+from cifkit.coordination.connection import get_CN_connections_by_best_methods
+from cifkit.coordination.filter import (
+    find_best_polyhedron,
+    get_CN_connections_by_min_dist_method,
+)
+from cifkit.coordination.geometry import get_polyhedron_coordinates_labels
+from cifkit.coordination.method import compute_CN_max_gap_per_site
 
 # Site info
 from cifkit.coordination.site_distance import (
     get_shortest_distance,
     get_shortest_distance_per_site,
 )
-from cifkit.coordination.geometry import (
-    get_polyhedron_coordinates_labels,
-)
 
+# Radius
+from cifkit.data.radius_handler import (
+    compute_radius_sum,
+    get_is_radius_data_available,
+    get_radius_values_per_element,
+)
+from cifkit.figures import polyhedron
+from cifkit.occupacny.mixing import (
+    get_mixing_type_per_pair_dict,
+    get_site_mixing_type,
+)
+from cifkit.preprocessors.environment import get_site_connections
+
+# Coordination number
+from cifkit.preprocessors.environment_util import flat_site_connections
+
+# Edit .cif file
+from cifkit.preprocessors.format import preprocess_label_element_loop_values
+
+# Supercell generation
+from cifkit.preprocessors.supercell import get_supercell_points
+from cifkit.preprocessors.supercell_util import get_cell_atom_count
 from cifkit.utils.bond_pair import (
     get_bond_pairs,
     get_pairs_sorted_by_mendeleev,
 )
+from cifkit.utils.cif_editor import remove_author_loop
 
-from cifkit.occupacny.mixing import (
-    get_site_mixing_type,
-    get_mixing_type_per_pair_dict,
+# Parser .cif file
+from cifkit.utils.cif_parser import (
+    check_unique_atom_site_labels,
+    get_cif_block,
+    get_formula_structure_weight_s_group,
+    get_loop_values,
+    get_tag_from_third_line,
+    get_unique_elements_from_loop,
+    get_unique_site_labels,
+    get_unitcell_angles_rad,
+    get_unitcell_lengths,
+    parse_atom_site_occupancy_info,
 )
+from cifkit.utils.log_messages import CifLog
+from cifkit.utils.unit import round_dict_values
 
 
 def ensure_connections(func):

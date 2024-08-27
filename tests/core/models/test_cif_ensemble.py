@@ -1,8 +1,10 @@
+import logging
 import os
 import shutil
-import logging
-import pytest
 from pathlib import Path
+
+import pytest
+
 from cifkit import CifEnsemble
 from cifkit.utils.folder import get_file_count, get_file_paths
 

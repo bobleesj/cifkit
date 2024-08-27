@@ -1,7 +1,6 @@
 import pytest
-from cifkit.data.radius_optimization import (
-    get_refined_CIF_radius,
-)
+
+from cifkit.data.radius_optimization import get_refined_CIF_radius
 
 
 def test_optimization(cif_URhIn):

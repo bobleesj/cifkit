@@ -1,7 +1,8 @@
-import os
 import glob
-from cifkit.utils.error_messages import FileError
+import os
 import shutil
+
+from cifkit.utils.error_messages import FileError
 
 
 def get_file_path(dir_path: str, file_name: str) -> str:

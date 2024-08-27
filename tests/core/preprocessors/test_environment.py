@@ -1,5 +1,6 @@
-import pytest
 import numpy as np
+import pytest
+
 from cifkit.preprocessors.environment import remove_duplicate_connections
 
 

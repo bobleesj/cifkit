@@ -1,16 +1,16 @@
 import pytest
-from cifkit.utils.formula import (
-    get_validated_formula_label,
-    get_parsed_formula,
-    get_unique_elements,
-    get_unique_element_count,
-    get_unique_elements_from_formulas,
-    get_subscripted_formula,
-    get_normalized_formula,
-    get_parsed_norm_formula,
-)
 
 from cifkit.utils.error_messages import GeneralError
+from cifkit.utils.formula import (
+    get_normalized_formula,
+    get_parsed_formula,
+    get_parsed_norm_formula,
+    get_subscripted_formula,
+    get_unique_element_count,
+    get_unique_elements,
+    get_unique_elements_from_formulas,
+    get_validated_formula_label,
+)
 
 
 @pytest.mark.parametrize(

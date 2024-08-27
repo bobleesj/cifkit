@@ -1,14 +1,9 @@
 import pytest
-from cifkit.preprocessors import (
-    supercell,
-    environment,
-    environment_util,
-)
+
+from cifkit import Cif, CifEnsemble
+from cifkit.coordination import composition, filter
+from cifkit.preprocessors import environment, environment_util, supercell
 from cifkit.utils import cif_parser, folder
-from cifkit import Cif
-from cifkit import CifEnsemble
-from cifkit.coordination import composition
-from cifkit.coordination import filter
 
 """
 CifEnsemble - histogram test

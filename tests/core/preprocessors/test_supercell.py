@@ -1,9 +1,8 @@
 import pytest
 
-
 from cifkit.preprocessors.supercell import (
-    get_unitcell_coords_for_all_labels,
     get_supercell_points,
+    get_unitcell_coords_for_all_labels,
 )
 
 

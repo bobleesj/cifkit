@@ -1,10 +1,11 @@
 import pytest
+
 from cifkit.utils.error_messages import GeneralError
 from cifkit.utils.string_parser import (
+    clean_parsed_structure,
     get_atom_type_from_label,
     get_string_to_formatted_float,
     trim_string,
-    clean_parsed_structure,
 )
 
 

@@ -1,9 +1,10 @@
 import pytest
-from cifkit.coordination.geometry import (
-    get_polyhedron_coordinates_labels,
-    compute_polyhedron_metrics,
-)
 from scipy.spatial import ConvexHull
+
+from cifkit.coordination.geometry import (
+    compute_polyhedron_metrics,
+    get_polyhedron_coordinates_labels,
+)
 
 
 @pytest.mark.fast

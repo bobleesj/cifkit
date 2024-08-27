@@ -1,6 +1,6 @@
 import pytest
-from cifkit import Example
-from cifkit import Cif, CifEnsemble
+
+from cifkit import Cif, CifEnsemble, Example
 
 
 @pytest.mark.fast

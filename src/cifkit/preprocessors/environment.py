@@ -1,5 +1,6 @@
 import numpy as np
-from cifkit.utils import unit, distance
+
+from cifkit.utils import distance, unit
 
 
 def get_site_connections(

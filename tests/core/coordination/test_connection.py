@@ -1,6 +1,4 @@
-from cifkit.coordination.geometry import (
-    get_polyhedron_coordinates_labels,
-)
+from cifkit.coordination.geometry import get_polyhedron_coordinates_labels
 
 
 def test_CN_connections_by_min_dist(

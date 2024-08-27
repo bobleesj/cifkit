@@ -1,4 +1,5 @@
 import pytest
+
 from cifkit.utils.bond_pair import (
     get_bond_pairs,
     get_pairs_sorted_by_mendeleev,

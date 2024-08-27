@@ -1,6 +1,8 @@
-import numpy as np
 from functools import partial
+
+import numpy as np
 from scipy.optimize import minimize
+
 from cifkit.data.radius import get_radius_data
 
 

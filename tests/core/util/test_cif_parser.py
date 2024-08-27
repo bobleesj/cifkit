@@ -1,26 +1,26 @@
 import pytest
 
-from cifkit.utils.error_messages import CifParserError
 from cifkit.utils import folder
 from cifkit.utils.cif_parser import (
-    get_cif_block,
-    get_unitcell_lengths,
-    get_unitcell_angles_rad,
-    get_loop_tags,
-    get_loop_values,
-    get_unique_label_count,
-    get_unique_elements_from_loop,
-    get_unique_site_labels,
-    get_label_occupancy_coordinates,
-    get_loop_value_dict,
-    get_start_end_line_indexes,
-    get_line_content_from_tag,
-    get_formula_structure_weight_s_group,
-    get_unique_formulas_structures_weights_s_groups,
-    get_tag_from_third_line,
-    parse_atom_site_occupancy_info,
     check_unique_atom_site_labels,
+    get_cif_block,
+    get_formula_structure_weight_s_group,
+    get_label_occupancy_coordinates,
+    get_line_content_from_tag,
+    get_loop_tags,
+    get_loop_value_dict,
+    get_loop_values,
+    get_start_end_line_indexes,
+    get_tag_from_third_line,
+    get_unique_elements_from_loop,
+    get_unique_formulas_structures_weights_s_groups,
+    get_unique_label_count,
+    get_unique_site_labels,
+    get_unitcell_angles_rad,
+    get_unitcell_lengths,
+    parse_atom_site_occupancy_info,
 )
+from cifkit.utils.error_messages import CifParserError
 
 
 def test_get_cif_block(cif_block_URhIn):

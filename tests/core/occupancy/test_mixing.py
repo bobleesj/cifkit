@@ -1,12 +1,12 @@
 import pytest
-from cifkit.occupacny.mixing import (
-    frac_coordinates,
-    get_site_mixing_type,
-    compute_coord_occupancy_sum,
-    get_mixing_type_per_pair_dict,
-)
-from cifkit import Cif
 
+from cifkit import Cif
+from cifkit.occupacny.mixing import (
+    compute_coord_occupancy_sum,
+    frac_coordinates,
+    get_mixing_type_per_pair_dict,
+    get_site_mixing_type,
+)
 
 """
 Test atomic mixing at the file level

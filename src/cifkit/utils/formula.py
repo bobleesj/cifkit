@@ -3,6 +3,7 @@ Parses a formula
 """
 
 import re
+
 from cifkit.utils.error_messages import GeneralError
 
 

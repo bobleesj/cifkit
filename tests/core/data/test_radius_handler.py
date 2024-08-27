@@ -1,7 +1,8 @@
 import pytest
+
 from cifkit.data.radius_handler import (
-    get_CIF_pauling_radius,
     compute_radius_sum,
+    get_CIF_pauling_radius,
     get_is_radius_data_available,
 )
 

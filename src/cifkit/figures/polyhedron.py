@@ -1,8 +1,8 @@
 import os
-import pyvista as pv
+
 import numpy as np
-from scipy.spatial import ConvexHull
-from scipy.spatial import Delaunay
+import pyvista as pv
+from scipy.spatial import ConvexHull, Delaunay
 
 
 def generate_contrasting_colors() -> list[str]:

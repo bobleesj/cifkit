@@ -1,9 +1,8 @@
 import os
-from cifkit.models.cif import Cif
 from pathlib import Path
-from cifkit.utils.cif_parser import (
-    check_unique_atom_site_labels,
-)
+
+from cifkit.models.cif import Cif
+from cifkit.utils.cif_parser import check_unique_atom_site_labels
 
 
 def make_directory_and_move(file_path, dir_path, new_file_path):

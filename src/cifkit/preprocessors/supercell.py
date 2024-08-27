@@ -1,6 +1,7 @@
-import numpy as np
 import gemmi
+import numpy as np
 from gemmi.cif import Block
+
 from cifkit.utils import cif_parser
 
 

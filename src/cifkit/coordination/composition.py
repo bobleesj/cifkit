@@ -1,6 +1,7 @@
 import numpy as np
-from cifkit.utils.string_parser import get_atom_type_from_label
+
 from cifkit.utils import bond_pair
+from cifkit.utils.string_parser import get_atom_type_from_label
 
 
 def get_bond_counts(

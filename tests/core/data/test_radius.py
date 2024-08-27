@@ -1,4 +1,5 @@
 import pytest
+
 from cifkit.data.radius import get_radius_data
 
 

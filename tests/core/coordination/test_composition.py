@@ -1,10 +1,10 @@
 import pytest
 
 from cifkit.coordination.composition import (
+    compute_avg_CN,
+    count_connections_per_site,
     get_bond_counts,
     get_bond_fractions,
-    count_connections_per_site,
-    compute_avg_CN,
     get_unique_CN_values,
 )
 

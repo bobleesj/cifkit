@@ -1,4 +1,5 @@
 import pytest
+
 from cifkit.coordination.site_distance import (
     get_shortest_distance,
     get_shortest_distance_per_site,

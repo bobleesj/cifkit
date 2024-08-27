@@ -1,8 +1,6 @@
 import logging
-from cifkit.utils.prompt import (
-    log_save_file_message,
-    log_connected_points,
-)
+
+from cifkit.utils.prompt import log_connected_points, log_save_file_message
 
 
 def test_log_save_file_message(caplog):

@@ -1,6 +1,4 @@
-from cifkit.coordination.site import (
-    get_min_distance_pair,
-)
+from cifkit.coordination.site import get_min_distance_pair
 
 
 def test_get_min_distance_pair(connections_URhIn):

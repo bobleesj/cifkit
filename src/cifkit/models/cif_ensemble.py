@@ -1,19 +1,15 @@
 import logging
-from click import secho
-from cifkit import Cif
-from cifkit.utils.folder import (
-    move_files,
-    copy_files,
-    get_file_paths,
-)
-from cifkit.utils.log_messages import CifEnsembleLog
-from cifkit.figures.histogram import plot_histogram
 from collections import Counter
-from cifkit.preprocessors.format import (
-    preprocess_label_element_loop_values,
-)
-from cifkit.utils.cif_editor import remove_author_loop
+
+from click import secho
+
+from cifkit import Cif
+from cifkit.figures.histogram import plot_histogram
 from cifkit.preprocessors.error import move_files_based_on_errors
+from cifkit.preprocessors.format import preprocess_label_element_loop_values
+from cifkit.utils.cif_editor import remove_author_loop
+from cifkit.utils.folder import copy_files, get_file_paths, move_files
+from cifkit.utils.log_messages import CifEnsembleLog
 
 
 class CifEnsemble:

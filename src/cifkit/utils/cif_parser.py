@@ -2,17 +2,19 @@
 Parses attributes from a .cif file.
 """
 
-import gemmi
 from typing import Any
+
+import gemmi
 from gemmi.cif import Block, Column
-from cifkit.utils.string_parser import (
-    get_string_to_formatted_float,
-    trim_string,
-    get_atom_type_from_label,
-    clean_parsed_structure,
-)
+
 from cifkit.utils import unit
 from cifkit.utils.error_messages import CifParserError
+from cifkit.utils.string_parser import (
+    clean_parsed_structure,
+    get_atom_type_from_label,
+    get_string_to_formatted_float,
+    trim_string,
+)
 
 
 def get_cif_block(file_path: str) -> Block:

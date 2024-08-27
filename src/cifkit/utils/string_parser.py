@@ -1,4 +1,5 @@
 import re
+
 from cifkit.utils import formula
 from cifkit.utils.error_messages import GeneralError
 
