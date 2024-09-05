@@ -18,18 +18,13 @@ authors:
   - orcid: 0000-0003-0732-7340
     affiliation: "2, 3"
 affiliations:
-  - name:
-      Department of Applied Physics and Applied Mathematics, Columbia
-      University, New York, NY 10027, USA
+  - name: Department of Applied Physics and Applied Mathematics, Columbia University, New York, NY 10027, USA
     index: 1
-  - name:
-      Department of Chemistry, Hunter College, City University of New York, New
-      York, NY 10065, USA
+  - name: Department of Chemistry, Hunter College, City University of New York, New York, NY 10065, USA
     index: 2
-  - name:
-      Ph.D. Program in Chemistry, The Graduate Center of the City University of
-      New York, New York, NY 10016, USA
+  - name: Ph.D. Program in Chemistry, The Graduate Center of the City University of New York, New York, NY 10016, USA
     index: 3
+
 date: 29 August 2024
 bibliography: paper.bib
 ---
