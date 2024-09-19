@@ -6,7 +6,8 @@
 - [ ] Optimization
 - [ ] Documentation Update
 
-## Description (Screenshots, files, etc)
+## Description (Screenshots, files, OS, etc)
+
 
 ## Checklist
 
