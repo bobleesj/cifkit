@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cifkit"
-dynamic=['version', 'dependencies']
+dynamic=["version", "dependencies"]
 requires-python = ">=3.10"
 description = "Python library for high-throughput .cif analysis"
 authors = [{name = "Sangjoon Lee", email = "bobleesj@gmail.com"}]
@@ -20,6 +20,9 @@ Changelog = "https://github.com/bobleesj/cifkit/blob/main/CHANGELOG"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools-git-versioning]
+enabled = true
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements/run.txt"]}
