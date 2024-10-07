@@ -31,7 +31,8 @@ with open(changelog_path, 'r') as file:
 if __name__ == "__main__":
     # Join collected lines with newline characters to keep the formatting
     output = "\n".join(collected_lines)
-
+    # Debugging: print the collected output
+    print(f"Collected lines:\n{output}")
     # Write the collected lines to CHANGELOG.md
     with open(output_file, 'w') as out_file:
         out_file.write(output)
