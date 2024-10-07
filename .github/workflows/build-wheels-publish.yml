@@ -55,6 +55,7 @@ jobs:
           verbose: true
 
   github-pre-release:
+    needs: [build-package]
     if: contains(github.ref, 'rc')
     runs-on: ubuntu-latest
     steps:
