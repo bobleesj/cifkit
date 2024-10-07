@@ -4,6 +4,22 @@ Release Notes
 
 .. current developments
 
+1.0.18
+=====
+
+**Added:**
+
+* 1
+
+**Changed:**
+
+* 2
+
+**Deprecated:**
+
+* 3
+
+
 1.0.17
 =====
 
