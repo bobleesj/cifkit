@@ -25,11 +25,11 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Run the changelog script for non-rc tags
-        if: !contains(github.ref, 'rc')
+        if: "!contains(github.ref, 'rc')"
         run: python .github/workflows/news-changelog.py
 
       - name: Automatically commit changes for non-rc tags
-        if: !contains(github.ref, 'rc')
+        if: "!contains(github.ref, 'rc')"
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: update changelog
