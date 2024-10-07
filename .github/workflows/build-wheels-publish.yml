@@ -82,6 +82,3 @@ jobs:
         with:
           body_path: CHANGELOG.txt
           draft: true
-          files: |
-            dist/*.whl
-            dist/*.tar.gz

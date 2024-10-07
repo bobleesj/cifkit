@@ -20,7 +20,6 @@ with open(changelog_path, 'r') as file:
         # Check if the line starts with the tag
         if line.strip().startswith(tag):
             collect = True
-            collected_lines.append(line.strip())  # Add the starting line
             continue
 
         # Check if a line matches another version pattern and we're already collecting
