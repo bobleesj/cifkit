@@ -34,26 +34,6 @@ jobs:
           commit_message: update changelog
           branch: pypi-build  # FIXME: change to main
   
-  pypi-publish:
-    needs: [build-package]
-    environment:
-      name: testpypi   # FIXME: change to pypi
-      url: https://test/pypi.org/p/cifkit  # FIXME: get the PyPI URL
-    permissions:
-      id-token: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: Packages
-          path: dist
-
-      - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/  # FIXME: remove test.
-          verbose: true
-
   github-pre-release:
     needs: [build-package]
     if: contains(github.ref, 'rc')
@@ -82,3 +62,23 @@ jobs:
         with:
           body_path: CHANGELOG.txt
           draft: true
+
+  pypi-publish:
+    needs: [build-package]
+    environment:
+      name: testpypi   # FIXME: change to pypi
+      url: https://test/pypi.org/p/cifkit  # FIXME: get the PyPI URL
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Packages
+          path: dist
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/  # FIXME: remove test.
+          verbose: true
