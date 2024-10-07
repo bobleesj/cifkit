@@ -25,13 +25,8 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Run the changelog script and capture output
-        run: |
-          echo "NEW_NEWS_CONTENT=$(python .github/workflows/news-changelog.py ${{ github.ref_name }})" >> $GITHUB_ENV
-  
-      - name: Use the Captured Content
-        run: |
-          echo "The new news content is $NEW_NEWS_CONTENT"
+      - name: Run the changelog script for full release (no rc)
+        run: python .github/workflows/news-changelog.py "${{ github.ref }}"
 
       - name: Automatically commit changes full release (no rc)
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -74,8 +69,14 @@ jobs:
     if: "!contains(github.ref, 'rc')"
     runs-on: ubuntu-latest
     steps:
-      - name: Create full release 
+      - name: Generate release notes for full release (no rc)
+        run: python .github/workflows/get-latest-changelog.py "${{ github.ref }}"
+      - name: Release
         uses: softprops/action-gh-release@v2
         with:
+          body_path: CHANGELOG.txt
           draft: true
+          # note you'll typically need to create a personal access token
+          # with permissions to create releases in the other repo
+          # token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
           
