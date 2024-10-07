@@ -27,7 +27,7 @@ jobs:
 
       - name: Run the changelog script and capture output
         run: |
-          echo "NEW_NEWS_CONTENT=$(python .github/workflows/news-changelog.py '${{ github.ref_name }}')" >> $GITHUB_ENV
+          echo "NEW_NEWS_CONTENT=$(python .github/workflows/news-changelog.py ${{ github.ref_name }})" >> $GITHUB_ENV
   
       - name: Use the Captured Content
         run: |
