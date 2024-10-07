@@ -1,5 +1,15 @@
 import os
 from glob import glob
+import sys
+
+# Get the GitHub reference passed as an argument
+github_ref = sys.argv[1]
+
+# Split the reference by "/"
+ref_parts = github_ref.split("/")
+
+# Get the latest tag (the last part of the ref)
+tag = ref_parts[-1]
 
 # Store section data
 news_items = {
@@ -38,7 +48,7 @@ def write_merged_file():
     CHANGELOG_HEADER = ".. current developments"
 
     # Insert news
-    new_news_content = "\n3.2.2\n=====\n\n"
+    new_news_content = f"\n{tag}\n=====\n\n"
     for section_name in sorted(news_items.keys()):
         items = news_items[section_name]
         if items:
@@ -68,7 +78,6 @@ def cleanup_rst_files(news_dir_path):
         rst_file_path = os.path.join(news_dir_path, file_name)
         if file_name.endswith('.rst') and file_name != "TEMPLATE.rst":
             os.remove(rst_file_path)
-
 
 
 if __name__ == "__main__":

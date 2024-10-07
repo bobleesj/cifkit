@@ -4,41 +4,6 @@ Release Notes
 
 .. current developments
 
-3.2.2
-=====
-
-
-3.2.2
-=====
-
-
-3.2.2
-=====
-
-**Added:**
-
-* addeed 1
-
-**Changed:**
-
-* changed 1
-* changed 2
-
-
-3.2.2
-=====
-
-**Fixed:**:
-
-* News CI bug with existing news *rst files
-
-**Removed:**:
-
-* mypy.ini file
-
-
-
-3.2.2
 
 ## [1.0.4] - 2024-09-03
 
