@@ -77,15 +77,10 @@ jobs:
           ref: pypi-build # FIXME: change to main
       - name: Generate release notes for full release for full release
         run: python .github/workflows/get-latest-changelog.py "${{ github.ref_name }}"
-      - name: Check if CHANGELOG.txt was generated
-        run: |
-          ls -la
-          cat CHANGELOG.rst
-          cat CHANGELOG.txt
-
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           body_path: CHANGELOG.txt
           draft: true
+          files: dist/*
           
