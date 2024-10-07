@@ -69,6 +69,10 @@ jobs:
     if: "!contains(github.ref, 'rc')"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
       - name: Generate release notes for full release (no rc)
         run: python .github/workflows/get-latest-changelog.py "${{ github.ref_name }}"
       - name: Release
