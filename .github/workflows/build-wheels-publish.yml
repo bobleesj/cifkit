@@ -35,17 +35,24 @@ jobs:
           repository-url: https://test.pypi.org/legacy/
           verbose: true
       
-      # This step runs for tags that do NOT contain 'rc'
+  update-changelog:
+    needs: [dist, pypi-publish]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Run specific script for non-RC tags
         if: "!contains(github.ref, 'rc')"
         run: |
-          python .github/workflows/news-chanegelog.py
+          python .github/workflows/news-changelog.py
       - name: Commit and push if there are changes
         run: |
           git add -A
           git commit -m "Update changelog"
           git push origin HEAD:${{ github.ref }}
-        
+
+          
       # - name: Run specific script for RC tags
       #   if: contains(github.ref, 'rc')
       #   run: |
