@@ -75,11 +75,8 @@ jobs:
           ref: ${{ github.ref }}
       - name: Generate release notes for full release for full release
         run: python .github/workflows/get-latest-changelog.py "${{ github.ref_name }}"
-      - name: Commit the latest release note for full release
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: update changelog
-          branch: pypi-build  # FIXME: change to main
+      - name: Check if CHANGELOG.txt was generated
+        run: ls -la  # This will show you if CHANGELOG.txt was generated and where it is located
       - name: Release
         uses: softprops/action-gh-release@v2
         with:

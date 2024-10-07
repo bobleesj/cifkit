@@ -8,11 +8,11 @@
 
 **Deprecated:**
 
-* 3
+* <news item>
 
 **Removed:**
 
-* <news item>
+* 4
 
 **Fixed:**
 
