@@ -35,9 +35,13 @@ jobs:
           repository-url: https://test.pypi.org/legacy/
           verbose: true
       
-      # This step runs for "rc" tags
+      # This step runs for tags that do NOT contain 'rc'
+      - name: Run specific script for non-RC tags
+        if: "!contains(github.ref, 'rc')"
+        run: |
+          echo "Running non-RC-specific script..."
       - name: Run specific script for RC tags
         if: contains(github.ref, 'rc')
         run: |
           echo "Running RC-specific script..."
-          ./scripts/rc-specific-script.sh  # Replace with your actual script
+          ./scripts/rc-specific-script.sh
