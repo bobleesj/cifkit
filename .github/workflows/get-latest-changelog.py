@@ -2,6 +2,8 @@ import re
 import sys
 
 tag = sys.argv[1]
+print("github_ref:", tag)
+
 changelog_path = "CHANGELOG.rst"
 output_file = "CHANGELOG.txt"  # Output file
 
