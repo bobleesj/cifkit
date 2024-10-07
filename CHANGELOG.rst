@@ -7,6 +7,18 @@ Release Notes
 1.0.8
 =====
 
+**Added:**
+
+* Test 1
+
+**Fixed:**
+
+* News CI bug with existing news *rst files
+
+**Removed:**
+
+* mypy.ini file
+
 
 1.0.7
 =====

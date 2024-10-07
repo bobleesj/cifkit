@@ -25,8 +25,13 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Run the changelog script for full release (no rc)
-        run: python .github/workflows/news-changelog.py "${{ github.ref_name }}"
+      - name: Run the changelog script and capture output
+        run: |
+          echo "NEW_NEWS_CONTENT=$(python .github/workflows/news-changelog.py '${{ github.ref_name }}')" >> $GITHUB_ENV
+  
+      - name: Use the Captured Content
+        run: |
+          echo "The new news content is $NEW_NEWS_CONTENT"
 
       - name: Automatically commit changes full release (no rc)
         uses: stefanzweifel/git-auto-commit-action@v5

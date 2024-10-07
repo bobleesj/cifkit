@@ -65,6 +65,8 @@ def write_merged_file():
     with open(CHANGELOG_PATH, "w") as file:
         file.write(final_content)
 
+    return new_news_content
+
 def cleanup_rst_files(news_dir_path):
     # List all files in the directory
     rst_files = os.listdir(news_dir_path)
@@ -77,8 +79,10 @@ def cleanup_rst_files(news_dir_path):
 if __name__ == "__main__":
     news_dir_path = "news"
     # Process each .rst file
-    process_news_files(news_dir_path)  
-    # Write new news under "".. current developments"
-    write_merged_file()      
+    process_news_files(news_dir_path)
+    # Write new news under ".. current developments"
+    new_news_content = write_merged_file()
+    # Print the result which can be captured in GitHub Actions
+    print(new_news_content)
     # Remove .rst files except TEMPLATE.rst
     cleanup_rst_files(news_dir_path)
