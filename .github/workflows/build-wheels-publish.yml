@@ -39,20 +39,23 @@ jobs:
     needs: [dist, pypi-publish]
     runs-on: ubuntu-latest
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout the repository
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-      - uses: stefanzweifel/git-auto-commit-action@v5
+
+      - name: Run the changelog script
+        run: |
+          python .github/workflows/news-changelog.py
+
+      - name: Automatically commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: update changelog
       # - name: Run specific script for non-RC tags
       #   if: "!contains(github.ref, 'rc')"
-      #   run: |
-      #     python .github/workflows/news-changelog.py
       # - name: Commit and push if there are changes
       #   uses: stefanzweifel/git-auto-commit-action@v5
 
