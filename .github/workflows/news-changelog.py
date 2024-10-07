@@ -3,13 +3,7 @@ from glob import glob
 import sys
 
 # Get the GitHub reference passed as an argument
-github_ref = sys.argv[1]
-
-# Split the reference by "/"
-ref_parts = github_ref.split("/")
-
-# Get the latest tag (the last part of the ref)
-tag = ref_parts[-1]
+tag = sys.argv[1]
 
 # Store section data
 news_items = {

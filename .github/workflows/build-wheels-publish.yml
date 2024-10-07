@@ -26,7 +26,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Run the changelog script for full release (no rc)
-        run: python .github/workflows/news-changelog.py "${{ github.ref }}"
+        run: python .github/workflows/news-changelog.py "${{ github.ref_name }}"
 
       - name: Automatically commit changes full release (no rc)
         uses: stefanzweifel/git-auto-commit-action@v5
