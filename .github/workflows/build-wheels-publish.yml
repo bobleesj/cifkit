@@ -39,9 +39,15 @@ jobs:
       - name: Run specific script for non-RC tags
         if: "!contains(github.ref, 'rc')"
         run: |
-          echo "Running non-RC-specific script..."
-      - name: Run specific script for RC tags
-        if: contains(github.ref, 'rc')
+          python .github/workflows/news-chanegelog.py
+      - name: Commit and push if there are changes
         run: |
-          echo "Running RC-specific script..."
-          ./scripts/rc-specific-script.sh
+          git add -A
+          git commit -m "Update changelog"
+          git push origin HEAD:${{ github.ref }}
+        
+      # - name: Run specific script for RC tags
+      #   if: contains(github.ref, 'rc')
+      #   run: |
+      #     echo "Running RC-specific script..."
+      #     ./scripts/rc-specific-script.sh

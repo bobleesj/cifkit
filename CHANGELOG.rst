@@ -1,3 +1,12 @@
+=============
+Release Notes
+=============
+
+.. current developments
+
+
+3.2.2
+
 ## [1.0.4] - 2024-09-03
 
 ### Fixed
