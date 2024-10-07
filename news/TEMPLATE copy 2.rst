@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* <news item>
+* 2
 
 **Deprecated:**
 

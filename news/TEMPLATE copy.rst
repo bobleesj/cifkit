@@ -4,11 +4,11 @@
 
 **Changed:**
 
-* 2
+* <news item>
 
 **Deprecated:**
 
-* <news item>
+* 3
 
 **Removed:**
 
