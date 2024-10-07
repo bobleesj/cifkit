@@ -26,7 +26,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Run the changelog script for full release (no rc)
-        run: python .github/workflows/news-changelog.py "${{ github.ref_name }}"
+        run: python .github/workflows/update-changelog.py "${{ github.ref_name }}"
 
       - name: Automatically commit changes full release (no rc)
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -37,8 +37,8 @@ jobs:
   pypi-publish:
     needs: [build-package]
     environment:
-      name: testpypi
-      url: https://test/pypi.org/p/cifkit
+      name: testpypi   # FIXME: change to pypi
+      url: https://test/pypi.org/p/cifkit  # FIXME: get the PyPI URL
     permissions:
       id-token: write
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          repository-url: https://test.pypi.org/legacy/
+          repository-url: https://test.pypi.org/legacy/  # FIXME: remove test.
           verbose: true
 
   github-pre-release:

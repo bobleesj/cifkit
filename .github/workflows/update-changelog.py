@@ -5,7 +5,7 @@ import sys
 # Get the GitHub reference passed as an argument
 tag = sys.argv[1]
 
-# Store section data
+# Store category data
 news_items = {
     "Added": [],
     "Changed": [],
@@ -15,45 +15,39 @@ news_items = {
     "Security": [],
 }
 
-# Parse a single .rst file
-def parse_each_header(file_path):
+def extract_news_items(file_path):
+    """Extract news bullet points under each category for each .rst file."""
     with open(file_path, "r") as file:
         for line in file:
             line = line.strip()
             
-            # Check if the line is a section header
+            # Check if the line is a category header
             if line.startswith("**") and line.endswith(":**"):
-                current_section = line.strip("**:").strip()
+                current_category = line.strip("**:").strip()
             
-            # Only add if the line is not empty and not a section header
-            elif current_section and line and not line.startswith("* <news item>"):
-                news_items[current_section].append(line)
+            # Only add if the line is not empty and not a category header
+            elif current_category and line and not line.startswith("* <news item>"):
+                news_items[current_category].append(line)
             
-
-# Function to process all .rst files in the directory
-def process_news_files(news_dir_path):
-    rst_files = glob(os.path.join(news_dir_path, "*.rst"))
-    
-    for rst_file in rst_files:
-        parse_each_header(rst_file)
 
 def write_merged_file():
+    """Add the news items under the ".. current developments" section."""
     CHANGELOG_PATH = "CHANGELOG.rst"
     CHANGELOG_HEADER = ".. current developments"
 
     # Insert news
     new_news_content = f"\n{tag}\n=====\n\n"
-    for section_name in sorted(news_items.keys()):
-        items = news_items[section_name]
+    for category_name in sorted(news_items.keys()):
+        items = news_items[category_name]
         if items:
-            # Add section name e.g. Added, Changed, etc.
-            new_news_content += f"**{section_name}:**\n\n"
+            # Add category name e.g. Added, Changed, etc.
+            new_news_content += f"**{category_name}:**\n\n"
             for item in items:
-                # Add each item in the section
+                # Add each item in the category
                 new_news_content += f"{item}\n"
             new_news_content += "\n"
 
-    # Read the file
+    # Read CHANGELOG.rst
     with open(CHANGELOG_PATH, "r") as file:
         current_content = file.read()
 
@@ -67,8 +61,8 @@ def write_merged_file():
 
     return new_news_content
 
-def cleanup_rst_files(news_dir_path):
-    # List all files in the directory
+def remove_news_rst_files(news_dir_path):
+    """Remove .rst files in the news directory except TEMPLATE.rst"""
     rst_files = os.listdir(news_dir_path)
     for file_name in rst_files:
         rst_file_path = os.path.join(news_dir_path, file_name)
@@ -77,12 +71,20 @@ def cleanup_rst_files(news_dir_path):
 
 
 if __name__ == "__main__":
-    news_dir_path = "news"
-    # Process each .rst file
-    process_news_files(news_dir_path)
-    # Write new news under ".. current developments"
+    NEWS_DIR_PATH = "news"
+    
+    # Get all news .rst files
+    news_rst_files = glob(os.path.join(NEWS_DIR_PATH, "*.rst"))
+    
+    # Extract and store news items into a single dictionary
+    for rst_file in news_rst_files:
+        extract_news_items(rst_file)
+
+    # Add news under ".. current developments"
     new_news_content = write_merged_file()
-    # Print the result which can be captured in GitHub Actions
+    
+    # Remove all .rst files in the news directory except TEMPLATE.rst
+    remove_news_rst_files(NEWS_DIR_PATH)
+
+    # Print for debugging
     print(new_news_content)
-    # Remove .rst files except TEMPLATE.rst
-    cleanup_rst_files(news_dir_path)
