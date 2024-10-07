@@ -67,7 +67,7 @@ jobs:
           generate_release_notes: true
 
   github-release:
-    needs: [update-changelog]
+    needs: [build-package, update-changelog]
     if: "!contains(github.ref, 'rc')"
     runs-on: ubuntu-latest
     steps:
