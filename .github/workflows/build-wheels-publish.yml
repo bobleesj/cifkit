@@ -66,10 +66,6 @@ jobs:
         if: contains(github.ref, 'rc')
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
-          title: ${{ github.ref }}
-          body: ${{ steps.update-changelog.outputs.changelog }}
-          token: ${{ secrets.GITHUB_TOKEN }}
           draft: true
           prerelease: true
         env:
