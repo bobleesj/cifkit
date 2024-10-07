@@ -1,4 +1,4 @@
-name: Build Wheels, Update Changelog, and Publish to PyPI
+name: Build, Update CHANGELOG, Release, Upload to PyPI
 on:
   workflow_dispatch:
   push:
