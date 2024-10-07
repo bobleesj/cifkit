@@ -1,12 +1,11 @@
-name: release
-
+name: Build Wheels, Update Changelog, and Publish to PyPI
 on:
   workflow_dispatch:
   push:
     tags:
       - '*' 
 jobs:
-  dist:
+  build-package:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,7 +14,7 @@ jobs:
       - uses: hynek/build-and-inspect-python-package@v2
 
   update-changelog:
-    needs: [dist]
+    needs: [build-package]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -26,27 +25,21 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Run the changelog script
-        run: |
-          python .github/workflows/news-changelog.py
+        if: contains(github.ref, 'rc')
+        run: python .github/workflows/news-changelog.py
 
       - name: Automatically commit changes
+        if: contains(github.ref, 'rc')
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: update changelog
           branch: pypi-build  # FIXME: change to main
-      # - name: Run specific script for non-RC tags
-      #   if: "!contains(github.ref, 'rc')"
-      # - name: Commit and push if there are changes
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-
-          
+   
       # - name: Run specific script for RC tags
       #   if: contains(github.ref, 'rc')
-      #   run: |
-      #     echo "Running RC-specific script..."
-      #     ./scripts/rc-specific-script.sh
+
   pypi-publish:
-    needs: [dist, update-changelog]
+    needs: [build-package, update-changelog]
     environment:
       name: testpypi
       url: https://test/pypi.org/p/cifkit
