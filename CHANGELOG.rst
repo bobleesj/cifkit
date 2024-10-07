@@ -4,6 +4,22 @@ Release Notes
 
 .. current developments
 
+1.0.7
+=====
+
+**Added:**
+
+* Test 1
+
+**Fixed:**
+
+* News CI bug with existing news *rst files
+
+**Removed:**
+
+* mypy.ini file
+
+
 
 ## [1.0.4] - 2024-09-03
 
