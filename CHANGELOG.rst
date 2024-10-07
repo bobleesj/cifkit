@@ -7,6 +7,19 @@ Release Notes
 3.2.2
 =====
 
+**Added:**
+
+* addeed 1
+
+**Changed:**
+
+* changed 1
+* changed 2
+
+
+3.2.2
+=====
+
 **Fixed:**:
 
 * News CI bug with existing news *rst files
