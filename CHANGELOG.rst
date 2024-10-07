@@ -4,6 +4,21 @@ Release Notes
 
 .. current developments
 
+refs/tags/1.0.11
+=====
+
+**Added:**
+
+* Test
+* addeed 1
+
+**Changed:**
+
+* Test3
+* changed 1
+* changed 2
+
+
 1.0.8
 =====
 
