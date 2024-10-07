@@ -14,8 +14,39 @@ jobs:
           ref: ${{ github.head_ref }}
       - uses: hynek/build-and-inspect-python-package@v2
 
-  pypi-publish:
+  update-changelog:
     needs: [dist]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Run the changelog script
+        run: |
+          python .github/workflows/news-changelog.py
+
+      - name: Automatically commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: update changelog
+          branch: pypi-build
+      # - name: Run specific script for non-RC tags
+      #   if: "!contains(github.ref, 'rc')"
+      # - name: Commit and push if there are changes
+      #   uses: stefanzweifel/git-auto-commit-action@v5
+
+          
+      # - name: Run specific script for RC tags
+      #   if: contains(github.ref, 'rc')
+      #   run: |
+      #     echo "Running RC-specific script..."
+      #     ./scripts/rc-specific-script.sh
+  pypi-publish:
+    needs: [dist, update-changelog]
     environment:
       name: testpypi
       url: https://test/pypi.org/p/cifkit
@@ -35,33 +66,3 @@ jobs:
           repository-url: https://test.pypi.org/legacy/
           verbose: true
       
-  update-changelog:
-    needs: [dist, pypi-publish]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Run the changelog script
-        run: |
-          python .github/workflows/news-changelog.py
-
-      - name: Automatically commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: update changelog
-      # - name: Run specific script for non-RC tags
-      #   if: "!contains(github.ref, 'rc')"
-      # - name: Commit and push if there are changes
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-
-          
-      # - name: Run specific script for RC tags
-      #   if: contains(github.ref, 'rc')
-      #   run: |
-      #     echo "Running RC-specific script..."
-      #     ./scripts/rc-specific-script.sh
