@@ -35,7 +35,7 @@ jobs:
           branch: pypi-build  # FIXME: change to main
   
   pypi-publish:
-    needs: [build-package, update-changelog]
+    needs: [build-package]
     environment:
       name: testpypi
       url: https://test/pypi.org/p/cifkit
