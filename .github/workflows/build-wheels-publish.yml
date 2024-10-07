@@ -73,7 +73,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: pypi-build # FIXME: change to main
       - name: Generate release notes for full release for full release
         run: python .github/workflows/get-latest-changelog.py "${{ github.ref_name }}"
       - name: Check if CHANGELOG.txt was generated
