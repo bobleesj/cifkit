@@ -65,8 +65,5 @@ jobs:
       - name: Create Release for Full Versions
         if: contains(github.ref, 'rc')
         uses: softprops/action-gh-release@v2
-        with:
-          files: 'dist/*'
-          body: "Full release details and changelog."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
