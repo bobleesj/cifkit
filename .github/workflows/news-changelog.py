@@ -20,7 +20,6 @@ def parse_each_header(file_path):
             # Check if the line is a section header
             if line.startswith("**") and line.endswith(":**"):
                 current_section = line.strip("**:").strip()
-                print(current_section)
             
             # Only add if the line is not empty and not a section header
             elif current_section and line and not line.startswith("* <news item>"):
@@ -44,7 +43,7 @@ def write_merged_file():
         items = news_items[section_name]
         if items:
             # Add section name e.g. Added, Changed, etc.
-            new_news_content += f"**{section_name}:**:\n\n"
+            new_news_content += f"**{section_name}:**\n\n"
             for item in items:
                 # Add each item in the section
                 new_news_content += f"{item}\n"

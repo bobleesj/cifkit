@@ -33,7 +33,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: update changelog
-          branch: pypi-build
+          branch: pypi-build  # FIXME: change to main
       # - name: Run specific script for non-RC tags
       #   if: "!contains(github.ref, 'rc')"
       # - name: Commit and push if there are changes
