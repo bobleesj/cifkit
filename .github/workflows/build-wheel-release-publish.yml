@@ -8,6 +8,6 @@ on:
 
 jobs:
   release:
-    uses: bobleesj/release-scripts/.github/workflows/_build-wheel-release-publish.yml@{{ VERSION/v0 }}
+    uses: bobleesj/release-scripts/.github/workflows/_build-wheel-release-publish.yml@v0
     with:
       project: cifkit
