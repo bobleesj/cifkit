@@ -6,6 +6,9 @@ on:
     tags:
       - '*'
 
+permissions:
+  id-token: write
+
 jobs:
   release:
     uses: bobleesj/release-scripts/.github/workflows/_build-wheel-release-publish.yml@v0
