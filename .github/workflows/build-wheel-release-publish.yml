@@ -2,10 +2,10 @@ name: Release
 
 on:
   pull_request:
-  # workflow_dispatch:
-  # push:
-  #   tags:
-  #     - '*'
+  workflow_dispatch:
+  push:
+    tags:
+      - '*'
 
 permissions:
   id-token: write
