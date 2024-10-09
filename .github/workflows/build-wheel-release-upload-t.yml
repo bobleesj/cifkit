@@ -1,0 +1,17 @@
+name: Release (GitHub/PyPI)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    uses: Billingegroup/release-scripts/.github/workflows/_build-wheel-release-upload.yml@v0
+    with:
+      project: cifkit
+    secrets:
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
