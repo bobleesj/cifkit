@@ -1,84 +1,16 @@
-name: Build, Update CHANGELOG, Release, Upload to PyPI
+name: Release
+
 on:
   workflow_dispatch:
   push:
     tags:
-      - '*' 
+      - '*'
+
 permissions:
-  contents: write
+  id-token: write
+
 jobs:
-  build-package:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-      - uses: hynek/build-and-inspect-python-package@v2
-
-  update-changelog:
-    needs: [build-package]
-    if: "!contains(github.ref, 'rc')"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-
-      - name: Run the changelog script for full release (no rc)
-        run: python .github/workflows/update-changelog.py "${{ github.ref_name }}"
-
-      - name: Automatically commit changes full release (no rc)
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: update changelog
-          branch: pypi-build  # FIXME: change to main
-  
-  github-pre-release:
-    needs: [build-package]
-    if: contains(github.ref, 'rc')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create pre-release for rc versions
-        uses: softprops/action-gh-release@v2
-        with:
-          draft: true
-          prerelease: true
-          generate_release_notes: true
-
-  github-release:
-    needs: [build-package, update-changelog]
-    if: "!contains(github.ref, 'rc')"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          ref: pypi-build # FIXME: change to main
-      - name: Generate release notes for full release for full release
-        run: python .github/workflows/get-latest-changelog.py "${{ github.ref_name }}"
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          body_path: CHANGELOG.txt
-          draft: true
-
-  pypi-publish:
-    needs: [build-package]
-    environment:
-      name: testpypi   # FIXME: change to pypi
-      url: https://test/pypi.org/p/cifkit  # FIXME: get the PyPI URL
-    permissions:
-      id-token: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: Packages
-          path: dist
-
-      - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/  # FIXME: remove test.
-          verbose: true
+  release:
+    uses: bobleesj/release-scripts/.github/workflows/_build-wheel-release-publish.yml@v0
+    with:
+      project: cifkit
