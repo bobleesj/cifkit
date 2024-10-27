@@ -6,9 +6,7 @@ from cifkit.utils.cif_parser import check_unique_atom_site_labels
 
 
 def make_directory_and_move(file_path, dir_path, new_file_path):
-    """
-    Create directory if it doesn't exist and move the file.
-    """
+    """Create directory if it doesn't exist and move the file."""
     os.makedirs(dir_path, exist_ok=True)
     new_file_path = os.path.join(dir_path, new_file_path)
     os.rename(file_path, new_file_path)

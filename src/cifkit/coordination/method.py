@@ -118,10 +118,8 @@ def compute_normalized_value(number: float, ref_number: float) -> float:
 def get_rad_sum_value(
     rad_sum_data, method_name: str, ref_label: str, other_label: str
 ) -> float:
-    """
-    Return the sum of radii value for a given pair of elements,
-    ensuring the pair is alphabetically sorted.
-    """
+    """Return the sum of radii value for a given pair of elements, ensuring the
+    pair is alphabetically sorted."""
 
     # Extract the element types from the labels
     ref_element = get_atom_type_from_label(ref_label)

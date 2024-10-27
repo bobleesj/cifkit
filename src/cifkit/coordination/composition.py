@@ -9,9 +9,7 @@ def get_bond_counts(
     connections: dict[str, list],
     sorted_by_mendeleev=False,
 ) -> dict:
-    """
-    Return a dictionary containing bond pairs and counts per label site.
-    """
+    """Return a dictionary containing bond pairs and counts per label site."""
     if sorted_by_mendeleev:
         bond_pairs = bond_pair.get_pairs_sorted_by_mendeleev(elements)
     else:
@@ -58,9 +56,7 @@ def get_bond_counts(
 
 
 def get_bond_fractions(bond_pair_data: dict) -> dict[tuple[str, str], float]:
-    """
-    Calculate the fraction of each bond type across all labels.
-    """
+    """Calculate the fraction of each bond type across all labels."""
     total_bond_counts: dict[tuple[str, str], float] = {}
     total_bonds = 0
 
@@ -83,9 +79,7 @@ def get_bond_fractions(bond_pair_data: dict) -> dict[tuple[str, str], float]:
 
 
 def count_connections_per_site(connections: dict) -> dict[str, int]:
-    """
-    Calculate the coordination number for each atom site.
-    """
+    """Calculate the coordination number for each atom site."""
     neighbor_count = {}
     for label, connection_data in connections.items():
         neighbor_count[label] = len(connection_data)
@@ -94,9 +88,7 @@ def count_connections_per_site(connections: dict) -> dict[str, int]:
 
 
 def compute_avg_CN(connections: dict[str, int]) -> float:
-    """
-    Calculate the average coordination number across all sites.
-    """
+    """Calculate the average coordination number across all sites."""
     coordination_numbers = count_connections_per_site(connections)
     total = 0
     for _, value in coordination_numbers.items():
@@ -105,9 +97,7 @@ def compute_avg_CN(connections: dict[str, int]) -> float:
 
 
 def get_unique_CN_values(connections: dict) -> set[int]:
-    """
-    Return unique coordination numbers from all sites.
-    """
+    """Return unique coordination numbers from all sites."""
     coordination_numbers = count_connections_per_site(connections)
     unique_numbers = set(coordination_numbers.values())
     return unique_numbers

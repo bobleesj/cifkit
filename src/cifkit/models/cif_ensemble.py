@@ -125,10 +125,8 @@ class CifEnsemble:
         )
 
     def _attribute_stats(self, attribute_name, transform=None):
-        """
-        Helper method to compute the count of each unique value of a given
-        attribute across all Cif objects.
-        """
+        """Helper method to compute the count of each unique value of a given
+        attribute across all Cif objects."""
         values = [
             (
                 transform(getattr(cif, attribute_name))

@@ -1,7 +1,5 @@
 def get_radius_data() -> dict:
-    """
-    Return a dictionary of element radii data.
-    """
+    """Return a dictionary of element radii data."""
     rad_data = {
         "Si": [1.176, 1.316],
         "Sc": [1.641, 1.620],

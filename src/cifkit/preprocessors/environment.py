@@ -9,9 +9,7 @@ def get_site_connections(
     supercell_points,
     cutoff_radius: float,
 ) -> dict:
-    """
-    Compute all pair distances per site label.
-    """
+    """Compute all pair distances per site label."""
     labels, lengths, angles = parsed_data
 
     all_labels_connections = {}
@@ -101,10 +99,8 @@ def get_nearest_dists_per_site(
 def get_most_connected_point_per_site(
     label: str, dist_dict: dict, dist_set: set
 ):
-    """
-    Identify the reference point with the highest number of connections
-    within the 50 shortest distances from a set of distances.
-    """
+    """Identify the reference point with the highest number of connections within
+    the 50 shortest distances from a set of distances."""
     sorted_unique_dists = sorted(dist_set)
     # Get the 30 shortest distances
     shortest_dists = sorted_unique_dists[:50]

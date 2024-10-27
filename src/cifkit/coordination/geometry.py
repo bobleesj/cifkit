@@ -6,9 +6,10 @@ from cifkit.utils.unit import round_dict_values
 def get_polyhedron_coordinates_labels(
     connections: dict, label: str
 ) -> tuple[list[list[float]], list[str]]:
-    """
-    Return a list of Cartesian coordinates and labels. The central atom is
-    the last index.
+    """Return a list of Cartesian coordinates and labels.
+
+    The central atom is the last index.
+
     """
     conn_data = connections[label]
     polyhedron_points = [conn[3] for conn in conn_data]
@@ -24,9 +25,7 @@ def get_polyhedron_coordinates_labels(
 
 
 def compute_polyhedron_metrics(polyhedron_points, hull):
-    """
-    Compute various metrics related to a given polyhedron.
-    """
+    """Compute various metrics related to a given polyhedron."""
     try:
         central_atom_coord = np.array(polyhedron_points[-1])
 
@@ -98,10 +97,8 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
 def compute_center_of_mass_and_distance(
     polyhedron_points, hull, central_atom_coord
 ):
-    """
-    Calculate the center of mass of a polyhedron and the distance
-    from the center of mass to a given point.
-    """
+    """Calculate the center of mass of a polyhedron and the distance from the
+    center of mass to a given point."""
     center_of_mass = np.mean(polyhedron_points[hull.vertices, :], axis=0)
     vector_to_center_of_mass = center_of_mass - central_atom_coord
     distance_to_center = np.linalg.norm(vector_to_center_of_mass)

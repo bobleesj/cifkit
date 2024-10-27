@@ -1,7 +1,5 @@
 def get_shortest_distance(connections: dict) -> float:
-    """
-    Return the shortest distance in the supercell.
-    """
+    """Return the shortest distance in the supercell."""
     min_dist = float("inf")
 
     # Iterate over each site's connections in the dictionary
@@ -16,9 +14,7 @@ def get_shortest_distance(connections: dict) -> float:
 def get_shortest_distance_per_site(
     connections: dict,
 ) -> dict[str, tuple[str, float]]:
-    """
-    Calculate the shortest distance for each label.
-    """
+    """Calculate the shortest distance for each label."""
     shortest_dist_info: dict[str, tuple[str, float]] = {}
 
     for label, connections in connections.items():

@@ -5,9 +5,10 @@ from cifkit.utils import string_parser
 def get_mendeleev_nums_from_pair_tuple(
     label_pair_tuple: tuple[str, str],
 ) -> tuple[int, int]:
-    """
-    Parse Mendeleev number for each label in the tuple.
+    """Parse Mendeleev number for each label in the tuple.
+
     If no number is found, default to 0 for that element.
+
     """
     # Parse the first and second elements
     first_element = string_parser.get_atom_type_from_label(label_pair_tuple[0])

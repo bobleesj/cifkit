@@ -42,9 +42,7 @@ def plot(
     is_displayed,
     output_dir=None,
 ):
-    """
-    Generate and save a 3D plot of a molecular structure.
-    """
+    """Generate and save a 3D plot of a molecular structure."""
 
     plotter = pv.Plotter(off_screen=not is_displayed, window_size=(1600, 1200))
     label_colors = generate_color_mapping(vertex_labels)
@@ -124,7 +122,6 @@ def plot(
     plotter.add_mesh(poly_data, color="aqua", opacity=0.5, show_edges=True)
 
     plotter.show()
-
     """
     Output
     """
@@ -145,7 +142,6 @@ def plot(
         + ".png"
     )
     save_path = os.path.join(output_dir, plot_filename)
-
     """
     Save
     """

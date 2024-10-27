@@ -2,17 +2,13 @@ import numpy as np
 
 
 def get_radians_from_degrees(angles: list[float]) -> list[float]:
-    """
-    Convert angles from degrees to radians and round to 5 decimal places.
-    """
+    """Convert angles from degrees to radians and round to 5 decimal places."""
     radians = [round(float(np.radians(angle)), 5) for angle in angles]
     return radians
 
 
 def round_float(distance: float, precision: int = 3) -> float:
-    """
-    Round a distance value to a specified precision.
-    """
+    """Round a distance value to a specified precision."""
     return round(distance, precision)
 
 
@@ -21,10 +17,8 @@ def fractional_to_cartesian(
     cell_lengths: list[float],
     cell_angles_rad: list[float],
 ) -> list[float]:
-    """
-    Convert fractional coordinates to Cartesian
-    coordinates using cell lengths and angles.
-    """
+    """Convert fractional coordinates to Cartesian coordinates using cell lengths
+    and angles."""
     alpha, beta, gamma = cell_angles_rad
 
     # Calculate the components of the transformation matrix

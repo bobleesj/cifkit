@@ -2,9 +2,7 @@ from cifkit.utils.error_messages import OccupancyError
 
 
 def frac_coordinates(atom_site_info: dict, label: str) -> tuple[str, str, str]:
-    """
-    Return a tuple of fractional coordinates
-    """
+    """Return a tuple of fractional coordinates."""
     x_frac = atom_site_info[label]["x_frac_coord"]
     y_frac = atom_site_info[label]["y_frac_coord"]
     z_frac = atom_site_info[label]["z_frac_coord"]
@@ -14,9 +12,7 @@ def frac_coordinates(atom_site_info: dict, label: str) -> tuple[str, str, str]:
 def compute_coord_occupancy_sum(
     site_labels: list[str], atom_site_info: dict
 ) -> dict[tuple[str, str, str], float]:
-    """
-    Compute sum of occupancy per each coordinate
-    """
+    """Compute sum of occupancy per each coordinate."""
     coord_occupancy_sum: dict[tuple[str, str, str], float] = {}
     for label in site_labels:
         occupancy = round(
@@ -31,9 +27,7 @@ def compute_coord_occupancy_sum(
 
 
 def get_site_mixing_type(site_labels: list[str], atom_site_info: dict) -> str:
-    """
-    Get file-level atomic site mixing info.
-    """
+    """Get file-level atomic site mixing info."""
 
     is_full_occupancy = True
     coord_occupancy_sum = compute_coord_occupancy_sum(
@@ -67,9 +61,7 @@ def get_site_mixing_type(site_labels: list[str], atom_site_info: dict) -> str:
 def get_mixing_type_per_pair_dict(
     site_labels: list[str], label_pairs: list[str], atom_site_info: dict
 ):
-    """
-    Return a dictionary, alphabetically sorted pair
-    """
+    """Return a dictionary, alphabetically sorted pair."""
     coord_occupancy_sum = compute_coord_occupancy_sum(
         site_labels, atom_site_info
     )
