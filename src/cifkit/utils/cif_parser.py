@@ -1,6 +1,4 @@
-"""
-Parses attributes from a .cif file.
-"""
+"""Parses attributes from a .cif file."""
 
 from typing import Any
 
@@ -19,9 +17,7 @@ from cifkit.utils.string_parser import (
 
 
 def get_cif_block(file_path: str) -> Block:
-    """
-    Return CIF block from file path.
-    """
+    """Return CIF block from file path."""
     doc = gemmi.cif.read_file(file_path)
     block = doc.sole_block()
 
@@ -31,9 +27,7 @@ def get_cif_block(file_path: str) -> Block:
 def get_unitcell_lengths(
     block: Block,
 ) -> list[float]:
-    """
-    Return the unit cell lengths.
-    """
+    """Return the unit cell lengths."""
     keys_lengths = [
         "_cell_length_a",
         "_cell_length_b",
@@ -51,9 +45,7 @@ def get_unitcell_lengths(
 def get_unitcell_angles_rad(
     block: Block,
 ) -> list[float]:
-    """
-    Return the unit cell angles.
-    """
+    """Return the unit cell angles."""
 
     keys_angles = [
         "_cell_angle_alpha",
@@ -70,9 +62,7 @@ def get_unitcell_angles_rad(
 
 
 def get_loop_tags() -> list[str]:
-    """
-    Return tags commonly used for atomic description.
-    """
+    """Return tags commonly used for atomic description."""
     loop_tags = [
         "_atom_site_label",
         "_atom_site_type_symbol",
@@ -88,9 +78,10 @@ def get_loop_tags() -> list[str]:
 
 
 def get_loop_values(block: Block) -> list[Column]:
-    """
-    Retrieve a list of predefined loop tags for atomic site description.
+    """Retrieve a list of predefined loop tags for atomic site description.
+
     If a tag is not found, None is inserted in its place in the list.
+
     """
     loop_tags = get_loop_tags()
 
@@ -104,16 +95,12 @@ def get_loop_values(block: Block) -> list[Column]:
 
 
 def get_unique_label_count(loop_values: list) -> int:
-    """
-    Count the number of labels in the loop.
-    """
+    """Count the number of labels in the loop."""
     return len(loop_values[0])
 
 
 def get_unique_elements_from_loop(loop_values: list) -> set[str]:
-    """
-    Return a list of alphabetically sorted unique elements from loop values.
-    """
+    """Return a list of alphabetically sorted unique elements from loop values."""
     num_atom_labels = get_unique_label_count(loop_values)
     unique_elements = set()
     for i in range(num_atom_labels):
@@ -123,9 +110,7 @@ def get_unique_elements_from_loop(loop_values: list) -> set[str]:
 
 
 def get_unique_site_labels(loop_values: list) -> list[str]:
-    """
-    Return a list of atom labels from loop values.
-    """
+    """Return a list of atom labels from loop values."""
     num_atom_labels = get_unique_label_count(loop_values)
     label_list = []
     for i in range(num_atom_labels):
@@ -138,9 +123,8 @@ def get_unique_site_labels(loop_values: list) -> list[str]:
 def get_label_occupancy_coordinates(
     loop_values: list, i
 ) -> tuple[str, float, tuple[float, float, float]]:
-    """
-    Return atom information (label, occupancy, coordinates) for the i-th atom.
-    """
+    """Return atom information (label, occupancy, coordinates) for the i-th
+    atom."""
     label: str = loop_values[0][i]
     occupancy: float = get_string_to_formatted_float(loop_values[7][i])
     coordinates: tuple[float, float, float] = (
@@ -155,9 +139,7 @@ def get_label_occupancy_coordinates(
 def get_loop_value_dict(
     loop_values: list,
 ) -> dict[str, dict[str, Any]]:
-    """
-    Create a dictionary containing CIF loop values for each label.
-    """
+    """Create a dictionary containing CIF loop values for each label."""
     loop_value_dict = {}
     num_of_atom_labels = get_unique_label_count(loop_values)
 
@@ -178,9 +160,7 @@ def get_loop_value_dict(
 def get_start_end_line_indexes(
     file_path: str, start_keyword: str
 ) -> tuple[int, int]:
-    """
-    Find the starting and ending indexes of the lines in atom_site_loop
-    """
+    """Find the starting and ending indexes of the lines in atom_site_loop."""
 
     with open(file_path, "r") as f:
         lines = f.readlines()
@@ -204,10 +184,11 @@ def get_start_end_line_indexes(
 
 
 def get_line_content_from_tag(file_path: str, start_keyword: str) -> list[str]:
-    """
-    Returns a list containing file content with starting keyword.
+    """Returns a list containing file content with starting keyword.
+
     This function only appropriate for PCD format for removing the author
     section.
+
     """
     start_index, end_index = get_start_end_line_indexes(
         file_path, start_keyword
@@ -228,9 +209,7 @@ def get_line_content_from_tag(file_path: str, start_keyword: str) -> list[str]:
 def get_formula_structure_weight_s_group(
     block: Block,
 ) -> tuple[str, str, float, int, str]:
-    """
-    Return the unit cell lengths.
-    """
+    """Return the unit cell lengths."""
     keys = [
         "_chemical_formula_structural",
         "_chemical_name_structure_type",
@@ -254,10 +233,11 @@ def get_formula_structure_weight_s_group(
 def get_unique_formulas_structures_weights_s_groups(
     file_path_list: list[str],
 ) -> tuple[set[str], set[str], set[float], set[int], set[str]]:
-    """
-    Find all unique structures, formulas, weights, space groups.
-    This function requires no initialization and should be more efficient
-    in analyzing and filtering a dataset.
+    """Find all unique structures, formulas, weights, space groups.
+
+    This function requires no initialization and should be more efficient in
+    analyzing and filtering a dataset.
+
     """
     formulas = set()
     structures = set()
@@ -284,10 +264,8 @@ def get_unique_formulas_structures_weights_s_groups(
 
 
 def get_tag_from_third_line(file_path: str, db_source="PCD") -> str:
-    """
-    Extract the tag from the provided CIF file path
-    appropriate for PCD db source only.
-    """
+    """Extract the tag from the provided CIF file path appropriate for PCD db
+    source only."""
 
     if not db_source == "PCD":
         return None
@@ -296,7 +274,7 @@ def get_tag_from_third_line(file_path: str, db_source="PCD") -> str:
         # Read first three lines
         f.readline()  # First line
         f.readline()  # Second line
-        third_line = f.readline().strip()  # Thrid line
+        third_line = f.readline().strip()  # Third line
         third_line = third_line.replace(",", "")
 
         # Split based on '#' and filter out empty strings
@@ -315,8 +293,8 @@ def get_tag_from_third_line(file_path: str, db_source="PCD") -> str:
 
 
 def parse_atom_site_occupancy_info(file_path: str) -> dict:
-    """Parse atom site loop information including element, occupancy,
-    fractional coordinates, multiplicity, and wyckoff symbol."""
+    """Parse atom site loop information including element, occupancy, fractional
+    coordinates, multiplicity, and wyckoff symbol."""
     block = get_cif_block(file_path)
     loop_vals = get_loop_values(block)
     label_count = len(loop_vals[0])

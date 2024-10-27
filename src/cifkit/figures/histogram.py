@@ -1,6 +1,4 @@
-"""
-Histgoram for supercell size, minimum distances
-"""
+"""Histgoram for supercell size, minimum distances."""
 
 import os
 
@@ -137,14 +135,12 @@ def plot_histogram(attribute, stats, dir_path, display, output_dir):
         histogram["data"], histogram["settings"], display, output_dir
     )
 
-    # Make a deafult folder if the output folder is not provided=
+    # Make a default folder if the output folder is not provided
 
 
 def generate_histogram(data, settings, display, output_dir: str) -> None:
-    """
-    Generate a histogram from a dictionary of data and save
-    it to a specified directory.
-    """
+    """Generate a histogram from a dictionary of data and save it to a specified
+    directory."""
 
     plt.figure(figsize=(10, 6))  # Create a new figure for each histogram
 

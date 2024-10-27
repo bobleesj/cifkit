@@ -9,10 +9,8 @@ from cifkit.data.radius import get_radius_data
 def generate_adjacent_pairs(
     elements: list[str],
 ) -> list[tuple[str, str]]:
-    """
-    Generate a list of tuples, where each tuple is
-    a pair of adjacent atom labels.
-    """
+    """Generate a list of tuples, where each tuple is a pair of adjacent atom
+    labels."""
 
     # Binary -> [('In', 'Rh')]
     # Ternary -> [('In', 'Rh'), ('Rh', 'U')]
@@ -23,19 +21,15 @@ def generate_adjacent_pairs(
 
 
 def objective(params, original_radii: list[float]) -> list[float]:
-    """
-    Calculate the objective function value,which is the sum of
-    squared percent differences between original and refined radii.
-    """
+    """Calculate the objective function value,which is the sum of squared percent
+    differences between original and refined radii."""
 
     return np.sum(((original_radii - params) / original_radii) ** 2)
 
 
 def constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
-    """
-    Enforce that the sum of the radii of the pair does not
-    exceed the shortest allowed distance between them.
-    """
+    """Enforce that the sum of the radii of the pair does not exceed the shortest
+    allowed distance between them."""
     i, j = index_pair
     i, j = index_pair
     return shortest_distance - (params[i] + params[j])
@@ -44,10 +38,8 @@ def constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
 def get_refined_CIF_radius(
     elements: list[str], shortest_distances: dict
 ) -> dict[str, float]:
-    """
-    Optimize CIF radii given atom labels and their
-    shortest pair distance constraints.
-    """
+    """Optimize CIF radii given atom labels and their shortest pair distance
+    constraints."""
     sorted_elements = sorted(elements)
     radii_data = get_radius_data()
     original_radii = np.array(

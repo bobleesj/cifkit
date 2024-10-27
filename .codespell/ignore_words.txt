@@ -1,0 +1,11 @@
+;; Please include explanations for each ignored word (lowercase) using full sentences.
+;; See https://docs.openverse.org/meta/codespell.html for docs.
+
+;; `nd` is a chemical element.
+nd
+
+;; `te` is a chemical element.
+te
+
+;; `Indide` refers to the keywords in the tyvanchuk_crystal_2024 paper.
+indide

@@ -59,8 +59,9 @@ from cifkit.utils.cif_parser import (
 
 # Identify .cif database source
 from cifkit.utils.cif_sourcer import get_cif_db_source
+
+# Utility
 from cifkit.utils.log_messages import CifLog
-from cifkit.utils.unit import round_dict_values
 
 
 def ensure_connections(func):
@@ -85,29 +86,104 @@ class Cif:
     def __init__(
         self, file_path: str, is_formatted=False, logging_enabled=False
     ) -> None:
-        """_summary_
+        """Initializes an object from a .cif file.
 
         Parameters
         ----------
         file_path : str
-            _description_
+            Path to the .cif file.
         is_formatted : bool, optional
-            _description_, by default False
+            If False, preprocess the .cif file to ensure compatibility with the
+            gemmi library. Default is False.
         logging_enabled : bool, optional
-            _description_, by default False
+            Enables detailed logging during initialization and for distance
+            calculations. Default is False.
+
+        Attributes
+        ----------
+        file_path : str
+            Path to the CIF file from which data is loaded.
+        logging_enabled : bool
+            Enables detailed logging for initialization and distance
+            alculations if set to True.
+        file_name : str
+            Base name of the CIF file, extracted from `file_path`.
+        file_name_without_ext : str
+            File name without its extension, useful for referencing or
+            generating derivative files.
+        db_source : str
+            Source database (e.g., ICSD, MP, CCDC, PCD) from which the CIF file
+            originates, determined at runtime.
+        unitcell_lengths : list[float]
+            List of unit cell lengths for the crystal structure, typically in
+            Angstroms.
+        unitcell_angles : list[float]
+            List of unit cell angles in radians, ordered by alpha, beta, gamma.
+        site_labels : list[str]
+            Lists all unique atomic site labels.
+        unique_elements : set[str]
+            Set of unique chemical elements present in the CIF file.
+        atom_site_info : dict[str, any]
+            Dictionary containing detailed information about each atomic site
+            including element, site occupancy,
+            fractional coordinates, symmetry, and multiplicity.
+        composition_type : int
+            Number of unique elements present in the .cif file, e.g., 1 for
+            unary, 2 for binary, etc.
+        tag : str
+            Additional tag associated with the CIF data, parsed from the third
+            line of PCD .cif files.
+        bond_pairs : set[tuple[str, str]]
+            Set of tuples representing bonded pairs of elements.
+        site_label_pairs : set[tuple[str, str]]
+            Set of tuples representing pairs of atomic site labels.
+        bond_pairs_sorted_by_mendeleev : set[tuple[str, str]]
+            Set of bonded pairs sorted according to Mendeleev Numbers.
+        site_label_pairs_sorted_by_mendeleev : set[tuple[str, str]]
+            Set of site label pairs sorted by Mendeleev Numbers.
+        site_mixing_type : str
+            Descriptor of the mixing type, categorized into four types:
+            deficiency_atomic_mixing,
+            full_occupancy_atomic_mixing, deficiency_without_atomic_mixing,
+            full_occupancy.
+        is_radius_data_available : bool
+            Indicates whether Pauling and CIF atomic radii are available for
+            all elements in the .cif file.
+        mixing_info_per_label_pair : dict
+            Dictionary mapping pairs of labels to their mixing information.
+        mixing_info_per_label_pair_sorted_by_mendeleev : dict
+            Same as `mixing_info_per_label_pair`, but sorted according to
+            Mendeleev numbers.
+        unitcell_points : list[list[tuple[float, float, float, str]]]
+            List of points defining the unit cell; each point contains
+            fractional coordinates and a site label.
+        supercell_points : list[list[tuple[float, float, float, str]]]
+            List of points defining the supercell of the cell, with
+            translations of ±1, ±1, ±1 from the unit cell.
+        unitcell_atom_count : int
+            Total count of atoms within the unit cell.
+        supercell_atom_count : int
+            Total count of atoms within the generated supercell
+            incorporating ±1, ±1, ±1 translations.
+        connections : None or dict
+            Initially None, intended to store connection data related to
+            the crystal structure. Connections are computed lazily and are
+            only calculated when first needed by a method or property requiring them.
         """
 
         self.file_path = file_path
         self.logging_enabled = logging_enabled
 
-        """Initialize the Cif object with the file path."""
+        # Initialize the Cif object with the file path.
         self.file_name = os.path.basename(file_path)
         self.file_name_without_ext = os.path.splitext(self.file_name)[0]
         self.db_source = get_cif_db_source(self.file_path)
-        self.connections = None  # Private attribute to store connections
+
+        # Private attribute to store connections
+        self.connections = None
         self._shortest_pair_distance = None
 
-        # If it is not previously formatted
+        # Pre-process if .cif has not been formatted
         if not is_formatted:
             self._preprocess()
 
@@ -181,9 +257,6 @@ class Cif:
         This method calculates the supercell points and atom counts based
         on the unit cell data. It uses the `get_supercell_points` and
         `get_cell_atom_count` functions to perform the calculations.
-
-        Returns:
-            None
         """
         # Method implementation goes here
         self.unitcell_points = get_supercell_points(self._block, 1)
@@ -191,11 +264,18 @@ class Cif:
         self.unitcell_atom_count = get_cell_atom_count(self.unitcell_points)
         self.supercell_atom_count = get_cell_atom_count(self.supercell_points)
 
-    def compute_connections(self, cutoff_radius=10.0):
-        """_summary_
+    def compute_connections(self, cutoff_radius=10.0) -> None:
+        """Computes various connection parameters for the crystal structure,
+        including connection network, shortest distances, bond counts, and
+        coordination numbers (CN). These prperties are lazily loaded to avoid
+        unnecessary computation during the initialization and pre-processing
+        step.
 
-        Args:
-            cutoff_radius (float, optional): _description_. Defaults to 10.0.
+        Parameters
+        ----------
+        cutoff_radius : float, optional
+            The distance threshold in Angstroms used to consider two atoms as connected,
+            by default 10.0
         """
         self._log_info(CifLog.COMPUTE_CONNECTIONS.value)
         self.connections = get_site_connections(
@@ -209,10 +289,7 @@ class Cif:
             cutoff_radius=cutoff_radius,
         )
 
-        # Flattened coordinations
         self._connections_flattened = flat_site_connections(self.connections)
-
-        # Shortest distance
         self._shortest_distance = get_shortest_distance(self.connections)
 
         # Shortest distance per bond pair
@@ -226,11 +303,10 @@ class Cif:
         )
 
         # Parse individual radii per element
-        self._radius_values = round_dict_values(
-            get_radius_values_per_element(
-                self.unique_elements, self.shortest_bond_pair_distance
-            )
+        self._radius_values = get_radius_values_per_element(
+            self.unique_elements, self.shortest_bond_pair_distance
         )
+
         self._radius_sum = compute_radius_sum(
             self.radius_values, self.is_radius_data_available
         )
@@ -341,23 +417,90 @@ class Cif:
     @property
     @ensure_connections
     def shortest_distance(self):
-        """Property that checks if connections are computed and computes."""
+        """Lazily retrieve the shortest atomic distance within the crystal
+        structure. This property is lazily loaded and ensures all necessary
+        connections are computed beforehand using the `@ensure_connections`
+        decorator. The computation calculates the minimum distance between any
+        pairs of atoms based on the connection data.
+
+        Returns
+        -------
+        float
+            The shortest distance between any two connected atoms in the
+            crystal structure, in Angstroms.
+        """
         return self._shortest_distance
 
     @property
     @ensure_connections
     def connections_flattened(self):
-        """Property that combine site connections into a single array."""
+        """Transform site connections into a sorted list of tuples, each
+        containing a pair of alphabetically sorted element symbols and the
+        distance between them.
+
+        Returns
+        -------
+        list[tuple[tuple[str, str], float]]
+            A sorted list of tuples, each containing a pair of alphabetically
+            sorted element symbols and the distance between them.
+
+        Examples
+        --------
+        >>> cif = Cif("path/to/cif/file.cif"))
+        >>> cif.connections_flattened
+        [(("In", "Rh"), 2.697), (("In", "Rh"), 2.697)]
+        """
         return self._connections_flattened
 
     @property
     @ensure_connections
     def shortest_bond_pair_distance(self):
+        """Determine the minimum distance for all possible unique pair of
+        elements. This property uses lazily loaded connections to compute the
+        distance if they are not already available.
+
+        Returns
+        -------
+        dict[tuple[str, str], float]
+
+        Examples
+        --------
+        >>> cif.shortest_bond_pair_distance
+        >>> {
+            ("In", "In"): 3.244,
+            ("In", "Rh"): 2.697,
+            ("In", "U"): 3.21,
+            ("Rh", "Rh"): 3.881,
+            ("Rh", "U"): 2.983,
+            ("U", "U"): 3.881,
+        }
+        """
         return self._shortest_bond_pair_distance
 
     @property
     @ensure_connections
     def shortest_site_pair_distance(self):
+        """Retrieves the shortest distance from each unique atomic site in the
+        crystal structure. This property uses lazily loaded connections to
+        compute these distances if they are not already available.
+
+        Returns
+        -------
+        dict[str, tuple[str, float]]
+             dictionary where each key is an atomic label and the value is a
+             tuple containing the label of the closest atomic site and the
+             shortest distance to it in Angstroms
+
+        Examples
+        --------
+        >>> cif.shortest_site_pair_distance
+        >>> {
+            "In1": ("Rh2", 2.697),
+            "Rh1": ("In1", 2.852),
+            "Rh2": ("In1", 2.697),
+            "U1": ("Rh1", 2.984),
+        }
+        """
         return self._shortest_site_pair_distance
 
     @property
@@ -498,17 +641,26 @@ class Cif:
 
     @ensure_connections
     def plot_polyhedron(
-        self, site_label, show_labels=True, is_displayed=False, output_dir=None
+        self,
+        site_label: str,
+        show_labels=True,
+        is_displayed=False,
+        output_dir=None,
     ) -> None:
-        """
-        Plots a polyhedron structure and optionally saves it.
+        """Function to plot a polyhedron structure and optionally saves it.
 
-        Args:
-            site_label (str): Central site label for the polyhedron.
-            show_labels (bool, optional): Whether to display vertex labels. Defaults to True.
-            is_displayed (bool, optional): Display plot interactively. Defaults to False.
-            output_dir (str, optional): Directory to save the plot. Defaults to None.
+        Parameters
+        ----------
+        site_label : str
+            Central site label for the polyhedron
+        show_labels : bool, optional
+            Whether to display vertex labels, by default True
+        is_displayed : bool, optional
+            Display plot interactively, by default False
+        output_dir : str, optional
+            Directory to save the plot, by default None
         """
+
         coords, vertex_labels = get_polyhedron_coordinates_labels(
             self.CN_connections_by_best_methods, site_label
         )

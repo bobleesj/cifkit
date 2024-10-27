@@ -2,11 +2,12 @@ from cifkit.utils import cif_parser, string_parser
 
 
 def preprocess_label_element_loop_values(file_path: str) -> None:
-    """
-    Modify the atomic label site text in a .cif file. .cif files may
-    have the atomic labels in symbolic forms such as "M1" and some also
-    have two elements provided such as "In1,Co3B". Each case is handled
-    with specific examples demonstrated in the source and test code.
+    """Modify the atomic label site text in a .cif file.
+
+    .cif files may have the atomic labels in symbolic forms such as "M1" and some
+    also have two elements provided such as "In1,Co3B". Each case is handled with
+    specific examples demonstrated in the source and test code.
+
     """
     is_cif_file_updated = False
     cif_block = cif_parser.get_cif_block(file_path)
@@ -26,7 +27,6 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
         )
 
         unique_elements = cif_parser.get_unique_elements_from_loop(loop_values)
-
         """
         Type 8.
         Ex) 1817279.cif
@@ -78,12 +78,12 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
             is_cif_file_updated = True
 
         if atom_type_symbol != atom_type_from_label:
-            """
-            Type 1.
-            Ex) 250165.cif
+            """Type 1. Ex) 250165.cif.
+
             M1 Th 4 a 0 0 0 0.99
             ->
             ThM1 Th 4 a 0 0 0 0.99
+
             """
             if (
                 len(site_label) == 2

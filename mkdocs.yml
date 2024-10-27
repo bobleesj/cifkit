@@ -61,4 +61,5 @@ plugins:
           options:
             show_source: false
             show_root_heading: true     # Show module names as headings
+            docstring_style: numpy
   - mkdocs-jupyter

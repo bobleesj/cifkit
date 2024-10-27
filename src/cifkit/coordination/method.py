@@ -64,7 +64,7 @@ def compute_CN_max_gap_per_site(
                 norm_dist_by_CIF_radius_sum = compute_normalized_value(
                     pair_dist, CIF_radius_sum_norm_value
                 )
-                norm_dist_by_CIF_radius_refined_sum = compute_normalized_value(
+                norm_dist_by_CIF_rad_ref_sum = compute_normalized_value(
                     pair_dist, CIF_radius_sum_refined_norm_value
                 )
                 norm_dist_by_Pauling_radius_sum = compute_normalized_value(
@@ -80,7 +80,7 @@ def compute_CN_max_gap_per_site(
                 distances = {
                     "dist_by_shortest_dist": norm_dist_by_min_dist,
                     "dist_by_CIF_radius_sum": norm_dist_by_CIF_radius_sum,
-                    "dist_by_CIF_radius_refined_sum": norm_dist_by_CIF_radius_refined_sum,
+                    "dist_by_CIF_radius_refined_sum": norm_dist_by_CIF_rad_ref_sum,
                     "dist_by_Pauling_radius_sum": norm_dist_by_Pauling_radius_sum,
                 }
             else:
@@ -118,10 +118,8 @@ def compute_normalized_value(number: float, ref_number: float) -> float:
 def get_rad_sum_value(
     rad_sum_data, method_name: str, ref_label: str, other_label: str
 ) -> float:
-    """
-    Return the sum of radii value for a given pair of elements,
-    ensuring the pair is alphabetically sorted.
-    """
+    """Return the sum of radii value for a given pair of elements, ensuring the
+    pair is alphabetically sorted."""
 
     # Extract the element types from the labels
     ref_element = get_atom_type_from_label(ref_label)

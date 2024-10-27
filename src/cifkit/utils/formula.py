@@ -1,6 +1,4 @@
-"""
-Parses a formula
-"""
+"""Parses a formula."""
 
 import re
 
@@ -19,9 +17,7 @@ def get_validated_formula_label(formula: str) -> str:
 
 
 def get_parsed_formula(formula: str) -> list[tuple[str, str]]:
-    """
-    Return a list of tuples, each tuple containing an element and its index.
-    """
+    """Return a list of tuples, each tuple containing an element and its index."""
     trimmed_formula = get_validated_formula_label(formula)
     pattern = r"([A-Z][a-z]*)(\d*\.?\d*)"
     elements = re.findall(pattern, trimmed_formula)
@@ -29,9 +25,7 @@ def get_parsed_formula(formula: str) -> list[tuple[str, str]]:
 
 
 def get_normalized_formula(formula: str, demical_places=3) -> str:
-    """
-    Return a formula with the stoichiometry coefficient sum of 1
-    """
+    """Return a formula with the stoichiometry coefficient sum of 1."""
     index_sum = 0.0
     normalized_formula_parts = []
     parsed_formula_set = get_parsed_formula(formula)
@@ -59,10 +53,8 @@ def get_normalized_formula(formula: str, demical_places=3) -> str:
 
 
 def get_parsed_norm_formula(formula: str) -> list[tuple[str, str]]:
-    """
-    Return a list of tuples, each tuple containing element
-    and normalized index.
-    """
+    """Return a list of tuples, each tuple containing element and normalized
+    index."""
     normalized_formula = get_normalized_formula(formula)
     parsed_normalized_formula = get_parsed_formula(normalized_formula)
     return parsed_normalized_formula
@@ -76,16 +68,12 @@ def get_unique_elements(formula: str) -> list[str]:
 
 
 def get_unique_element_count(formula: str) -> int:
-    """
-    Return the number of unique elements in the chemical formula.
-    """
+    """Return the number of unique elements in the chemical formula."""
     return len(get_unique_elements(formula))
 
 
 def get_unique_elements_from_formulas(formulas: list) -> set[str]:
-    """
-    Return unique elements from a list of formulas.
-    """
+    """Return unique elements from a list of formulas."""
     unique_elements = set()  # Create a set to store unique elements
 
     for formula in formulas:
@@ -100,9 +88,7 @@ def get_unique_elements_from_formulas(formulas: list) -> set[str]:
 
 
 def get_subscripted_formula(formula: str) -> str:
-    """
-    Return a subscripted formula used for plotting.
-    """
+    """Return a subscripted formula used for plotting."""
     validated_formula = get_validated_formula_label(formula)
     # Use regular expression to find elements and numbers
     subscripted_formula = re.sub(

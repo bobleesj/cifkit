@@ -9,10 +9,11 @@ from cifkit.utils.cif_sourcer import get_cif_db_source
 
 
 def remove_author_loop(file_path: str) -> None:
-    """
-    Remove the author section from a .cif file to prevent parsing problems
-    caused by a wrongly formatted author block. This is a common issue in
-    PCD files.
+    """Remove the author section from a .cif file to prevent parsing problems
+    caused by a wrongly formatted author block.
+
+    This is a common issue in PCD files.
+
     """
     (
         start_index,
@@ -32,9 +33,10 @@ def remove_author_loop(file_path: str) -> None:
 
 
 def add_hashtag_in_first_line(file_path: str):
-    """
-    ICSD files start with (C) which causes parsing issues with gemmi.
+    """ICSD files start with (C) which causes parsing issues with gemmi.
+
     If that is the case, add a # before (C) to fix the parsing issue.
+
     """
     # First, check if the file exists and is a CIF file
     if not os.path.exists(file_path) or not file_path.endswith(".cif"):
@@ -55,10 +57,11 @@ def add_hashtag_in_first_line(file_path: str):
 
 
 def edit_cif_file_based_on_db(file_path: str):
-    """
-    Edit a CIF file based on the database it is from.
+    """Edit a CIF file based on the database it is from.
+
     PCD: Remove author loop and preprocess label element loop values
     ICSD: Add a hashtag in the first line
+
     """
     db_source = get_cif_db_source(file_path)
     if db_source == "ICSD":

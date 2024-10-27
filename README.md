@@ -22,7 +22,7 @@ variables for handling large datasets, on the order of tens of thousands, of
 
 `cifkit` provides higher-level functions in just a few lines of code.
 
-- **Coordination geometry** - `cifkit` provides fuctions for visualing
+- **Coordination geometry** - `cifkit` provides functions for visualing
   coordination geometry from each site and extracts physics-based features like
   volume and packing efficiency in each polyhedron.
 - **Atomic mixing** - `cifkit` extracts atomic mixing information at the bond
@@ -79,7 +79,7 @@ ensemble.filter_by_structures(["Co1.75Ge", "CoIn2"])
 ensemble.filter_by_structures("CeAl2Ga2")
 ```
 
-To learn more, please read the official documention here:
+To learn more, please read the official documentation here:
 https://bobleesj.github.io/cifkit.
 
 ## Quotes
@@ -122,3 +122,10 @@ Here is how you can contribute to the `cifkit` project if you found it helpful:
 - If you have any suggestions or need further clarification on how to use
   `cifkit`, please reach out to Bob Lee
   ([@bobleesj](https://github.com/bobleesj)).
+
+## To render documentation
+
+```bash
+pip install -r requirements/docs.txt
+mkdocs serve
+```
