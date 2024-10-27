@@ -19,7 +19,8 @@ class CifEnsemble:
         preprocess=True,
         logging_enabled=False,
     ) -> None:
-        """Initialize a CifEnsemble object, containing a collection of Cif objects
+        """Initialize a CifEnsemble object, containing a collection of Cif
+        objects.
 
         Parameters
         ----------
@@ -136,6 +137,7 @@ class CifEnsemble:
     @property
     def unique_space_group_names(self) -> set[str]:
         """Get unique space groups from all .cif files in the folder.
+
         Examples
         --------
         >>> cif_ensemble.unique_space_group_names
@@ -146,6 +148,7 @@ class CifEnsemble:
     @property
     def unique_space_group_numbers(self) -> set[str]:
         """Get unique space groups from all .cif files in the folder.
+
         Examples
         --------
         >>> cif_ensemble.unique_space_group_numbers
@@ -156,6 +159,7 @@ class CifEnsemble:
     @property
     def unique_site_mixing_types(self) -> set[int]:
         """Get unique site mixing types from all .cif files in the folder.
+
         Examples
         --------
         >>> cif_ensemble.unique_site_mixing_types
@@ -166,6 +170,7 @@ class CifEnsemble:
     @property
     def unique_composition_types(self) -> set[int]:
         """Get unique composition types from all .cif files in the folder.
+
         Examples
         --------
         >>> cif_ensemble.unique_composition_types
@@ -206,7 +211,8 @@ class CifEnsemble:
         Returns
         -------
         set[str]
-            Unique coordination number values by minimum distance method from all .cif files.
+            Unique coordination number values by minimum distance method from all .cif
+            files.
         """
         return self._get_unique_property_values_from_set(
             "CN_unique_values_by_min_dist_method"
@@ -291,7 +297,8 @@ class CifEnsemble:
         return self._attribute_stats("CN_unique_values_by_best_methods")
 
     def _collect_cif_data(self, attribute, transform=None):
-        """Generic method to collect data from CIF files based on an attribute."""
+        """Generic method to collect data from CIF files based on an
+        attribute."""
         collected_data = []
         for cif in self.cifs:
             attr_value = getattr(cif, attribute, None)
@@ -443,7 +450,7 @@ class CifEnsemble:
             Set of file paths to CIF files.
         to_directory_path : str
             Destination directory path.
-            
+
         Examples
         --------
         >>> file_paths = {
@@ -477,9 +484,9 @@ class CifEnsemble:
         >>> cif_ensemble_test.copy_cif_files(file_paths, dest_dir_path)
         """
         copy_files(to_directory_path, list(file_paths))
-    
+
     # FIXME: refactor this section to maintain DRY principle
-    
+
     def generate_structure_histogram(self, display=False, output_dir=None):
         plot_histogram(
             "structure",
