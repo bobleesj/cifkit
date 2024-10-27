@@ -29,7 +29,7 @@ mixing, among other parameters.
 
 `cifkit` provides higher-level functions in just a few lines of code.
 
-- **Coordination geometry** - `cifkit` provides fuctions for visualing
+- **Coordination geometry** - `cifkit` provides functions for visualing
   coordination geometry from each site and extracts physics-based features like
   volume and packing efficiency in each polyhedron.
 - **Atomic mixing** - `cifkit` extracts atomic mixing information at the bond
