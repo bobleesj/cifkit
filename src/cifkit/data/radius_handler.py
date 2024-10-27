@@ -32,7 +32,9 @@ def get_CIF_pauling_radius(elements: list[str]) -> dict:
     return radii
 
 
-def get_radius_values_per_element(elements: list[str], shortest_bond_distances) -> dict:
+def get_radius_values_per_element(
+    elements: list[str], shortest_bond_distances
+) -> dict:
     """Merge CIF and Pauling radius data with CIF refined radius data."""
     is_radius_data_available = get_is_radius_data_available(elements)
 
@@ -57,7 +59,9 @@ def get_radius_values_per_element(elements: list[str], shortest_bond_distances) 
     return round_dict_values(combined_radii)
 
 
-def compute_radius_sum(radius_values: dict[str: dict[str:float]], is_radius_data_available: bool):
+def compute_radius_sum(
+    radius_values: dict[str : dict[str:float]], is_radius_data_available: bool
+):
     """Compute the sum of two radii."""
 
     if not is_radius_data_available:

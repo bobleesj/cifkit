@@ -35,7 +35,8 @@ def find_best_polyhedron(max_gaps_per_label, connections):
 
             except Exception:
                 print(
-                    f"Error in determining polyhedron for {label} using {method} - skipped"
+                    f"Error in polyhedron calculation for"
+                    f"{label} using {method} - Skip"
                 )
                 continue  # Move to the next method
 

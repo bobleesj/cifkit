@@ -124,9 +124,8 @@ Here is how you can contribute to the `cifkit` project if you found it helpful:
   ([@bobleesj](https://github.com/bobleesj)).
 
 ## To render documentation
-  
+
 ```bash
 pip install -r requirements/docs.txt
 mkdocs serve
 ```
-

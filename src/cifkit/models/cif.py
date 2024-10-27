@@ -86,77 +86,89 @@ class Cif:
     def __init__(
         self, file_path: str, is_formatted=False, logging_enabled=False
     ) -> None:
-        """Initialize an object from a .cif file.
+        """Initializes an object from a .cif file.
 
         Parameters
         ----------
         file_path : str
             Path to the .cif file.
         is_formatted : bool, optional
-            If False, preprocesses the .cif file for compatibility with the gemmi library, by default False.
+            If False, preprocess the .cif file to ensure compatibility with the
+            gemmi library. Default is False.
         logging_enabled : bool, optional
-            Enables logging for initialization and distance calculations, by default False.
-
+            Enables detailed logging during initialization and for distance
+            calculations. Default is False.
 
         Attributes
         ----------
         file_path : str
             Path to the CIF file from which data is loaded.
         logging_enabled : bool
-            If True, enables detailed logging for initialization and distancecalculations.
+            Enables detailed logging for initialization and distance
+            alculations if set to True.
         file_name : str
             Base name of the CIF file, extracted from `file_path`.
         file_name_without_ext : str
-            File name without its extension, useful for referencing or generating derivative files.
+            File name without its extension, useful for referencing or
+            generating derivative files.
         db_source : str
-            Source database (ICSD, MP, CCDC, PCD, etc.) from which the CIF file originates, determined at runtime.
+            Source database (e.g., ICSD, MP, CCDC, PCD) from which the CIF file
+            originates, determined at runtime.
         unitcell_lengths : list[float]
-            List of unit cell lengths for the crystal structure, typically in Angstroms.
+            List of unit cell lengths for the crystal structure, typically in
+            Angstroms.
         unitcell_angles : list[float]
-            List of unit cell angles in radians ordred by alpha, beta, gamma.
+            List of unit cell angles in radians, ordered by alpha, beta, gamma.
         site_labels : list[str]
-            List of all unique atomic site labels.
+            Lists all unique atomic site labels.
         unique_elements : set[str]
-            Set of unique chemical elements present in the cif file.
+            Set of unique chemical elements present in the CIF file.
         atom_site_info : dict[str, any]
-            Dictionary containing detailed element, site occupancy, fractional coords, symmetry, and multiplicity
-            information for each atomic site
+            Dictionary containing detailed information about each atomic site
+            including element, site occupancy,
+            fractional coordinates, symmetry, and multiplicity.
         composition_type : int
-            Number of unique elements present in the .cif file. 1 for unary, 2 for binary, etc.
+            Number of unique elements present in the .cif file, e.g., 1 for
+            unary, 2 for binary, etc.
         tag : str
-            Additional tag associated with the CIF data, parsed from the third line of PCD .cif files.
+            Additional tag associated with the CIF data, parsed from the third
+            line of PCD .cif files.
         bond_pairs : set[tuple[str, str]]
             Set of tuples representing bonded pairs of elements.
         site_label_pairs : set[tuple[str, str]]
-            Set of tuples representing pairs of atomic site labels
+            Set of tuples representing pairs of atomic site labels.
         bond_pairs_sorted_by_mendeleev : set[tuple[str, str]]
             Set of bonded pairs sorted according to Mendeleev Numbers.
         site_label_pairs_sorted_by_mendeleev : set[tuple[str, str]]
             Set of site label pairs sorted by Mendeleev Numbers.
-       site_mixing_type : str
-            Descriptor of the mixing type, categorized into deficiency_atomic_mixing, full_occupancy_atomic_mixing,
-            deficiency_without_atomic_mixing, and full_occupancy.
+        site_mixing_type : str
+            Descriptor of the mixing type, categorized into four types:
+            deficiency_atomic_mixing,
+            full_occupancy_atomic_mixing, deficiency_without_atomic_mixing,
+            full_occupancy.
         is_radius_data_available : bool
-            Indicates whether data about Pauling and CIF atomic radii are available for the elements in the .cif.
+            Indicates whether Pauling and CIF atomic radii are available for
+            all elements in the .cif file.
         mixing_info_per_label_pair : dict
             Dictionary mapping pairs of labels to their mixing information.
         mixing_info_per_label_pair_sorted_by_mendeleev : dict
-            Same as `mixing_info_per_label_pair`, but sorted according to Mendeleev's order.
+            Same as `mixing_info_per_label_pair`, but sorted according to
+            Mendeleev numbers.
         unitcell_points : list[list[tuple[float, float, float, str]]]
-            List of points defining the unit cell; each point contains fractional coordinates and a site label.
+            List of points defining the unit cell; each point contains
+            fractional coordinates and a site label.
         supercell_points : list[list[tuple[float, float, float, str]]]
-            List of points defining the supercell of the cell, with translations of ±1, ±1, ±1 from the unit cell.
+            List of points defining the supercell of the cell, with
+            translations of ±1, ±1, ±1 from the unit cell.
         unitcell_atom_count : int
             Total count of atoms within the unit cell.
         supercell_atom_count : int
-            Total count of atoms within the generated supercell, incorporating ±1, ±1, ±1 translations.
+            Total count of atoms within the generated supercell
+            incorporating ±1, ±1, ±1 translations.
         connections : None or dict
-            Initially None, this attribute is intended to store connection data related to the crystal structure.
-            Connections are computed lazily, meaning they are only calculated when first needed
-            by a method or property that requires them. This lazy computation is managed through the
-            `@ensure_connections` decorator, which checks if `connections` is None and computes them if necessary.
-            The actual computation involves parsing the CIF file's data to establish atomic or molecular spatial
-            relationships
+            Initially None, intended to store connection data related to
+            the crystal structure. Connections are computed lazily and are
+            only calculated when first needed by a method or property requiring them.
         """
 
         self.file_path = file_path
@@ -245,7 +257,6 @@ class Cif:
         This method calculates the supercell points and atom counts based
         on the unit cell data. It uses the `get_supercell_points` and
         `get_cell_atom_count` functions to perform the calculations.
-
         """
         # Method implementation goes here
         self.unitcell_points = get_supercell_points(self._block, 1)
@@ -257,13 +268,14 @@ class Cif:
         """Computes various connection parameters for the crystal structure,
         including connection network, shortest distances, bond counts, and
         coordination numbers (CN). These prperties are lazily loaded to avoid
-        unnecessary computation during the initialization and pre-processing step.
+        unnecessary computation during the initialization and pre-processing
+        step.
 
         Parameters
         ----------
         cutoff_radius : float, optional
-            The distance threshold in Angstroms used to consider two atoms as connected, by default 10.0
-
+            The distance threshold in Angstroms used to consider two atoms as connected,
+            by default 10.0
         """
         self._log_info(CifLog.COMPUTE_CONNECTIONS.value)
         self.connections = get_site_connections(
@@ -292,8 +304,8 @@ class Cif:
 
         # Parse individual radii per element
         self._radius_values = get_radius_values_per_element(
-                self.unique_elements, self.shortest_bond_pair_distance
-            )
+            self.unique_elements, self.shortest_bond_pair_distance
+        )
 
         self._radius_sum = compute_radius_sum(
             self.radius_values, self.is_radius_data_available
@@ -416,7 +428,6 @@ class Cif:
         float
             The shortest distance between any two connected atoms in the
             crystal structure, in Angstroms.
-
         """
         return self._shortest_distance
 
@@ -438,7 +449,6 @@ class Cif:
         >>> cif = Cif("path/to/cif/file.cif"))
         >>> cif.connections_flattened
         [(("In", "Rh"), 2.697), (("In", "Rh"), 2.697)]
-
         """
         return self._connections_flattened
 
@@ -453,10 +463,10 @@ class Cif:
         -------
         dict[tuple[str, str], float]
 
-        Examples:
+        Examples
         --------
         >>> cif.shortest_bond_pair_distance
-        {
+        >>> {
             ("In", "In"): 3.244,
             ("In", "Rh"): 2.697,
             ("In", "U"): 3.21,
@@ -464,7 +474,6 @@ class Cif:
             ("Rh", "U"): 2.983,
             ("U", "U"): 3.881,
         }
-
         """
         return self._shortest_bond_pair_distance
 
@@ -472,24 +481,25 @@ class Cif:
     @ensure_connections
     def shortest_site_pair_distance(self):
         """Retrieves the shortest distance from each unique atomic site in the
-        crystal structure. This property uses lazily loaded connections to compute
-        these distances if they are not already available.
+        crystal structure. This property uses lazily loaded connections to
+        compute these distances if they are not already available.
 
         Returns
         -------
         dict[str, tuple[str, float]]
-             dictionary where each key is an atomic label and the value is a tuple containing the label of the
-             closest atomic site and the shortest distance to it in Angstroms
+             dictionary where each key is an atomic label and the value is a
+             tuple containing the label of the closest atomic site and the
+             shortest distance to it in Angstroms
 
         Examples
+        --------
         >>> cif.shortest_site_pair_distance
-        {
+        >>> {
             "In1": ("Rh2", 2.697),
             "Rh1": ("In1", 2.852),
             "Rh2": ("In1", 2.697),
             "U1": ("Rh1", 2.984),
         }
-
         """
         return self._shortest_site_pair_distance
 
@@ -631,7 +641,11 @@ class Cif:
 
     @ensure_connections
     def plot_polyhedron(
-        self, site_label: str, show_labels=True, is_displayed=False, output_dir=None
+        self,
+        site_label: str,
+        show_labels=True,
+        is_displayed=False,
+        output_dir=None,
     ) -> None:
         """Function to plot a polyhedron structure and optionally saves it.
 
@@ -645,7 +659,6 @@ class Cif:
             Display plot interactively, by default False
         output_dir : str, optional
             Directory to save the plot, by default None
-
         """
 
         coords, vertex_labels = get_polyhedron_coordinates_labels(

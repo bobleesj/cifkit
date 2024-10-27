@@ -54,7 +54,11 @@ def plot(
     coordination_number = len(points) - 1
 
     # Title
-    title = f"Formula: {formula}, Central atom: {central_atom_label}, CN: {coordination_number},\n{file_path}"
+    title = (
+        f"Formula: {formula}, Central atom: {central_atom_label}, "
+        f"CN: {coordination_number},\n{file_path}"
+    )
+
     plotter.add_title(title, font="arial")
     # Constructing title and subtitle
 
