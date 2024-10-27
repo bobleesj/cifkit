@@ -1,7 +1,7 @@
 **Added:**
 
 * pre-commit hook for each pull request
-* Support for Python 3.13
+* automated PyPI 
 
 **Changed:**
 
@@ -13,7 +13,7 @@
 
 **Removed:**
 
-* Support for Python 3.10
+* <news item>
 
 **Fixed:**
 
