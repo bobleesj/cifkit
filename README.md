@@ -122,3 +122,11 @@ Here is how you can contribute to the `cifkit` project if you found it helpful:
 - If you have any suggestions or need further clarification on how to use
   `cifkit`, please reach out to Bob Lee
   ([@bobleesj](https://github.com/bobleesj)).
+
+## To render documentation
+  
+```bash
+pip install -r requirements/docs.txt
+mkdocs serve
+```
+
