@@ -57,12 +57,14 @@ def add_hashtag_in_first_line(file_path: str):
 def edit_cif_file_based_on_db(file_path: str):
     """
     Edit a CIF file based on the database it is from.
+    PCD: Remove author loop and preprocess label element loop values
+    ICSD: Add a hashtag in the first line
     """
     db_source = get_cif_db_source(file_path)
     if db_source == "ICSD":
         add_hashtag_in_first_line(file_path)
     elif db_source == "PCD":
         remove_author_loop(file_path)
+        preprocess_label_element_loop_values(file_path)
 
-    preprocess_label_element_loop_values(file_path)
     check_unique_atom_site_labels(file_path)

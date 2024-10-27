@@ -8,6 +8,7 @@ def get_cif_db_source(file_path):
         "MS": "'Materials Studio'",
         "PCD": "#_database_code_PCD",
         "MP": "# generated using pymatgen",
+        "CCDC": "# Cambridge Structural Database (CSD)",
     }
 
     if os.path.exists(file_path) and file_path.endswith(".cif"):

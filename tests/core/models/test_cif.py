@@ -665,8 +665,9 @@ Test CIF various db sources
             216,
         ),
         ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
+        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
         ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1383),
-        ("tests/data/cif/sources/MP/GaN.cif", "MP", {"Ga", "N"}, 108),
+        ("tests/data/cif/sources/CCSD/2294753.cif", "CCDC", {'Er', 'In', 'Co'}, 3844),
         (
             "tests/data/cif/sources/MP/LiFeP2O7.cif",
             "MP",
@@ -691,3 +692,4 @@ def test_init_cif_file(
     assert cif.db_source == expected_db_source
     assert cif.unique_elements == expected_elements
     assert cif.supercell_atom_count == expected_atom_count
+
