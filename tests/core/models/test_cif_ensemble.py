@@ -521,6 +521,7 @@ def test_init_without_preprocessing(
         ("tests/data/cif/sources/MP", 2, {108: 1, 594: 1}),
         ("tests/data/cif/sources/PCD", 1, {364: 1}),
         ("tests/data/cif/sources/MS", 1, {2988: 1}),
+        ("tests/data/cif/sources/CCSD", 1, {3844: 1}),
     ],
 )
 @pytest.mark.fast

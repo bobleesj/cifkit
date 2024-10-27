@@ -1,6 +1,7 @@
 **Added:**
 
 * CifEnsemble support for ICSD, COD, MP files
+* Support CCDC CIF files
 
 **Changed:**
 
