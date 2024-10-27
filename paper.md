@@ -39,8 +39,7 @@ bibliography: paper.bib
 `cifkit` provides higher-level utility functions and variables from .cif files,
 which are standard file formats for storing crystallographic data such as atomic
 fractional coordinates, symmetry operations, and unit cell dimensions. `cifkit`
-serves as an engine for building Python applications that automate crystal
-structure analysis, enabling the extraction of physics-based information crucial
+is building Python applications that automate crystal structure analysis, enabling the extraction of pysics-based information crucial
 for understanding geometric configurations and identifying irregularities.
 `cifkit` also offers various tools for determining coordination numbers,
 plotting coordination geometry-based polyhedron from each site, calculating bond

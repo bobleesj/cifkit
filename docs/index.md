@@ -48,7 +48,7 @@ mixing, among other parameters.
 
 Python 3.10, 3.11, 3.12 are supported.
 
-![Python - Version](https://img.shields.io/pypi/pyversions/quacc)
+![Python - Version](https://img.shields.io/pypi/pyversions/cifkit)
 [![PyPi version](https://img.shields.io/pypi/v/cifkit.svg)](https://pypi.python.org/pypi/cifkit)
 [![Conda version](https://img.shields.io/conda/vn/conda-forge/cifkit)](https://anaconda.org/conda-forge/cifkit)
 
@@ -197,8 +197,6 @@ Please consider citing `cifkit` if it has been useful for your research:
 > Note: the `cifkit` manuscript is also under reviewed by the Journal of Open Source Software.
 
 <a href="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19"><img src="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19/status.svg"></a>
-
-
 
 ## Other links
 

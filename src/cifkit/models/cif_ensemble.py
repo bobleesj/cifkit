@@ -488,6 +488,21 @@ class CifEnsemble:
     # FIXME: refactor this section to maintain DRY principle
 
     def generate_structure_histogram(self, display=False, output_dir=None):
+        """Generate a histogram of the 'structure' property from CIF files.
+
+        This method creates a histogram based on the 'structure' statistics of the CIF
+        files. If 'output_dir' is specified, the histogram image (.png) will be saved to
+        that directory. If 'output_dir' is not specified, the image will be saved to the
+        directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "structure",
             self.structure_stats,
@@ -497,6 +512,21 @@ class CifEnsemble:
         )
 
     def generate_formula_histogram(self, display=False, output_dir=None):
+        """Generate a histogram of the 'formula' property from CIF files.
+
+        This method creates a histogram based on the 'formula' statistics of the CIF
+        files. If 'output_dir' is specified, the histogram image (.png) will be saved to
+        that directory. If 'output_dir' is not specified, the image will be saved to the
+        directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "formula",
             self.formula_stats,
@@ -506,6 +536,21 @@ class CifEnsemble:
         )
 
     def generate_tag_histogram(self, display=False, output_dir=None):
+        """Generate a histogram of the 'tag' property from CIF files.
+
+        This method creates a histogram based on the 'tag' statistics of the CIF
+        files. If 'output_dir' is specified, the histogram image (.png) will be saved to
+        that directory. If 'output_dir' is not specified, the image will be saved to the
+        directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "tag",
             self.tag_stats,
@@ -517,6 +562,21 @@ class CifEnsemble:
     def generate_space_group_number_histogram(
         self, display=False, output_dir=None
     ):
+        """Generate a histogram of the 'space_group_number' property from CIF files.
+
+        This method creates a histogram based on the 'space_group_number' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "space_group_number",
             self.space_group_number_stats,
@@ -528,6 +588,21 @@ class CifEnsemble:
     def generate_space_group_name_histogram(
         self, display=False, output_dir=None
     ):
+        """Generate a histogram of the 'space_group_name' property from CIF files.
+
+        This method creates a histogram based on the 'space_group_name' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "space_group_name",
             self.space_group_name_stats,
@@ -539,6 +614,21 @@ class CifEnsemble:
     def generate_supercell_size_histogram(
         self, display=False, output_dir=None
     ):
+        """Generate a histogram of the 'supercell_count' property from CIF files.
+
+        This method creates a histogram based on the 'supercell_count' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "supercell_size",
             self.supercell_size_stats,
@@ -548,6 +638,21 @@ class CifEnsemble:
         )
 
     def generate_elements_histogram(self, display=False, output_dir=None):
+        """Generate a histogram of the 'unique_elements' property from CIF files.
+
+        This method creates a histogram based on the 'unique_elements' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "elements",
             self.unique_elements_stats,
@@ -559,6 +664,21 @@ class CifEnsemble:
     def generate_CN_by_min_dist_method_histogram(
         self, display=False, output_dir=None
     ):
+        """Generate a histogram of the 'CN_by_min' property from CIF files.
+
+        This method creates a histogram based on the 'CN_by_min' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "CN_by_min_dist_method",
             self.unique_CN_values_by_min_dist_method_stat,
@@ -570,6 +690,21 @@ class CifEnsemble:
     def generate_CN_by_best_methods_histogram(
         self, display=False, output_dir=None
     ):
+        """Generate a histogram of the 'CN_by_best_methods' property from CIF files.
+
+        This method creates a histogram based on the 'CN_by_best_methods' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "CN_by_best_methods",
             self.unique_CN_values_by_method_methods_stat,
@@ -581,6 +716,21 @@ class CifEnsemble:
     def generate_composition_type_histogram(
         self, display=False, output_dir=None
     ):
+        """Generate a histogram of the 'composition_type' property from CIF files.
+
+        This method creates a histogram based on the 'composition_type' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "composition_type",
             self.composition_type_stats,
@@ -592,6 +742,21 @@ class CifEnsemble:
     def generate_site_mixing_type_histogram(
         self, display=False, output_dir=None
     ):
+        """Generate a histogram of the 'site_mixing_type' property from CIF files.
+
+        This method creates a histogram based on the 'site_mixing_type' statistics of
+        the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+        saved to that directory. If 'output_dir' is not specified, the image will be saved
+        to the directory specified by 'self.dir_path'.
+
+        Parameters
+        ----------
+        display : bool, optional
+            If True, the plot is displayed using plt.show(). Default is False.
+        output_dir : str, optional
+            The directory path where the histogram should be saved. If None,
+            the histogram is saved in the directory defined by 'self.dir_path'.
+        """
         plot_histogram(
             "site_mixing_type",
             self.site_mixing_type_stats,
