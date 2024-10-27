@@ -667,7 +667,7 @@ Test CIF various db sources
         ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
         ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
         ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1383),
-        ("tests/data/cif/sources/CCSD/2294753.cif", "CCDC", {'Er', 'In', 'Co'}, 3844),
+        ("tests/data/cif/sources/CCDC/2294753.cif", "CCDC", {'Er', 'In', 'Co'}, 3844),
         (
             "tests/data/cif/sources/MP/LiFeP2O7.cif",
             "MP",
