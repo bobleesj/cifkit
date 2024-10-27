@@ -1,6 +1,6 @@
 # cifkit
 
-![Integration Tests](https://github.com/bobleesj/cifkit/actions/workflows/python-run-pytest.yml/badge.svg)
+[![CI](https://github.com/bobleesj/cifkit/actions/workflows/tests-on-pr.yml/badge.svg?branch=main)](https://github.com/bobleesj/cifkit/actions/workflows/tests-on-pr.yml)
 [![codecov](https://codecov.io/gh/bobleesj/cifkit/graph/badge.svg?token=AN2YAC337A)](https://codecov.io/gh/bobleesj/cifkit)
 ![Python - Version](https://img.shields.io/pypi/pyversions/quacc)
 [![PyPi version](https://img.shields.io/pypi/v/cifkit.svg)](https://pypi.python.org/pypi/cifkit)

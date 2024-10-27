@@ -19,6 +19,35 @@ class CifEnsemble:
         preprocess=True,
         logging_enabled=False,
     ) -> None:
+        """Initialize a CifEnsemble object, containing a collection of Cif objects
+
+        Parameters
+        ----------
+        cif_dir_path : str
+            Path to the folder path containing .cif file(s).
+        add_nested_files : bool, optional
+            Option to include .cif files contained in sub-directories within cif_dir_path
+            , by default False
+        preprocess : bool, optional
+            Option to edit .cif files before initializing each .cif into Cif object,
+            by default True
+        logging_enabled : bool, optional
+            Option to log while pre-processing Cif objects, by default False
+
+        Attributes
+        ----------
+        dir_path: str
+            Path to the folder containing .cif files
+        file_paths: list[str]
+            List of file paths to .cif files
+        cifs: list[Cif]
+            List of Cif objects
+        file_count: int
+            Number of .cif files in the folder
+        logging_enabled: bool
+            Option to log while pre-processing Cif objects
+        """
+
         # Process each file, handling exceptions that may occur
         self.logging_enabled = logging_enabled
         file_paths = get_file_paths(
@@ -68,37 +97,80 @@ class CifEnsemble:
 
     @property
     def unique_formulas(self) -> set[str]:
-        """Get unique formulas from all .cif files in the folder."""
+        """Get unique formulas from all .cif files in the folder.
+
+        Returns
+        -------
+        set[str]
+            unique formulas
+
+        Examples
+        --------
+        >>> cif_ensemble.unique_formulas
+        {"EuIr2Ge2", "CeRu2Ge2", "LaRu2Ge2", "Mo"}
+        """
         return self._get_unique_property_values("formula")
 
     @property
     def unique_structures(self) -> set[str]:
-        """Get unique structures from all .cif files in the folder."""
+        """Get unique structures from all .cif files in the folder.
+
+        Examples
+        --------
+        >>> cif_ensemble.unique_structures
+        {"CeAl2Ga2", "W"}
+        """
         return self._get_unique_property_values("structure")
 
     @property
     def unique_tags(self) -> set[str]:
-        """Get unique formulas from all .cif files in the folder."""
+        """Get unique formulas from all .cif files in the folder.
+
+        Examples
+        --------
+        >>> cif_ensemble.unique_tags
+        {"hex", "rt", "rt_hex", ""}
+        """
         return self._get_unique_property_values("tag")
 
     @property
     def unique_space_group_names(self) -> set[str]:
-        """Get unique space groups from all .cif files in the folder."""
+        """Get unique space groups from all .cif files in the folder.
+        Examples
+        --------
+        >>> cif_ensemble.unique_space_group_names
+        {"I4/mmm", "Im-3m"}
+        """
         return self._get_unique_property_values("space_group_name")
 
     @property
     def unique_space_group_numbers(self) -> set[str]:
-        """Get unique space groups from all .cif files in the folder."""
+        """Get unique space groups from all .cif files in the folder.
+        Examples
+        --------
+        >>> cif_ensemble.unique_space_group_numbers
+        {139, 229}
+        """
         return self._get_unique_property_values("space_group_number")
 
     @property
     def unique_site_mixing_types(self) -> set[int]:
-        """Get unique site mixing types from all .cif files in the folder."""
+        """Get unique site mixing types from all .cif files in the folder.
+        Examples
+        --------
+        >>> cif_ensemble.unique_site_mixing_types
+        {"deficiency_without_atomic_mixing", "full_occupancy"}
+        """
         return self._get_unique_property_values("site_mixing_type")
 
     @property
     def unique_composition_types(self) -> set[int]:
-        """Get unique composition types from all .cif files in the folder."""
+        """Get unique composition types from all .cif files in the folder.
+        Examples
+        --------
+        >>> cif_ensemble.unique_composition_types
+        {1, 3}
+        """
         return self._get_unique_property_values("composition_type")
 
     def _get_unique_property_values_from_set(self, property_name: str):
@@ -109,17 +181,46 @@ class CifEnsemble:
 
     @property
     def unique_elements(self) -> set[str]:
-        """Get unique elements from all .cif files in the folder."""
+        """Get unique elements from all .cif files in the folder.
+
+        Examples
+        --------
+        >>> cif_ensemble.unique_elements_stats
+        {
+            "Ce": 1,
+            "Eu": 1,
+            "Ge": 3,
+            "Ir": 1,
+            "La": 1,
+            "Mo": 3,
+            "Ru": 2,
+        }
+        """
+
         return self._get_unique_property_values_from_set("unique_elements")
 
     @property
     def CN_unique_values_by_min_dist_method(self) -> set[str]:
+        """
+
+        Returns
+        -------
+        set[str]
+            Unique coordination number values by minimum distance method from all .cif files.
+        """
         return self._get_unique_property_values_from_set(
             "CN_unique_values_by_min_dist_method"
         )
 
     @property
     def CN_unique_values_by_best_methods(self) -> set[str]:
+        """
+
+        Returns
+        -------
+        set[str]
+            Unique coordination number by best methods from all .cif files.
+        """
         return self._get_unique_property_values_from_set(
             "CN_unique_values_by_best_methods"
         )
@@ -334,15 +435,51 @@ class CifEnsemble:
     def move_cif_files(
         self, file_paths: set[str], to_directory_path: str
     ) -> None:
-        """Move a set of CIF files to a destination directory."""
+        """Move a set of CIF files to a destination directory.
+
+        Parameters
+        ----------
+        file_paths : set[str]
+            Set of file paths to CIF files.
+        to_directory_path : str
+            Destination directory path.
+            
+        Examples
+        --------
+        >>> file_paths = {
+            "tests/data/cif/ensemble_test/300169.cif",
+            "tests/data/cif/ensemble_test/300170.cif",
+        }
+        >>> dest_dir_path = "tests/data/cif/ensemble_new_dir"
+        >>> cif_ensemble_test.move_cif_files(file_paths, dest_dir_path)
+        """
         move_files(to_directory_path, list(file_paths))
 
     def copy_cif_files(
         self, file_paths: set[str], to_directory_path: str
     ) -> None:
-        """Copy a set of CIF files to a destination directory."""
-        copy_files(to_directory_path, list(file_paths))
+        """Copy a set of CIF files to a destination directory.
 
+        Parameters
+        ----------
+        file_paths : set[str]
+            Set of file paths to CIF files.
+        to_directory_path : str
+            Destination directory path.
+
+        Examples
+        --------
+        >>> file_paths = {
+            "tests/data/cif/ensemble_test/300169.cif",
+            "tests/data/cif/ensemble_test/300170.cif",
+        }
+        >>> dest_dir_path = "tests/data/cif/ensemble_new_dir"
+        >>> cif_ensemble_test.copy_cif_files(file_paths, dest_dir_path)
+        """
+        copy_files(to_directory_path, list(file_paths))
+    
+    # FIXME: refactor this section to maintain DRY principle
+    
     def generate_structure_histogram(self, display=False, output_dir=None):
         plot_histogram(
             "structure",
