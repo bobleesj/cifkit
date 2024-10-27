@@ -198,12 +198,13 @@ class Cif:
             logging.info(formatted_message)
 
     def _preprocess(self):
-        """Preprocess each .cif file and check any error."""
+        """Preprocess each .cif file before initializng and separate files with
+        error."""
         self._log_info(CifLog.PREPROCESSING.value)
         edit_cif_file_based_on_db(self.file_path)
 
     def _load_data(self):
-        """Load data from the .cif file and process it."""
+        """Load data from the .cif file and extract attributes."""
         self._log_info(CifLog.LOADING_DATA.value)
         self._block = get_cif_block(self.file_path)
         self._parse_cif_data()
@@ -265,8 +266,7 @@ class Cif:
         self.supercell_atom_count = get_cell_atom_count(self.supercell_points)
 
     def compute_connections(self, cutoff_radius=10.0) -> None:
-        """Computes various connection parameters for the crystal structure,
-        including connection network, shortest distances, bond counts, and
+        """Compute onnection network, shortest distances, bond counts, and
         coordination numbers (CN). These prperties are lazily loaded to avoid
         unnecessary computation during the initialization and pre-processing
         step.
@@ -462,6 +462,8 @@ class Cif:
         Returns
         -------
         dict[tuple[str, str], float]
+            Dictionary where each key is a tuple of element symbols and the float value
+            is the distance between pair of elements in Angstroms.
 
         Examples
         --------
@@ -506,11 +508,86 @@ class Cif:
     @property
     @ensure_connections
     def radius_values(self):
+        """Retrieve CIF radius, CIF_refined radius, and Pauling C12 radius.
+        This property uses lazily loaded connections to compute these distances
+        if they are not already available because the CIF radius values are
+        determined using the shortest bonding pair from
+        shortest_bond_pair_distance.
+
+        Returns
+        -------
+        dict[str : dict[str:float]]
+            Dictionary where each key is an atomic label and the value is a dictionary
+            containing the CIF radius, CIF_refined radius, and Pauling C12 radius in
+            Angstroms.
+
+        Examples
+        --------
+        >>> cif.radius_values
+        >>> {
+            "In": {
+                "CIF_radius": 1.624,
+                "CIF_radius_refined": 1.328,
+                "Pauling_radius_CN12": 1.66,
+            },
+            "Rh": {
+                "CIF_radius": 1.345,
+                "CIF_radius_refined": 1.369,
+                "Pauling_radius_CN12": 1.342,
+            },
+            "U": {
+                "CIF_radius": 1.377,
+                "CIF_radius_refined": 1.614,
+                "Pauling_radius_CN12": 1.516,
+            },
+        }
+        """
         return self._radius_values
 
     @property
     @ensure_connections
     def radius_sum(self):
+        """Retrieve the sum of CIF radius, CIF_refined radius, and Pauling C12
+        radius for the shortest bonding pairs of elements.
+
+        Returns
+        -------
+        dict[str : dict[str:float]]
+            Dictionary where each key is a radius type and the value is a dictionary
+            with the key being a bond pair of elements and the value being the total
+            radius in Angstroms.
+
+        Examples
+        --------
+        >>> cif.radius_values
+        >>>  {
+            "CIF_radius_sum": {
+                "In-In": 3.248,
+                "In-Rh": 2.969,
+                "In-U": 3.001,
+                "Rh-Rh": 2.69,
+                "Rh-U": 2.722,
+                "U-U": 2.754,
+            },
+            "CIF_radius_refined_sum": {
+                "In-In": 2.657,
+                "In-Rh": 2.697,
+                "In-U": 2.943,
+                "Rh-Rh": 2.737,
+                "Rh-U": 2.983,
+                "U-U": 3.229,
+            },
+            "Pauling_radius_sum": {
+                "In-In": 3.32,
+                "In-Rh": 3.002,
+                "In-U": 3.176,
+                "Rh-Rh": 2.684,
+                "Rh-U": 2.858,
+                "U-U": 3.032,
+            },
+        }
+        """
+
         return self._radius_sum
 
     @property
