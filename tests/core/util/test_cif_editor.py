@@ -6,7 +6,10 @@ import tempfile
 import gemmi
 import pytest
 
-from cifkit.utils.cif_editor import add_hashtag_in_first_line, remove_author_loop
+from cifkit.utils.cif_editor import (
+    add_hashtag_in_first_line,
+    remove_author_loop,
+)
 from cifkit.utils.cif_parser import get_unitcell_lengths
 
 

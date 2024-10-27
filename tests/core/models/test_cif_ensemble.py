@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from cifkit import CifEnsemble
-from cifkit.utils.folder import get_file_count, get_file_paths
+from cifkit.utils.folder import get_file_count, get_file_paths, copy_files
 
 
 @pytest.mark.fast
@@ -268,26 +268,6 @@ Test filter by value
 """
 
 
-# assert cif_ensemble_test.filter_by_CN_min_dist_method_exact_matching(
-#     [16]
-# ) == {
-#     "tests/data/cif/ensemble_test/300169.cif",
-#     "tests/data/cif/ensemble_test/300170.cif",
-#     "tests/data/cif/ensemble_test/300171.cif",
-# }
-
-# assert cif_ensemble_test.filter_by_CN_min_dist_method_exact_matching(
-#     [9, 12, 16]
-# ) == {
-#     "tests/data/cif/ensemble_test/300171.cif",
-# }
-
-
-# """
-# Test filter by rang
-# """
-
-
 @pytest.mark.fast
 def test_filter_by_supercell_count(cif_ensemble_test: CifEnsemble):
     result = cif_ensemble_test.filter_by_supercell_count(200, 400)
@@ -531,3 +511,25 @@ def test_init_without_preprocessing(
 
     with caplog.at_level(logging.INFO):
         assert "Preprocessing tests/data/cif/folder" not in caplog.text
+
+
+@pytest.mark.parametrize(
+    "cif_folder_path, expected_file_count, expected_supercell_stats",
+    [
+        ("tests/data/cif/sources/ICSD", 4, {216: 2, 307: 1, 320: 1}),
+        ("tests/data/cif/sources/COD", 2, {519: 1, 1383: 1}),
+        ("tests/data/cif/sources/MP", 2, {108: 1, 594: 1}),
+        ("tests/data/cif/sources/PCD", 1, {364: 1}),
+        ("tests/data/cif/sources/MS", 1, {2988: 1}),
+    ],
+)
+@pytest.mark.fast
+def test_init_cif_files(
+    tmpdir, cif_folder_path, expected_file_count, expected_supercell_stats
+):
+    cif_file_paths = get_file_paths(cif_folder_path)
+    copy_files(tmpdir, cif_file_paths)
+    ensemble = CifEnsemble(tmpdir)
+
+    assert ensemble.file_count == expected_file_count
+    assert ensemble.supercell_size_stats == expected_supercell_stats

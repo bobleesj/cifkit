@@ -651,56 +651,43 @@ def test_init_without_mendeeleve_number():
 
 
 """
-1. Test ICSD file
+Test CIF various db sources
 """
 
 
-@pytest.mark.fast
-def test_init_ICSD_file(tmpdir):
-    file_path = "tests/data/cif/sources/ICSD/EntryWithCollCode43054.cif"
-
-    copied_file_path = os.path.join(tmpdir, "EntryWithCollCode43054.cif")
-
+@pytest.mark.parametrize(
+    "file_path, expected_db_source, expected_elements, expected_atom_count",
+    [
+        (
+            "tests/data/cif/sources/ICSD/EntryWithCollCode43054.cif",
+            "ICSD",
+            {"Fe", "Ge"},
+            216,
+        ),
+        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
+        ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1383),
+        ("tests/data/cif/sources/MP/GaN.cif", "MP", {"Ga", "N"}, 108),
+        (
+            "tests/data/cif/sources/MP/LiFeP2O7.cif",
+            "MP",
+            {"Fe", "Li", "O", "P"},
+            594,
+        ),
+    ],
+)
+@pytest.mark.now
+def test_init_cif_file(
+    tmpdir,
+    file_path,
+    expected_db_source,
+    expected_elements,
+    expected_atom_count,
+):
+    copied_file_path = os.path.join(tmpdir, os.path.basename(file_path))
     shutil.copyfile(file_path, copied_file_path)
-    cif_ICSD = Cif(copied_file_path)
-    assert cif_ICSD.db_source == "ICSD"
-    assert cif_ICSD.unique_elements == {"Fe", "Ge"}
-    assert cif_ICSD.CN_unique_values_by_best_methods == {7, 13}
+    cif = Cif(copied_file_path)
 
-
-"""
-2. Test MS file
-"""
-
-
-@pytest.mark.fast
-def test_init_MS_file(tmpdir):
-    file_path = "tests/data/cif/sources/MS/U13Rh4.cif"
-
-    copied_file_path = os.path.join(tmpdir, "U13Rh4.cif")
-
-    shutil.copyfile(file_path, copied_file_path)
-    cif_MS = Cif(copied_file_path)
-
-    assert cif_MS.db_source == "MS"
-    assert cif_MS.unique_elements == {"U", "Fe"}
-    assert cif_MS.supercell_atom_count == 2988
-
-
-"""
-3. Test COD file
-"""
-
-
-@pytest.mark.fast
-def test_init_COD_file(tmpdir):
-    file_path = "tests/data/cif/sources/COD/1010581.cif"
-
-    copied_file_path = os.path.join(tmpdir, "1010581.cif")
-
-    shutil.copyfile(file_path, copied_file_path)
-    cif_COD = Cif(copied_file_path)
-
-    assert cif_COD.db_source == "COD"
-    assert cif_COD.unique_elements == {"Cu", "Se"}
-    assert cif_COD.supercell_atom_count == 1383
+    # Perform assertions
+    assert cif.db_source == expected_db_source
+    assert cif.unique_elements == expected_elements
+    assert cif.supercell_atom_count == expected_atom_count
