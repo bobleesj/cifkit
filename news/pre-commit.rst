@@ -1,7 +1,7 @@
 **Added:**
 
 * pre-commit hook for each pull request
-* automated PyPI 
+* automated PyPI
 
 **Changed:**
 
