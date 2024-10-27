@@ -1,6 +1,11 @@
 import os
 
+from cifkit.preprocessors.format import preprocess_label_element_loop_values
 from cifkit.utils import cif_parser
+
+# Parser .cif file
+from cifkit.utils.cif_parser import check_unique_atom_site_labels
+from cifkit.utils.cif_sourcer import get_cif_db_source
 
 
 def remove_author_loop(file_path: str) -> None:
@@ -47,3 +52,17 @@ def add_hashtag_in_first_line(file_path: str):
         # Write the modified content back to the file
         with open(file_path, "w") as file:
             file.writelines(lines)
+
+
+def edit_cif_file_based_on_db(file_path: str):
+    """
+    Edit a CIF file based on the database it is from.
+    """
+    db_source = get_cif_db_source(file_path)
+    if db_source == "ICSD":
+        add_hashtag_in_first_line(file_path)
+    elif db_source == "PCD":
+        remove_author_loop(file_path)
+
+    preprocess_label_element_loop_values(file_path)
+    check_unique_atom_site_labels(file_path)
