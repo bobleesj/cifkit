@@ -1,0 +1,284 @@
+####################################################################### 
+# 
+# This file contains crystal structure data downloaded from the 
+# Cambridge Structural Database (CSD) hosted by the Cambridge 
+# Crystallographic Data Centre (CCDC).
+# 
+# Full information about CCDC data access policies and citation 
+# guidelines are available at http://www.ccdc.cam.ac.uk/access/V1 
+# 
+# Audit and citation data items may have been added by the CCDC. 
+# Please retain this information to preserve the provenance of 
+# this file and to allow appropriate attribution of the data. 
+# 
+#######################################################################
+
+data_Er23Co7In20
+_audit_block_doi                 10.25505/fiz.icsd.cc2h0w9q
+_database_code_depnum_ccdc_archive 'CCDC 2294753'
+loop_
+_citation_id
+_citation_doi
+_citation_year
+1 10.1016/j.jallcom.2023.173241 2024
+loop_
+_audit_author_name
+_audit_author_address
+'Volodymyr Smetana'
+;Stockholm University
+Sweden
+;
+_audit_update_record             
+;
+2023-11-24 deposited with the CCDC.	2024-10-27 downloaded from the CCDC.
+;
+
+_audit_creation_method           SHELXL-2019/1
+_shelx_SHELXL_version_number     2019/1
+_chemical_name_systematic        ?
+_chemical_name_common            ?
+_chemical_melting_point          ?
+_chemical_formula_moiety         ?
+_chemical_formula_sum            'Co6.71 Er23 In20.30'
+_chemical_formula_weight         6573.16
+
+loop_
+_atom_type_symbol
+_atom_type_description
+_atom_type_scat_dispersion_real
+_atom_type_scat_dispersion_imag
+_atom_type_scat_source
+Co Co 0.3494 0.9721 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
+In In -0.7276 1.3100 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
+Er Er -0.2586 4.9576 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
+
+_space_group_crystal_system      orthorhombic
+_space_group_IT_number           55
+_space_group_name_H-M_alt        'P b a m'
+_space_group_name_Hall           '-P 2 2ab'
+
+_shelx_space_group_comment       
+;
+The symmetry employed for this shelxl refinement is uniquely defined
+by the following loop, which should always be used as a source of
+symmetry information in preference to the above space-group names.
+They are only intended as comments.
+;
+
+# start Validation Reply Form
+_vrf_PLAT971_Er23Co7In20         
+;
+PROBLEM: Check Calcd Resid. Dens.
+RESPONSE: The residual electron map could not properly
+be reduced due to crystal quality but is balanced. Multiple 
+samples were prepared and multiple crystals measured to improve
+quality but without success. The model is consistent and was 
+confirmed by consequent Rietveld refinements. See Figure 2.
+;
+_vrf_PLAT972_Er23Co7In20         
+;
+PROBLEM: Check Calcd Resid. Dens.
+RESPONSE: The residual electron map could not properly
+be reduced due to crystal quality but is balanced. Multiple 
+samples were prepared and multiple crystals measured to improve
+quality but without success. The model is consistent and was 
+confirmed by consequent Rietveld refinements. See Figure 2.
+;
+# end Validation Reply Form
+
+loop_
+_space_group_symop_operation_xyz
+'x, y, z'
+'x+1/2, -y+1/2, -z'
+'-x+1/2, y+1/2, -z'
+'-x, -y, z'
+'-x, -y, -z'
+'-x-1/2, y-1/2, z'
+'x-1/2, -y-1/2, z'
+'x, y, -z'
+
+_cell_length_a                   23.203(5)
+_cell_length_b                   28.399(5)
+_cell_length_c                   3.5306(6)
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                90
+_cell_volume                     2326.5(8)
+_cell_formula_units_Z            2
+_cell_measurement_temperature    273(2)
+_cell_measurement_reflns_used    45265
+_cell_measurement_theta_min      1.896
+_cell_measurement_theta_max      25.998
+
+_exptl_crystal_description       block
+_exptl_crystal_colour            ?
+_exptl_crystal_density_meas      ?
+_exptl_crystal_density_method    ?
+_exptl_crystal_density_diffrn    9.383
+_exptl_crystal_F_000             5480
+_exptl_transmission_factor_min   ?
+_exptl_transmission_factor_max   ?
+_exptl_crystal_size_max          ?
+_exptl_crystal_size_mid          ?
+_exptl_crystal_size_min          ?
+_exptl_absorpt_coefficient_mu    53.066
+_shelx_estimated_absorpt_T_min   ?
+_shelx_estimated_absorpt_T_max   ?
+_exptl_absorpt_correction_type   Multi-scan
+_exptl_absorpt_correction_T_min  0.05
+_exptl_absorpt_correction_T_max  0.09
+_exptl_absorpt_process_details   SADABS
+_exptl_absorpt_special_details   ?
+_diffrn_ambient_temperature      273(2)
+_diffrn_radiation_wavelength     0.71073
+_diffrn_radiation_type           MoK\a
+_diffrn_source                   ?
+_diffrn_measurement_device_type  'Bruker Venture'
+_diffrn_measurement_method       'w and f scans'
+_diffrn_detector_area_resol_mean ?
+_diffrn_reflns_number            45265
+_diffrn_reflns_av_unetI/netI     0.0438
+_diffrn_reflns_av_R_equivalents  0.0984
+_diffrn_reflns_limit_h_min       -28
+_diffrn_reflns_limit_h_max       28
+_diffrn_reflns_limit_k_min       -35
+_diffrn_reflns_limit_k_max       35
+_diffrn_reflns_limit_l_min       -4
+_diffrn_reflns_limit_l_max       4
+_diffrn_reflns_theta_min         1.896
+_diffrn_reflns_theta_max         25.998
+_diffrn_reflns_theta_full        25.242
+_diffrn_measured_fraction_theta_max 0.997
+_diffrn_measured_fraction_theta_full 0.997
+_diffrn_reflns_Laue_measured_fraction_max 0.997
+_diffrn_reflns_Laue_measured_fraction_full 0.997
+_diffrn_reflns_point_group_measured_fraction_max 0.997
+_diffrn_reflns_point_group_measured_fraction_full 0.997
+_reflns_number_total             2686
+_reflns_number_gt                2432
+_reflns_threshold_expression     'I > 2\s(I)'
+_reflns_Friedel_coverage         0.000
+_reflns_Friedel_fraction_max     .
+_reflns_Friedel_fraction_full    .
+
+_reflns_special_details          
+;
+ Reflections were merged by SHELXL according to the crystal
+ class for the calculation of statistics and refinement.
+ 
+ _reflns_Friedel_fraction is defined as the number of unique
+ Friedel pairs measured divided by the number that would be
+ possible theoretically, ignoring centric projections and
+ systematic absences.
+;
+
+_computing_data_collection       ?
+_computing_cell_refinement       ?
+_computing_data_reduction        ?
+_computing_structure_solution    ?
+_computing_structure_refinement  'SHELXL-2019/1 (Sheldrick, 2019)'
+_computing_molecular_graphics    ?
+_computing_publication_material  ?
+_refine_special_details          ?
+_refine_ls_structure_factor_coef Fsqd
+_refine_ls_matrix_type           full
+_refine_ls_weighting_scheme      calc
+_refine_ls_weighting_details     
+'w=1/[\s^2^(Fo^2^)+621.9436P] where P=(Fo^2^+2Fc^2^)/3'
+_atom_sites_solution_primary     ?
+_atom_sites_solution_secondary   ?
+_atom_sites_solution_hydrogens   .
+_refine_ls_hydrogen_treatment    undef
+_refine_ls_extinction_method     none
+_refine_ls_extinction_coef       .
+_refine_ls_number_reflns         2686
+_refine_ls_number_parameters     156
+_refine_ls_number_restraints     0
+_refine_ls_R_factor_all          0.0682
+_refine_ls_R_factor_gt           0.0622
+_refine_ls_wR_factor_ref         0.1204
+_refine_ls_wR_factor_gt          0.1183
+_refine_ls_goodness_of_fit_ref   1.191
+_refine_ls_restrained_S_all      1.191
+_refine_ls_shift/su_max          0.000
+_refine_ls_shift/su_mean         0.000
+
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_U_iso_or_equiv
+_atom_site_adp_type
+_atom_site_occupancy
+_atom_site_site_symmetry_order
+_atom_site_calc_flag
+_atom_site_refinement_flags_posn
+_atom_site_refinement_flags_adp
+_atom_site_refinement_flags_occupancy
+_atom_site_disorder_assembly
+_atom_site_disorder_group
+Er1 Er 0.07748(8) 0.05652(6) 0.500000 0.0142(4) Uani 1 2 d S T P . .
+Er2 Er 0.08595(7) 0.30947(6) 0.500000 0.0120(4) Uani 1 2 d S T P . .
+Er3 Er 0.10456(7) 0.17922(6) 0.500000 0.0106(4) Uani 1 2 d S T P . .
+Er4 Er 0.13093(7) 0.43511(6) 0.500000 0.0104(4) Uani 1 2 d S T P . .
+Er5 Er 0.25432(7) 0.17093(6) 0.500000 0.0108(4) Uani 1 2 d S T P . .
+Er6 Er 0.27041(7) 0.03909(6) 0.500000 0.0114(4) Uani 1 2 d S T P . .
+Er7 Er 0.28309(7) 0.41410(6) 0.500000 0.0108(4) Uani 1 2 d S T P . .
+Er8 Er 0.28332(8) 0.29107(6) 0.500000 0.0126(4) Uani 1 2 d S T P . .
+Er9 Er 0.39889(7) 0.12119(6) 0.500000 0.0127(4) Uani 1 2 d S T P . .
+Er10 Er 0.43243(8) 0.43616(6) 0.500000 0.0154(4) Uani 1 2 d S T P . .
+Er11 Er 0.45377(7) 0.27772(6) 0.500000 0.0123(4) Uani 1 2 d S T P . .
+Er12 Er 0.000000 0.500000 0.500000 0.0121(5) Uani 1 4 d S T P . .
+In1 In 0.00590(11) 0.13767(9) 0.000000 0.0126(6) Uani 1 2 d S T P . .
+In2 In 0.01855(12) 0.40539(9) 0.000000 0.0151(6) Uani 1 2 d S T P . .
+In3 In 0.17656(11) 0.24925(9) 0.000000 0.0118(5) Uani 1 2 d S T P . .
+In4 In 0.18106(11) 0.10191(9) 0.000000 0.0112(5) Uani 1 2 d S T P . .
+In5 In 0.19366(11) 0.35672(9) 0.000000 0.0121(6) Uani 1 2 d S T P . .
+In6 In 0.33472(11) 0.49473(9) 0.000000 0.0128(6) Uani 1 2 d S T P . .
+In7 In 0.35370(11) 0.21223(9) 0.000000 0.0135(6) Uani 1 2 d S T P . .
+In8 In 0.37378(11) 0.35183(9) 0.000000 0.0140(6) Uani 1 2 d S T P . .
+In9 In 0.38378(11) 0.02818(9) 0.000000 0.0135(6) Uani 1 2 d S T P . .
+In10 In 0.47597(11) 0.18988(9) 0.000000 0.0138(6) Uani 1 2 d S T P . .
+Co1 Co 0.0496(2) 0.23684(16) 0.000000 0.0118(11) Uani 1 2 d S T P . .
+Co2 Co 0.2156(2) 0.46222(17) 0.000000 0.0116(10) Uani 1 2 d S T P . .
+Co3 Co 0.3080(2) 0.11152(17) 0.000000 0.0109(10) Uani 1 2 d S T P . .
+In11 In 0.000000 0.000000 0.000000 0.017(2) Uani 0.27(4) 4 d S T P . .
+Co4 Co 0.000000 0.000000 0.000000 0.017(2) Uani 0.73(4) 4 d S T P . .
+
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_23
+_atom_site_aniso_U_13
+_atom_site_aniso_U_12
+Er1 0.0166(9) 0.0100(8) 0.0161(9) 0.000 0.000 0.0028(6)
+Er2 0.0159(9) 0.0104(8) 0.0097(9) 0.000 0.000 -0.0019(6)
+Er3 0.0134(8) 0.0079(7) 0.0105(9) 0.000 0.000 0.0010(6)
+Er4 0.0130(8) 0.0083(7) 0.0099(8) 0.000 0.000 0.0015(6)
+Er5 0.0136(8) 0.0091(8) 0.0097(9) 0.000 0.000 -0.0004(6)
+Er6 0.0143(8) 0.0094(8) 0.0104(9) 0.000 0.000 0.0001(6)
+Er7 0.0133(8) 0.0079(7) 0.0111(9) 0.000 0.000 -0.0010(6)
+Er8 0.0178(9) 0.0077(8) 0.0123(9) 0.000 0.000 0.0003(6)
+Er9 0.0144(8) 0.0137(8) 0.0100(9) 0.000 0.000 -0.0001(6)
+Er10 0.0145(9) 0.0144(8) 0.0175(10) 0.000 0.000 0.0026(7)
+Er11 0.0154(8) 0.0115(8) 0.0100(9) 0.000 0.000 0.0007(6)
+Er12 0.0148(12) 0.0119(11) 0.0097(12) 0.000 0.000 0.0001(9)
+In1 0.0150(13) 0.0080(11) 0.0149(14) 0.000 0.000 0.0004(10)
+In2 0.0168(13) 0.0093(12) 0.0194(15) 0.000 0.000 -0.0032(10)
+In3 0.0141(13) 0.0085(11) 0.0128(14) 0.000 0.000 0.0000(10)
+In4 0.0135(13) 0.0064(11) 0.0138(14) 0.000 0.000 0.0005(9)
+In5 0.0147(13) 0.0070(11) 0.0144(14) 0.000 0.000 0.0004(10)
+In6 0.0135(13) 0.0081(12) 0.0168(14) 0.000 0.000 -0.0003(10)
+In7 0.0140(13) 0.0116(12) 0.0147(14) 0.000 0.000 0.0017(10)
+In8 0.0137(13) 0.0102(12) 0.0183(15) 0.000 0.000 0.0010(10)
+In9 0.0149(13) 0.0115(12) 0.0140(14) 0.000 0.000 -0.0002(10)
+In10 0.0127(13) 0.0103(12) 0.0185(15) 0.000 0.000 0.0001(10)
+Co1 0.019(3) 0.003(2) 0.013(3) 0.000 0.000 0.0020(19)
+Co2 0.012(2) 0.011(2) 0.012(3) 0.000 0.000 0.0020(19)
+Co3 0.015(3) 0.010(2) 0.008(3) 0.000 0.000 0.0011(19)
+In11 0.021(4) 0.013(3) 0.019(4) 0.000 0.000 -0.002(2)
+Co4 0.021(4) 0.013(3) 0.019(4) 0.000 0.000 -0.002(2)

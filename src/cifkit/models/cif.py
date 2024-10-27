@@ -1,10 +1,4 @@
-"""
-Import statements placed bottom to avoid cluttering.
-"""
-
 import logging
-
-# Polyhedron
 import os
 
 # Bond pair
@@ -42,18 +36,16 @@ from cifkit.preprocessors.environment import get_site_connections
 # Coordination number
 from cifkit.preprocessors.environment_util import flat_site_connections
 
-# Edit .cif file
-from cifkit.preprocessors.format import preprocess_label_element_loop_values
-
 # Supercell generation
 from cifkit.preprocessors.supercell import get_supercell_points
 from cifkit.preprocessors.supercell_util import get_cell_atom_count
 from cifkit.utils.bond_pair import get_bond_pairs, get_pairs_sorted_by_mendeleev
-from cifkit.utils.cif_editor import add_hashtag_in_first_line, remove_author_loop
+
+# Edit .cif file
+from cifkit.utils.cif_editor import edit_cif_file_based_on_db
 
 # Parser .cif file
 from cifkit.utils.cif_parser import (
-    check_unique_atom_site_labels,
     get_cif_block,
     get_formula_structure_weight_s_group,
     get_loop_values,
@@ -132,15 +124,7 @@ class Cif:
     def _preprocess(self):
         """Preprocess each .cif file and check any error."""
         self._log_info(CifLog.PREPROCESSING.value)
-
-        if self.db_source == "ICSD":
-            add_hashtag_in_first_line(self.file_path)
-
-        elif self.db_source == "PCD":
-            remove_author_loop(self.file_path)
-
-        preprocess_label_element_loop_values(self.file_path)
-        check_unique_atom_site_labels(self.file_path)
+        edit_cif_file_based_on_db(self.file_path)
 
     def _load_data(self):
         """Load data from the .cif file and process it."""

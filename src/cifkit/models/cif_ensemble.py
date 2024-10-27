@@ -6,8 +6,7 @@ from click import secho
 from cifkit import Cif
 from cifkit.figures.histogram import plot_histogram
 from cifkit.preprocessors.error import move_files_based_on_errors
-from cifkit.preprocessors.format import preprocess_label_element_loop_values
-from cifkit.utils.cif_editor import remove_author_loop
+from cifkit.utils.cif_editor import edit_cif_file_based_on_db
 from cifkit.utils.folder import copy_files, get_file_paths, move_files
 from cifkit.utils.log_messages import CifEnsembleLog
 
@@ -30,12 +29,7 @@ class CifEnsemble:
         if preprocess:
             self._log_info(CifEnsembleLog.PREPROCESSING.value)
             for file_path in file_paths:
-                try:
-                    remove_author_loop(file_path)
-                    preprocess_label_element_loop_values(file_path)
-                except Exception as e:
-                    print(f"Error processing {file_path}: {e}")
-
+                edit_cif_file_based_on_db(file_path)
             # Move ill-formatted files after processing
             move_files_based_on_errors(cif_dir_path, file_paths)
 
