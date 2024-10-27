@@ -103,9 +103,9 @@ def supercell_points_URhIn(cif_block_URhIn):
 
 
 @pytest.fixture(scope="module")
-def lenghts_URhIn(cif_block_URhIn) -> list[float]:
-    lenghts = cif_parser.get_unitcell_lengths(cif_block_URhIn)
-    return lenghts
+def lengths_URhIn(cif_block_URhIn) -> list[float]:
+    lengths = cif_parser.get_unitcell_lengths(cif_block_URhIn)
+    return lengths
 
 
 @pytest.fixture(scope="module")
@@ -121,9 +121,9 @@ def site_labels_URhIn(loop_values_URhIn):
 
 @pytest.fixture(scope="module")
 def parsed_cif_data_URhIn(
-    unique_site_labels_URhIn, lenghts_URhIn, angles_rad_URhIn
+    unique_site_labels_URhIn, lengths_URhIn, angles_rad_URhIn
 ) -> tuple[list[str], list[float], list[float]]:
-    return (unique_site_labels_URhIn, lenghts_URhIn, angles_rad_URhIn)
+    return (unique_site_labels_URhIn, lengths_URhIn, angles_rad_URhIn)
 
 
 @pytest.fixture(scope="module")

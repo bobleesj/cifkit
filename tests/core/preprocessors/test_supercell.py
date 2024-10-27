@@ -165,7 +165,7 @@ def supercell_2_points_URhIn():
 def test_get_unit_cell_coordinates(cif_block_URhIn, unitcell_points_URhIn):
     coordinates = get_unitcell_coords_for_all_labels(cif_block_URhIn)
 
-    # Flatten the coordinates for comparision with the expected
+    # Flatten the coordinates for comparison with the expected
     coordinates_set = set(
         tuple(coord) for sublist in coordinates for coord in sublist
     )

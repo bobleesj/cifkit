@@ -602,14 +602,12 @@ def test_init_atomic_mixing_deficiency_without_atomic_mixing():
 
 
 """
-Test files with error in geoemtry
+Test files with error in geometry
 """
 
 
 def print_connected_points(all_labels_connections):
-    """
-    Utility function for printing connections per site label
-    """
+    """Utility function for printing connections per site label."""
     for label, connections in all_labels_connections.items():
         print(f"\nAtom site {label}:")
         for (
@@ -667,7 +665,12 @@ Test CIF various db sources
         ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
         ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
         ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1383),
-        ("tests/data/cif/sources/CCDC/2294753.cif", "CCDC", {'Er', 'In', 'Co'}, 3844),
+        (
+            "tests/data/cif/sources/CCDC/2294753.cif",
+            "CCDC",
+            {"Er", "In", "Co"},
+            3844,
+        ),
         (
             "tests/data/cif/sources/MP/LiFeP2O7.cif",
             "MP",

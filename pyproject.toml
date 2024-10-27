@@ -66,3 +66,13 @@ exclude = '''
   | .*\.toml$
 )/
 '''
+
+[tool.codespell]
+exclude-file = ".codespell/ignore_lines.txt"
+ignore-words = ".codespell/ignore_words.txt"
+
+[tool.docformatter]
+recursive = true
+wrap-summaries = 82
+wrap-descriptions = 81
+blank = true
