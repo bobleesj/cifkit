@@ -1,10 +1,8 @@
 default_language_version:
-  node: system
-  python: python3
-
+    python: python3
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v4.6.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
@@ -16,7 +14,7 @@ repos:
       - id: check-toml
       - id: check-added-large-files
   - repo: https://github.com/pycqa/flake8
-    rev: 7.1.1
+    rev: 7.0.0
     hooks:
       - id: flake8
   - repo: https://github.com/pycqa/isort
@@ -29,16 +27,9 @@ repos:
     hooks:
       - id: nbstripout
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v4.4.0
     hooks:
       - id: no-commit-to-branch
         name: Prevent Commit to Main Branch
         args: ["--branch", "main"]
         stages: [pre-commit]
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
-    hooks:
-      - id: codespell
-        exclude: '\.cif$'
-        additional_dependencies:
-          - tomli

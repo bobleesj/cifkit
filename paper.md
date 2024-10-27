@@ -83,8 +83,8 @@ mixing, among other parameters.
 
 # Examples
 
-cifkit is designed to minimize the reliance on API documentation for useres with
-limited programming experience. By simplifying user interactions while
+cifkit is designed to minmize the reliance on API documentation for useres with
+limtied programming experience. By simplifying user interactions while
 maintaining robust functionality, cifkit enables a broader range of scientists
 to leverage computational tools for complex tasks such as extracting descriptors
 for geometry-based polyhedra from each atomic site. The full installation
@@ -94,7 +94,7 @@ Google Colab URL provided in the official documentation.
 ```python
 from cifkit import Cif, Example
 
-# Initialize with the .cif file path
+# Initalize with the .cif file path
 cif = Cif(Example.Er10Co9In20_file_path)
 cif.formula
 ```
@@ -104,7 +104,7 @@ To extract information from a set of .cif files:
 ```python
 from cifkit import CifEnsemble, Example
 
-# Initialize with the folder path containing .cif files
+# Initalize with the folder path containing .cif files
 ensemble = CifEnsemble(Example.ErCoIn_big_folder_path)
 ensemble.unique_formulas
 ensemble.unique_structures

@@ -262,6 +262,7 @@ tests/data/cif/ensemble_test/300170.cif
 {'Ge1': 5, 'Ru1': 12, 'Ce1': 16}
 """
 
+
 """
 Test filter by value
 """

@@ -274,8 +274,10 @@ def test_get_parsed_atom_site_occupancy_info_ICSD(file_path_ICSD_formatted):
 
 
 def test_get_parsed_atom_site_occupancy_info_with_braket():
-    """Er7 Er 16 h 0.06284 0.06662 0.39495 1 Co13B Co 4 c 0.75 0.25 0.59339
-    0.07(3) `"""
+    """
+    Er7 Er 16 h 0.06284 0.06662 0.39495 1
+    Co13B Co 4 c 0.75 0.25 0.59339 0.07(3)
+    `"""
     file_path = "tests/data/cif/cif_parser/1814810.cif"
     atom_site_info = parse_atom_site_occupancy_info(file_path)
 
