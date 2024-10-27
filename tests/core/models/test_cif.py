@@ -692,4 +692,3 @@ def test_init_cif_file(
     assert cif.db_source == expected_db_source
     assert cif.unique_elements == expected_elements
     assert cif.supercell_atom_count == expected_atom_count
-
