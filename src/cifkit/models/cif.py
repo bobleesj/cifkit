@@ -2,9 +2,7 @@ import logging
 import os
 
 # Bond pair
-from cifkit.coordination.bond_distance import (
-    get_shortest_distance_per_bond_pair,
-)
+from cifkit.coordination.bond_distance import get_shortest_distance_per_bond_pair
 from cifkit.coordination.composition import (
     compute_avg_CN,
     get_bond_counts,
@@ -32,10 +30,7 @@ from cifkit.data.radius_handler import (
     get_radius_values_per_element,
 )
 from cifkit.figures import polyhedron
-from cifkit.occupancy.mixing import (
-    get_mixing_type_per_pair_dict,
-    get_site_mixing_type,
-)
+from cifkit.occupancy.mixing import get_mixing_type_per_pair_dict, get_site_mixing_type
 from cifkit.preprocessors.environment import get_site_connections
 
 # Coordination number
@@ -44,10 +39,7 @@ from cifkit.preprocessors.environment_util import flat_site_connections
 # Supercell generation
 from cifkit.preprocessors.supercell import get_supercell_points
 from cifkit.preprocessors.supercell_util import get_cell_atom_count
-from cifkit.utils.bond_pair import (
-    get_bond_pairs,
-    get_pairs_sorted_by_mendeleev,
-)
+from cifkit.utils.bond_pair import get_bond_pairs, get_pairs_sorted_by_mendeleev
 
 # Edit .cif file
 from cifkit.utils.cif_editor import edit_cif_file_based_on_db

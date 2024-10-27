@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from cifkit import CifEnsemble
-from cifkit.utils.folder import get_file_count, get_file_paths, copy_files
+from cifkit.utils.folder import copy_files, get_file_count, get_file_paths
 
 
 @pytest.mark.fast
