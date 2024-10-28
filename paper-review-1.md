@@ -19,7 +19,7 @@ This is a valid point. I have modified the "Statement of Need" and emphasized th
 
 ```markdown
 `cifkit` distinguishes itself from existing libraries by offering higher-level
-functions and variables that allow solid-state synthesists to obtain intuitive and 
+functions and variables that allow solid-state synthesists to obtain intuitive and
 measurable properties impactful properties. It facilitates the visualization of
 coordination geometry from each site using four coordination determination
 methods and extracts physics-based features like volume and packing
@@ -54,7 +54,7 @@ I have added numpy-style docstrings for the main classes `Cif` and `CifEnsemble`
 
 > Examples in the docs aren't the most consistent. For instance, some example lines of code use "ensemble" as the variable, and some use "ensemble_test". It may also be better if the commented outputs reflected the example folder ("Example.ErCoIn_big_folder_path") so users can more easily verify correctness. Finally, incorporating the visualization tools in the docs (currently they're demonstrated only in the README) would be appreciated.
 
-Thank you for your suggestion. I have now maintained the instance name `ensemble` consistently. The actual ouput using the Jupyter notebook has been used for all examples.
+Thank you for your suggestion. I have now maintained the instance name `ensemble` consistently. The actual output using the Jupyter notebook has been used for all examples.
 
 > The statement of need could be made more clear in the docs
 
