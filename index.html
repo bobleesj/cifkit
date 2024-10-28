@@ -10,11 +10,11 @@
       
       
       
-        <link rel="next" href="notebooks/00_Intro/">
+        <link rel="next" href="notebooks/01_cif/">
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
@@ -46,7 +46,7 @@
     
       <link rel="stylesheet" href="assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -89,12 +89,12 @@
     <a href="." title="cifkit" class="md-header__button md-logo" aria-label="cifkit" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -122,7 +122,7 @@
     <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
       </label>
     
   
@@ -132,7 +132,7 @@
     <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
       </label>
     
   
@@ -140,13 +140,13 @@
       
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
       <label class="md-header__button md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -155,15 +155,15 @@
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
@@ -188,7 +188,7 @@
         <a href="https://github.com/bobleesj/cifkit" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     bobleesj/cifkit
@@ -233,17 +233,50 @@
   
   
   
-    
-    
-      <li class="md-tabs__item">
-        <a href="notebooks/00_Intro/" class="md-tabs__link">
-          
+    <li class="md-tabs__item">
+      <a href="notebooks/01_cif/" class="md-tabs__link">
+        
   
-  Notebooks
-
-        </a>
-      </li>
     
+  
+  CIF
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="notebooks/02_cif_ensemble/" class="md-tabs__link">
+        
+  
+    
+  
+  CifEnsemble
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="api/" class="md-tabs__link">
+        
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
   
 
       
@@ -274,7 +307,7 @@
     <a href="." title="cifkit" class="md-nav__button md-logo" aria-label="cifkit" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     cifkit
@@ -284,7 +317,7 @@
       <a href="https://github.com/bobleesj/cifkit" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     bobleesj/cifkit
@@ -347,6 +380,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#statement-of-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statement of need
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      TL;DR
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-speed-expectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing speed expectation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
       Installation
@@ -356,46 +416,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#start-with-cifensemble" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Start with CifEnsemble
+      Overview
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Start with CifEnsemble">
+    <nav class="md-nav" aria-label="Overview">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-unique-attributes" class="md-nav__link">
+  <a href="#cif" class="md-nav__link">
     <span class="md-ellipsis">
-      Get unique attributes
+      Cif
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-distances-and-supercell-size-per-file" class="md-nav__link">
+  <a href="#cifensemble" class="md-nav__link">
     <span class="md-ellipsis">
-      Get distances and supercell size per file
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter-files-by-attributes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Filter files by attributes
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move-and-copy-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      Move and copy files
+      CifEnsemble
     </span>
   </a>
   
@@ -407,18 +449,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#are-you-ready" class="md-nav__link">
+  <a href="#research-projects-using-cifkit" class="md-nav__link">
     <span class="md-ellipsis">
-      Are you ready?
+      Research projects using cifkit
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#research-projects-using-cifkit" class="md-nav__link">
+  <a href="#how-to-ask-for-help" class="md-nav__link">
     <span class="md-ellipsis">
-      Research projects using cifkit
+      How to ask for help
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-contribute-to-cifkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to contribute to cifkit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Citation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other links
     </span>
   </a>
   
@@ -438,67 +516,6 @@
   
   
   
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Notebooks
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Notebooks
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="notebooks/00_Intro/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Installation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="notebooks/01_cif/" class="md-nav__link">
         
@@ -512,10 +529,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
@@ -533,11 +549,23 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
+    
       
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -561,134 +589,176 @@
 
 
 <h1 id="getting-started">Getting started</h1>
-<p>The purpose of this guide is to illustrate some of the main features that
-<code>cifkit</code> provides. It assumes a very basic knowledge of Python.</p>
-<p><code>cifkit</code> is an open source CIF library that supports supercell generation and
-provide tools for high-throuhgput analysis. It also provides various tools for
-determining coordination numbers, plotting polyhedrons from each site based on
-the coordination numbers, bond fractions, move and copy <code>.cif</code> files based on a
-set of attributes, and determine atomic mixing information in 2-3 lines of code.</p>
+<h2 id="statement-of-need">Statement of need</h2>
+<p><code>cifkit</code> uses .cif files by offering higher-level functions and variables that
+enable users to perform complex tasks efficiently with a few lines of code. <code>cifkit</code> distinguishes itself from existing libraries by offering higher-level
+functions and variables that allow solid-state synthesists to obtain intuitive and 
+measurable properties impactful properties. It facilitates the visualization of
+coordination geometry from each site using four coordination determination
+methods and extracts physics-based features like volume and packing
+efficiency—crucial for structural analysis in machine learning tasks. Moreover,
+<code>cifkit</code> extracts atomic mixing information at the bond pair level, tasks that
+would otherwise require extensive manual effort using GUI-based tools like
+VESTA, Diamond, and CrystalMaker.</p>
+<p><code>cifkit</code> further enhances its utility by providing functions for sorting,
+preprocessing, and analyzing the distribution of underlying CIF files. It
+systematically addresses common issues in CIF files from databases, such as
+incorrect loop values and missing fractional coordinates, by standardizing and
+filtering out ill-formatted files. The package also preprocesses atomic site
+labels, transforming labels like 'M1' to 'Fe1' in files with atomic mixing for
+improved visualization and pattern matching. Beyond error correction, <code>cifkit</code>
+offers functionalities to copy, move, and sort files based on attributes such as
+coordination numbers, space groups, unit cells, and shortest distances. It
+excels in visualizing and cataloging CIF files, organizing them by supercell
+size, tags, coordination numbers, elements, and atomic mixing.</p>
+<h2 id="tldr">TL;DR</h2>
+<p><code>cifkit</code> provides higher-level functions in just a few lines of code.</p>
+<ul>
+<li><strong>Coordination geometry</strong> - <code>cifkit</code> provides functions for visualing
+  coordination geometry from each site and extracts physics-based features like
+  volume and packing efficiency in each polyhedron.</li>
+<li><strong>Atomic mixing</strong> - <code>cifkit</code> extracts atomic mixing information at the bond
+  pair level—tasks that would otherwise require extensive manual effort using
+  GUI-based tools like VESTA, Diamond, and CrystalMaker.</li>
+<li><strong>Filter</strong> - <code>cifkit</code> offers features for preprocessing. It systematically
+  addresses common issues in CIF files from databases, such as incorrect loop
+  values and missing fractional coordinates, by standardizing and filtering out
+  ill-formatted files. It also preprocesses atomic site labels, transforming
+  labels such as 'M1' to 'Fe1' in files with atomic mixing.</li>
+<li><strong>Sort</strong> - <code>cifkit</code> allows you to copy, move, and sort <code>.cif</code> files based on
+  attributes such as coordination numbers, space groups, unit cells, shortest
+  distances, elements, and more.</li>
+</ul>
+<h2 id="processing-speed-expectation">Processing speed expectation</h2>
+<p>Processing approximately 10,000 .cif files on a standard laptop (iMac with M1 chip) may take about 30 to 60 minutes. At this rate, we can process nearly all .cif files within 1–2 days.</p>
 <h2 id="installation">Installation</h2>
-<p>Install <code>cifkit</code> via:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>cifkit
+<p>Python 3.10, 3.11, 3.12 are supported.</p>
+<p><img alt="Python - Version" src="https://img.shields.io/pypi/pyversions/cifkit" />
+<a href="https://pypi.python.org/pypi/cifkit"><img alt="PyPi version" src="https://img.shields.io/pypi/v/cifkit.svg" /></a>
+<a href="https://anaconda.org/conda-forge/cifkit"><img alt="Conda version" src="https://img.shields.io/conda/vn/conda-forge/cifkit" /></a></p>
+<p>Option 1. conda install</p>
+<p>The preferred method is to install <code>cifkit</code> using Conda:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>create<span class="w"> </span>cifkit_env<span class="w"> </span>cifkit
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>cifkit_env
 </code></pre></div>
-<p>You may need to download other dependencies:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>cifkit<span class="w"> </span>pyvista<span class="w"> </span>gemmi
+<p>If the above option does not work, please feel free to use pip install:</p>
+<p>Option 2. pip install</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>cifkit
 </code></pre></div>
-<p><code>gemmi</code> is used for parsing <code>.cif</code> files. <code>pyvista</code> is used for plotting
-polyhedrons.</p>
-<h2 id="start-with-cifensemble">Start with CifEnsemble</h2>
-<p><code>cifkit</code> offers a class called <code>CifEnsemble</code> which handles many <code>.cif</code> files in
-a high-throuhgput way. You can initialize the object using the folder path
-containing <code>.cif</code> files shown below.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">CifEnsemble</span>
+<h2 id="overview">Overview</h2>
+<p><code>cifkit</code> provide two primary classes: <code>Cif</code> and <code>CifEnsemble</code>.</p>
+<h3 id="cif">Cif</h3>
+<p><code>Cif</code> is initialized with a <code>.cif</code> file path. It parses the <code>.cif</code> file,
+generates supercells, and computes nearest neighbors. It also determines
+coordination numbers using four different methods and generates polyhedrons for
+each site.</p>
+<p>The example below uses <code>cifkit</code> to visualize the polyhedron generated from each
+atomic site based on the coordination number geometry.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">Cif</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Initialize</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="s2">&quot;tests/data/cif/ensemble_test&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="s2">&quot;your_cif_file_path&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">site_labels</span> <span class="o">=</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># Initialize including nested files</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="s2">&quot;tests/data/cif/ensemble_test&quot;</span><span class="p">,</span> <span class="n">add_nested_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># Folder path</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">cif_folder_path</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># &quot;tests/data/cif/ensemble_test&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># Loop through each site label</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">site_labels</span><span class="p">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="c1"># Dipslay each polyhedron, .png saved for each label</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<p>If you do not have <code>.cif</code> files for testing, <code>cifkit</code> also provides a set of
-<code>.cif</code> files accessible.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">Example</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Initalize with the file path</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn_big_folder_path</span><span class="p">)</span>
+<p><img alt="Polyhedron generation" src="assets/img/ErCoIn-polyhedron.png" /></p>
+<p>For more, visit
+<a href="https://bobleesj.github.io/cifkit/notebooks/01_cif">https://bobleesj.github.io/cifkit/notebooks/01_cif</a>
+for a full tutorial with an interactive Google Codelab link.</p>
+<h3 id="cifensemble">CifEnsemble</h3>
+<p><code>CifEnsemble</code> is initialized with a folder path containing <code>.cif</code> files. It
+identifies unique attributes, such as space groups and elements, across the
+<code>.cif</code> files, moves and copies files based on these attributes. It generates
+histograms for all attributes.</p>
+<p>The following example generates a distribution of structure.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">CifEnsemble</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="s2">&quot;your_cif_containing_folder_path&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">generate_structure_histogram</span><span class="p">()</span>
 </code></pre></div>
-<h3 id="get-unique-attributes">Get unique attributes</h3>
-<p>Use the <code>ensemble</code> object to get unique attributes such as elements, formulas,
-etc.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Unique formulas</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_formulas</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># {&quot;EuIr2Ge2&quot;, &quot;CeRu2Ge2&quot;, &quot;LaRu2Ge2&quot;, &quot;Mo&quot;}</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># Unique structures</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_structures</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># {&quot;CeAl2Ga2&quot;, &quot;W&quot;}</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Unique elements</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_elements</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># {&quot;La&quot;, &quot;Ru&quot;, &quot;Ge&quot;, &quot;Ir&quot;, &quot;Eu&quot;, &quot;Ce&quot;, &quot;Mo&quot;}</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Unique space group names</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_names</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># {&quot;I4/mmm&quot;, &quot;Im-3m&quot;}</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1"># Unique space group numbers</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_numbers</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="c1"># {139, 229}</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="c1"># Unique tags</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_tags</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="c1"># {&quot;hex&quot;, &quot;rt&quot;, &quot;rt_hex&quot;, &quot;&quot;}</span>
+<p><img alt="structure distribution" src="assets/img/histogram-structure.png" /></p>
+<p>Basde on your visual histogram above, you can copy and move .cif files based on
+specific attributes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Return file paths matching structures either Co1.75Ge or CoIn2</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">([</span><span class="s2">&quot;Co1.75Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;CoIn2&quot;</span><span class="p">])</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Return file path matching CeAl2Ga2</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">(</span><span class="s2">&quot;CeAl2Ga2&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="get-distances-and-supercell-size-per-file">Get distances and supercell size per file</h3>
-<p>The following computes the size of each supercell and the minimum distance per
-file.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Get min distance per file</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">minimum_distances</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># [(&quot;tests/data/cif/ensemble_test/250709.cif&quot;, 2.725),</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># (&quot;tests/data/cif/ensemble_test/300171.cif&quot;, 2.383),</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># (&quot;tests/data/cif/ensemble_test/300170.cif&quot;, 2.28)]</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Get supercell size per file</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">supercell_atom_counts</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># [(&quot;tests/data/cif/ensemble_test/250709.cif&quot;, 54),</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># (&quot;tests/data/cif/ensemble_test/300171.cif&quot;, 360),</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c1"># (&quot;tests/data/cif/ensemble_test/300170.cif&quot;, 360)]</span>
-</code></pre></div>
-<h3 id="filter-files-by-attributes">Filter files by attributes</h3>
-<p>The following returns a set of file paths to each <code>.cif</code> file.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># By formulas</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">filter_by_formulas</span><span class="p">([</span><span class="s2">&quot;LaRu2Ge2&quot;</span><span class="p">])</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">filter_by_formulas</span><span class="p">([</span><span class="s2">&quot;LaRu2Ge2&quot;</span><span class="p">,</span> <span class="s2">&quot;Mo&quot;</span><span class="p">])</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># By structures</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">([</span><span class="s2">&quot;W&quot;</span><span class="p">])</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">(</span><span class="s2">&quot;CeAl2Ga2&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># By space group</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">filter_by_space_group_names</span><span class="p">(</span><span class="s2">&quot;Im-3m&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="c1"># By space group numbers</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">ensemble_test</span><span class="o">.</span><span class="n">filter_by_space_group_numbers</span><span class="p">([</span><span class="mi">139</span><span class="p">])</span>
-</code></pre></div>
-<h3 id="move-and-copy-files">Move and copy files</h3>
-<p>Now you have a set of file paths with example below, you can copy and move files
-to a specific directroy. For high-throuhgout analysis, you might be interested
-in separating files based on tags, elements, coordination numbers, etc.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">file_paths</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="s2">&quot;tests/data/cif/ensemble_test/300169.cif&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="s2">&quot;tests/data/cif/ensemble_test/300171.cif&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="s2">&quot;tests/data/cif/ensemble_test/300170.cif&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># To move files</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">move_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># To copy files</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">copy_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="are-you-ready">Are you ready?</h2>
-<p>Now, if you are interested in working with individual <code>.cif</code> files and learn
-more about all features in <code>cifkit</code>, let's visit the <code>Example notebooks</code> section
-<a href="https://bobleesj.github.io/cifkit/notebooks/00_Intro/">here</a>!</p>
+<p>For more, visit
+<a href="https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/">https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/</a>
+for a full tutorial with an interactive Google Codelab link.</p>
 <h2 id="research-projects-using-cifkit">Research projects using <code>cifkit</code></h2>
+<p>The below projects uses the <code>Cif</code> and <code>CifEnsemble</code> classes for research
+applications.</p>
 <ul>
 <li>CIF Bond Analyzer (CBA) - extract and visualize bonding patterns -
   <a href="https://doi.org/10.1016/j.jallcom.2023.173241">DOI</a> |
-  <a href="https://github.com/bobleesj/cif-bond-analyzer">GitHub</a></li>
-<li>CIF Cleaner - move, copy .cif files based on attributes -
-  <a href="https://github.com/bobleesj/cif-cleaner">GitHub</a></li>
+  <a href="https://github.com/bobleesj/cif-bond-analyzer">GitHub</a> |
+  <a href="https://bobleesj.github.io/files/presentation/2024-GRC-poster.pdf">Poster</a></li>
 <li>Structure Analysis/Featurizer (SAF) - build geometric features for binary,
   ternary compounds -
   <a href="https://github.com/bobleesj/structure-analyzer-featurizer">GitHub</a></li>
+<li>CIF Cleaner - move, copy .cif files based on attributes
+  <a href="https://github.com/bobleesj/cif-cleaner">GitHub</a></li>
+</ul>
+<h2 id="how-to-ask-for-help">How to ask for help</h2>
+<p><code>cifkit</code> is also designed for experimental materials scientists and chemists.</p>
+<ul>
+<li>If you have any issues or questions, please feel free to reach out to Bob Lee
+  <a href="https://github.com/bobleesj">@bobleesj</a> or
+  <a href="https://github.com/bobleesj/cifkit/issues">leave an issue</a>.</li>
+</ul>
+<h2 id="how-to-contribute-to-cifkit">How to contribute to <code>cifkit</code></h2>
+<p>Here is how you can contribute to the <code>cifkit</code> project if you found it helpful:</p>
+<ul>
+<li>Star the repository on GitHub and recommend it to your colleagues who might
+  find <code>cifkit</code> helpful as well.
+  <a href="https://github.com/bobleesj/cifkit/stargazers"><img alt="Star GitHub repository" src="https://img.shields.io/github/stars/bobleesj/cifkit.svg?style=social" /></a></li>
+<li>Create a new issue for any bugs or feature requests
+  <a href="https://github.com/bobleesj/cifkit/issues">here</a></li>
+<li>Fork the repository and consider contributing changes via a pull request.
+  <a href="https://github.com/bobleesj/cifkit/fork"><img alt="Fork GitHub repository" src="https://img.shields.io/github/forks/bobleesj/cifkit?style=social" /></a>.
+  Check out
+  <a href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+  for instructions.</li>
+<li>If you have any suggestions or need further clarification on how to use
+  <code>cifkit</code>, please reach out to Bob Lee
+  (<a href="https://github.com/bobleesj">@bobleesj</a>).</li>
+</ul>
+<h2 id="contributors">Contributors</h2>
+<p><code>cifkit</code> has been greatly enhanced thanks to the contributions from a diverse
+group of researchers:</p>
+<ul>
+<li>Anton Oliynyk: original ideation with <code>.cif</code> files</li>
+<li>Alex Vtorov: tool recommendation for polyhedron visualization</li>
+<li>Danila Shiryaev: testing as beta user</li>
+<li>Fabian Zills (<a href="https://github.com/PythonFZ">@PythonFZ</a>): suggested tooling
+  improvements</li>
+<li>Emil Jaffal (<a href="https://github.com/EmilJaffal">@EmilJaffal</a>): initial testing
+  and bug report</li>
+<li>Nikhil Kumar Barua: initial testing and bug report</li>
+<li>Nishant Yadav (<a href="https://github.com/sethisiddha1998">@sethisiddha1998</a>):
+  initial testing and bug report</li>
+<li>Siddha Sankalpa Sethi (<a href="https://github.com/runzsh">@runzsh</a>): initial testing
+  and bug report in initial testing and initial testing and bug report</li>
+</ul>
+<p>We welcome all forms of contributions from the community. Your ideas and
+improvements are valued and appreciated.</p>
+<h2 id="citation">Citation</h2>
+<p>Please consider citing <code>cifkit</code> if it has been useful for your research:</p>
+<blockquote>
+<p>Note: the <code>cifkit</code> manuscript is also under reviewed by the Journal of Open
+Source Software.</p>
+</blockquote>
+<p><a href="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19"><img src="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19/status.svg"></a></p>
+<h2 id="other-links">Other links</h2>
+<ul>
+<li><a href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">Contribution guide</a></li>
+<li><a href="https://github.com/bobleesj/cifkit/blob/main/LICENSE">MIT license</a></li>
 </ul>
 
 
@@ -707,14 +777,14 @@ more about all features in <code>cifkit</code>, let's visit the <code>Example no
             </div>
           
           
-  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
 
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
   Back to top
 </button>
         
@@ -728,18 +798,18 @@ more about all features in <code>cifkit</code>, let's visit the <code>Example no
         
         
           
-          <a href="notebooks/00_Intro/" class="md-footer__link md-footer__link--next" aria-label="Next: Installation">
+          <a href="notebooks/01_cif/" class="md-footer__link md-footer__link--next" aria-label="Next: CIF">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Installation
+                CIF
               </div>
             </div>
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
             </div>
           </a>
         
@@ -768,10 +838,10 @@ more about all features in <code>cifkit</code>, let's visit the <code>Example no
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.footer", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.footer", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.ad660dcc.min.js"></script>
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>

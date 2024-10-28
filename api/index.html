@@ -1,0 +1,3566 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../notebooks/02_cif_ensemble/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>API Reference - cifkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="cifkit" class="md-header__button md-logo" aria-label="cifkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            cifkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bobleesj/cifkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bobleesj/cifkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Getting started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../notebooks/01_cif/" class="md-tabs__link">
+        
+  
+    
+  
+  CIF
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../notebooks/02_cif_ensemble/" class="md-tabs__link">
+        
+  
+    
+  
+  CifEnsemble
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="cifkit" class="md-nav__button md-logo" aria-label="cifkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    cifkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bobleesj/cifkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bobleesj/cifkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/01_cif/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CIF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/02_cif_ensemble/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CifEnsemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cifkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      cifkit
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="cifkit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cif
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cif">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.CN_best_methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      CN_best_methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.CN_max_gap_per_site" class="md-nav__link">
+    <span class="md-ellipsis">
+      CN_max_gap_per_site
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.connections_flattened" class="md-nav__link">
+    <span class="md-ellipsis">
+      connections_flattened
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.radius_sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      radius_sum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.radius_values" class="md-nav__link">
+    <span class="md-ellipsis">
+      radius_values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.shortest_bond_pair_distance" class="md-nav__link">
+    <span class="md-ellipsis">
+      shortest_bond_pair_distance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.shortest_distance" class="md-nav__link">
+    <span class="md-ellipsis">
+      shortest_distance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.shortest_site_pair_distance" class="md-nav__link">
+    <span class="md-ellipsis">
+      shortest_site_pair_distance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.compute_connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      compute_connections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.Cif.plot_polyhedron" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_polyhedron
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble" class="md-nav__link">
+    <span class="md-ellipsis">
+      CifEnsemble
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CifEnsemble">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.CN_unique_values_by_best_methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      CN_unique_values_by_best_methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.CN_unique_values_by_min_dist_method" class="md-nav__link">
+    <span class="md-ellipsis">
+      CN_unique_values_by_min_dist_method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_composition_types" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_composition_types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_elements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_formulas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_site_mixing_types" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_site_mixing_types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_space_group_names" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_space_group_names
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_space_group_numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_space_group_numbers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_structures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.unique_tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      unique_tags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.copy_cif_files" class="md-nav__link">
+    <span class="md-ellipsis">
+      copy_cif_files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_CN_by_best_methods_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_CN_by_best_methods_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_CN_by_min_dist_method_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_CN_by_min_dist_method_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_composition_type_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_composition_type_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_elements_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_elements_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_formula_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_formula_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_site_mixing_type_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_site_mixing_type_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_space_group_name_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_space_group_name_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_space_group_number_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_space_group_number_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_structure_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_structure_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_supercell_size_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_supercell_size_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.generate_tag_histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_tag_histogram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifkit.CifEnsemble.move_cif_files" class="md-nav__link">
+    <span class="md-ellipsis">
+      move_cif_files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="api-reference">API reference</h1>
+<p>This section contains the automatic API reference for <code>Cif</code> and <code>CifEnsemble</code> modules in the <code>cifkit</code> package.</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="cifkit" class="doc doc-heading">
+            <code>cifkit</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="cifkit.Cif" class="doc doc-heading">
+            <code>Cif</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.CN_best_methods" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">CN_best_methods</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Determines the optimal coordination method for each atomic site.</p>
+<p>For each atomic site, the coordination polyhedron is generated for each method
+in <code>self.CN_max_gap_per_site</code>. The method with the smallest value of
+<code>polyhedron_metrics["distance_from_avg_point_to_center"]</code>, indicating the highest
+symmetry of the polyhedron, is selected as the "best method" among the four
+methods used to determine the CN gap in <code>self.CN_max_gap_per_site</code>.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>dict[str, dict[str, float | int | str]]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary where each key represents an atomic site, and the corresponding
+value is a dictionary containing:</p>
+<ul>
+<li><code>volume_of_polyhedron</code> (float): The volume of the polyhedron surrounding
+the atomic site.</li>
+<li><code>distance_from_avg_point_to_center</code> (float): The average distance from
+the polyhedron's vertices  to its geometric center, used as a measure of
+symmetry.</li>
+<li><code>number_of_vertices</code> (int): The number of vertices in the coordination
+polyhedron.</li>
+<li><code>number_of_edges</code> (int): The number of edges connecting vertices in the
+polyhedron.</li>
+<li><code>number_of_faces</code> (int): The number of faces in the coordination polyhedron.</li>
+<li><code>shortest_distance_to_face</code> (float): The shortest distance between the
+atomic site and the nearest face.</li>
+<li><code>shortest_distance_to_edge</code> (float): The shortest distance between the
+atomic site and the nearest edge.</li>
+<li><code>volume_of_inscribed_sphere</code> (float): Volume of the largest sphere that can
+it inside the polyhedron.</li>
+<li><code>packing_efficiency</code> (float): A measure of how efficiently the polyhedron
+is packed around the atomic site.</li>
+<li><code>method_used</code> (str): The name of the chosen method
+(e.g., <code>dist_by_shortest_dist</code>) providing the  highest symmetry based on
+<code>distance_from_avg_point_to_center</code>.</li>
+</ul>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span> <span class="o">=</span> <span class="n">cif_URhIn</span><span class="o">.</span><span class="n">CN_best_methods</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;In1&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_vertices&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">14</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;Rh2&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_vertices&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;In1&quot;</span><span class="p">][</span><span class="s2">&quot;method_used&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;dist_by_shortest_dist&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;Rh2&quot;</span><span class="p">][</span><span class="s2">&quot;method_used&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;dist_by_shortest_dist&quot;</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.CN_max_gap_per_site" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">CN_max_gap_per_site</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Determines the maximum gap in coordination number (CN) for each
+atomic site.</p>
+<p>For each atomic site, considers the first 20 nearest neighbors. The distances
+to these neighbors are normalized based on four methods:</p>
+<ul>
+<li><code>dist_by_shortest_dist</code>: Normalization by the shortest distance from the site.</li>
+<li><code>dist_by_CIF_radius_sum</code>: Normalization by the sum of CIF radii.</li>
+<li><code>dist_by_CIF_radius_refined_sum</code>: Normalization by the sum of refined CIF radii.</li>
+<li><code>dist_by_Pauling_radius_sum</code>: Normalization by the sum of Pauling radii.</li>
+</ul>
+<p>The radius sums are calculated for each element pair involved. For each
+normalization method, the maximum gap is determined as the largest difference
+between consecutive normalized distances (i.e., the difference between the nth
+and (n-1)th neighbors).</p>
+<p>This CN gap provides insight into the bonding relevance for each site.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>dict of dict of dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A dictionary where each key represents an atomic site, mapping to another
+dictionary with normalization methods as keys. Each normalization method
+contains a dictionary with:</p>
+<ul>
+<li><code>max_gap</code> (float): The maximum gap in the normalized distances.</li>
+<li><code>CN</code> (int): Coordination number based on the normalization method.</li>
+</ul>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    &quot;In1&quot;: {</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.306, &quot;CN&quot;: 14},</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.39, &quot;CN&quot;: 14},</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.341, &quot;CN&quot;: 12},</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.398, &quot;CN&quot;: 14},</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">    },</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="go">    &quot;U1&quot;: {</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.197, &quot;CN&quot;: 11},</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.312, &quot;CN&quot;: 11},</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.27, &quot;CN&quot;: 17},</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.256, &quot;CN&quot;: 17},</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="go">    },</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">    &quot;Rh1&quot;: {</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.315, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.347, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.418, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.402, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="go">    },</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">    &quot;Rh2&quot;: {</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.31, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.324, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.397, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.380, &quot;CN&quot;: 9},</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="go">    },</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="go">}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.connections_flattened" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">connections_flattened</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Transform site connections into a sorted list of tuples, each
+containing a pair of alphabetically sorted element symbols and the
+distance between them.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>list[tuple[tuple[str, str], float]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A sorted list of tuples, each containing a pair of alphabetically
+sorted element symbols and the distance between them.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="s2">&quot;path/to/cif/file.cif&quot;</span><span class="p">))</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">connections_flattened</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">[((&quot;In&quot;, &quot;Rh&quot;), 2.697), ((&quot;In&quot;, &quot;Rh&quot;), 2.697)]</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.radius_sum" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">radius_sum</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieve the sum of CIF radius, CIF_refined radius, and Pauling C12
+radius for the shortest bonding pairs of elements.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>dict[str:dict[str:float]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary where each key is a radius type and the value is a dictionary
+with the key being a bond pair of elements and the value being the total
+radius in Angstroms.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">radius_values</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span> <span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    &quot;CIF_radius_sum&quot;: {</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">        &quot;In-In&quot;: 3.248,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">        &quot;In-Rh&quot;: 2.969,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">        &quot;In-U&quot;: 3.001,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">        &quot;Rh-Rh&quot;: 2.69,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">        &quot;Rh-U&quot;: 2.722,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="go">        &quot;U-U&quot;: 2.754,</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="go">    },</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="go">    &quot;CIF_radius_refined_sum&quot;: {</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="go">        &quot;In-In&quot;: 2.657,</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">        &quot;In-Rh&quot;: 2.697,</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="go">        &quot;In-U&quot;: 2.943,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">        &quot;Rh-Rh&quot;: 2.737,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="go">        &quot;Rh-U&quot;: 2.983,</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="go">        &quot;U-U&quot;: 3.229,</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="go">    },</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="go">    &quot;Pauling_radius_sum&quot;: {</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="go">        &quot;In-In&quot;: 3.32,</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">        &quot;In-Rh&quot;: 3.002,</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="go">        &quot;In-U&quot;: 3.176,</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="go">        &quot;Rh-Rh&quot;: 2.684,</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="go">        &quot;Rh-U&quot;: 2.858,</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="go">        &quot;U-U&quot;: 3.032,</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="go">    },</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="go">}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.radius_values" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">radius_values</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieve CIF radius, CIF_refined radius, and Pauling C12 radius for
+each element.</p>
+<p>This property uses lazy loading to compute or retrieve radius values only when
+needed, optimizing performance. The CIF radius and Pauling C12 radius are standard
+values sourced from <code>data/radius.py</code> for each element. In contrast, the
+CIF_refined radius is calculated based on bonding distances to ensure accuracy
+across different environments.</p>
+<ul>
+<li><strong>CIF_radius</strong>: The standard radius value commonly determined from
+elemental .cif files, the approximate size of an atom within a crystal structure.</li>
+<li><strong>CIF_radius_refined</strong>: An optimized radius calculated to ensure that, across
+all bonding pairs, the sum of the two radii in a bonded pair attempts to
+matches the shortest unique observed bond distances. This refinement is designed
+to improve packing efficiency within a coordination polyhedron.</li>
+<li><strong>Pauling_radius_CN12</strong>: The Pauling radius of the element, calculated with a
+coordination number (CN) of 12, providing a basis for comparison with other radius
+types.</li>
+</ul>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>dict[str, dict[str, float]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A dictionary where each key is an atomic label (e.g., "In", "Rh", "U"), and
+the corresponding value is a dictionary with radius information in Angstroms:</p>
+<ul>
+<li><code>CIF_radius</code> (float): The standard CIF radius.</li>
+<li><code>CIF_radius_refined</code> (float): The optimized radius based on CIF radius.</li>
+<li><code>Pauling_radius_CN12</code> (float): The Pauling radius with a coordination
+number of 12, parsed from literature.</li>
+</ul>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">radius_values</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    &quot;In&quot;: {</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">        &quot;CIF_radius&quot;: 1.624,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">        &quot;CIF_radius_refined&quot;: 1.328,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">        &quot;Pauling_radius_CN12&quot;: 1.66,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">    },</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">    &quot;Rh&quot;: {</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="go">        &quot;CIF_radius&quot;: 1.345,</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="go">        &quot;CIF_radius_refined&quot;: 1.369,</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="go">        &quot;Pauling_radius_CN12&quot;: 1.342,</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="go">    },</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">    &quot;U&quot;: {</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="go">        &quot;CIF_radius&quot;: 1.377,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">        &quot;CIF_radius_refined&quot;: 1.614,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="go">        &quot;Pauling_radius_CN12&quot;: 1.516,</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="go">    },</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="go">}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.shortest_bond_pair_distance" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">shortest_bond_pair_distance</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Determine the minimum distance for all possible unique pair of
+elements. This property uses lazily loaded connections to compute the
+distance if they are not already available.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>dict[tuple[str, str], float]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary where each key is a tuple of element symbols and the float value
+is the distance between pair of elements in Angstroms.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    (&quot;In&quot;, &quot;In&quot;): 3.244,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">    (&quot;In&quot;, &quot;Rh&quot;): 2.697,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">    (&quot;In&quot;, &quot;U&quot;): 3.21,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">    (&quot;Rh&quot;, &quot;Rh&quot;): 3.881,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">    (&quot;Rh&quot;, &quot;U&quot;): 2.983,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">    (&quot;U&quot;, &quot;U&quot;): 3.881,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="go">}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.shortest_distance" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">shortest_distance</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Lazily retrieve the shortest atomic distance within the crystal
+structure. This property is lazily loaded and ensures all necessary
+connections are computed beforehand using the <code>@ensure_connections</code>
+decorator. The computation calculates the minimum distance between any
+pairs of atoms based on the connection data.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The shortest distance between any two connected atoms in the
+crystal structure, in Angstroms.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.Cif.shortest_site_pair_distance" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">shortest_site_pair_distance</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieves the shortest distance from each unique atomic site in the
+crystal structure. This property uses lazily loaded connections to
+compute these distances if they are not already available.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>dict[str, tuple[str, float]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>dictionary where each key is an atomic label and the value is a
+tuple containing the label of the closest atomic site and the
+shortest distance to it in Angstroms</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">shortest_site_pair_distance</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    &quot;In1&quot;: (&quot;Rh2&quot;, 2.697),</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">    &quot;Rh1&quot;: (&quot;In1&quot;, 2.852),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">    &quot;Rh2&quot;: (&quot;In1&quot;, 2.697),</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">    &quot;U1&quot;: (&quot;Rh1&quot;, 2.984),</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.Cif.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">is_formatted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes an object from a .cif file.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>file_path</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the .cif file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>is_formatted</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If False, preprocess the .cif file to ensure compatibility with the
+gemmi library. Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>logging_enabled</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Enables detailed logging during initialization and for distance
+calculations. Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.file_path">file_path</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the CIF file from which data is loaded.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.logging_enabled">logging_enabled</span></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Enables detailed logging for initialization and distance
+alculations if set to True.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.file_name">file_name</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Base name of the CIF file, extracted from <code>file_path</code>.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.file_name_without_ext">file_name_without_ext</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>File name without its extension, useful for referencing or
+generating derivative files.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.db_source">db_source</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Source database (e.g., ICSD, MP, CCDC, PCD) from which the CIF file
+originates, determined at runtime.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.unitcell_lengths">unitcell_lengths</span></code></td>
+            <td>
+                  <code>list[float]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of unit cell lengths for the crystal structure, typically in
+Angstroms.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.unitcell_angles">unitcell_angles</span></code></td>
+            <td>
+                  <code>list[float]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of unit cell angles in radians, ordered by alpha, beta, gamma.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.site_labels">site_labels</span></code></td>
+            <td>
+                  <code>list[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Lists all unique atomic site labels.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.unique_elements">unique_elements</span></code></td>
+            <td>
+                  <code>set[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set of unique chemical elements present in the CIF file.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.atom_site_info">atom_site_info</span></code></td>
+            <td>
+                  <code>dict[str, any]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary containing detailed information about each atomic site
+including element, site occupancy,
+fractional coordinates, symmetry, and multiplicity.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.composition_type">composition_type</span></code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of unique elements present in the .cif file, e.g., 1 for
+unary, 2 for binary, etc.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.tag">tag</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Additional tag associated with the CIF data, parsed from the third
+line of PCD .cif files.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.bond_pairs">bond_pairs</span></code></td>
+            <td>
+                  <code>set[tuple[str, str]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set of tuples representing bonded pairs of elements.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.site_label_pairs">site_label_pairs</span></code></td>
+            <td>
+                  <code>set[tuple[str, str]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set of tuples representing pairs of atomic site labels.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.bond_pairs_sorted_by_mendeleev">bond_pairs_sorted_by_mendeleev</span></code></td>
+            <td>
+                  <code>set[tuple[str, str]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set of bonded pairs sorted according to Mendeleev Numbers.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.site_label_pairs_sorted_by_mendeleev">site_label_pairs_sorted_by_mendeleev</span></code></td>
+            <td>
+                  <code>set[tuple[str, str]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set of site label pairs sorted by Mendeleev Numbers.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.site_mixing_type">site_mixing_type</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Descriptor of the mixing type, categorized into four types:
+Full occupancy is assigned when a single atomic site occupies
+the fractional coordinate with an occupancy value of 1.
+Full occupancy with mixing is assigned when multiple atomic sites
+collectively occupy the fractional coordinate to a sum of 1.
+Deficiency without mixing is assigned when a single atomic site occupying
+the fractional coordinate with a sum less than 1.
+Deficiency with atomic mixing is assigned when multiple atomic sites occupy
+the fractional coordinate with a sum less than 1.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.is_radius_data_available">is_radius_data_available</span></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Indicates whether Pauling and CIF atomic radii are available for
+all elements in the .cif file.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.mixing_info_per_label_pair">mixing_info_per_label_pair</span></code></td>
+            <td>
+                  <code>dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary mapping pairs of labels to their mixing information.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.mixing_info_per_label_pair_sorted_by_mendeleev">mixing_info_per_label_pair_sorted_by_mendeleev</span></code></td>
+            <td>
+                  <code>dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Same as <code>mixing_info_per_label_pair</code>, but sorted according to
+Mendeleev numbers.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.unitcell_points">unitcell_points</span></code></td>
+            <td>
+                  <code>list[list[tuple[float, float, float, str]]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of points defining the unit cell; each point contains
+fractional coordinates and a site label.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.supercell_points">supercell_points</span></code></td>
+            <td>
+                  <code>list[list[tuple[float, float, float, str]]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of points defining the supercell of the cell For each .cif file,
+a unit cell is generated by applying the symmetry operations.
+A supercell is generated by applying ±1 shifts from the unit cell.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.unitcell_atom_count">unitcell_atom_count</span></code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Total count of atoms within the unit cell.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.supercell_atom_count">supercell_atom_count</span></code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Total count of atoms within the generated supercell
+incorporating ±1, ±1, ±1 translations.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.Cif.__init__.connections">connections</span></code></td>
+            <td>
+                  <code>None or dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initially None, intended to store connection data related to
+the crystal structure. Connections are computed lazily and are
+only calculated when first needed by a method or property requiring them.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.Cif.compute_connections" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compute_connections</span><span class="p">(</span><span class="n">cutoff_radius</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compute onnection network, shortest distances, bond counts, and
+coordination numbers (CN). These prperties are lazily loaded to avoid
+unnecessary computation during the initialization and pre-processing
+step.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>cutoff_radius</code>
+            </td>
+            <td>
+                  <code>float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The distance threshold in Angstroms used to consider two atoms as connected,
+by default 10.0</p>
+              </div>
+            </td>
+            <td>
+                  <code>10.0</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.Cif.plot_polyhedron" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">plot_polyhedron</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Function to plot a polyhedron structure and optionally saves it.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>site_label</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Central site label for the polyhedron</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>show_labels</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to display vertex labels, by default True</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>is_displayed</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Display plot interactively, by default False</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Directory to save the plot, by default None</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="cifkit.CifEnsemble" class="doc doc-heading">
+            <code>CifEnsemble</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.CN_unique_values_by_best_methods" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">CN_unique_values_by_best_methods</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>set[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique coordination number by best methods from all .cif files.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.CN_unique_values_by_min_dist_method" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">CN_unique_values_by_min_dist_method</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>set[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique coordination number values by minimum distance method from all .cif
+files.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_composition_types" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_composition_types</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique composition types from all .cif files in the folder.</p>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_composition_types</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{1, 3}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_elements" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_elements</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique elements from all .cif files in the folder.</p>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_elements_stats</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    &quot;Ce&quot;: 1,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">    &quot;Eu&quot;: 1,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">    &quot;Ge&quot;: 3,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">    &quot;Ir&quot;: 1,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">    &quot;La&quot;: 1,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">    &quot;Mo&quot;: 3,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="go">    &quot;Ru&quot;: 2,</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="go">}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_formulas" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_formulas</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique formulas from all .cif files in the folder.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>set[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>unique formulas</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_formulas</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{&quot;EuIr2Ge2&quot;, &quot;CeRu2Ge2&quot;, &quot;LaRu2Ge2&quot;, &quot;Mo&quot;}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_site_mixing_types" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_site_mixing_types</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique site mixing types from all .cif files in the folder.</p>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_site_mixing_types</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{&quot;deficiency_without_atomic_mixing&quot;, &quot;full_occupancy&quot;}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_space_group_names" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_space_group_names</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique space groups from all .cif files in the folder.</p>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_space_group_names</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{&quot;I4/mmm&quot;, &quot;Im-3m&quot;}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_space_group_numbers" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_space_group_numbers</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique space groups from all .cif files in the folder.</p>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_space_group_numbers</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{139, 229}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_structures" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_structures</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique structures from all .cif files in the folder.</p>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_structures</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{&quot;CeAl2Ga2&quot;, &quot;W&quot;}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="cifkit.CifEnsemble.unique_tags" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unique_tags</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get unique formulas from all .cif files in the folder.</p>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_tags</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">{&quot;hex&quot;, &quot;rt&quot;, &quot;rt_hex&quot;, &quot;&quot;}</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">cif_dir_path</span><span class="p">,</span> <span class="n">add_nested_files</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initialize a CifEnsemble object, containing a collection of Cif
+objects.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>cif_dir_path</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the folder path containing .cif file(s).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>add_nested_files</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Option to include .cif files contained in sub-directories within cif_dir_path
+, by default False</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>preprocess</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Option to edit .cif files before initializing each into a Cif object,
+by default True. Preprocess modifies atomic site labels in
+atom_site_label. Some site labels may contain a comma or a symbol like M
+due to atomic mixing. It reformats each atom_site_label so it can be
+parsed into an element type matching atom_site_type_symbol. For PCD
+databases, addresses in publ_author_address often have an incorrect
+format requiring manual modifications. It also relocates any ill-formatted
+files, such as those with duplicate labels in atom_site_label, missing
+fractional coordinates, or files requiring supercell generation.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>logging_enabled</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Option to log while pre-processing Cif objects, by default False</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.CifEnsemble.__init__.dir_path">dir_path</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the folder containing .cif files</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.CifEnsemble.__init__.file_paths">file_paths</span></code></td>
+            <td>
+                  <code>list[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of file paths to .cif files</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.CifEnsemble.__init__.cifs">cifs</span></code></td>
+            <td>
+                  <code>list[<a class="autorefs autorefs-internal" title="cifkit.Cif" href="#cifkit.Cif">Cif</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of Cif objects</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.CifEnsemble.__init__.file_count">file_count</span></code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of .cif files in the folder</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="cifkit.CifEnsemble.__init__.logging_enabled">logging_enabled</span></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Option to log while pre-processing Cif objects</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.copy_cif_files" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">copy_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">to_directory_path</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Copy a set of CIF files to a destination directory.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>file_paths</code>
+            </td>
+            <td>
+                  <code>set[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set of file paths to CIF files.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>to_directory_path</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination directory path.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">file_paths</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">    &quot;tests/data/cif/ensemble_test/300169.cif&quot;,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    &quot;tests/data/cif/ensemble_test/300170.cif&quot;,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">dest_dir_path</span> <span class="o">=</span> <span class="s2">&quot;tests/data/cif/ensemble_new_dir&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble_test</span><span class="o">.</span><span class="n">copy_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+</code></pre></div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_CN_by_best_methods_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_CN_by_best_methods_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'CN_by_best_methods' property from CIF
+files.</p>
+<p>This method creates a histogram based on the 'CN_by_best_methods' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_CN_by_min_dist_method_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_CN_by_min_dist_method_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'CN_by_min' property from CIF files.</p>
+<p>This method creates a histogram based on the 'CN_by_min' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_composition_type_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_composition_type_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'composition_type' property from CIF
+files.</p>
+<p>This method creates a histogram based on the 'composition_type' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_elements_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_elements_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'unique_elements' property from CIF
+files.</p>
+<p>This method creates a histogram based on the 'unique_elements' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_formula_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_formula_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'formula' property from CIF files.</p>
+<p>This method creates a histogram based on the 'formula' statistics of the CIF
+files. If 'output_dir' is specified, the histogram image (.png) will be saved to
+that directory. If 'output_dir' is not specified, the image will be saved to the
+directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_site_mixing_type_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_site_mixing_type_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'site_mixing_type' property from CIF
+files.</p>
+<p>This method creates a histogram based on the 'site_mixing_type' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_space_group_name_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_space_group_name_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'space_group_name' property from CIF
+files.</p>
+<p>This method creates a histogram based on the 'space_group_name' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_space_group_number_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_space_group_number_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'space_group_number' property from CIF
+files.</p>
+<p>This method creates a histogram based on the 'space_group_number' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_structure_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_structure_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'structure' property from CIF files.</p>
+<p>This method creates a histogram based on the 'structure' statistics of the CIF
+files. If 'output_dir' is specified, the histogram image (.png) will be saved to
+that directory. If 'output_dir' is not specified, the image will be saved to the
+directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_supercell_size_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_supercell_size_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'supercell_count' property from CIF
+files.</p>
+<p>This method creates a histogram based on the 'supercell_count' statistics of
+the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
+saved to that directory. If 'output_dir' is not specified, the image will be saved
+to the directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.generate_tag_histogram" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_tag_histogram</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a histogram of the 'tag' property from CIF files.</p>
+<p>This method creates a histogram based on the 'tag' statistics of the CIF
+files. If 'output_dir' is specified, the histogram image (.png) will be saved to
+that directory. If 'output_dir' is not specified, the image will be saved to the
+directory specified by 'self.dir_path'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>display</code>
+            </td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, the plot is displayed using plt.show(). Default is False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_dir</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by 'self.dir_path'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="cifkit.CifEnsemble.move_cif_files" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">move_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">to_directory_path</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Move a set of CIF files to a destination directory.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>file_paths</code>
+            </td>
+            <td>
+                  <code>set[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set of file paths to CIF files.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>to_directory_path</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination directory path.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">file_paths</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">    &quot;tests/data/cif/ensemble_test/300169.cif&quot;,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">    &quot;tests/data/cif/ensemble_test/300170.cif&quot;,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">dest_dir_path</span> <span class="o">=</span> <span class="s2">&quot;tests/data/cif/ensemble_new_dir&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble_test</span><span class="o">.</span><span class="n">move_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+</code></pre></div>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../notebooks/02_cif_ensemble/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CifEnsemble">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                CifEnsemble
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.footer", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
