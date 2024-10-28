@@ -13,7 +13,8 @@ assignees: ""
 - [ ] Locally rendered documentation contains all appropriate pages, including
       API references (check no modules are missing), tutorials, and other human
       written text is up-to-date with any changes in the code.
-- [ ] Installation instructions in the README, documentation and on the website are updated and tested
+- [ ] Installation instructions in the README, documentation and on the website
+      are updated and tested
 - [ ] Successfully run any tutorial examples or do functional testing in some
       other way.
 - [ ] Grammar and writing quality have been checked (no typos).

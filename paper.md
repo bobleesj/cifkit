@@ -1,4 +1,3 @@
-
 ---
 title:
   "cifkit: A Python package for coordination geometry and atomic site analysis"
@@ -64,11 +63,11 @@ coordination environment identification through ChemEnv
 generating and running atomistic simulations.
 
 `cifkit` distinguishes itself from existing libraries by offering higher-level
-functions and variables that allow solid-state synthesists to obtain intuitive and
-measurable properties impactful properties. It facilitates the visualization of
-coordination geometry from each site using four coordination determination
-methods and extracts physics-based features like volume and packing
-efficiency—crucial for structural analysis in machine learning tasks. Moreover,
+functions and variables that allow solid-state synthesists to obtain intuitive
+and measurable properties impactful properties. It facilitates the visualization
+of coordination geometry from each site using four coordination determination
+methods and extracts physics-based features like volume and packing efficiency,
+which are crucial for structural analysis in machine learning tasks. Moreover,
 `cifkit` extracts atomic mixing information at the bond pair level, tasks that
 would otherwise require extensive manual effort using GUI-based tools like
 VESTA, Diamond, and CrystalMaker. These functions can be further developed
@@ -172,7 +171,7 @@ testing. We acknowledge Fabian Zills for his recommendations on Python tooling.
 
 We thank the developers of the following dependencies:
 
-- gemmi [w@ojdyr_gemmi_2022]: .cif parsing and space group operations
+- gemmi [@wojdyr_gemmi_2022]: .cif parsing and space group operations
 - matplotlib [@hunter_matplotlib_2007]: visualization of histograms
 - numpy [@harris_array_2020]: angle conversion, linear algebra
 - pyvista [@sullivan_pyvista_2019]: visualization of polyhedra

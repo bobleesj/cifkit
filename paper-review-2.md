@@ -2,9 +2,17 @@
 
 **Code comments:**
 
-> For io related methods, e.g. the ones that generate histograms, more clarity is needed regarding where they write things by default. Running the histogram tutorial from the documentation, it wrote the histograms to a folder deep in my conda environment site-packages, which would likely not be intuitive to many users (particularly as this package is presented as being catered to users with less coding experience) and may cause issues on shared resources.
+> For io related methods, e.g. the ones that generate histograms, more clarity
+> is needed regarding where they write things by default. Running the histogram
+> tutorial from the documentation, it wrote the histograms to a folder deep in
+> my conda environment site-packages, which would likely not be intuitive to
+> many users (particularly as this package is presented as being catered to
+> users with less coding experience) and may cause issues on shared resources.
 
-Thank you for the details. Yes, the histogram images were saved to the Anaconda environment, as that was where the .cif files were provided by default in the installed package. In the docs, I have included information about options to set the output path for users for clarity:
+Thank you for the details. Yes, the histogram images were saved to the Anaconda
+environment, as that was where the .cif files were provided by default in the
+installed package. In the docs, I have included information about options to set
+the output path for users for clarity:
 
 ```python
 # Optional: Specify the output directory where the .png file will be saved.
@@ -37,13 +45,21 @@ def generate_supercell_size_histogram(
     """
 ```
 
-> I will echo the previous comment that more docstrings would be invaluable in helping code clarity. In particular, I would urge adopting a standardized approach to this, such as Numpy, to be more in line with community standards
+> I will echo the previous comment that more docstrings would be invaluable in
+> helping code clarity. In particular, I would urge adopting a standardized
+> approach to this, such as Numpy, to be more in line with community standards
 
-Per your suggestion, I have added NumPy-style docstrings to the core `Cif` and `CifEnsemble` classes. I will continue updating the documentation after modularizing some functions, such as combining the histogram generation functions into a single one to reduce verbosity.
+Per your suggestion, I have added NumPy-style docstrings to the core `Cif` and
+`CifEnsemble` classes. I will continue updating the documentation after
+modularizing some functions, such as combining the histogram generation
+functions into a single one to reduce verbosity.
 
 > I have opened a technical issue I encountered here
 
-Thank you. I have addressed the issue via this PR: https://github.com/bobleesj/cifkit/pull/47. To ensure compatibility, I created a test function to ensure that raw .cif files sourced from ICSD, COD can be parsed and the supercell can be generated:
+Thank you. I have addressed the issue via this PR:
+https://github.com/bobleesj/cifkit/pull/47. To ensure compatibility, I created a
+test function to ensure that raw .cif files sourced from ICSD, COD can be parsed
+and the supercell can be generated:
 
 ```python
 @pytest.mark.parametrize(
@@ -61,9 +77,16 @@ Thank you. I have addressed the issue via this PR: https://github.com/bobleesj/c
 
 **Documentation comments:**
 
-> As the core classes for this package are Cif and CifEnsemble, more explicit explanations as to the inputs and parameters would be helpful -- especially for CifEnsemble. For example, unless I'm missing it, a comprehensive list of everything that the preprocess parameter triggers is not mentioned in the documentation.
+> As the core classes for this package are Cif and CifEnsemble, more explicit
+> explanations as to the inputs and parameters would be helpful -- especially
+> for CifEnsemble. For example, unless I'm missing it, a comprehensive list of
+> everything that the preprocess parameter triggers is not mentioned in the
+> documentation.
 
-Thank you. I have included docstrings for the `Cif` and `CifEnsemble` classes, providing explicit parameters and preprocessing triggers as shown below. While the documentation can be further refined, I believe it serves its purpose for now.
+Thank you. I have included docstrings for the `Cif` and `CifEnsemble` classes,
+providing explicit parameters and preprocessing triggers as shown below. While
+the documentation can be further refined, I believe it serves its purpose for
+now.
 
 ```python
 class CifEnsemble:
@@ -113,9 +136,17 @@ class CifEnsemble:
         """
 ```
 
-> In the documentation there are a couple instances of general clean-up required. One example is the first box on Getting Started uses a CIF method ensemble.cif_folder_path which gives an error when run. Another example is under the CIF specific documentation which refers to a README.md for complete documentation, but it is unclear where this file is located (since that info doesn't appear to be the main README in the repo?).
+> In the documentation there are a couple instances of general clean-up
+> required. One example is the first box on Getting Started uses a CIF method
+> ensemble.cif_folder_path which gives an error when run. Another example is
+> under the CIF specific documentation which refers to a README.md for complete
+> documentation, but it is unclear where this file is located (since that info
+> doesn't appear to be the main README in the repo?).
 
-I have revised the documentation to enhance clarity and personally tested each example to ensure accuracy. Additionally, I have included comments indicating the location of default Example files provided in the package for first-time users:
+I have revised the documentation to enhance clarity and personally tested each
+example to ensure accuracy. Additionally, I have included comments indicating
+the location of default Example files provided in the package for first-time
+users:
 
 ```python
 # In `cifkit` we provide .cif files that can be accessed through `from cifkit import Example` as shown below. For advancuser, these example .cif files are located under `src/cifkit/data` in the package.
@@ -128,30 +159,56 @@ cif = Cif(Example.Er10Co9In20_file_path)
 ...
 ```
 
-> There are options in the Cif class to use either the by_d_min_method or by_best_methods. Please refer to the README.md for complete documentation.
+> There are options in the Cif class to use either the by_d_min_method or
+> by_best_methods. Please refer to the README.md for complete documentation.
 
-I have included detailed documentations in the API. https://github.com/bobleesj/cifkit/blob/dbaf32400b70f323ba5965526193704b2613ea7b/src/cifkit/models/cif.py#L619 and https://github.com/bobleesj/cifkit/blob/dbaf32400b70f323ba5965526193704b2613ea7b/src/cifkit/models/cif.py#L682.
+I have included detailed documentations in the API.
+https://github.com/bobleesj/cifkit/blob/dbaf32400b70f323ba5965526193704b2613ea7b/src/cifkit/models/cif.py#L619
+and
+https://github.com/bobleesj/cifkit/blob/dbaf32400b70f323ba5965526193704b2613ea7b/src/cifkit/models/cif.py#L682.
 
-> This is relatively minor, but on the documentation website it wasn't immediately clear to me what would be contained under the Notebooks tab at the top. Given this outlines several of the core functionalities of cifkit, I would consider renaming it to something more descriptive.
+> This is relatively minor, but on the documentation website it wasn't
+> immediately clear to me what would be contained under the Notebooks tab at the
+> top. Given this outlines several of the core functionalities of cifkit, I
+> would consider renaming it to something more descriptive.
 
-Thank you for your feedback. I have replaced the name "Notebooks" but into 4 sections:  `Getting started` `Cif` `CifEnsemble` and `API References`.
+Thank you for your feedback. I have replaced the name "Notebooks" but into 4
+sections: `Getting started` `Cif` `CifEnsemble` and `API References`.
 
-> The contributing guidelines at this stage are somewhat vague. For example, is a minimum code coverage required for added features?
+> The contributing guidelines at this stage are somewhat vague. For example, is
+> a minimum code coverage required for added features?
 
-I have included a PR request template (https://github.com/bobleesj/cifkit/blob/main/.github/pull_request_template.md) as well as the `CONTRIBUTING.md` for how to fork, clone, commit, etc.
+I have included a PR request template
+(https://github.com/bobleesj/cifkit/blob/main/.github/pull_request_template.md)
+as well as the `CONTRIBUTING.md` for how to fork, clone, commit, etc.
 
 **Paper comments:**
 
-> In the summary it mentions that this package is designed to process datasets on "the order of tens of thousands". It is not clear to me where this is coming from and what exactly causes the bottleneck for going beyond this estimate. Details regarding what determined this limitation would be helpful to judge high-throughput performance
+> In the summary it mentions that this package is designed to process datasets
+> on "the order of tens of thousands". It is not clear to me where this is
+> coming from and what exactly causes the bottleneck for going beyond this
+> estimate. Details regarding what determined this limitation would be helpful
+> to judge high-throughput performance
 
-Please see my comment above in response to @espottesmith's point about "The authors do not make significant performance claims."
+Please see my comment above in response to @espottesmith's point about "The
+authors do not make significant performance claims."
 
-Additionally, as @ml-evs pointed out, our package's strength lies not in high-throughput processing (ASE, pymagen do a much better job) but in its specific features for "coordination geometry" and "atomic site analysis" with features that are demanded in experimental research. Consequently, I have modified the manuscript title to "cifkit: A Python package for coordination geometry and atomic site analysis" and removed "high-throughput."
+Additionally, as @ml-evs pointed out, our package's strength lies not in
+high-throughput processing (ASE, pymagen do a much better job) but in its
+specific features for "coordination geometry" and "atomic site analysis" with
+features that are demanded in experimental research. Consequently, I have
+modified the manuscript title to "cifkit: A Python package for coordination
+geometry and atomic site analysis" and removed "high-throughput."
 
-> The examples in the paper are presented with limited explanation as to what they are showing. While the comments help in the second example, and some of the methods are self-explanatory by their naming, more comments would help cement the clarity here.
+> The examples in the paper are presented with limited explanation as to what
+> they are showing. While the comments help in the second example, and some of
+> the methods are self-explanatory by their naming, more comments would help
+> cement the clarity here.
 
-Thank you for this feedback. I have added higher-level functions that are considered novel in our package and included more explanatory comments.
+Thank you for this feedback. I have added higher-level functions that are
+considered novel in our package and included more explanatory comments.
 
-> Overall, this work would make a great addition to JOSS pending the minor revisions described above.
+> Overall, this work would make a great addition to JOSS pending the minor
+> revisions described above.
 
 Thank you for your review and recommendation!
