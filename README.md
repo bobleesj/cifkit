@@ -54,7 +54,7 @@ for label in site_labels:
     cif.plot_polyhedron(label, is_displayed=True)
 ```
 
-![Polyhedron generation](docs/assets/img/ErCoIn_polyhedron.png)
+![Polyhedron generation](docs/assets/img/ErCoIn-polyhedron.pngg)
 
 ### Example Usage 2 - sort
 
