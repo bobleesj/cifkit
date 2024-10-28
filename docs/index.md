@@ -56,23 +56,23 @@ Python 3.10, 3.11, 3.12 are supported.
 [![Conda version](https://img.shields.io/conda/vn/conda-forge/cifkit)](https://anaconda.org/conda-forge/cifkit)
 
 
-Option 1. pip install
+Option 1. conda install
+
+The preferred method is to install `cifkit` using Conda.
+
+```bash
+conda create cifkit_env cifkit
+conda activate cifkit_env
+```
+
+
+If the above option does not work, please feel free to use pip install.
+
+Option 2. pip install
 
 ```bash
 pip install cifkit
 ```
-
-Option 2. conda install
-
-```bash
-conda install cifkit
-```
-
-If you are new to Conda, feel free to read the following blog posts:
-
-- [How to use Python package manager for beginners (Ft. Conda with Cheatsheet)](https://bobleesj.github.io/tutorial/2024/02/26/intro-to-python-package-manager.html)
-- [Why there are two Python installation methods (Ft. Conda and pip)](https://bobleesj.github.io/tutorial/2024/08/31/conda-pip-installation.html)
-
 
 ## Overview
 
