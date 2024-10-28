@@ -4,6 +4,28 @@ Release Notes
 
 .. current developments
 
+1.0.5
+=====
+
+**Added:**
+
+* pre-commit hook for each pull request
+* automated PyPI
+* Core docstrings to Cif and CifEnsembleo classes
+* CifEnsemble support for ICSD, COD, MP files
+* Support CCDC CIF files
+* Use GitHub Actions to deploy to PyPI and update CHANGELOG.rst
+
+**Fixed:**
+
+* Simpler issue templates used in Billinge Group
+* Preprocess .cif files in CifEnsemble before initializing into CIF objects
+
+**Removed:**
+
+* Support for click module
+
+
 
 1.0.4
 =====
