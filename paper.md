@@ -132,7 +132,7 @@ from cifkit import Cif, Example
 }
 ```
 
-For proessing a large number of .cif files, you may use `CifEnsemble`:
+For processing a large number of .cif files, you may use `CifEnsemble`:
 
 ```python
 from cifkit import CifEnsemble, Example
