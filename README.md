@@ -39,8 +39,8 @@ variables for handling large datasets, on the order of tens of thousands, of
 
 ### Example usage 1 - coordination geometry
 
-The example below uses `cifkit` to visualize the polyhedron generated from each atomic site based on the
-coordination number geometry.
+The example below uses `cifkit` to visualize the polyhedron generated from each
+atomic site based on the coordination number geometry.
 
 ```python
 from cifkit import Cif
@@ -69,7 +69,8 @@ ensemble.generate_structure_histogram()
 
 ![structure distribution](docs/assets/img/histogram-structure.png)
 
-Basde on your visual histogram above, you can copy and move .cif files based on specific attributes:
+Basde on your visual histogram above, you can copy and move .cif files based on
+specific attributes:
 
 ```python
 # Return file paths matching structures either Co1.75Ge or CoIn2
@@ -96,8 +97,7 @@ mentioned above.
 > `cifkit` was communicated clearly, both in documentation and in actual
 > outputs, allowing me to catch errors in my data before it was used in my
 > visualizations. I now use `cifkit` by default for processing CIFs before they
-> pass through the rest of my pipeline." - Alex Vtorov
-`
+> pass through the rest of my pipeline." - Alex Vtorov `
 
 ## Documentation
 

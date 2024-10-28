@@ -2,15 +2,14 @@
 
 ## Statement of need
 
-`cifkit` uses .cif files by offering higher-level
-functions and variables that enable users to perform complex tasks efficiently
-with a few lines of code. `cifkit` facilitates the visualization of
-coordination geometry from each site but also extracts physics-based features
-like volume and packing efficiency, crucial for structural analysis in ML tasks.
-Additionally, it extracts atomic mixing information at the bond pair level—tasks
-that would otherwise require extensive manual effort using GUI-based tools like
-VESTA, Diamond, and CrystalMaker, due to the lack of readily available
-higher-level functions.
+`cifkit` uses .cif files by offering higher-level functions and variables that
+enable users to perform complex tasks efficiently with a few lines of code.
+`cifkit` facilitates the visualization of coordination geometry from each site
+but also extracts physics-based features like volume and packing efficiency,
+crucial for structural analysis in ML tasks. Additionally, it extracts atomic
+mixing information at the bond pair level—tasks that would otherwise require
+extensive manual effort using GUI-based tools like VESTA, Diamond, and
+CrystalMaker, due to the lack of readily available higher-level functions.
 
 Further enhancing its utility, cifkit excels in sorting, preprocessing, and
 understanding the distribution of underlying CIF files. Common issues in CIF
@@ -45,7 +44,10 @@ mixing, among other parameters.
 
 ## Processing speed expectation
 
-Based on the Apple M1 iMac chip, processing a .cif file of 150 files takes around 50 seconds, but this depends on the size of the unit cell in the .cif files. Processing 10,000 .cif files or more may take about an hour, but this also depends on the laptop.
+Based on the Apple M1 iMac chip, processing a .cif file of 150 files takes
+around 50 seconds, but this depends on the size of the unit cell in the .cif
+files. Processing 10,000 .cif files or more may take about an hour, but this
+also depends on the laptop.
 
 ## Installation
 
@@ -55,7 +57,6 @@ Python 3.10, 3.11, 3.12 are supported.
 [![PyPi version](https://img.shields.io/pypi/v/cifkit.svg)](https://pypi.python.org/pypi/cifkit)
 [![Conda version](https://img.shields.io/conda/vn/conda-forge/cifkit)](https://anaconda.org/conda-forge/cifkit)
 
-
 Option 1. conda install
 
 The preferred method is to install `cifkit` using Conda.
@@ -64,7 +65,6 @@ The preferred method is to install `cifkit` using Conda.
 conda create cifkit_env cifkit
 conda activate cifkit_env
 ```
-
 
 If the above option does not work, please feel free to use pip install.
 
@@ -85,8 +85,8 @@ generates supercells, and computes nearest neighbors. It also determines
 coordination numbers using four different methods and generates polyhedrons for
 each site.
 
-The example below uses `cifkit` to visualize the polyhedron generated from each atomic site based on the
-coordination number geometry.
+The example below uses `cifkit` to visualize the polyhedron generated from each
+atomic site based on the coordination number geometry.
 
 ```python
 from cifkit import Cif
@@ -102,7 +102,9 @@ for label in site_labels:
 
 ![Polyhedron generation](assets/img/ErCoIn_polyhedron.png)
 
-For more, visit [https://bobleesj.github.io/cifkit/notebooks/01_cif](https://bobleesj.github.io/cifkit/notebooks/01_cif) for a full tutorial with an interactive Google Codelab link.
+For more, visit
+[https://bobleesj.github.io/cifkit/notebooks/01_cif](https://bobleesj.github.io/cifkit/notebooks/01_cif)
+for a full tutorial with an interactive Google Codelab link.
 
 ### CifEnsemble
 
@@ -110,7 +112,6 @@ For more, visit [https://bobleesj.github.io/cifkit/notebooks/01_cif](https://bob
 identifies unique attributes, such as space groups and elements, across the
 `.cif` files, moves and copies files based on these attributes. It generates
 histograms for all attributes.
-
 
 The following example generates a distribution of structure.
 
@@ -123,7 +124,8 @@ ensemble.generate_structure_histogram()
 
 ![structure distribution](assets/img/histogram-structure.png)
 
-Basde on your visual histogram above, you can copy and move .cif files based on specific attributes:
+Basde on your visual histogram above, you can copy and move .cif files based on
+specific attributes:
 
 ```python
 # Return file paths matching structures either Co1.75Ge or CoIn2
@@ -133,15 +135,19 @@ ensemble.filter_by_structures(["Co1.75Ge", "CoIn2"])
 ensemble.filter_by_structures("CeAl2Ga2")
 ```
 
-For more, visit [https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/](https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/) for a full tutorial with an interactive Google Codelab link.
+For more, visit
+[https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/](https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/)
+for a full tutorial with an interactive Google Codelab link.
 
 ## Research projects using `cifkit`
 
-The below projects uses the `Cif` and `CifEnsemble` classes for research applications.
+The below projects uses the `Cif` and `CifEnsemble` classes for research
+applications.
 
 - CIF Bond Analyzer (CBA) - extract and visualize bonding patterns -
   [DOI](https://doi.org/10.1016/j.jallcom.2023.173241) |
-  [GitHub](https://github.com/bobleesj/cif-bond-analyzer) | [Poster](https://bobleesj.github.io/files/presentation/2024-GRC-poster.pdf)
+  [GitHub](https://github.com/bobleesj/cif-bond-analyzer) |
+  [Poster](https://bobleesj.github.io/files/presentation/2024-GRC-poster.pdf)
 - Structure Analysis/Featurizer (SAF) - build geometric features for binary,
   ternary compounds -
   [GitHub](https://github.com/bobleesj/structure-analyzer-featurizer)
@@ -152,7 +158,9 @@ The below projects uses the `Cif` and `CifEnsemble` classes for research applica
 
 `cifkit` is also designed for experimental materials scientists and chemists.
 
-- If you have any issues or questions, please feel free to reach out to Bob Lee [@bobleesj](https://github.com/bobleesj) or [leave an issue](https://github.com/bobleesj/cifkit/issues).
+- If you have any issues or questions, please feel free to reach out to Bob Lee
+  [@bobleesj](https://github.com/bobleesj) or
+  [leave an issue](https://github.com/bobleesj/cifkit/issues).
 
 ## How to contribute to `cifkit`
 
@@ -197,11 +205,10 @@ improvements are valued and appreciated.
 
 Please consider citing `cifkit` if it has been useful for your research:
 
-> Note: the `cifkit` manuscript is also under reviewed by the Journal of Open Source Software.
+> Note: the `cifkit` manuscript is also under reviewed by the Journal of Open
+> Source Software.
 
 <a href="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19"><img src="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19/status.svg"></a>
-
-
 
 ## Other links
 
