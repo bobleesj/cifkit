@@ -1,8 +1,6 @@
 import logging
 from collections import Counter
 
-from click import secho
-
 from cifkit import Cif
 from cifkit.figures.histogram import plot_histogram
 from cifkit.preprocessors.error import move_files_based_on_errors
@@ -76,7 +74,7 @@ class CifEnsemble:
             cif_dir_path, add_nested_files=add_nested_files
         )
         self.file_count = len(self.file_paths)
-        secho(f"Initializing {self.file_count} Cif objects...", fg="yellow")
+        print(f"Initializing {self.file_count} Cif objects...")
 
         if logging_enabled:
             self.cifs: list[Cif] = [
@@ -88,7 +86,7 @@ class CifEnsemble:
                 Cif(file_path, is_formatted=True)
                 for file_path in self.file_paths
             ]
-        secho("Finished initialization!", fg="green")
+        print("Finished initialization!")
 
     def _log_info(self, message):
         """Log a formatted message if logging is enabled."""

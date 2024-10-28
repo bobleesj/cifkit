@@ -81,7 +81,6 @@ git commit -m "Describe your changes"
 git push origin branch-name
 ```
 
-
 ## Step 8: Create a Pull Request
 
 Once your changes are pushed to your fork, go to the original repository on
