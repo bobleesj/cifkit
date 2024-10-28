@@ -14,9 +14,6 @@
 variables for handling large datasets, on the order of tens of thousands, of
 `.cif` files.
 
-> The current codebase and documentation are actively being improved as of Sep
-> 18, 2024.
-
 ## Features:
 
 `cifkit` provides higher-level functions in just a few lines of code.
