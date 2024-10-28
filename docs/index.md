@@ -3,25 +3,27 @@
 ## Statement of need
 
 `cifkit` uses .cif files by offering higher-level functions and variables that
-enable users to perform complex tasks efficiently with a few lines of code.
-`cifkit` facilitates the visualization of coordination geometry from each site
-but also extracts physics-based features like volume and packing efficiency,
-crucial for structural analysis in ML tasks. Additionally, it extracts atomic
-mixing information at the bond pair level—tasks that would otherwise require
-extensive manual effort using GUI-based tools like VESTA, Diamond, and
-CrystalMaker, due to the lack of readily available higher-level functions.
+enable users to perform complex tasks efficiently with a few lines of code. `cifkit` distinguishes itself from existing libraries by offering higher-level
+functions and variables that allow solid-state synthesists to obtain intuitive and 
+measurable properties impactful properties. It facilitates the visualization of
+coordination geometry from each site using four coordination determination
+methods and extracts physics-based features like volume and packing
+efficiency—crucial for structural analysis in machine learning tasks. Moreover,
+`cifkit` extracts atomic mixing information at the bond pair level, tasks that
+would otherwise require extensive manual effort using GUI-based tools like
+VESTA, Diamond, and CrystalMaker.
 
-Further enhancing its utility, cifkit excels in sorting, preprocessing, and
-understanding the distribution of underlying CIF files. Common issues in CIF
-files from databases, such as incorrect loop values and missing fractional
-coordinates, are systematically addressed as cifkit standardizes and filters out
-ill-formatted files. It also preprocesses atomic site labels, transforming
-labels such as 'M1' to 'Fe1' in files with atomic mixing. Beyond error
-correction, cifkit provides functionalities to copy, move, and sort files based
-on attributes like coordination numbers, space groups, unit cells, and shortest
-distances. It also excels in visualizing and cataloging CIF files, organizing
-them based on supercell size, tags, coordination numbers, elements, and atomic
-mixing, among other parameters.
+`cifkit` further enhances its utility by providing functions for sorting,
+preprocessing, and analyzing the distribution of underlying CIF files. It
+systematically addresses common issues in CIF files from databases, such as
+incorrect loop values and missing fractional coordinates, by standardizing and
+filtering out ill-formatted files. The package also preprocesses atomic site
+labels, transforming labels like 'M1' to 'Fe1' in files with atomic mixing for
+improved visualization and pattern matching. Beyond error correction, `cifkit`
+offers functionalities to copy, move, and sort files based on attributes such as
+coordination numbers, space groups, unit cells, and shortest distances. It
+excels in visualizing and cataloging CIF files, organizing them by supercell
+size, tags, coordination numbers, elements, and atomic mixing.
 
 ## TL;DR
 
@@ -44,10 +46,7 @@ mixing, among other parameters.
 
 ## Processing speed expectation
 
-Based on the Apple M1 iMac chip, processing a .cif file of 150 files takes
-around 50 seconds, but this depends on the size of the unit cell in the .cif
-files. Processing 10,000 .cif files or more may take about an hour, but this
-also depends on the laptop.
+Processing approximately 10,000 .cif files on a standard laptop (iMac with M1 chip) may take about 30 to 60 minutes. At this rate, we can process nearly all .cif files within 1–2 days.
 
 ## Installation
 
@@ -59,14 +58,14 @@ Python 3.10, 3.11, 3.12 are supported.
 
 Option 1. conda install
 
-The preferred method is to install `cifkit` using Conda.
+The preferred method is to install `cifkit` using Conda:
 
 ```bash
 conda create cifkit_env cifkit
 conda activate cifkit_env
 ```
 
-If the above option does not work, please feel free to use pip install.
+If the above option does not work, please feel free to use pip install:
 
 Option 2. pip install
 
@@ -100,7 +99,7 @@ for label in site_labels:
     cif.plot_polyhedron(label, is_displayed=True)
 ```
 
-![Polyhedron generation](assets/img/ErCoIn_polyhedron.png)
+![Polyhedron generation](assets/img/ErCoIn-polyhedron.png)
 
 For more, visit
 [https://bobleesj.github.io/cifkit/notebooks/01_cif](https://bobleesj.github.io/cifkit/notebooks/01_cif)
@@ -118,7 +117,7 @@ The following example generates a distribution of structure.
 ```python
 from cifkit import CifEnsemble
 
-ensemble = CifEnsemble("cif_containing_folder_path")
+ensemble = CifEnsemble("your_cif_containing_folder_path")
 ensemble.generate_structure_histogram()
 ```
 
