@@ -602,7 +602,7 @@ def test_init_atomic_mixing_deficiency_without_atomic_mixing():
 
 
 """
-Test files with error in geoemtry
+Test files with error in geometry
 """
 
 

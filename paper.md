@@ -64,8 +64,8 @@ coordination environment identification through ChemEnv
 generating and running atomistic simulations.
 
 `cifkit` distinguishes itself from existing libraries by offering higher-level
-functions and variables that allow solid-state synthesists to obtain intuitive,
-yet physically impactful properties. It facilitates the visualization of
+functions and variables that allow solid-state synthesists to obtain intuitive and
+measurable properties impactful properties. It facilitates the visualization of
 coordination geometry from each site using four coordination determination
 methods and extracts physics-based features like volume and packing
 efficiency—crucial for structural analysis in machine learning tasks. Moreover,
@@ -132,7 +132,7 @@ from cifkit import Cif, Example
 }
 ```
 
-For proessing a large number of .cif files, you may use `CifEnsemble`:
+For processing a large number of .cif files, you may use `CifEnsemble`:
 
 ```python
 from cifkit import CifEnsemble, Example

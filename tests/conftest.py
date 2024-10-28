@@ -104,8 +104,8 @@ def supercell_points_URhIn(cif_block_URhIn):
 
 @pytest.fixture(scope="module")
 def lenghts_URhIn(cif_block_URhIn) -> list[float]:
-    lenghts = cif_parser.get_unitcell_lengths(cif_block_URhIn)
-    return lenghts
+    lengths = cif_parser.get_unitcell_lengths(cif_block_URhIn)
+    return lengths
 
 
 @pytest.fixture(scope="module")
