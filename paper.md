@@ -172,7 +172,7 @@ testing. We acknowledge Fabian Zills for his recommendations on Python tooling.
 
 We thank the developers of the following dependencies:
 
-- gemmi [w@ojdyr_gemmi_2022]: .cif parsing and space group operations
+- gemmi [@wojdyr_gemmi_2022]: .cif parsing and space group operations
 - matplotlib [@hunter_matplotlib_2007]: visualization of histograms
 - numpy [@harris_array_2020]: angle conversion, linear algebra
 - pyvista [@sullivan_pyvista_2019]: visualization of polyhedra
