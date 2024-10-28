@@ -1,6 +1,5 @@
 # Getting started
 
-
 ## Statement of need
 
 `cifkit` uses .cif files by offering higher-level
@@ -44,11 +43,15 @@ mixing, among other parameters.
   attributes such as coordination numbers, space groups, unit cells, shortest
   distances, elements, and more.
 
+## Processing speed expectation
+
+Based on the Apple M1 iMac chip, processing a .cif file of 150 files takes around 50 seconds, but this depends on the size of the unit cell in the .cif files. Processing 10,000 .cif files or more may take about an hour, but this also depends on the laptop.
+
 ## Installation
 
 Python 3.10, 3.11, 3.12 are supported.
 
-![Python - Version](https://img.shields.io/pypi/pyversions/quacc)
+![Python - Version](https://img.shields.io/pypi/pyversions/cifkit)
 [![PyPi version](https://img.shields.io/pypi/v/cifkit.svg)](https://pypi.python.org/pypi/cifkit)
 [![Conda version](https://img.shields.io/conda/vn/conda-forge/cifkit)](https://anaconda.org/conda-forge/cifkit)
 

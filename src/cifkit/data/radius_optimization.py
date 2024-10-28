@@ -31,7 +31,6 @@ def constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
     """Enforce that the sum of the radii of the pair does not exceed the shortest
     allowed distance between them."""
     i, j = index_pair
-    i, j = index_pair
     return shortest_distance - (params[i] + params[j])
 
 

@@ -74,6 +74,8 @@ pytest
 After completing your changes, stage and commit your work:
 
 ```bash
+pre-commit run --all-files # pip install pre-commit required
+
 git add .
 git commit -m "Describe your changes"
 git push origin branch-name

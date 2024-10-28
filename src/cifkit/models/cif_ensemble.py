@@ -30,8 +30,16 @@ class CifEnsemble:
             Option to include .cif files contained in sub-directories within cif_dir_path
             , by default False
         preprocess : bool, optional
-            Option to edit .cif files before initializing each .cif into Cif object,
-            by default True
+            Option to edit .cif files before initializing each into a Cif object,
+            by default True. Preprocess modifies atomic site labels in
+            atom_site_label. Some site labels may contain a comma or a symbol like M
+            due to atomic mixing. It reformats each atom_site_label so it can be
+            parsed into an element type matching atom_site_type_symbol. For PCD
+            databases, addresses in publ_author_address often have an incorrect
+            format requiring manual modifications. It also relocates any ill-formatted
+            files, such as those with duplicate labels in atom_site_label, missing
+            fractional coordinates, or files requiring supercell generation.
+
         logging_enabled : bool, optional
             Option to log while pre-processing Cif objects, by default False
 
@@ -562,7 +570,8 @@ class CifEnsemble:
     def generate_space_group_number_histogram(
         self, display=False, output_dir=None
     ):
-        """Generate a histogram of the 'space_group_number' property from CIF files.
+        """Generate a histogram of the 'space_group_number' property from CIF
+        files.
 
         This method creates a histogram based on the 'space_group_number' statistics of
         the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
@@ -588,7 +597,8 @@ class CifEnsemble:
     def generate_space_group_name_histogram(
         self, display=False, output_dir=None
     ):
-        """Generate a histogram of the 'space_group_name' property from CIF files.
+        """Generate a histogram of the 'space_group_name' property from CIF
+        files.
 
         This method creates a histogram based on the 'space_group_name' statistics of
         the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
@@ -614,7 +624,8 @@ class CifEnsemble:
     def generate_supercell_size_histogram(
         self, display=False, output_dir=None
     ):
-        """Generate a histogram of the 'supercell_count' property from CIF files.
+        """Generate a histogram of the 'supercell_count' property from CIF
+        files.
 
         This method creates a histogram based on the 'supercell_count' statistics of
         the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
@@ -638,7 +649,8 @@ class CifEnsemble:
         )
 
     def generate_elements_histogram(self, display=False, output_dir=None):
-        """Generate a histogram of the 'unique_elements' property from CIF files.
+        """Generate a histogram of the 'unique_elements' property from CIF
+        files.
 
         This method creates a histogram based on the 'unique_elements' statistics of
         the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
@@ -690,7 +702,8 @@ class CifEnsemble:
     def generate_CN_by_best_methods_histogram(
         self, display=False, output_dir=None
     ):
-        """Generate a histogram of the 'CN_by_best_methods' property from CIF files.
+        """Generate a histogram of the 'CN_by_best_methods' property from CIF
+        files.
 
         This method creates a histogram based on the 'CN_by_best_methods' statistics of
         the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
@@ -716,7 +729,8 @@ class CifEnsemble:
     def generate_composition_type_histogram(
         self, display=False, output_dir=None
     ):
-        """Generate a histogram of the 'composition_type' property from CIF files.
+        """Generate a histogram of the 'composition_type' property from CIF
+        files.
 
         This method creates a histogram based on the 'composition_type' statistics of
         the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
@@ -742,7 +756,8 @@ class CifEnsemble:
     def generate_site_mixing_type_histogram(
         self, display=False, output_dir=None
     ):
-        """Generate a histogram of the 'site_mixing_type' property from CIF files.
+        """Generate a histogram of the 'site_mixing_type' property from CIF
+        files.
 
         This method creates a histogram based on the 'site_mixing_type' statistics of
         the CIF files. If 'output_dir' is specified, the histogram image (.png) will be
