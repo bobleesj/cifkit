@@ -6,7 +6,7 @@ def compute_CN_max_gap_per_site(
     all_labels_connections,
     is_radius_data_available: bool,
     site_mixing_type: str,
-):
+) -> dict[str: dict[str: dict[str: float]]]:
     use_all_methods = False
 
     if is_radius_data_available and site_mixing_type == "full_occupancy":

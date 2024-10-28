@@ -63,7 +63,7 @@ The following example generates a distribution of structure.
 ```python
 from cifkit import CifEnsemble
 
-ensemble = CifEnsemble("cif_containing_folder_path")
+ensemble = CifEnsemble("your_folder_path_containing_cif_files")
 ensemble.generate_structure_histogram()
 ```
 

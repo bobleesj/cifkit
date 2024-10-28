@@ -8,7 +8,7 @@ def get_bond_counts(
     elements: list[str],
     connections: dict[str, list],
     sorted_by_mendeleev=False,
-) -> dict:
+) -> dict[str, dict[tuple[str, str], int]]:
     """Return a dictionary containing bond pairs and counts per label site."""
     if sorted_by_mendeleev:
         bond_pairs = bond_pair.get_pairs_sorted_by_mendeleev(elements)
