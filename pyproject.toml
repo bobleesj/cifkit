@@ -46,6 +46,10 @@ where = ["src"]
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements/pip.txt"]}
 
+[tool.codespell]
+ignore-words-list = "indide,nd,te,caf,mater"
+skip = "*.cif"
+
 [tool.black]
 line-length = 79
 include = '\.pyi?$'

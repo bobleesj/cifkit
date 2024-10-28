@@ -64,7 +64,7 @@ coordination environment identification through ChemEnv
 generating and running atomistic simulations.
 
 `cifkit` distinguishes itself from existing libraries by offering higher-level
-functions and variables that allow solid-state synthesists to obtain intuitive and 
+functions and variables that allow solid-state synthesists to obtain intuitive and
 measurable properties impactful properties. It facilitates the visualization of
 coordination geometry from each site using four coordination determination
 methods and extracts physics-based features like volume and packing
