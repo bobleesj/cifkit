@@ -17,5 +17,3 @@ assignees: ""
 - [ ] Successfully run any tutorial examples or do functional testing in some
       other way.
 - [ ] Grammar and writing quality have been checked (no typos).
-
-
