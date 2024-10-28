@@ -1,10 +1,10 @@
-## Review by @lancekavalsky
+## Response to @lancekavalsky
 
 **Code comments:**
 
 > For io related methods, e.g. the ones that generate histograms, more clarity is needed regarding where they write things by default. Running the histogram tutorial from the documentation, it wrote the histograms to a folder deep in my conda environment site-packages, which would likely not be intuitive to many users (particularly as this package is presented as being catered to users with less coding experience) and may cause issues on shared resources.
 
-Thank you for pointing that out. Yes, the histogram images were saved to the Anaconda environment, as that was where the .cif files were provided by default in the package. In the docs, I have included information about options to set the output path for users:
+Thank you for the details. Yes, the histogram images were saved to the Anaconda environment, as that was where the .cif files were provided by default in the installed package. In the docs, I have included information about options to set the output path for users for clarity:
 
 ```python
 # Optional: Specify the output directory where the .png file will be saved.
@@ -14,7 +14,7 @@ ensemble.generate_site_mixing_type_histogram(output_dir="path/to/directory")
 ensemble.generate_site_mixing_type_histogram(display=False)
 ```
 
-For API users, I have include numpy-stlye docstrings:
+For API doc users, I have included docstrings:
 
 ```python
 def generate_supercell_size_histogram(
@@ -39,11 +39,11 @@ def generate_supercell_size_histogram(
 
 > I will echo the previous comment that more docstrings would be invaluable in helping code clarity. In particular, I would urge adopting a standardized approach to this, such as Numpy, to be more in line with community standards
 
-Per your suggestion, I have used Numpy docstrings to the core `Cif` and `CifEnsemble` classes. I will continue to udpate the docs after I make someo f the functions more dmoularlized like combinignign generating histogram functions into a singlo to avoid verbosity. https://github.com/bobleesj/cifkit/pull/54
+Per your suggestion, I have added NumPy-style docstrings to the core `Cif` and `CifEnsemble` classes. I will continue updating the documentation after modularizing some functions, such as combining the histogram generation functions into a single one to reduce verbosity.
 
 > I have opened a technical issue I encountered here
 
-Thank you. I have addressed the issue via this PR: https://github.com/bobleesj/cifkit/pull/47. To ensure compatibility, I created a test function to ensure that raw .cif files sourced from ICSD, COD can be all parsed and the supercell can be generated:
+Thank you. I have addressed the issue via this PR: https://github.com/bobleesj/cifkit/pull/47. To ensure compatibility, I created a test function to ensure that raw .cif files sourced from ICSD, COD can be parsed and the supercell can be generated:
 
 ```python
 @pytest.mark.parametrize(
@@ -63,7 +63,7 @@ Thank you. I have addressed the issue via this PR: https://github.com/bobleesj/c
 
 > As the core classes for this package are Cif and CifEnsemble, more explicit explanations as to the inputs and parameters would be helpful -- especially for CifEnsemble. For example, unless I'm missing it, a comprehensive list of everything that the preprocess parameter triggers is not mentioned in the documentation.
 
-Thank you. I have included docstrings for Cif and CifEnsemble classes to provide explicit parameters as shown below and the preprocessing triggers in the docstrings. The docs can be further improved. I hope it serves the purpose for now. I plan on maintaining this package during my graduate school.
+Thank you. I have included docstrings for the `Cif` and `CifEnsemble` classes, providing explicit parameters and preprocessing triggers as shown below. While the documentation can be further refined, I believe it serves its purpose for now.
 
 ```python
 class CifEnsemble:
@@ -115,7 +115,7 @@ class CifEnsemble:
 
 > In the documentation there are a couple instances of general clean-up required. One example is the first box on Getting Started uses a CIF method ensemble.cif_folder_path which gives an error when run. Another example is under the CIF specific documentation which refers to a README.md for complete documentation, but it is unclear where this file is located (since that info doesn't appear to be the main README in the repo?).
 
-I have rewritten the documentation to improve clarity and personally tested each example to ensure there are no bugs. I have also added the following to indiate where the default files are located as a comment:
+I have revised the documentation to enhance clarity and personally tested each example to ensure accuracy. Additionally, I have included comments indicating the location of default Example files provided in the package for first-time users:
 
 ```python
 # In `cifkit` we provide .cif files that can be accessed through `from cifkit import Example` as shown below. For advancuser, these example .cif files are located under `src/cifkit/data` in the package.
@@ -125,11 +125,7 @@ from cifkit import Cif
 
 # Initialize with the example file provided
 cif = Cif(Example.Er10Co9In20_file_path)
-
-# Print attributes
-print("File name:", cif.file_name)
-print("Formula:", cif.formula)
-print("Unique element:", cif.unique_elements)
+...
 ```
 
 > There are options in the Cif class to use either the by_d_min_method or by_best_methods. Please refer to the README.md for complete documentation.
@@ -148,13 +144,13 @@ I have included a PR request template (https://github.com/bobleesj/cifkit/blob/m
 
 > In the summary it mentions that this package is designed to process datasets on "the order of tens of thousands". It is not clear to me where this is coming from and what exactly causes the bottleneck for going beyond this estimate. Details regarding what determined this limitation would be helpful to judge high-throughput performance
 
-I have added the following to the front page of the documentation: "Based on the Apple M1 iMac chip, processing 150 .cif files takes around 1 to 2 minutes, though this depends on the size of the unit cells in the .cif files. Processing 10,000 or more .cif files may take about an hour or two, but this also depends on the computing device. We expect that we can process all .cif files within 1-2 days."
+Please see my comment above in response to @espottesmith's point about "The authors do not make significant performance claims."
 
-I am reluctant to add this information to the paper at the moment since the processing speed can vary based on the supercell size. We might come up with an improved method for computing connections using matrices, similar to how ASE does, instead of loops to iteratively compute distances between all atoms.
+Additionally, as @ml-evs pointed out, our package's strength lies not in high-throughput processing (ASE, pymagen do a much better job) but in its specific features for "coordination geometry" and "atomic site analysis" with features that are demanded in experimental research. Consequently, I have modified the manuscript title to "cifkit: A Python package for coordination geometry and atomic site analysis" and removed "high-throughput."
 
 > The examples in the paper are presented with limited explanation as to what they are showing. While the comments help in the second example, and some of the methods are self-explanatory by their naming, more comments would help cement the clarity here.
 
-Thank you. I have added higher-level functions that are considered novel in this paper and added comments.
+Thank you for this feedback. I have added higher-level functions that are considered novel in our package and included more explanatory comments.
 
 > Overall, this work would make a great addition to JOSS pending the minor revisions described above.
 
