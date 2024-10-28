@@ -61,7 +61,7 @@ Option 1. conda install
 The preferred method is to install `cifkit` using Conda:
 
 ```bash
-conda create cifkit_env cifkit
+conda create -n cifkit_env cifkit
 conda activate cifkit_env
 ```
 
