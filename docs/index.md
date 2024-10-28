@@ -56,18 +56,7 @@ Python 3.10, 3.11, 3.12 are supported.
 [![PyPi version](https://img.shields.io/pypi/v/cifkit.svg)](https://pypi.python.org/pypi/cifkit)
 [![Conda version](https://img.shields.io/conda/vn/conda-forge/cifkit)](https://anaconda.org/conda-forge/cifkit)
 
-Option 1. conda install
-
-The preferred method is to install `cifkit` using Conda:
-
-```bash
-conda create -n cifkit_env cifkit
-conda activate cifkit_env
-```
-
-If the above option does not work, please feel free to use pip install:
-
-Option 2. pip install
+pip install
 
 ```bash
 pip install cifkit
