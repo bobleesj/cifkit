@@ -15,7 +15,7 @@ authors:
     corresponding: true
     affiliation: 1
   - name: Anton O. Oliynyk
-  - orcid: 0000-0003-0732-7340
+    orcid: 0000-0003-0732-7340
     affiliation: [ 2, 3 ]
 affiliations:
   - name:
