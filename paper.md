@@ -1,7 +1,6 @@
 
 ---
-title:
-  "cifkit: A Python package for coordination geometry and atomic site analysis"
+title: "cifkit: A Python package for coordination geometry and atomic site analysis"
 tags:
   - Python
   - CIF
