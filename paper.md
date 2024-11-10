@@ -142,10 +142,10 @@ from cifkit import CifEnsemble, Example
 # Filter .cif by formula
 >>> ensemble.filter_by_formulas(["LaRu2Ge2"])
 
-# Return file paths by site mixing type(s)
+# Filter .cif by formula by site mixing type(s)
 >>> ensemble.filter_by_site_mixing_types(["deficiency_without_atomic_mixing"])
 
-# Return file paths by coordination number(s)
+# Filter .cif by formula by coordination number(s)
 >>> ensemble.filter_by_CN_min_dist_method_containing([14])
 ```
 
