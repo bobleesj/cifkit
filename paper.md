@@ -16,7 +16,7 @@ authors:
     affiliation: 1
   - name: Anton O. Oliynyk
     orcid: 0000-0003-0732-7340
-    affiliation: [ 2, 3 ]
+    affiliation: "2, 3"
 affiliations:
   - name:
       Department of Applied Physics and Applied Mathematics, Columbia
