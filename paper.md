@@ -64,7 +64,7 @@ generating and running atomistic simulations.
 
 `cifkit` distinguishes itself from existing libraries by offering higher-level
 functions and variables that allow solid-state synthesists to obtain intuitive
-and measurable properties impactful properties. It facilitates the visualization
+and measurable properties of interest. It facilitates the visualization
 of coordination geometry from each site using four coordination determination
 methods and extracts physics-based features like volume and packing efficiency,
 which are crucial for structural analysis in machine learning tasks. Moreover,
@@ -80,8 +80,8 @@ preprocessing, and analyzing the distribution of underlying CIF files. It
 systematically addresses common issues in CIF files from databases, such as
 incorrect loop values and missing fractional coordinates, by standardizing and
 filtering out ill-formatted files. The package also preprocesses atomic site
-labels, transforming labels like 'M1' to 'Fe1' in files with atomic mixing for
-improved visualization and pattern matching. Beyond error correction, `cifkit`
+labels, transforming labels such as 'M1' into 'Fe1' in files with atomic mixing for
+enhanced visualization and pattern matching. Beyond error correction, `cifkit`
 offers functionalities to copy, move, and sort files based on attributes such as
 coordination numbers, space groups, unit cells, and shortest distances. It
 excels in visualizing and cataloging CIF files, organizing them by supercell
@@ -152,9 +152,9 @@ from cifkit import CifEnsemble, Example
 # Applications
 
 `cifkit` has been used for research conducted at academic and national
-laboratories for crystal structural analysis and machine learning studies. CIF
+laboratories for crystal structure analysis and machine learning studies. CIF
 Bond Analyzer (CBA) utilizes `cifkit` to extract coordination geometry
-information for newly a discovered phase [@tyvanchuk_crystal_2024]. The
+information for a newly discovered phase [@tyvanchuk_crystal_2024]. The
 Structure Analysis/Featurizer (SAF) employs `cifkit` to construct and extract
 physics-based geometric features for binary and ternary compounds
 [@jaffal_composition_2024]. Furthermore, geometric features generated with
@@ -167,7 +167,8 @@ properties explored in [@lee_machine_2024].
 We acknowledge the initial testing done by Nishant Yadav, Siddha Sankalpa Sethi,
 and Arnab Dutta from the Indian Institute of Technology, Kharagpur. We also
 thank Emil Jaffal, Danila Shiryaev, and Alex Vtorov from CUNY Hunter College for
-testing. We acknowledge Fabian Zills for his recommendations on Python tooling.
+their testing efforts. We acknowledge Fabian Zills for his recommendations on
+Python tooling.
 
 We thank the developers of the following dependencies:
 
