@@ -139,13 +139,13 @@ from cifkit import CifEnsemble, Example
 # Initialize with the folder path containing .cif files
 >>> ensemble = CifEnsemble(Example.ErCoIn_big_folder_path)
 
-# Filter .cif by formula
+# Filter .cif by formula(s)
 >>> ensemble.filter_by_formulas(["LaRu2Ge2"])
 
-# Filter .cif by formula by site mixing type(s)
+# Filter .cif by site mixing type(s)
 >>> ensemble.filter_by_site_mixing_types(["deficiency_without_atomic_mixing"])
 
-# Filter .cif by formula by coordination number(s)
+# Filter .cif by coordination number(s)
 >>> ensemble.filter_by_CN_min_dist_method_containing([14])
 ```
 
