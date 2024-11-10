@@ -1,5 +1,6 @@
 ---
-title: "cifkit: A Python package for coordination geometry and atomic site analysis"
+title:
+  "cifkit: A Python package for coordination geometry and atomic site analysis"
 tags:
   - Python
   - CIF
@@ -151,9 +152,9 @@ from cifkit import CifEnsemble, Example
 # Applications
 
 `cifkit` has been used for research conducted at academic and national
-laboratories for crystal structural analysis and machine learning studies.
-CIF Bond Analyzer (CBA) utilizes `cifkit` to extract coordination
-geometry information for newly a discovered phase [@tyvanchuk_crystal_2024]. The
+laboratories for crystal structural analysis and machine learning studies. CIF
+Bond Analyzer (CBA) utilizes `cifkit` to extract coordination geometry
+information for newly a discovered phase [@tyvanchuk_crystal_2024]. The
 Structure Analysis/Featurizer (SAF) employs `cifkit` to construct and extract
 physics-based geometric features for binary and ternary compounds
 [@jaffal_composition_2024]. Furthermore, geometric features generated with
