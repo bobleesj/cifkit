@@ -97,7 +97,7 @@ polyhedra descriptors from atomic sites. The full installation process can be
 executed via a Jupyter notebook, accessible through the Google Colab URL
 provided in the official documentation.
 
-![polyhedron-image-distribution-of-files](docs/assets/img/ErCoIn-histogram-combined.png)
+![Atomic site coordination geometry (left) and distribution based on coordination number (right)](docs/assets/img/ErCoIn-histogram-combined.png)
 
 ```python
 from cifkit import Cif, Example
@@ -142,7 +142,7 @@ from cifkit import CifEnsemble, Example
 >>> ensemble.filter_by_formulas(["LaRu2Ge2"])
 
 # Return file paths by site mixing types
->>> ensemble.filter_by_site_mixing_types(["full_occupancy", "deficiency_without_atomic_mixing"])
+>>> ensemble.filter_by_site_mixing_types(["deficiency_without_atomic_mixing"])
 
 # Determine shortest pair distance per .cif file
 >>> ensemble.filter_by_CN_min_dist_method_containing([14])
@@ -151,8 +151,8 @@ from cifkit import CifEnsemble, Example
 # Applications
 
 `cifkit` has been used for research conducted at academic and national
-laboratories for crystal structural analysis and machine learning studies, and
-expanding. CIF Bond Analyzer (CBA) utilizes `cifkit` to extract coordination
+laboratories for crystal structural analysis and machine learning studies.
+CIF Bond Analyzer (CBA) utilizes `cifkit` to extract coordination
 geometry information for newly a discovered phase [@tyvanchuk_crystal_2024]. The
 Structure Analysis/Featurizer (SAF) employs `cifkit` to construct and extract
 physics-based geometric features for binary and ternary compounds
