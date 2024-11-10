@@ -1,6 +1,6 @@
-
 ---
-title: "cifkit: A Python package for coordination geometry and atomic site analysis"
+title:
+  "cifkit: A Python package for coordination geometry and atomic site analysis"
 tags:
   - Python
   - CIF
@@ -63,11 +63,11 @@ coordination environment identification through ChemEnv
 generating and running atomistic simulations.
 
 `cifkit` distinguishes itself from existing libraries by offering higher-level
-functions and variables that allow solid-state synthesists to obtain intuitive and
-measurable properties impactful properties. It facilitates the visualization of
-coordination geometry from each site using four coordination determination
-methods and extracts physics-based features like volume and packing
-efficiency—crucial for structural analysis in machine learning tasks. Moreover,
+functions and variables that allow solid-state synthesists to obtain intuitive
+and measurable properties impactful properties. It facilitates the visualization
+of coordination geometry from each site using four coordination determination
+methods and extracts physics-based features like volume and packing efficiency,
+which are crucial for structural analysis in machine learning tasks. Moreover,
 `cifkit` extracts atomic mixing information at the bond pair level, tasks that
 would otherwise require extensive manual effort using GUI-based tools like
 VESTA, Diamond, and CrystalMaker. These functions can be further developed
@@ -98,7 +98,7 @@ polyhedra descriptors from atomic sites. The full installation process can be
 executed via a Jupyter notebook, accessible through the Google Colab URL
 provided in the official documentation.
 
-![polyhedron-image-distribution-of-files](docs/assets/img/ErCoIn-histogram-combined.png)
+![Atomic site coordination geometry (left) and distribution based on coordination number (right)](docs/assets/img/ErCoIn-histogram-combined.png)
 
 ```python
 from cifkit import Cif, Example
@@ -143,7 +143,7 @@ from cifkit import CifEnsemble, Example
 >>> ensemble.filter_by_formulas(["LaRu2Ge2"])
 
 # Return file paths by site mixing types
->>> ensemble.filter_by_site_mixing_types(["full_occupancy", "deficiency_without_atomic_mixing"])
+>>> ensemble.filter_by_site_mixing_types(["deficiency_without_atomic_mixing"])
 
 # Determine shortest pair distance per .cif file
 >>> ensemble.filter_by_CN_min_dist_method_containing([14])
@@ -152,9 +152,9 @@ from cifkit import CifEnsemble, Example
 # Applications
 
 `cifkit` has been used for research conducted at academic and national
-laboratories for crystal structural analysis and machine learning studies, and
-expanding. CIF Bond Analyzer (CBA) utilizes `cifkit` to extract coordination
-geometry information for newly a discovered phase [@tyvanchuk_crystal_2024]. The
+laboratories for crystal structural analysis and machine learning studies. CIF
+Bond Analyzer (CBA) utilizes `cifkit` to extract coordination geometry
+information for newly a discovered phase [@tyvanchuk_crystal_2024]. The
 Structure Analysis/Featurizer (SAF) employs `cifkit` to construct and extract
 physics-based geometric features for binary and ternary compounds
 [@jaffal_composition_2024]. Furthermore, geometric features generated with

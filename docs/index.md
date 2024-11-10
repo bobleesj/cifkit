@@ -3,10 +3,11 @@
 ## Statement of need
 
 `cifkit` uses .cif files by offering higher-level functions and variables that
-enable users to perform complex tasks efficiently with a few lines of code. `cifkit` distinguishes itself from existing libraries by offering higher-level
-functions and variables that allow solid-state synthesists to obtain intuitive and
-measurable properties impactful properties. It facilitates the visualization of
-coordination geometry from each site using four coordination determination
+enable users to perform complex tasks efficiently with a few lines of code.
+`cifkit` distinguishes itself from existing libraries by offering higher-level
+functions and variables that allow solid-state synthesists to obtain intuitive
+and measurable properties impactful properties. It facilitates the visualization
+of coordination geometry from each site using four coordination determination
 methods and extracts physics-based features like volume and packing
 efficiency—crucial for structural analysis in machine learning tasks. Moreover,
 `cifkit` extracts atomic mixing information at the bond pair level, tasks that
@@ -46,7 +47,9 @@ size, tags, coordination numbers, elements, and atomic mixing.
 
 ## Processing speed expectation
 
-Processing approximately 10,000 .cif files on a standard laptop (iMac with M1 chip) may take about 30 to 60 minutes. At this rate, we can process nearly all .cif files within 1–2 days.
+Processing approximately 10,000 .cif files on a standard laptop (iMac with M1
+chip) may take about 30 to 60 minutes. At this rate, we can process nearly all
+.cif files within 1–2 days.
 
 ## Installation
 
