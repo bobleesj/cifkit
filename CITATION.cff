@@ -10,5 +10,5 @@ doi: 10.5281/zenodo.12784260
 message: >-
   If you use cifkit, please consider citing.
 title: >-
-  cifkit – Python package for high-throughput .cif analysis
+  cifkit: A Python package for coordination geometry and atomic site analysis
 url: https://github.com/bobleesj/cifkit
