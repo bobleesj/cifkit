@@ -22,7 +22,7 @@ classifiers = [
         'Topic :: Scientific/Engineering :: Physics',
         'Topic :: Scientific/Engineering :: Chemistry',
 ]
-description = "Python library for high-throughput .cif analysis"
+description = "A Python package for coordination geometry and atomic site analysis"
 authors = [{name = "Sangjoon Lee", email = "bobleesj@gmail.com"}]
 readme = "README.md"
 license = {file = "LICENSE"}
