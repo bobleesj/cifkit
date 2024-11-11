@@ -103,7 +103,7 @@ provided in the official documentation.
 ![Atomic site coordination geometry from a single .cif file (left) and distribution of coordination numbers obtained from an ensemble of .cif files (right)](docs/assets/img/ErCoIn-histogram-combined.png)
 
 ```python
-from cifkit import Cif, Example
+>>> from cifkit import Cif, Example
 
 # Initialize with the .cif file path
 >>> cif = Cif(Example.Er10Co9In20_file_path)
@@ -136,7 +136,7 @@ from cifkit import Cif, Example
 For processing a large number of .cif files, you may use `CifEnsemble`:
 
 ```python
-from cifkit import CifEnsemble, Example
+>>> from cifkit import CifEnsemble, Example
 
 # Initialize with the folder path containing .cif files
 >>> ensemble = CifEnsemble(Example.ErCoIn_big_folder_path)
