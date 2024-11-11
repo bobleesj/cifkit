@@ -45,13 +45,13 @@ demanded by experimental synthesists, cifkit has been used as a backend for
 Python applications that automate crystal structure analysis, enabling the
 extraction of physics-based features crucial for understanding geometric
 configurations and identifying irregularities. `cifkit` offers functions such as
-plotting coordination geometry-based polyhedron from each site, calculating bond
+plotting a coordination geometry-based polyhedron from each site, calculating bond
 fractions, determining atomic mixing information, and sorting .cif files based
 on a set of attributes.
 
 # Statement of need
 
-In solid state chemistry and materials science, the Crystallographic Information
+In solid-state chemistry and materials science, the Crystallographic Information
 File (CIF) [@hall_crystallographic_1991] is the primary file format for storing
 and distributing crystal structure information. Open-source Python packages for
 reading, editing, and creating CIF files include Python Materials Genomics
@@ -81,7 +81,7 @@ systematically addresses common issues in CIF files from databases, such as
 incorrect loop values and missing fractional coordinates, by standardizing and
 filtering out ill-formatted files. The package also preprocesses atomic site
 labels, transforming labels such as 'M1' into 'Fe1' in files with atomic mixing for
-enhanced visualization and pattern matching. Beyond error correction, `cifkit`
+enhanced visualization and pattern matching. Beyond preprocessing, `cifkit`
 offers functionalities to copy, move, and sort files based on attributes such as
 coordination numbers, space groups, unit cells, and shortest distances. It
 excels in visualizing and cataloging CIF files, organizing them by supercell
