@@ -94,11 +94,13 @@ limited programming experience and no background in computational materials
 science or chemistry. By simplifying user interactions while maintaining robust
 functionality, `cifkit` enables a broader range of scientists to leverage
 computational tools for complex tasks—such as extracting geometry-based
-polyhedra descriptors from atomic sites. The full installation process can be
-executed via a Jupyter notebook, accessible through the Google Colab URL
+polyhedra descriptors from atomic sites. As shown in Figure 1, `cifkit` provides
+a higher-level function to visualize the atomic site coordination geometry from a single .cif file
+using the `Cif` object. It also provides an overview of multiple .cif files through the the `CifEnsemble` object.
+The full installation process can be executed via a Jupyter notebook, accessible through the Google Colab URL
 provided in the official documentation.
 
-![Atomic site coordination geometry (left) and distribution based on coordination number (right)](docs/assets/img/ErCoIn-histogram-combined.png)
+![Atomic site coordination geometry from a single .cif file (left) and distribution of coordination numbers obtained from an ensemble of .cif files (right)](docs/assets/img/ErCoIn-histogram-combined.png)
 
 ```python
 from cifkit import Cif, Example
