@@ -4,6 +4,14 @@ Release Notes
 
 .. current developments
 
+1.0.6
+=====
+
+**Added:**
+
+* cifkit accepted to JOSS
+
+
 1.0.5
 =====
 
