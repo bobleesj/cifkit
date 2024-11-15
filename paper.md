@@ -21,15 +21,15 @@ authors:
 affiliations:
   - name:
       Department of Applied Physics and Applied Mathematics, Columbia
-      University, New York, NY 10027, USA
+      University, New York, NY 10027, United States
     index: 1
   - name:
       Department of Chemistry, Hunter College, City University of New York, New
-      York, NY 10065, USA
+      York, NY 10065, United States
     index: 2
   - name:
       Ph.D. Program in Chemistry, The Graduate Center of the City University of
-      New York, New York, NY 10016, USA
+      New York, New York, NY 10016, United States
     index: 3
 date: 29 August 2024
 bibliography: paper.bib
