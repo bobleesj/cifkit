@@ -23,7 +23,7 @@ repos:
       - id: isort
         args: ["--profile", "black"]
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.8.0
+    rev: 0.8.1
     hooks:
       - id: nbstripout
   - repo: https://github.com/pre-commit/pre-commit-hooks
