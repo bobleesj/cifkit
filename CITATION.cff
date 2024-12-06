@@ -11,4 +11,4 @@ message: >-
   If you use cifkit, please consider citing.
 title: >-
   cifkit: A Python package for coordination geometry and atomic site analysis
-url: https://github.com/bobleesj/cifkit
+url: https://doi.org/10.21105/joss.07205
