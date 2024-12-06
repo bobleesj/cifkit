@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cifkit"
 dynamic=['version', 'dependencies']
-requires-python = ">=3.10, <3.13"
+requires-python = ">=3.11, <3.14"
 classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -16,9 +16,9 @@ classifiers = [
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX',
         'Operating System :: Unix',
-        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         'Topic :: Scientific/Engineering :: Physics',
         'Topic :: Scientific/Engineering :: Chemistry',
 ]
