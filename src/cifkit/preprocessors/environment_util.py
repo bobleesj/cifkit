@@ -6,8 +6,8 @@ from cifkit.utils.string_parser import get_atom_type_from_label
 def flat_site_connections(
     site_connections: dict,
 ) -> list[tuple[tuple[str, str], float]]:
-    """Transform site connections into a sorted list of tuples, each containing a
-    pair of alphabetically distance."""
+    """Transform site connections into a sorted list of tuples, each containing
+    a pair of alphabetically distance."""
     flattened_points = []
     for site_label, connections in site_connections.items():
         for connection in connections:

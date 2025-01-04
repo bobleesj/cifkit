@@ -74,8 +74,8 @@ def get_unitcell_coords_after_sym_operations_per_label(
     atom_site_fracs: tuple[float, float, float],
     atom_site_label: str,
 ) -> list[tuple[float, float, float, str]]:
-    """Generate a list of coordinates for each atom site after applying symmetry
-    operations."""
+    """Generate a list of coordinates for each atom site after applying
+    symmetry operations."""
 
     symmetry_operations = find_symmetry_operations(block)
     if symmetry_operations is not None:

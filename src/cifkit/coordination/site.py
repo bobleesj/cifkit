@@ -14,8 +14,8 @@ def get_min_distance_pair(
 def get_min_distance_pair_per_site_label(
     connections: dict,
 ) -> list[tuple[tuple[str, str], float]]:
-    """Return a list of tuples containing element pairs and the minimum distance
-    from each site label in the loop."""
+    """Return a list of tuples containing element pairs and the minimum
+    distance from each site label in the loop."""
     element_pairs = []
     # Iterate over each pair and their list of distances
     for ref_label, pair_data in connections.items():

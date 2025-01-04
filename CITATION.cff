@@ -6,9 +6,8 @@ authors:
     given-names: Sangjoon
     orcid: "https://orcid.org/0000-0002-2367-3932"
 cff-version: 1.2.0
-doi: 10.5281/zenodo.12784260
+doi: 10.21105/joss.07205
 message: >-
   If you use cifkit, please consider citing.
 title: >-
   cifkit: A Python package for coordination geometry and atomic site analysis
-url: https://doi.org/10.21105/joss.07205

@@ -17,7 +17,8 @@ def get_bond_pairs(labels: list[str]) -> set[tuple[str, str]]:
 def get_pairs_sorted_by_mendeleev(
     labels: list[str],
 ) -> set[tuple[str, str]]:
-    """Generate all unique pairs, each tuple sorted by the Mendeleeve number."""
+    """Generate all unique pairs, each tuple sorted by the Mendeleeve
+    number."""
 
     pairs = get_bond_pairs(labels)
     sorted_pairs = {order_tuple_pair_by_mendeleev(pair) for pair in pairs}

@@ -35,8 +35,7 @@ def get_unitcell_lengths(
     ]
 
     lengths = [
-        get_string_to_formatted_float(block.find_value(key))
-        for key in keys_lengths
+        get_string_to_formatted_float(block.find_value(key)) for key in keys_lengths
     ]
 
     return lengths
@@ -53,10 +52,7 @@ def get_unitcell_angles_rad(
         "_cell_angle_gamma",
     ]
 
-    angles = [
-        get_string_to_formatted_float(block.find_value(key))
-        for key in keys_angles
-    ]
+    angles = [get_string_to_formatted_float(block.find_value(key)) for key in keys_angles]
 
     return unit.get_radians_from_degrees(angles)
 
@@ -81,7 +77,6 @@ def get_loop_values(block: Block) -> list[Column]:
     """Retrieve a list of predefined loop tags for atomic site description.
 
     If a tag is not found, None is inserted in its place in the list.
-
     """
     loop_tags = get_loop_tags()
 
@@ -100,7 +95,8 @@ def get_unique_label_count(loop_values: list) -> int:
 
 
 def get_unique_elements_from_loop(loop_values: list) -> set[str]:
-    """Return a list of alphabetically sorted unique elements from loop values."""
+    """Return a list of alphabetically sorted unique elements from loop
+    values."""
     num_atom_labels = get_unique_label_count(loop_values)
     unique_elements = set()
     for i in range(num_atom_labels):
@@ -157,9 +153,7 @@ def get_loop_value_dict(
     return loop_value_dict
 
 
-def get_start_end_line_indexes(
-    file_path: str, start_keyword: str
-) -> tuple[int, int]:
+def get_start_end_line_indexes(file_path: str, start_keyword: str) -> tuple[int, int]:
     """Find the starting and ending indexes of the lines in atom_site_loop."""
 
     with open(file_path, "r") as f:
@@ -186,13 +180,10 @@ def get_start_end_line_indexes(
 def get_line_content_from_tag(file_path: str, start_keyword: str) -> list[str]:
     """Returns a list containing file content with starting keyword.
 
-    This function only appropriate for PCD format for removing the author
-    section.
-
+    This function only appropriate for PCD format for removing the
+    author section.
     """
-    start_index, end_index = get_start_end_line_indexes(
-        file_path, start_keyword
-    )
+    start_index, end_index = get_start_end_line_indexes(file_path, start_keyword)
 
     if start_index is None or end_index is None:
         return None
@@ -235,9 +226,8 @@ def get_unique_formulas_structures_weights_s_groups(
 ) -> tuple[set[str], set[str], set[float], set[int], set[str]]:
     """Find all unique structures, formulas, weights, space groups.
 
-    This function requires no initialization and should be more efficient in
-    analyzing and filtering a dataset.
-
+    This function requires no initialization and should be more
+    efficient in analyzing and filtering a dataset.
     """
     formulas = set()
     structures = set()
@@ -293,8 +283,8 @@ def get_tag_from_third_line(file_path: str, db_source="PCD") -> str:
 
 
 def parse_atom_site_occupancy_info(file_path: str) -> dict:
-    """Parse atom site loop information including element, occupancy, fractional
-    coordinates, multiplicity, and wyckoff symbol."""
+    """Parse atom site loop information including element, occupancy,
+    fractional coordinates, multiplicity, and wyckoff symbol."""
     block = get_cif_block(file_path)
     loop_vals = get_loop_values(block)
     label_count = len(loop_vals[0])
@@ -304,32 +294,20 @@ def parse_atom_site_occupancy_info(file_path: str) -> dict:
     for i in range(label_count):
         # Safely extract data, assuming the possibility of None values in columns
         atom_site_label = loop_vals[0][i] if loop_vals[0] else None
-        element = (
-            strip_numbers_and_symbols(loop_vals[1][i])
-            if loop_vals[1]
-            else None
-        )
+        element = strip_numbers_and_symbols(loop_vals[1][i]) if loop_vals[1] else None
         symmetry_multiplicity = int(loop_vals[2][i]) if loop_vals[2] else None
         wyckoff_symbol = loop_vals[3][i] if loop_vals[3] else None
         x_frac_coord = (
-            get_string_to_formatted_float(loop_vals[4][i])
-            if loop_vals[4]
-            else None
+            get_string_to_formatted_float(loop_vals[4][i]) if loop_vals[4] else None
         )
         y_frac_coord = (
-            get_string_to_formatted_float(loop_vals[5][i])
-            if loop_vals[5]
-            else None
+            get_string_to_formatted_float(loop_vals[5][i]) if loop_vals[5] else None
         )
         z_frac_coord = (
-            get_string_to_formatted_float(loop_vals[6][i])
-            if loop_vals[6]
-            else None
+            get_string_to_formatted_float(loop_vals[6][i]) if loop_vals[6] else None
         )
         site_occupancy = (
-            get_string_to_formatted_float(loop_vals[7][i])
-            if loop_vals[7]
-            else None
+            get_string_to_formatted_float(loop_vals[7][i]) if loop_vals[7] else None
         )
 
         parsed_data[atom_site_label] = {

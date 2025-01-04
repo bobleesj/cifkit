@@ -4,8 +4,7 @@ def sort_element_pair_tuples(
     """Alphabetically sort the pair tuple of elements."""
     # First, sort the elements within each tuple
     alp_sorted_tuples = [
-        ((min(a, b), max(a, b)), distance)
-        for (a, b), distance in element_pair_tuples
+        ((min(a, b), max(a, b)), distance) for (a, b), distance in element_pair_tuples
     ]
 
     # Priotize alphabetic sort, and sort by distance
