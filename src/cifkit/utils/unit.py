@@ -17,8 +17,8 @@ def fractional_to_cartesian(
     cell_lengths: list[float],
     cell_angles_rad: list[float],
 ) -> list[float]:
-    """Convert fractional coordinates to Cartesian coordinates using cell lengths
-    and angles."""
+    """Convert fractional coordinates to Cartesian coordinates using cell
+    lengths and angles."""
     alpha, beta, gamma = cell_angles_rad
 
     # Calculate the components of the transformation matrix
@@ -64,7 +64,6 @@ def round_dict_values(dict, precision=3):
     if dict is None:
         return None
     rounded_dict = {
-        k: round(v, precision) if isinstance(v, float) else v
-        for k, v in dict.items()
+        k: round(v, precision) if isinstance(v, float) else v for k, v in dict.items()
     }
     return rounded_dict

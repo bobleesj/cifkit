@@ -126,9 +126,7 @@ def plot(
     plotter.add_mesh(poly_data, color="aqua", opacity=0.5, show_edges=True)
 
     plotter.show()
-    """
-    Output
-    """
+    """Output."""
 
     # Determine the output directory based on provided path
     if not output_dir:
@@ -146,8 +144,6 @@ def plot(
         + ".png"
     )
     save_path = os.path.join(output_dir, plot_filename)
-    """
-    Save
-    """
+    """Save."""
     # Save the screenshot
     plotter.screenshot(save_path)

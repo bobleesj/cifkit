@@ -62,9 +62,7 @@ def test_round_dict_values():
         "float2": 2.71828,
         "int": 1,
         "string": "test",
-        "nested_dict": {
-            "float": 9.8765
-        },  # Note: Nested dictionaries are not processed.
+        "nested_dict": {"float": 9.8765},  # Note: Nested dictionaries are not processed.
     }
     expected_dict = {
         "float1": 3.142,

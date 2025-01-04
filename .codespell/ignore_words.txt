@@ -9,3 +9,12 @@ socio-economic
 
 ;; Frobenius norm used in np.linalg.norm
 fro
+
+;; indide is chemical name
+indide
+
+;; used as a date
+nd
+
+;; chemical
+te

@@ -13,14 +13,11 @@ def remove_author_loop(file_path: str) -> None:
     caused by a wrongly formatted author block.
 
     This is a common issue in PCD files.
-
     """
     (
         start_index,
         end_index,
-    ) = cif_parser.get_start_end_line_indexes(
-        file_path, "_publ_author_address"
-    )
+    ) = cif_parser.get_start_end_line_indexes(file_path, "_publ_author_address")
 
     with open(file_path, "r") as f:
         original_lines = f.readlines()
@@ -36,7 +33,6 @@ def add_hashtag_in_first_line(file_path: str):
     """ICSD files start with (C) which causes parsing issues with gemmi.
 
     If that is the case, add a # before (C) to fix the parsing issue.
-
     """
     # First, check if the file exists and is a CIF file
     if not os.path.exists(file_path) or not file_path.endswith(".cif"):
@@ -61,7 +57,6 @@ def edit_cif_file_based_on_db(file_path: str):
 
     PCD: Remove author loop and preprocess label element loop values
     ICSD: Add a hashtag in the first line
-
     """
     db_source = get_cif_db_source(file_path)
     if db_source == "ICSD":

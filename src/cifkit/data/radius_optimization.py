@@ -14,22 +14,20 @@ def generate_adjacent_pairs(
 
     # Binary -> [('In', 'Rh')]
     # Ternary -> [('In', 'Rh'), ('Rh', 'U')]
-    label_to_pair = [
-        (elements[i], elements[i + 1]) for i in range(len(elements) - 1)
-    ]
+    label_to_pair = [(elements[i], elements[i + 1]) for i in range(len(elements) - 1)]
     return label_to_pair
 
 
 def objective(params, original_radii: list[float]) -> list[float]:
-    """Calculate the objective function value,which is the sum of squared percent
-    differences between original and refined radii."""
+    """Calculate the objective function value,which is the sum of squared
+    percent differences between original and refined radii."""
 
     return np.sum(((original_radii - params) / original_radii) ** 2)
 
 
 def constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
-    """Enforce that the sum of the radii of the pair does not exceed the shortest
-    allowed distance between them."""
+    """Enforce that the sum of the radii of the pair does not exceed the
+    shortest allowed distance between them."""
     i, j = index_pair
     return shortest_distance - (params[i] + params[j])
 

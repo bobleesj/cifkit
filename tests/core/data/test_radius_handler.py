@@ -33,9 +33,7 @@ def test_compute_radius_sum(radius_data_URhIn, radius_sum_data_URhIn):
     # Assert each element and sub-element individually
     for element, radii in expected.items():
         for key, value in radii.items():
-            assert combined_radii[element][key] == pytest.approx(
-                value, abs=0.001
-            )
+            assert combined_radii[element][key] == pytest.approx(value, abs=0.001)
 
 
 @pytest.mark.parametrize(

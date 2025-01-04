@@ -17,7 +17,8 @@ def get_validated_formula_label(formula: str) -> str:
 
 
 def get_parsed_formula(formula: str) -> list[tuple[str, str]]:
-    """Return a list of tuples, each tuple containing an element and its index."""
+    """Return a list of tuples, each tuple containing an element and its
+    index."""
     trimmed_formula = get_validated_formula_label(formula)
     pattern = r"([A-Z][a-z]*)(\d*\.?\d*)"
     elements = re.findall(pattern, trimmed_formula)
@@ -43,9 +44,7 @@ def get_normalized_formula(formula: str, demical_places=3) -> str:
         else:
             normalized_index = float(element_index) / index_sum
 
-        normalized_formula_parts.append(
-            f"{element}{normalized_index:.{demical_places}f}"
-        )
+        normalized_formula_parts.append(f"{element}{normalized_index:.{demical_places}f}")
 
     # Join all parts into one string for the normalized formula
     normalized_formula = "".join(normalized_formula_parts)

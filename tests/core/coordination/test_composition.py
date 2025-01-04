@@ -19,9 +19,7 @@ def test_get_bond_counts(CN_connections_by_min_dist_URhIn):
     }
     elements = {"In", "Rh", "U"}
 
-    assert (
-        get_bond_counts(elements, CN_connections_by_min_dist_URhIn) == expected
-    )
+    assert get_bond_counts(elements, CN_connections_by_min_dist_URhIn) == expected
 
 
 @pytest.mark.slow
@@ -68,10 +66,7 @@ def test_get_bond_fraction(bond_counts_CN):
 @pytest.mark.slow
 def test_get_coordination_numbers(CN_connections_by_min_dist_URhIn):
     expected = {"In1": 14, "Rh1": 9, "Rh2": 9, "U1": 11}
-    assert (
-        count_connections_per_site(CN_connections_by_min_dist_URhIn)
-        == expected
-    )
+    assert count_connections_per_site(CN_connections_by_min_dist_URhIn) == expected
 
 
 def test_get_average_coordination_number(

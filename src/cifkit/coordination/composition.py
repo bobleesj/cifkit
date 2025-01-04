@@ -39,9 +39,7 @@ def get_bond_counts(
 
             # Sort by Mendeeleve
             if sorted_by_mendeleev:
-                sorted_bond_pair = bond_pair.order_tuple_pair_by_mendeleev(
-                    pair
-                )
+                sorted_bond_pair = bond_pair.order_tuple_pair_by_mendeleev(pair)
             else:
                 sorted_bond_pair = tuple(sorted((ref_element, conn_element)))
 
