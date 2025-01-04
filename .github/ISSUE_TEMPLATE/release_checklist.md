@@ -24,7 +24,7 @@ assignees: ""
       `twine check dist/*` to ensure that the package can be built and is
       correctly formatted for PyPI release.
 
-Please mention @sbillinge here when you are ready for PyPI/GitHub release.
+Please mention @bobleesj here when you are ready for PyPI/GitHub release.
 Include any additional comments necessary, such as version information and
 details about the pre-release here:
 
@@ -36,19 +36,19 @@ details about the pre-release here:
 - [ ] Docs are deployed successfully to `https://www.diffpy.org/<package-name>`.
 - [ ] Successfully run all tests, tutorial examples or do functional testing.
 
-Please let @sbillinge know that all checks are done and the package is ready for
+Please let @bobleesj know that all checks are done and the package is ready for
 full release.
 
 ### conda-forge release preparation checklist:
 
-<!-- After @sbillinge releases the PyPI package, please check the following when creating a PR for conda-forge release.-->
+<!-- After @bobleesj releases the PyPI package, please check the following when creating a PR for conda-forge release.-->
 
 - [ ] Ensure that the full release has appeared on PyPI successfully.
 - [ ] New package dependencies listed in `conda.txt` and `test.txt` are added to
       `meta.yaml` in the feedstock.
 - [ ] Close any open issues on the feedstock. Reach out to @bobleesj if you have
       questions.
-- [ ] Tag @sbillinge and @bobleesj for conda-forge release.
+- [ ] Tag @bobleesj for conda-forge release.
 
 ### Post-release checklist
 
