@@ -1,6 +1,6 @@
 **Added:**
 
-* Standarlize `cifkit` using `scikit-package` v0.1.0 including `docformatter`, `prettier`, and `codespell` for code formatting and linting. 
+* Standarlize `cifkit` using `scikit-package` v0.1.0 including `docformatter`, `prettier`, and `codespell` for code formatting and linting.
 
 **Changed:**
 
