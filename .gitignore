@@ -2,21 +2,13 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.DS_Store
-
-
-# Test file
-test.ipynb
 
 # C extensions
 *.so
 
-nodemon.json
-debug/
-.ruff_cache
-
 # Distribution / packaging
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -28,12 +20,14 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
+venv/
 *.egg-info/
 .installed.cfg
 *.egg
+bin/
+temp/
+tags/
+errors.err
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -44,89 +38,55 @@ share/python-wheels/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+MANIFEST
 
 # Unit test / coverage reports
 htmlcov/
 .tox/
-.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
-*.cover
-*.py,cover
+*,cover
 .hypothesis/
-.pytest_cache/
-cover/
 
 # Translations
 *.mo
 *.pot
 
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
 # Django stuff:
 *.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
 
 # Sphinx documentation
-docs/_build/
+docs/build/
+docs/source/generated/
+
+# pytest
+.pytest_cache/
 
 # PyBuilder
 target/
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# Editor files
+# mac
+.DS_Store
+*~
 
-# pyenv
-.python-version
+# vim
+*.swp
+*.swo
 
-# celery beat schedule file
-celerybeat-schedule
+# pycharm
+.idea/
 
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# VS Code settings
+# VSCode
 .vscode/
+
+# Ipython Notebook
+.ipynb_checkpoints

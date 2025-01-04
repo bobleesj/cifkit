@@ -1,15 +1,18 @@
-name: Tests on PR
+name: CI
 
 on:
   push:
     branches:
       - main
-  pull_request:
+  release:
+    types:
+      - prereleased
+      - published
   workflow_dispatch:
 
 jobs:
-  tests-on-pr:
-    uses: Billingegroup/release-scripts/.github/workflows/_tests-on-pr.yml@v0
+  matrix-coverage:
+    uses: Billingegroup/release-scripts/.github/workflows/_matrix-and-codecov-on-merge-to-main.yml@v0
     with:
       project: cifkit
       c_extension: false
