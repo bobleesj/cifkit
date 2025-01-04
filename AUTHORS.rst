@@ -1,7 +1,8 @@
 Authors
 =======
 
-Billinge Group and community contributors.
+Sangjoon Lee
+Anton Oliynyk
 
 Contributors
 ------------
