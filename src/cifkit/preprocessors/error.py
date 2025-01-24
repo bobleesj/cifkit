@@ -68,6 +68,7 @@ def move_files_based_on_errors(cif_dir_path, file_paths):
         print(f"# of files moved to '{error_type}' folder: {count}")
     print()
 
+
 def _make_directory_and_move(file_path, dir_path, new_file_path):
     """Create directory if it doesn't exist and move the file."""
     os.makedirs(dir_path, exist_ok=True)

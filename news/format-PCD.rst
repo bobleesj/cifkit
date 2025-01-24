@@ -1,6 +1,6 @@
 **Added:**
 
-* Relocate PCD .cif files that have no atomic site/label while preprocesing each .cif file.
+* Relocate PCD .cif files that have no atomic site/label while preprocessing each .cif file.
 
 **Changed:**
 
