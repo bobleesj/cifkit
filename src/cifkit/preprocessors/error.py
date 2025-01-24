@@ -37,12 +37,16 @@ def move_files_based_on_errors(dir_path, file_paths):
         filename = os.path.basename(file_path)
         print(f"Preprocessing {file_path} ({i}/{len(file_paths)})")
         try:
-            # Preprocess the CIF file
-            preprocess_label_element_loop_values(file_path)
+            # Attempt to initialize a Cif object and if it is PCD source,
+            # preprocess the CIF file and identify the error type
+            cif = Cif(file_path, is_formatted=True)
+            db_source = cif.db_source
+            if db_source == "PCD":
+                # Preprocess the CIF file
+                preprocess_label_element_loop_values(file_path)
             # Check site element can be parsed from site label
             check_unique_atom_site_labels(file_path)
-            # Attempt to initialize a Cif object
-            Cif(file_path, is_formatted=True)
+
         except Exception as e:
             error_message = str(e)
             # Example of handling specific errors, adjust as needed

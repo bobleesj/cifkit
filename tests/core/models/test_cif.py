@@ -566,7 +566,7 @@ def test_init_error_coord_missing():
     with pytest.raises(ValueError) as e:
         Cif(file_path)
 
-    assert "not enough values to unpack (expected 2, got 1)" in str(e.value)
+    assert "contains no atomic label and type." in str(e.value)
 
 
 """
