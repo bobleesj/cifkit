@@ -18,12 +18,14 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
     content_lines = cif_parser.get_line_content_from_tag(
         file_path, "_atom_site_occupancy"
     )
-
+    # Check whether the content line is empty, then throw an error
     for line in content_lines:
         line = line.strip()
-        site_label, atom_type_symbol = line.split()[:2]
+        try:
+            site_label, atom_type_symbol = line.split()[:2]
+        except ValueError:
+            raise ValueError("The file contains no atomic label and type.")
         atom_type_from_label = string_parser.get_atom_type_from_label(site_label)
-
         unique_elements = cif_parser.get_unique_elements_from_loop(loop_values)
         """Type 8. Ex) 1817279.cif.
 

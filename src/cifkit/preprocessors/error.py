@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from cifkit.models.cif import Cif
+from cifkit.preprocessors.format import preprocess_label_element_loop_values
 from cifkit.utils.cif_parser import check_unique_atom_site_labels
 
 
@@ -20,6 +21,7 @@ def move_files_based_on_errors(dir_path, file_paths):
 
     # Dictionary to hold directory paths for each error type
     error_directories = {
+        "error_no_labels": dir_path / "error_no_labels",
         "error_operations": dir_path / "error_operations",
         "error_duplicate_labels": dir_path / "error_duplicate_labels",
         "error_wrong_loop_value": dir_path / "error_wrong_loop_value",
@@ -35,15 +37,19 @@ def move_files_based_on_errors(dir_path, file_paths):
         filename = os.path.basename(file_path)
         print(f"Preprocessing {file_path} ({i}/{len(file_paths)})")
         try:
-            # Check the label before instantiating the Cif object to save time
+            # Preprocess the CIF file
+            preprocess_label_element_loop_values(file_path)
+            # Check site element can be parsed from site label
             check_unique_atom_site_labels(file_path)
-            # Instantiate the Cif object fully
+            # Attempt to initialize a Cif object
             Cif(file_path, is_formatted=True)
         except Exception as e:
             error_message = str(e)
             # Example of handling specific errors, adjust as needed
             if "symmetry operation" in error_message:
                 error_type = "error_operations"
+            elif "no atomic label and type" in error_message:
+                error_type = "error_no_labels"
             elif "contains duplicate atom site labels" in error_message:
                 error_type = "error_duplicate_labels"
             elif "Wrong number of values in loop" in error_message:

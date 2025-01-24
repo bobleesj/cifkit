@@ -63,6 +63,7 @@ def edit_cif_file_based_on_db(file_path: str):
         add_hashtag_in_first_line(file_path)
     elif db_source == "PCD":
         remove_author_loop(file_path)
+        # Preprocessing the label is only tested on PCD files
         preprocess_label_element_loop_values(file_path)
 
     check_unique_atom_site_labels(file_path)
