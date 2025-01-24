@@ -64,7 +64,7 @@ class CifEnsemble:
             self._log_info(CifEnsembleLog.PREPROCESSING.value)
             for file_path in file_paths:
                 edit_cif_file_based_on_db(file_path)
-            # Move ill-formatted files after processing
+            # Move ill-formatted files after pre-processing
             move_files_based_on_errors(cif_dir_path, file_paths)
 
         # Initialize new files after ill-formatted files are moved

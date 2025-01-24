@@ -6,28 +6,21 @@ from cifkit.preprocessors.format import preprocess_label_element_loop_values
 from cifkit.utils.cif_parser import check_unique_atom_site_labels
 
 
-def make_directory_and_move(file_path, dir_path, new_file_path):
-    """Create directory if it doesn't exist and move the file."""
-    os.makedirs(dir_path, exist_ok=True)
-    new_file_path = os.path.join(dir_path, new_file_path)
-    os.rename(file_path, new_file_path)
-
-
-def move_files_based_on_errors(dir_path, file_paths):
-    print(f"\nCIF Preprocessing in {dir_path} begun...\n")
+def move_files_based_on_errors(cif_dir_path, file_paths):
+    print(f"\nCIF Preprocessing in {cif_dir_path} begun...\n")
 
     # Ensure dir_path is a Path object
-    dir_path = Path(dir_path)
+    cif_dir_path = Path(cif_dir_path)
 
     # Dictionary to hold directory paths for each error type
     error_directories = {
-        "error_no_labels": dir_path / "error_no_labels",
-        "error_operations": dir_path / "error_operations",
-        "error_duplicate_labels": dir_path / "error_duplicate_labels",
-        "error_wrong_loop_value": dir_path / "error_wrong_loop_value",
-        "error_coords": dir_path / "error_coords",
-        "error_invalid_label": dir_path / "error_invalid_label",
-        "error_others": dir_path / "error_others",
+        "error_no_labels": cif_dir_path / "error_no_labels",
+        "error_operations": cif_dir_path / "error_operations",
+        "error_duplicate_labels": cif_dir_path / "error_duplicate_labels",
+        "error_wrong_loop_value": cif_dir_path / "error_wrong_loop_value",
+        "error_coords": cif_dir_path / "error_coords",
+        "error_invalid_label": cif_dir_path / "error_invalid_label",
+        "error_others": cif_dir_path / "error_others",
     }
 
     # Ensure all direct
@@ -65,7 +58,7 @@ def move_files_based_on_errors(dir_path, file_paths):
             else:
                 error_type = "error_others"
 
-            make_directory_and_move(file_path, error_directories[error_type], filename)
+            _make_directory_and_move(file_path, error_directories[error_type], filename)
             num_files_moved[error_type] += 1
             print(f"File {filename} moved to '{error_type}' due to: {error_message}")
 
@@ -74,3 +67,9 @@ def move_files_based_on_errors(dir_path, file_paths):
     for error_type, count in num_files_moved.items():
         print(f"# of files moved to '{error_type}' folder: {count}")
     print()
+
+def _make_directory_and_move(file_path, dir_path, new_file_path):
+    """Create directory if it doesn't exist and move the file."""
+    os.makedirs(dir_path, exist_ok=True)
+    new_file_path = os.path.join(dir_path, new_file_path)
+    os.rename(file_path, new_file_path)
