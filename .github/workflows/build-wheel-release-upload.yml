@@ -12,7 +12,7 @@ jobs:
     with:
       project: cifkit
       c_extension: false
-      github_admin_username: bobleesj
+      maintainer_github_username: bobleesj
     secrets:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
