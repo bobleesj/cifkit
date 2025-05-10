@@ -93,10 +93,6 @@ for label in site_labels:
 
 ![Polyhedron generation](assets/img/ErCoIn-polyhedron.png)
 
-For more, visit
-[https://bobleesj.github.io/cifkit/notebooks/01_cif](https://bobleesj.github.io/cifkit/notebooks/01_cif)
-for a full tutorial with an interactive Google Codelab link.
-
 ### CifEnsemble
 
 `CifEnsemble` is initialized with a folder path containing `.cif` files. It
@@ -125,10 +121,6 @@ ensemble.filter_by_structures(["Co1.75Ge", "CoIn2"])
 # Return file path matching CeAl2Ga2
 ensemble.filter_by_structures("CeAl2Ga2")
 ```
-
-For more, visit
-[https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/](https://bobleesj.github.io/cifkit/notebooks/02_cif_ensemble/)
-for a full tutorial with an interactive Google Codelab link.
 
 ## Research projects using `cifkit`
 
