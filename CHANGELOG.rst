@@ -4,6 +4,15 @@ Release Notes
 
 .. current developments
 
+1.0.8
+=====
+
+**Added:**
+
+* Standarlize `cifkit` using `scikit-package` v0.1.0 including `docformatter`, `prettier`, and `codespell` for code formatting and linting.
+* Relocate PCD .cif files that have no atomic site/label while preprocessing each .cif file.
+
+
 1.0.6
 =====
 
