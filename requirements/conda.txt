@@ -1,0 +1,5 @@
+gemmi
+matplotlib-base
+numpy
+pyvista
+scipy

@@ -1,0 +1,65 @@
+nav:
+  - Getting started: index.md
+  - Cif: notebooks/01_cif.ipynb
+  - CifEnsemble: notebooks/02_cif_ensemble.ipynb
+  - API Reference: api.md
+
+site_name: cifkit
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.footer
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: indigo
+      # accent: purple
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: indigo
+      # accent: lime
+  icon:
+    repo: fontawesome/brands/git-alt
+
+repo_url: https://github.com/bobleesj/cifkit
+repo_name: bobleesj/cifkit
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            show_root_heading: true # Show module names as headings
+            docstring_style: numpy
+  - mkdocs-jupyter
