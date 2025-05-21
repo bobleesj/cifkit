@@ -8,11 +8,11 @@ on:
 
 jobs:
   release:
-    uses: Billingegroup/release-scripts/.github/workflows/_build-wheel-release-upload.yml@v0
+    uses: scikit-package/release-scripts/.github/workflows/_build-wheel-release-upload.yml@v0
     with:
       project: cifkit
       c_extension: false
-      maintainer_github_username: bobleesj
+      maintainer_GITHUB_username: bobleesj
     secrets:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
