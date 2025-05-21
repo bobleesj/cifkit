@@ -72,7 +72,9 @@ def compute_CN_max_gap_per_site(
                 )
 
             # Compute normalized distances
-            norm_dist_by_min_dist = compute_normalized_value(pair_dist, shortest_dist)
+            norm_dist_by_min_dist = compute_normalized_value(
+                pair_dist, shortest_dist
+            )
             # Store distances
             if use_all_methods:
                 distances = {
@@ -95,8 +97,13 @@ def compute_CN_max_gap_per_site(
                         abs(norm_distance - previous_values[method]),
                         3,
                     )
-                    if current_gap > max_gaps_per_label[ref_label][method]["max_gap"]:
-                        max_gaps_per_label[ref_label][method]["max_gap"] = current_gap
+                    if (
+                        current_gap
+                        > max_gaps_per_label[ref_label][method]["max_gap"]
+                    ):
+                        max_gaps_per_label[ref_label][method][
+                            "max_gap"
+                        ] = current_gap
                         max_gaps_per_label[ref_label][method]["CN"] = i
 
                 previous_values[method] = norm_distance
@@ -126,6 +133,8 @@ def get_rad_sum_value(
     if method_name not in rad_sum_data:
         raise KeyError(f"Method {method_name} not found in rad_sum")
     if key not in rad_sum_data[method_name]:
-        raise KeyError(f"Key {key} not found in method {method_name} of rad_sum")
+        raise KeyError(
+            f"Key {key} not found in method {method_name} of rad_sum"
+        )
 
     return rad_sum_data[method_name][key]

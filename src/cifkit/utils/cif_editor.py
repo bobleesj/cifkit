@@ -17,7 +17,9 @@ def remove_author_loop(file_path: str) -> None:
     (
         start_index,
         end_index,
-    ) = cif_parser.get_start_end_line_indexes(file_path, "_publ_author_address")
+    ) = cif_parser.get_start_end_line_indexes(
+        file_path, "_publ_author_address"
+    )
 
     with open(file_path, "r") as f:
         original_lines = f.readlines()

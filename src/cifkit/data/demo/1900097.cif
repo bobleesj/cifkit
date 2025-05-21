@@ -34,7 +34,7 @@ _chemical_formula_sum                    'O6.54 Sn2.20 Ta1.56'
 _chemical_name_mineral                   oxystannomicrolite
 _chemical_compound_source                ?
 _chemical_name_structure_type
-(Ta~0.78~Sn~0.22~)~2~Sn~1.76~O~6.54~-b,cF168,227                              
+(Ta~0.78~Sn~0.22~)~2~Sn~1.76~O~6.54~-b,cF168,227
 _chemical_formula_weight                 648.0
 
 # Bibliographic data
@@ -321,4 +321,3 @@ _pd_proc_ls_proof_wR_factor              ?
 _refine_ls_R_I_factor                    ?
 
 # End of data set 1900097
-

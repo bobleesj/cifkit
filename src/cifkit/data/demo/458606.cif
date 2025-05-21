@@ -39,7 +39,7 @@ _chemical_formula_weight                 321.9
 # Bibliographic data
 
 _publ_section_title
-'Preparation and lattice parameters of ^249^Bk monopnictides'                 
+'Preparation and lattice parameters of ^249^Bk monopnictides'
 _journal_coden_ASTM                      JINCAO
 _journal_name_full                       'J. Inorg. Nucl. Chem.'
 _journal_year                            1980
@@ -354,4 +354,3 @@ loop_
  6 4 2 0.779 5
 
 # End of data set 458606
-

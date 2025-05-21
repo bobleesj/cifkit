@@ -15,9 +15,7 @@ repos:
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
-        exclude: '\.cif$'
       - id: trailing-whitespace
-        exclude: '\.cif$'
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: check-toml

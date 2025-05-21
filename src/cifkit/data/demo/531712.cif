@@ -40,7 +40,7 @@ _chemical_melting_point                  2073
 # Bibliographic data
 
 _publ_section_title
-'X-ray study of the tellurides of lanthanum'                                  
+'X-ray study of the tellurides of lanthanum'
 _journal_coden_ASTM                      INOMAF
 _journal_name_full                       'Inorg. Mater.'
 _journal_year                            1965
@@ -355,4 +355,3 @@ loop_
  6 2 0 1.015 2
 
 # End of data set 531712
-

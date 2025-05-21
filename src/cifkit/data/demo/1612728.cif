@@ -39,7 +39,7 @@ _chemical_formula_weight                 394.3
 # Bibliographic data
 
 _publ_section_title
-'Structure of BaBiO~3-x~ at high temperature'                                 
+'Structure of BaBiO~3-x~ at high temperature'
 _journal_coden_ASTM                      MRBUAC
 _journal_name_full                       'Mater. Res. Bull.'
 _journal_year                            1990
@@ -360,4 +360,3 @@ _pd_proc_ls_proof_wR_factor              0.097
 _refine_ls_R_I_factor                    ?
 
 # End of data set 1612728
-

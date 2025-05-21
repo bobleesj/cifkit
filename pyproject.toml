@@ -12,7 +12,7 @@ maintainers = [
   { name="Sangjoon Lee", email="bobleesj@gmail.com" },
 ]
 description = "A Python package for coordination geometry and atomic site analysis."
-keywords = ["cif", "solid-state", "high-throughput", "crystallography"]
+keywords = ['cif', 'solid-state', 'high-throughput', 'inorganics', 'crystallography']
 readme = "README.rst"
 requires-python = ">=3.11, <3.14"
 classifiers = [
@@ -57,7 +57,7 @@ ignore-words = ".codespell/ignore_words.txt"
 skip = "*.cif,*.dat"
 
 [tool.black]
-line-length = 90
+line-length = 79
 include = '\.pyi?$'
 exclude = '''
 /(

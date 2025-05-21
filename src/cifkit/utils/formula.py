@@ -44,7 +44,9 @@ def get_normalized_formula(formula: str, demical_places=3) -> str:
         else:
             normalized_index = float(element_index) / index_sum
 
-        normalized_formula_parts.append(f"{element}{normalized_index:.{demical_places}f}")
+        normalized_formula_parts.append(
+            f"{element}{normalized_index:.{demical_places}f}"
+        )
 
     # Join all parts into one string for the normalized formula
     normalized_formula = "".join(normalized_formula_parts)

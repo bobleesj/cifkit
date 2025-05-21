@@ -25,7 +25,9 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
             site_label, atom_type_symbol = line.split()[:2]
         except ValueError:
             raise ValueError("The file contains no atomic label and type.")
-        atom_type_from_label = string_parser.get_atom_type_from_label(site_label)
+        atom_type_from_label = string_parser.get_atom_type_from_label(
+            site_label
+        )
         unique_elements = cif_parser.get_unique_elements_from_loop(loop_values)
         """Type 8. Ex) 1817279.cif.
 
@@ -68,7 +70,9 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
             and site_label[2].isalpha()
         ):
             # Uppercase the last character
-            modified_label = site_label[0] + site_label[1] + site_label[2].upper()
+            modified_label = (
+                site_label[0] + site_label[1] + site_label[2].upper()
+            )
 
             # Modify the label
             line = line.replace(site_label, modified_label)  # Modify the line
@@ -108,7 +112,9 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
                 and site_label[-2].isdigit()
                 and site_label[-3].isalpha()
             ):
-                new_label = site_label.replace(atom_type_from_label, atom_type_symbol)
+                new_label = site_label.replace(
+                    atom_type_from_label, atom_type_symbol
+                )
                 line = line.replace(site_label, new_label)  # Modify the line
                 is_cif_file_updated = True
 
@@ -121,7 +127,9 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
             """
 
             if len(site_label) == 1 and site_label[-1].isalpha():
-                new_label = site_label.replace(atom_type_from_label, atom_type_symbol)
+                new_label = site_label.replace(
+                    atom_type_from_label, atom_type_symbol
+                )
                 line = line.replace(site_label, new_label)
                 is_cif_file_updated = True
 
@@ -140,7 +148,9 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
                 if site_label.lower() not in atom_type_symbol.lower():
                     # print(atom_type_label.lower(), atom_type_symbol.lower())
                     # Do not use get_atom_type since replace the entire label
-                    new_label = site_label.replace(site_label, atom_type_symbol)
+                    new_label = site_label.replace(
+                        site_label, atom_type_symbol
+                    )
                     line = line.replace(site_label, new_label)
                     is_cif_file_updated = True
 
@@ -159,8 +169,13 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
                 and site_label[2].isdigit()
             ):
                 first_two_label_characters = site_label[0] + site_label[1]
-                if first_two_label_characters.lower() == atom_type_symbol.lower():
-                    modified_label = site_label[0] + site_label[1].lower() + site_label[2]
+                if (
+                    first_two_label_characters.lower()
+                    == atom_type_symbol.lower()
+                ):
+                    modified_label = (
+                        site_label[0] + site_label[1].lower() + site_label[2]
+                    )
                     line = line.replace(site_label, modified_label)
                     is_cif_file_updated = True
 
@@ -180,8 +195,13 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
                 and site_label[3].isalpha()
             ):
                 first_two_label_characters = site_label[0] + site_label[1]
-                if first_two_label_characters.lower() != atom_type_symbol.lower():
-                    modified_label = atom_type_symbol + site_label[2] + site_label[3]
+                if (
+                    first_two_label_characters.lower()
+                    != atom_type_symbol.lower()
+                ):
+                    modified_label = (
+                        atom_type_symbol + site_label[2] + site_label[3]
+                    )
                     line = line.replace(site_label, modified_label)
                     is_cif_file_updated = True
 
@@ -199,7 +219,10 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
                 and site_label[2].isdigit()
             ):
                 first_two_label_characters = site_label[0] + site_label[1]
-                if first_two_label_characters.lower() != atom_type_symbol.lower():
+                if (
+                    first_two_label_characters.lower()
+                    != atom_type_symbol.lower()
+                ):
                     modified_label = atom_type_symbol + site_label[2]
                     line = line.replace(site_label, modified_label)
                     is_cif_file_updated = True
@@ -213,7 +236,9 @@ def preprocess_label_element_loop_values(file_path: str) -> None:
         (
             start_index,
             end_index,
-        ) = cif_parser.get_start_end_line_indexes(file_path, "_atom_site_occupancy")
+        ) = cif_parser.get_start_end_line_indexes(
+            file_path, "_atom_site_occupancy"
+        )
         # Replace the specific section in original_lines with modified_lines
         original_lines[start_index:end_index] = modified_lines
 

@@ -11,7 +11,10 @@ def get_is_radius_data_available(elements: list[str]) -> bool:
     data = get_radius_data()
     for element in elements:
         element_data = data.get(element, {})
-        if not ("CIF_radius" in element_data and "Pauling_radius_CN12" in element_data):
+        if not (
+            "CIF_radius" in element_data
+            and "Pauling_radius_CN12" in element_data
+        ):
             return False
     return True
 
@@ -45,8 +48,12 @@ def get_radius_values_per_element(
     for element in elements:
         combined_radii[element] = {
             "CIF_radius": CIF_pauling_rad[element]["CIF_radius"],
-            "CIF_radius_refined": float(np.round(CIF_refined_rad.get(element), 3)),
-            "Pauling_radius_CN12": CIF_pauling_rad[element]["Pauling_radius_CN12"],
+            "CIF_radius_refined": float(
+                np.round(CIF_refined_rad.get(element), 3)
+            ),
+            "Pauling_radius_CN12": CIF_pauling_rad[element][
+                "Pauling_radius_CN12"
+            ],
         }
 
     return round_dict_values(combined_radii)
@@ -73,11 +80,14 @@ def compute_radius_sum(
             elem_j = elements[j]
 
             # Element pair label, e.g., A-B or A-A
-            pair_label = f"{elem_i}-{elem_j}" if i != j else f"{elem_i}-{elem_i}"
+            pair_label = (
+                f"{elem_i}-{elem_j}" if i != j else f"{elem_i}-{elem_i}"
+            )
 
             # Sum radii for each radius type
             pair_distances["CIF_radius_sum"][pair_label] = round(
-                radius_values[elem_i]["CIF_radius"] + radius_values[elem_j]["CIF_radius"],
+                radius_values[elem_i]["CIF_radius"]
+                + radius_values[elem_j]["CIF_radius"],
                 3,
             )
             pair_distances["CIF_radius_refined_sum"][pair_label] = round(

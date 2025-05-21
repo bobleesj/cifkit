@@ -14,7 +14,9 @@ def generate_adjacent_pairs(
 
     # Binary -> [('In', 'Rh')]
     # Ternary -> [('In', 'Rh'), ('Rh', 'U')]
-    label_to_pair = [(elements[i], elements[i + 1]) for i in range(len(elements) - 1)]
+    label_to_pair = [
+        (elements[i], elements[i + 1]) for i in range(len(elements) - 1)
+    ]
     return label_to_pair
 
 

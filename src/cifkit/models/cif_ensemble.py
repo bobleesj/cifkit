@@ -57,7 +57,9 @@ class CifEnsemble:
 
         # Process each file, handling exceptions that may occur
         self.logging_enabled = logging_enabled
-        file_paths = get_file_paths(cif_dir_path, add_nested_files=add_nested_files)
+        file_paths = get_file_paths(
+            cif_dir_path, add_nested_files=add_nested_files
+        )
         self.dir_path = cif_dir_path
 
         if preprocess:
@@ -68,7 +70,9 @@ class CifEnsemble:
             move_files_based_on_errors(cif_dir_path, file_paths)
 
         # Initialize new files after ill-formatted files are moved
-        self.file_paths = get_file_paths(cif_dir_path, add_nested_files=add_nested_files)
+        self.file_paths = get_file_paths(
+            cif_dir_path, add_nested_files=add_nested_files
+        )
         self.file_count = len(self.file_paths)
         print(f"Initializing {self.file_count} Cif objects...")
 
@@ -79,7 +83,8 @@ class CifEnsemble:
             ]
         else:
             self.cifs: list[Cif] = [
-                Cif(file_path, is_formatted=True) for file_path in self.file_paths
+                Cif(file_path, is_formatted=True)
+                for file_path in self.file_paths
             ]
         print("Finished initialization!")
 
@@ -331,7 +336,9 @@ class CifEnsemble:
         return cif_file_paths
 
     # With sets
-    def _filter_contains_any(self, property_name: str, values: list) -> set[str]:
+    def _filter_contains_any(
+        self, property_name: str, values: list
+    ) -> set[str]:
         cif_file_paths = set()
         for cif in self.cifs:
             property_value: str = getattr(cif, property_name)
@@ -339,7 +346,9 @@ class CifEnsemble:
                 cif_file_paths.add(cif.file_path)
         return cif_file_paths
 
-    def _filter_exact_match(self, property_name: str, values: list) -> set[str]:
+    def _filter_exact_match(
+        self, property_name: str, values: list
+    ) -> set[str]:
         cif_file_paths = set()
         for cif in self.cifs:
             property_value: str = getattr(cif, property_name)
@@ -379,17 +388,33 @@ class CifEnsemble:
     Filter by CN
     """
 
-    def filter_by_CN_min_dist_method_containing(self, values: list[int]) -> set[str]:
-        return self._filter_contains_any("CN_unique_values_by_min_dist_method", values)
+    def filter_by_CN_min_dist_method_containing(
+        self, values: list[int]
+    ) -> set[str]:
+        return self._filter_contains_any(
+            "CN_unique_values_by_min_dist_method", values
+        )
 
-    def filter_by_CN_min_dist_method_exact_matching(self, values: list[int]) -> set[str]:
-        return self._filter_exact_match("CN_unique_values_by_min_dist_method", values)
+    def filter_by_CN_min_dist_method_exact_matching(
+        self, values: list[int]
+    ) -> set[str]:
+        return self._filter_exact_match(
+            "CN_unique_values_by_min_dist_method", values
+        )
 
-    def filter_by_CN_best_methods_containing(self, values: list[int]) -> set[str]:
-        return self._filter_contains_any("CN_unique_values_by_best_methods", values)
+    def filter_by_CN_best_methods_containing(
+        self, values: list[int]
+    ) -> set[str]:
+        return self._filter_contains_any(
+            "CN_unique_values_by_best_methods", values
+        )
 
-    def filter_by_CN_best_methods_exact_matching(self, values: list[int]) -> set[str]:
-        return self._filter_exact_match("CN_unique_values_by_best_methods", values)
+    def filter_by_CN_best_methods_exact_matching(
+        self, values: list[int]
+    ) -> set[str]:
+        return self._filter_exact_match(
+            "CN_unique_values_by_best_methods", values
+        )
 
     def _filter_by_range(
         self, property: str, min: float | int, max: float | int
@@ -407,16 +432,22 @@ class CifEnsemble:
     def filter_by_min_distance(
         self, min_distance: float, max_distance: float
     ) -> set[str]:
-        return self._filter_by_range("shortest_distance", min_distance, max_distance)
+        return self._filter_by_range(
+            "shortest_distance", min_distance, max_distance
+        )
 
-    def filter_by_supercell_count(self, min_count: int, max_count: int) -> set[str]:
+    def filter_by_supercell_count(
+        self, min_count: int, max_count: int
+    ) -> set[str]:
         return self._filter_by_range(
             "supercell_atom_count",
             min_count,
             max_count,
         )
 
-    def move_cif_files(self, file_paths: set[str], to_directory_path: str) -> None:
+    def move_cif_files(
+        self, file_paths: set[str], to_directory_path: str
+    ) -> None:
         """Move a set of CIF files to a destination directory.
 
         Parameters
@@ -437,7 +468,9 @@ class CifEnsemble:
         """
         move_files(to_directory_path, list(file_paths))
 
-    def copy_cif_files(self, file_paths: set[str], to_directory_path: str) -> None:
+    def copy_cif_files(
+        self, file_paths: set[str], to_directory_path: str
+    ) -> None:
         """Copy a set of CIF files to a destination directory.
 
         Parameters
@@ -532,7 +565,9 @@ class CifEnsemble:
             output_dir,
         )
 
-    def generate_space_group_number_histogram(self, display=False, output_dir=None):
+    def generate_space_group_number_histogram(
+        self, display=False, output_dir=None
+    ):
         """Generate a histogram of the 'space_group_number' property from CIF
         files.
 
@@ -557,7 +592,9 @@ class CifEnsemble:
             output_dir,
         )
 
-    def generate_space_group_name_histogram(self, display=False, output_dir=None):
+    def generate_space_group_name_histogram(
+        self, display=False, output_dir=None
+    ):
         """Generate a histogram of the 'space_group_name' property from CIF
         files.
 
@@ -582,7 +619,9 @@ class CifEnsemble:
             output_dir,
         )
 
-    def generate_supercell_size_histogram(self, display=False, output_dir=None):
+    def generate_supercell_size_histogram(
+        self, display=False, output_dir=None
+    ):
         """Generate a histogram of the 'supercell_count' property from CIF
         files.
 
@@ -632,7 +671,9 @@ class CifEnsemble:
             output_dir,
         )
 
-    def generate_CN_by_min_dist_method_histogram(self, display=False, output_dir=None):
+    def generate_CN_by_min_dist_method_histogram(
+        self, display=False, output_dir=None
+    ):
         """Generate a histogram of the 'CN_by_min' property from CIF files.
 
         This method creates a histogram based on the 'CN_by_min' statistics of
@@ -656,7 +697,9 @@ class CifEnsemble:
             output_dir,
         )
 
-    def generate_CN_by_best_methods_histogram(self, display=False, output_dir=None):
+    def generate_CN_by_best_methods_histogram(
+        self, display=False, output_dir=None
+    ):
         """Generate a histogram of the 'CN_by_best_methods' property from CIF
         files.
 
@@ -681,7 +724,9 @@ class CifEnsemble:
             output_dir,
         )
 
-    def generate_composition_type_histogram(self, display=False, output_dir=None):
+    def generate_composition_type_histogram(
+        self, display=False, output_dir=None
+    ):
         """Generate a histogram of the 'composition_type' property from CIF
         files.
 
@@ -706,7 +751,9 @@ class CifEnsemble:
             output_dir,
         )
 
-    def generate_site_mixing_type_histogram(self, display=False, output_dir=None):
+    def generate_site_mixing_type_histogram(
+        self, display=False, output_dir=None
+    ):
         """Generate a histogram of the 'site_mixing_type' property from CIF
         files.
 

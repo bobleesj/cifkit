@@ -40,7 +40,7 @@ _chemical_melting_point                  2298
 # Bibliographic data
 
 _publ_section_title
-'Phase diagram of the Nd-Te system and the properties of the phases'          
+'Phase diagram of the Nd-Te system and the properties of the phases'
 _journal_coden_ASTM                      INOMAF
 _journal_name_full                       'Inorg. Mater.'
 _journal_year                            1966
@@ -348,4 +348,3 @@ loop_
  6 2 0 0.991 10
 
 # End of data set 531692
-

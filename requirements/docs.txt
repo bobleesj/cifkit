@@ -1,5 +1,7 @@
-mkdocstrings
-mkdocstrings-python
-mkdocs
-mkdocs-material
-mkdocs-jupyter
+sphinx
+sphinx_rtd_theme
+sphinx-copybutton
+sphinxcontrib-apidoc
+doctr
+nbsphinx
+ipykernel

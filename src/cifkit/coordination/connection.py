@@ -1,4 +1,6 @@
-def get_CN_connections_by_best_methods(best_methods, connections: dict) -> dict:
+def get_CN_connections_by_best_methods(
+    best_methods, connections: dict
+) -> dict:
     """Retrieve connections limited by the number of vertices (CN) for each
     label."""
     CN_connections = {}

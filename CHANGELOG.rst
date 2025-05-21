@@ -9,82 +9,39 @@ Release Notes
 
 **Added:**
 
-* cifkit accepted to JOSS
-
+* Publish ``cikift`` to Journal of Open Source Software (JOSS) with DOI: `10.21105/joss.05923 <https://doi.org/10.21105/joss.07205>`_.
 
 1.0.5
 =====
 
 **Added:**
 
-* pre-commit hook for each pull request
-* automated PyPI
-* Core docstrings to Cif and CifEnsembleo classes
-* CifEnsemble support for ICSD, COD, MP files
-* Support CCDC CIF files
-* Use GitHub Actions to deploy to PyPI and update CHANGELOG.rst
-
-**Fixed:**
-
-* Simpler issue templates used in Billinge Group
-* Preprocess .cif files in CifEnsemble before initializing into CIF objects
-
-**Removed:**
-
-* Support for click module
-
-
-
-1.0.4
-=====
-
-**Fixed:**
-
-* do not print atom site info during Cif init
+* Add docstrings to ``Cif`` and ``CifEnsembleo`` classes.
+* Add support for ICSD, COD, MP, CCDC files.
+* Use GitHub Actions to deploy to PyPI and update ``CHANGELOG.rst``.
 
 1.0.3
 =====
 
 **Added:**
 
-* support .cif file formats of PCD, COD, Materials Studio, ICSD
+* Support .cif file formats of PCD, COD, Materials Studio, ICSD.
 
 **Fixed:**
 
-* update `U` Pauling CN12 value from 1.51 to 1.516
-
+* Update `U` Pauling CN12 value from 1.51 to 1.516.
 
 1.0.2
 =====
 
 **Added:**
 
-* initializing progress statement for `CifEnsemble` to enhance user experience (https://github.com/bobleesj/cifkit/issues/12)
-* print option for `compute_connections` in CifEnsemble (https://github.com/bobleesj/cifkit/issues/13)
-* preprocessing option for `CifEnsemble` to handle input data more flexibly (https://github.com/bobleesj/cifkit/issues/15)
+* Initializing progress statement for `CifEnsemble` to enhance user experience.
+* Print option for `compute_connections` in CifEnsemble.
+* Preprocessing option for `CifEnsemble` to handle input data more flexibly.
 
 **Fixed:**
 
-* error computing polyhedron metrics: index 4 is out of bounds for axis 0 with size 4 (https://github.com/bobleesj/cifkit/issues/10)
-* warning for using categorical units to plot a list of strings for histogram generation (https://github.com/bobleesj/cifkit/issues/11)
-* misclassification issue during preprocessing: do not move to 'others' folder if elements do not belong to Mendeleev table (https://github.com/bobleesj/cifkit/issues/14)
-
-
-1.0.1
-=====
-
-**Fixed:**
-
-* error computing polyhedron metrics: index 4 is out of bounds (https://github.com/bobleesj/cifkit/issues/10)
-
-
-1.0.0
-=====
-
-**Added:**
-
-* issue and pull request templates.
-
-### Fixed
-
-* duplicate connected points in connections with atomic mixing (https://github.com/bobleesj/cifkit/issues/7)
+* Error computing polyhedron metrics: index 4 is out of bounds for axis 0 with size 4.
+* Warning for using categorical units to plot a list of strings for histogram generation.
+* Misclassification issue during preprocessing: do not move to 'others' folder if elements do not belong to Mendeleev table.

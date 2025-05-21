@@ -96,7 +96,9 @@ def get_nearest_dists_per_site(
     return dist_dict, dist_set
 
 
-def get_most_connected_point_per_site(label: str, dist_dict: dict, dist_set: set):
+def get_most_connected_point_per_site(
+    label: str, dist_dict: dict, dist_set: set
+):
     """Identify the reference point with the highest number of connections
     within the 50 shortest distances from a set of distances."""
     sorted_unique_dists = sorted(dist_set)
@@ -142,7 +144,9 @@ def remove_duplicate_connections(connections):
         unique_list = []
         for item in value:
             # The tuple representing the endpoint coordinates is item[3]
-            coords = tuple(item[3])  # Need to convert list to tuple to use it in a set
+            coords = tuple(
+                item[3]
+            )  # Need to convert list to tuple to use it in a set
             if coords not in seen:
                 seen.add(coords)
                 unique_list.append(item)

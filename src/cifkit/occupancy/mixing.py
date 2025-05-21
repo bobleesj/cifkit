@@ -30,7 +30,9 @@ def get_site_mixing_type(site_labels: list[str], atom_site_info: dict) -> str:
     """Get file-level atomic site mixing info."""
 
     is_full_occupancy = True
-    coord_occupancy_sum = compute_coord_occupancy_sum(site_labels, atom_site_info)
+    coord_occupancy_sum = compute_coord_occupancy_sum(
+        site_labels, atom_site_info
+    )
 
     # Now check summed occupancies
     for _, occupancy_sum in coord_occupancy_sum.items():
@@ -60,7 +62,9 @@ def get_mixing_type_per_pair_dict(
     site_labels: list[str], label_pairs: list[str], atom_site_info: dict
 ):
     """Return a dictionary, alphabetically sorted pair."""
-    coord_occupancy_sum = compute_coord_occupancy_sum(site_labels, atom_site_info)
+    coord_occupancy_sum = compute_coord_occupancy_sum(
+        site_labels, atom_site_info
+    )
 
     # Store categorizy per pair
     atom_site_pair_dict = {}
@@ -113,16 +117,17 @@ def get_mixing_type_per_pair_dict(
         # Check 1. One of the labels is deficient
         # Check 2. Both labels are not atomic mixed
         if (is_first_label_site_deficient or is_second_label_deficient) and (
-            not is_first_label_atomic_mixed and not is_second_label_atomic_mixed
+            not is_first_label_atomic_mixed
+            and not is_second_label_atomic_mixed
         ):
             atom_site_pair_dict[pair] = "deficiency_without_atomic_mixing"
 
         # Check 1. Both labels are not deficient
         # Check 2. At least one label is atomic mixed
         # Assign "2" for "full_occupancy_atomic_mixing"
-        if (not is_first_label_site_deficient and not is_second_label_deficient) and (
-            is_first_label_atomic_mixed or is_second_label_atomic_mixed
-        ):
+        if (
+            not is_first_label_site_deficient and not is_second_label_deficient
+        ) and (is_first_label_atomic_mixed or is_second_label_atomic_mixed):
             atom_site_pair_dict[pair] = "full_occupancy_atomic_mixing"
 
         # Assign "1" for "deficiency_with_atomic_mixing"

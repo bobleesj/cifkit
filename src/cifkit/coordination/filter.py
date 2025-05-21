@@ -41,7 +41,9 @@ def find_best_polyhedron(max_gaps_per_label, connections):
                 continue  # Move to the next method
 
             # Returns non if there is any error
-            polyhedron_metrics = compute_polyhedron_metrics(polyhedron_points, hull)
+            polyhedron_metrics = compute_polyhedron_metrics(
+                polyhedron_points, hull
+            )
 
             # If there is no metrics, then skip the method
             if polyhedron_metrics is None:
@@ -69,7 +71,9 @@ def get_CN_connections_by_min_dist_method(max_gaps_per_label, connections):
     CN_by_shortest_dist = {}
     for label, methods_info in max_gaps_per_label.items():
         # Access the 'dist_by_shortest_dist' method and get the 'CN' value
-        CN_by_shortest_dist[label] = methods_info["dist_by_shortest_dist"]["CN"]
+        CN_by_shortest_dist[label] = methods_info["dist_by_shortest_dist"][
+            "CN"
+        ]
 
     CN_connections: dict = {}
     # Iterate through each label and number of connections

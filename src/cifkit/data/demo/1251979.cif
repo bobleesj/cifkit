@@ -39,7 +39,7 @@ _chemical_formula_weight                 60.1
 # Bibliographic data
 
 _publ_section_title
-'The structures of the \b-cristobalite phases of SiO~2~ and AlPO~4~'          
+'The structures of the \b-cristobalite phases of SiO~2~ and AlPO~4~'
 _journal_coden_ASTM                      PHMAA4
 _journal_name_full                       'Philos. Mag.'
 _journal_year                            1975
@@ -315,4 +315,3 @@ _pd_proc_ls_proof_wR_factor              ?
 _refine_ls_R_I_factor                    ?
 
 # End of data set 1251979
-

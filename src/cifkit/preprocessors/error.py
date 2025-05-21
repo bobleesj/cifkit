@@ -58,9 +58,13 @@ def move_files_based_on_errors(cif_dir_path, file_paths):
             else:
                 error_type = "error_others"
 
-            _make_directory_and_move(file_path, error_directories[error_type], filename)
+            _make_directory_and_move(
+                file_path, error_directories[error_type], filename
+            )
             num_files_moved[error_type] += 1
-            print(f"File {filename} moved to '{error_type}' due to: {error_message}")
+            print(
+                f"File {filename} moved to '{error_type}' due to: {error_message}"
+            )
 
     # Display the number of files moved to each folder
     print("\nSUMMARY")

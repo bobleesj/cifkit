@@ -30,18 +30,18 @@ _database_code_PDF                       04-010-8468
 # Entry summary
 
 _chemical_formula_structural
-'H K~11~ W~18~ Sn~3~ P~2~ O~68~ [H~2~ O]~27~'                                 
+'H K~11~ W~18~ Sn~3~ P~2~ O~68~ [H~2~ O]~27~'
 _chemical_formula_sum                    'H54 K11 O95 P2 Sn3 W18'
 _chemical_name_mineral                   ?
 _chemical_compound_source                ?
 _chemical_name_structure_type
-HK~11~W~18~Sn~3~P~2~O~68~[H~2~O]~27~,mP524,14                                 
+HK~11~W~18~Sn~3~P~2~O~68~[H~2~O]~27~,mP524,14
 _chemical_formula_weight                 5732.8
 
 # Bibliographic data
 
 _publ_section_title
-'K~11~[HSn^2+^~3~(PW^6+^~9~O~34~)~2~].27H~2~O - Synthesis and Structure'      
+'K~11~[HSn^2+^~3~(PW^6+^~9~O~34~)~2~].27H~2~O - Synthesis and Structure'
 _journal_coden_ASTM                      ZAACAB
 _journal_name_full                       'Z. Anorg. Allg. Chem.'
 _journal_year                            1996
@@ -295,4 +295,3 @@ _refine_ls_R_factor_gt                   0.090
 _refine_ls_wR_factor_gt                  0.225
 
 # End of data set 1708560
-
