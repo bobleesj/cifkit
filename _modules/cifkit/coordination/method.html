@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.coordination.method &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cifkit.coordination.method</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cifkit.coordination.method</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.string_parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_atom_type_from_label</span>
+
+
+<div class="viewcode-block" id="compute_CN_max_gap_per_site">
+<a class="viewcode-back" href="../../../api/cifkit.coordination.method.html#cifkit.coordination.method.compute_CN_max_gap_per_site">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_CN_max_gap_per_site</span><span class="p">(</span>
+    <span class="n">radius_sum_data</span><span class="p">,</span>
+    <span class="n">all_labels_connections</span><span class="p">,</span>
+    <span class="n">is_radius_data_available</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">site_mixing_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">:</span><span class="nb">float</span><span class="p">]]]:</span>
+    <span class="n">use_all_methods</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">is_radius_data_available</span> <span class="ow">and</span> <span class="n">site_mixing_type</span> <span class="o">==</span> <span class="s2">&quot;full_occupancy&quot;</span><span class="p">:</span>
+        <span class="n">use_all_methods</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">use_all_methods</span><span class="p">:</span>
+        <span class="n">methods</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;dist_by_shortest_dist&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;dist_by_CIF_radius_sum&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;dist_by_CIF_radius_refined_sum&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;dist_by_Pauling_radius_sum&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">methods</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;dist_by_shortest_dist&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+
+    <span class="n">norm_dists_per_label</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">max_gaps_per_label</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">ref_label</span><span class="p">,</span> <span class="n">connection_data</span> <span class="ow">in</span> <span class="n">all_labels_connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Initialize each label</span>
+        <span class="n">norm_dists_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">}</span>
+        <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">method</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max_gap&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;CN&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span>
+        <span class="p">}</span>
+        <span class="c1"># Limit to 20 connection data points</span>
+        <span class="n">connection_data</span> <span class="o">=</span> <span class="n">connection_data</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+        <span class="n">shortest_dist</span> <span class="o">=</span> <span class="n">connection_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">previous_values</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">method</span><span class="p">:</span> <span class="mf">0.0</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">connection</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">connection_data</span><span class="p">):</span>
+            <span class="n">pair_dist</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">connected_label</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Get new rad sum for each ref label</span>
+            <span class="k">if</span> <span class="n">use_all_methods</span><span class="p">:</span>
+                <span class="n">CIF_radius_sum_norm_value</span> <span class="o">=</span> <span class="n">get_rad_sum_value</span><span class="p">(</span>
+                    <span class="n">radius_sum_data</span><span class="p">,</span>
+                    <span class="s2">&quot;CIF_radius_sum&quot;</span><span class="p">,</span>
+                    <span class="n">ref_label</span><span class="p">,</span>
+                    <span class="n">connected_label</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">CIF_radius_sum_refined_norm_value</span> <span class="o">=</span> <span class="n">get_rad_sum_value</span><span class="p">(</span>
+                    <span class="n">radius_sum_data</span><span class="p">,</span>
+                    <span class="s2">&quot;CIF_radius_refined_sum&quot;</span><span class="p">,</span>
+                    <span class="n">ref_label</span><span class="p">,</span>
+                    <span class="n">connected_label</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">Pauling_rad_sum_norm_value</span> <span class="o">=</span> <span class="n">get_rad_sum_value</span><span class="p">(</span>
+                    <span class="n">radius_sum_data</span><span class="p">,</span>
+                    <span class="s2">&quot;Pauling_radius_sum&quot;</span><span class="p">,</span>
+                    <span class="n">ref_label</span><span class="p">,</span>
+                    <span class="n">connected_label</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">norm_dist_by_CIF_radius_sum</span> <span class="o">=</span> <span class="n">compute_normalized_value</span><span class="p">(</span>
+                    <span class="n">pair_dist</span><span class="p">,</span> <span class="n">CIF_radius_sum_norm_value</span>
+                <span class="p">)</span>
+                <span class="n">norm_dist_by_CIF_rad_ref_sum</span> <span class="o">=</span> <span class="n">compute_normalized_value</span><span class="p">(</span>
+                    <span class="n">pair_dist</span><span class="p">,</span> <span class="n">CIF_radius_sum_refined_norm_value</span>
+                <span class="p">)</span>
+                <span class="n">norm_dist_by_Pauling_radius_sum</span> <span class="o">=</span> <span class="n">compute_normalized_value</span><span class="p">(</span>
+                    <span class="n">pair_dist</span><span class="p">,</span> <span class="n">Pauling_rad_sum_norm_value</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Compute normalized distances</span>
+            <span class="n">norm_dist_by_min_dist</span> <span class="o">=</span> <span class="n">compute_normalized_value</span><span class="p">(</span>
+                <span class="n">pair_dist</span><span class="p">,</span> <span class="n">shortest_dist</span>
+            <span class="p">)</span>
+            <span class="c1"># Store distances</span>
+            <span class="k">if</span> <span class="n">use_all_methods</span><span class="p">:</span>
+                <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;dist_by_shortest_dist&quot;</span><span class="p">:</span> <span class="n">norm_dist_by_min_dist</span><span class="p">,</span>
+                    <span class="s2">&quot;dist_by_CIF_radius_sum&quot;</span><span class="p">:</span> <span class="n">norm_dist_by_CIF_radius_sum</span><span class="p">,</span>
+                    <span class="s2">&quot;dist_by_CIF_radius_refined_sum&quot;</span><span class="p">:</span> <span class="n">norm_dist_by_CIF_rad_ref_sum</span><span class="p">,</span>
+                    <span class="s2">&quot;dist_by_Pauling_radius_sum&quot;</span><span class="p">:</span> <span class="n">norm_dist_by_Pauling_radius_sum</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;dist_by_shortest_dist&quot;</span><span class="p">:</span> <span class="n">norm_dist_by_min_dist</span><span class="p">,</span>
+                <span class="p">}</span>
+
+            <span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">norm_distance</span> <span class="ow">in</span> <span class="n">distances</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">norm_dists_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">norm_distance</span><span class="p">)</span>
+
+                <span class="c1"># Calculate and update max gaps</span>
+                <span class="k">if</span> <span class="n">previous_values</span><span class="p">[</span><span class="n">method</span><span class="p">]:</span>
+                    <span class="n">current_gap</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                        <span class="nb">abs</span><span class="p">(</span><span class="n">norm_distance</span> <span class="o">-</span> <span class="n">previous_values</span><span class="p">[</span><span class="n">method</span><span class="p">]),</span>
+                        <span class="mi">3</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span>
+                        <span class="n">current_gap</span>
+                        <span class="o">&gt;</span> <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span><span class="s2">&quot;max_gap&quot;</span><span class="p">]</span>
+                    <span class="p">):</span>
+                        <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span>
+                            <span class="s2">&quot;max_gap&quot;</span>
+                        <span class="p">]</span> <span class="o">=</span> <span class="n">current_gap</span>
+                        <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span><span class="s2">&quot;CN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
+                <span class="n">previous_values</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">norm_distance</span>
+
+    <span class="k">return</span> <span class="n">max_gaps_per_label</span></div>
+
+
+
+<div class="viewcode-block" id="compute_normalized_value">
+<a class="viewcode-back" href="../../../api/cifkit.coordination.method.html#cifkit.coordination.method.compute_normalized_value">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_normalized_value</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">ref_number</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">((</span><span class="n">number</span> <span class="o">/</span> <span class="n">ref_number</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_rad_sum_value">
+<a class="viewcode-back" href="../../../api/cifkit.coordination.method.html#cifkit.coordination.method.get_rad_sum_value">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_rad_sum_value</span><span class="p">(</span>
+    <span class="n">rad_sum_data</span><span class="p">,</span> <span class="n">method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ref_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">other_label</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the sum of radii value for a given pair of elements, ensuring the</span>
+<span class="sd">    pair is alphabetically sorted.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Extract the element types from the labels</span>
+    <span class="n">ref_element</span> <span class="o">=</span> <span class="n">get_atom_type_from_label</span><span class="p">(</span><span class="n">ref_label</span><span class="p">)</span>
+    <span class="n">other_element</span> <span class="o">=</span> <span class="n">get_atom_type_from_label</span><span class="p">(</span><span class="n">other_label</span><span class="p">)</span>
+
+    <span class="c1"># Sort the elements alphabetically to form a consistent key</span>
+    <span class="n">sorted_elements</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">ref_element</span><span class="p">,</span> <span class="n">other_element</span><span class="p">])</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sorted_elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">sorted_elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Ensure that method_name is valid and key exists in the dictionary</span>
+    <span class="k">if</span> <span class="n">method_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rad_sum_data</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Method </span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2"> not found in rad_sum&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rad_sum_data</span><span class="p">[</span><span class="n">method_name</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> not found in method </span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2"> of rad_sum&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rad_sum_data</span><span class="p">[</span><span class="n">method_name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

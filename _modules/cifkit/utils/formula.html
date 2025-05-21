@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.utils.formula &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cifkit.utils.formula</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cifkit.utils.formula</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Parses a formula.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.error_messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeneralError</span>
+
+
+<div class="viewcode-block" id="get_validated_formula_label">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_validated_formula_label">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_validated_formula_label</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">GeneralError</span><span class="o">.</span><span class="n">INVALID_TYPE</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">formula</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">GeneralError</span><span class="o">.</span><span class="n">EMPTY_STRING_INPUT</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">trimmed_formula</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">trimmed_formula</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">trimmed_formula</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">GeneralError</span><span class="o">.</span><span class="n">NON_ALPHABETIC_START</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">trimmed_formula</span></div>
+
+
+
+<div class="viewcode-block" id="get_parsed_formula">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_parsed_formula">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_parsed_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of tuples, each tuple containing an element and its</span>
+<span class="sd">    index.&quot;&quot;&quot;</span>
+    <span class="n">trimmed_formula</span> <span class="o">=</span> <span class="n">get_validated_formula_label</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;([A-Z][a-z]*)(\d*\.?\d*)&quot;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">trimmed_formula</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">elements</span></div>
+
+
+
+<div class="viewcode-block" id="get_normalized_formula">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_normalized_formula">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_normalized_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">demical_places</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a formula with the stoichiometry coefficient sum of 1.&quot;&quot;&quot;</span>
+    <span class="n">index_sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">normalized_formula_parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">parsed_formula_set</span> <span class="o">=</span> <span class="n">get_parsed_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the sum of all indices</span>
+    <span class="k">for</span> <span class="n">element</span><span class="p">,</span> <span class="n">element_index</span> <span class="ow">in</span> <span class="n">parsed_formula_set</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">element_index</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">index_sum</span> <span class="o">+=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">index_sum</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element_index</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">element</span><span class="p">,</span> <span class="n">element_index</span> <span class="ow">in</span> <span class="n">parsed_formula_set</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">element_index</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">normalized_index</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">index_sum</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">normalized_index</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element_index</span><span class="p">)</span> <span class="o">/</span> <span class="n">index_sum</span>
+
+        <span class="n">normalized_formula_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}{</span><span class="n">normalized_index</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">demical_places</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Join all parts into one string for the normalized formula</span>
+    <span class="n">normalized_formula</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">normalized_formula_parts</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">normalized_formula</span></div>
+
+
+
+<div class="viewcode-block" id="get_parsed_norm_formula">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_parsed_norm_formula">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_parsed_norm_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of tuples, each tuple containing element and normalized</span>
+<span class="sd">    index.&quot;&quot;&quot;</span>
+    <span class="n">normalized_formula</span> <span class="o">=</span> <span class="n">get_normalized_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+    <span class="n">parsed_normalized_formula</span> <span class="o">=</span> <span class="n">get_parsed_formula</span><span class="p">(</span><span class="n">normalized_formula</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parsed_normalized_formula</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_elements">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_unique_elements">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_elements</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="s2">&quot;Return a set of elements parsed from a formula.&quot;</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="n">get_parsed_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+    <span class="n">unique_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span> <span class="k">for</span> <span class="n">element</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">unique_elements</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_element_count">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_unique_element_count">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_element_count</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the number of unique elements in the chemical formula.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">get_unique_elements</span><span class="p">(</span><span class="n">formula</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_elements_from_formulas">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_unique_elements_from_formulas">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_elements_from_formulas</span><span class="p">(</span><span class="n">formulas</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return unique elements from a list of formulas.&quot;&quot;&quot;</span>
+    <span class="n">unique_elements</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># Create a set to store unique elements</span>
+
+    <span class="k">for</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">formulas</span><span class="p">:</span>
+        <span class="n">parsed_formula</span> <span class="o">=</span> <span class="n">get_parsed_formula</span><span class="p">(</span>
+            <span class="n">formula</span>
+        <span class="p">)</span>  <span class="c1"># Assume this function returns a list of tuples</span>
+        <span class="k">for</span> <span class="n">element</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">parsed_formula</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span><span class="p">:</span>  <span class="c1"># Ensure that element is not empty</span>
+                <span class="n">unique_elements</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>  <span class="c1"># Add the element to the set</span>
+
+    <span class="k">return</span> <span class="n">unique_elements</span></div>
+
+
+
+<div class="viewcode-block" id="get_subscripted_formula">
+<a class="viewcode-back" href="../../../api/cifkit.utils.formula.html#cifkit.utils.formula.get_subscripted_formula">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_subscripted_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a subscripted formula used for plotting.&quot;&quot;&quot;</span>
+    <span class="n">validated_formula</span> <span class="o">=</span> <span class="n">get_validated_formula_label</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+    <span class="c1"># Use regular expression to find elements and numbers</span>
+    <span class="n">subscripted_formula</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;([A-Z][a-z]*)(\d*\.?\d*)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1$_{\2}$&quot;</span><span class="p">,</span> <span class="n">validated_formula</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">subscripted_formula</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.utils.error_messages module &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cifkit.utils.folder module" href="cifkit.utils.folder.html" />
+    <link rel="prev" title="cifkit.utils.distance module" href="cifkit.utils.distance.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="cifkit.html">Package API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cifkit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cifkit.coordination.html">cifkit.coordination package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.data.html">cifkit.data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.figures.html">cifkit.figures package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.models.html">cifkit.models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.occupancy.html">cifkit.occupancy package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.preprocessors.html">cifkit.preprocessors package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="cifkit.utils.html">cifkit.utils package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="cifkit.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cifkit.utils.html#module-cifkit.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.html#module-cifkit">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="cifkit.html">cifkit package</a></li>
+          <li class="breadcrumb-item"><a href="cifkit.utils.html">cifkit.utils package</a></li>
+      <li class="breadcrumb-item active">cifkit.utils.error_messages module</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/api/cifkit.utils.error_messages.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-cifkit.utils.error_messages">
+<span id="cifkit-utils-error-messages-module"></span><h1>cifkit.utils.error_messages module<a class="headerlink" href="#module-cifkit.utils.error_messages" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.CifParserError">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.utils.error_messages.</span></span><span class="sig-name descname"><span class="pre">CifParserError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/utils/error_messages.html#CifParserError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.error_messages.CifParserError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.CifParserError.DUPLICATE_LABELS">
+<span class="sig-name descname"><span class="pre">DUPLICATE_LABELS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">file</span> <span class="pre">contains</span> <span class="pre">duplicate</span> <span class="pre">atom</span> <span class="pre">site</span> <span class="pre">labels.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.CifParserError.DUPLICATE_LABELS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.CifParserError.INVALID_LOOP_TAGS">
+<span class="sig-name descname"><span class="pre">INVALID_LOOP_TAGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">returned</span> <span class="pre">loop</span> <span class="pre">tags</span> <span class="pre">do</span> <span class="pre">not</span> <span class="pre">match</span> <span class="pre">the</span> <span class="pre">expected</span> <span class="pre">tags.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.CifParserError.INVALID_LOOP_TAGS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.CifParserError.INVALID_PARSED_ELEMENT">
+<span class="sig-name descname"><span class="pre">INVALID_PARSED_ELEMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">element</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">correctly</span> <span class="pre">parsed</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">site</span> <span class="pre">label.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.CifParserError.INVALID_PARSED_ELEMENT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.CifParserError.MISSING_COORDINATES">
+<span class="sig-name descname"><span class="pre">MISSING_COORDINATES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Missing</span> <span class="pre">atomic</span> <span class="pre">coordinates'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.CifParserError.MISSING_COORDINATES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.CifParserError.MISSING_LOOP_VALUES">
+<span class="sig-name descname"><span class="pre">MISSING_LOOP_VALUES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Wrong</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">values</span> <span class="pre">in</span> <span class="pre">loop'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.CifParserError.MISSING_LOOP_VALUES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.CifParserError.SYMMETRY_OPERATION_ERROR">
+<span class="sig-name descname"><span class="pre">SYMMETRY_OPERATION_ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">processing</span> <span class="pre">symmetry</span> <span class="pre">operation'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.CifParserError.SYMMETRY_OPERATION_ERROR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.FileError">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.utils.error_messages.</span></span><span class="sig-name descname"><span class="pre">FileError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/utils/error_messages.html#FileError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.error_messages.FileError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.FileError.FILE_IS_EMPTY">
+<span class="sig-name descname"><span class="pre">FILE_IS_EMPTY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">file</span> <span class="pre">at</span> <span class="pre">{file_path}</span> <span class="pre">is</span> <span class="pre">empty.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.FileError.FILE_IS_EMPTY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.FileError.FILE_NOT_FOUND">
+<span class="sig-name descname"><span class="pre">FILE_NOT_FOUND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">file</span> <span class="pre">at</span> <span class="pre">{file_path}</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">found.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.FileError.FILE_NOT_FOUND" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.GeneralError">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.utils.error_messages.</span></span><span class="sig-name descname"><span class="pre">GeneralError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/utils/error_messages.html#GeneralError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.error_messages.GeneralError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.GeneralError.EMPTY_STRING_INPUT">
+<span class="sig-name descname"><span class="pre">EMPTY_STRING_INPUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">formula/label</span> <span class="pre">cannot</span> <span class="pre">be</span> <span class="pre">empty.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.GeneralError.EMPTY_STRING_INPUT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.GeneralError.INVALID_CIF_BLOCK">
+<span class="sig-name descname"><span class="pre">INVALID_CIF_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">CIF</span> <span class="pre">block</span> <span class="pre">should</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">None.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.GeneralError.INVALID_CIF_BLOCK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.GeneralError.INVALID_TYPE">
+<span class="sig-name descname"><span class="pre">INVALID_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">formula/label</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">a</span> <span class="pre">string.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.GeneralError.INVALID_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.GeneralError.NON_ALPHABETIC_START">
+<span class="sig-name descname"><span class="pre">NON_ALPHABETIC_START</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">first</span> <span class="pre">character</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">alphabetic</span> <span class="pre">after</span> <span class="pre">trimming.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.GeneralError.NON_ALPHABETIC_START" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.GeneralError.NON_MATCHING_ELEMENT">
+<span class="sig-name descname"><span class="pre">NON_MATCHING_ELEMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'No</span> <span class="pre">matching</span> <span class="pre">element</span> <span class="pre">was</span> <span class="pre">parsed</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">site</span> <span class="pre">label.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.GeneralError.NON_MATCHING_ELEMENT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.OccupancyError">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.utils.error_messages.</span></span><span class="sig-name descname"><span class="pre">OccupancyError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/utils/error_messages.html#OccupancyError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.error_messages.OccupancyError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.utils.error_messages.OccupancyError.INVALID_MIXING_TYPE">
+<span class="sig-name descname"><span class="pre">INVALID_MIXING_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'The</span> <span class="pre">file</span> <span class="pre">cannot</span> <span class="pre">be</span> <span class="pre">categorized</span> <span class="pre">into</span> <span class="pre">one</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">4</span> <span class="pre">mixing</span> <span class="pre">types.'</span></em><a class="headerlink" href="#cifkit.utils.error_messages.OccupancyError.INVALID_MIXING_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cifkit.utils.distance.html" class="btn btn-neutral float-left" title="cifkit.utils.distance module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cifkit.utils.folder.html" class="btn btn-neutral float-right" title="cifkit.utils.folder module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

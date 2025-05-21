@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.preprocessors.environment &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cifkit.preprocessors.environment</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cifkit.preprocessors.environment</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance</span><span class="p">,</span> <span class="n">unit</span>
+
+
+<div class="viewcode-block" id="get_site_connections">
+<a class="viewcode-back" href="../../../api/cifkit.preprocessors.environment.html#cifkit.preprocessors.environment.get_site_connections">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_site_connections</span><span class="p">(</span>
+    <span class="n">parsed_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">unitcell_points</span><span class="p">,</span>
+    <span class="n">supercell_points</span><span class="p">,</span>
+    <span class="n">cutoff_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute all pair distances per site label.&quot;&quot;&quot;</span>
+    <span class="n">labels</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">angles</span> <span class="o">=</span> <span class="n">parsed_data</span>
+
+    <span class="n">all_labels_connections</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">site_label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="n">filtered_unitcell_points</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">point</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">unitcell_points</span> <span class="k">if</span> <span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">site_label</span>
+        <span class="p">]</span>
+
+        <span class="n">dist_result</span> <span class="o">=</span> <span class="n">get_nearest_dists_per_site</span><span class="p">(</span>
+            <span class="n">filtered_unitcell_points</span><span class="p">,</span>
+            <span class="n">supercell_points</span><span class="p">,</span>
+            <span class="n">cutoff_radius</span><span class="p">,</span>
+            <span class="n">lengths</span><span class="p">,</span>
+            <span class="n">angles</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">dist_dict</span><span class="p">,</span> <span class="n">dist_set</span> <span class="o">=</span> <span class="n">dist_result</span>
+
+        <span class="p">(</span>
+            <span class="n">label</span><span class="p">,</span>
+            <span class="n">connections</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">get_most_connected_point_per_site</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">dist_dict</span><span class="p">,</span> <span class="n">dist_set</span><span class="p">)</span>
+
+        <span class="n">all_labels_connections</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">connections</span>
+    <span class="k">return</span> <span class="n">remove_duplicate_connections</span><span class="p">(</span><span class="n">all_labels_connections</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_nearest_dists_per_site">
+<a class="viewcode-back" href="../../../api/cifkit.preprocessors.environment.html#cifkit.preprocessors.environment.get_nearest_dists_per_site">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_nearest_dists_per_site</span><span class="p">(</span>
+    <span class="n">filtered_unitcell_points</span><span class="p">,</span>
+    <span class="n">supercell_points</span><span class="p">,</span>
+    <span class="n">cutoff_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lengths</span><span class="p">,</span>
+    <span class="n">angles_rad</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># Initialize a dictionary to store the relationships</span>
+    <span class="n">dist_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">dist_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="c1"># Loop through each point in the filtered list</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point_1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filtered_unitcell_points</span><span class="p">):</span>
+        <span class="n">point_2_info</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">point_2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">supercell_points</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">point_1</span> <span class="o">==</span> <span class="n">point_2</span><span class="p">:</span>
+                <span class="k">continue</span>  <span class="c1"># Skip comparison with itself</span>
+            <span class="c1"># Convert fractional to Cartesian coordinates</span>
+            <span class="n">cart_1</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">fractional_to_cartesian</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">point_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">point_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">point_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+                <span class="n">lengths</span><span class="p">,</span>
+                <span class="n">angles_rad</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">cart_2</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">fractional_to_cartesian</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">point_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">point_2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">point_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+                <span class="n">lengths</span><span class="p">,</span>
+                <span class="n">angles_rad</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Calculate the dist between two points</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">calc_dist_two_cart_points</span><span class="p">(</span><span class="n">cart_1</span><span class="p">,</span> <span class="n">cart_2</span><span class="p">)</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+            <span class="c1"># Check the dist</span>
+            <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">cutoff_radius</span> <span class="ow">and</span> <span class="n">dist</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+                <span class="n">point_2_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="n">point_2</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>  <span class="c1"># site label</span>
+                        <span class="n">dist</span><span class="p">,</span>
+                        <span class="p">[</span>
+                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># x</span>
+                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># y</span>
+                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># z</span>
+                        <span class="p">],</span>
+                        <span class="p">[</span>
+                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># x</span>
+                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># y</span>
+                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># z</span>
+                        <span class="p">],</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">dist_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+        <span class="c1"># Store the list in the dictionary with `i` as the key</span>
+        <span class="k">if</span> <span class="n">point_2_info</span><span class="p">:</span>
+            <span class="n">dist_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">point_2_info</span>
+
+    <span class="k">return</span> <span class="n">dist_dict</span><span class="p">,</span> <span class="n">dist_set</span></div>
+
+
+
+<div class="viewcode-block" id="get_most_connected_point_per_site">
+<a class="viewcode-back" href="../../../api/cifkit.preprocessors.environment.html#cifkit.preprocessors.environment.get_most_connected_point_per_site">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_most_connected_point_per_site</span><span class="p">(</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dist_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">dist_set</span><span class="p">:</span> <span class="nb">set</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify the reference point with the highest number of connections</span>
+<span class="sd">    within the 50 shortest distances from a set of distances.&quot;&quot;&quot;</span>
+    <span class="n">sorted_unique_dists</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dist_set</span><span class="p">)</span>
+    <span class="c1"># Get the 30 shortest distances</span>
+    <span class="n">shortest_dists</span> <span class="o">=</span> <span class="n">sorted_unique_dists</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span>
+
+    <span class="c1"># Variables to track the reference point with the highest count</span>
+    <span class="n">max_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_ref_point</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">max_connections</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ref_idx</span><span class="p">,</span> <span class="n">connections</span> <span class="ow">in</span> <span class="n">dist_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Initialize a dictionary to count occurrences of each shortest</span>
+        <span class="n">dist_counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">dist</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">shortest_dists</span><span class="p">}</span>
+
+        <span class="c1"># Count the occurrences of the shortest distances</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">dist_counts</span><span class="p">:</span>
+                <span class="n">dist_counts</span><span class="p">[</span><span class="n">dist</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Calculate the total count of occurrences for this reference point</span>
+        <span class="n">total_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dist_counts</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="c1"># Check if this is the maximum we&#39;ve encountered so far</span>
+        <span class="k">if</span> <span class="n">total_count</span> <span class="o">&gt;</span> <span class="n">max_count</span><span class="p">:</span>
+            <span class="n">max_count</span> <span class="o">=</span> <span class="n">total_count</span>
+            <span class="n">max_ref_point</span> <span class="o">=</span> <span class="n">ref_idx</span>
+            <span class="n">max_connections</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Return the max point</span>
+    <span class="k">if</span> <span class="n">max_ref_point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">label</span><span class="p">,</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">other_label</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cart_1</span><span class="p">,</span> <span class="n">cart_2</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">other_label</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cart_1</span><span class="p">,</span> <span class="n">cart_2</span> <span class="ow">in</span> <span class="n">max_connections</span>
+        <span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="remove_duplicate_connections">
+<a class="viewcode-back" href="../../../api/cifkit.preprocessors.environment.html#cifkit.preprocessors.environment.remove_duplicate_connections">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_duplicate_connections</span><span class="p">(</span><span class="n">connections</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove duplicate connections based on the last set of coordinates.&quot;&quot;&quot;</span>
+    <span class="n">unique_connections</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">unique_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="c1"># The tuple representing the endpoint coordinates is item[3]</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                <span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="p">)</span>  <span class="c1"># Need to convert list to tuple to use it in a set</span>
+            <span class="k">if</span> <span class="n">coords</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+                <span class="n">unique_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">unique_connections</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">unique_list</span>
+    <span class="k">return</span> <span class="n">unique_connections</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,863 +1,326 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-      
-        <link rel="next" href="notebooks/01_cif/">
-      
-      
-      <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
-    
-    
-      
-        <title>cifkit</title>
-      
-    
-    
-      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
-      
-        
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
-      
-      
 
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-      <link rel="stylesheet" href="assets/_mkdocstrings.css">
-    
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit documentation &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
 
-    
-    
-    
-  </head>
   
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#getting-started" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f539c95a"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CIF" href="notebooks/01_cif.html" /> 
+</head>
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="cifkit" class="md-header__button md-logo" aria-label="cifkit" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+          
+          
+          <a href="#" class="icon icon-home">
             cifkit
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              Getting started
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-      
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/bobleesj/cifkit" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
-  </div>
-  <div class="md-source__repository">
-    bobleesj/cifkit
-  </div>
-</a>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
       </div>
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-    
-  
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Getting started
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="notebooks/01_cif/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  CIF
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="notebooks/02_cif_ensemble/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  CifEnsemble
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="api/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  API Reference
-
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-  
-
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="." title="cifkit" class="md-nav__button md-logo" aria-label="cifkit" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    cifkit
-  </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/bobleesj/cifkit" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
-  </div>
-  <div class="md-source__repository">
-    bobleesj/cifkit
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Getting started
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Getting started
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#statement-of-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      Statement of need
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tldr" class="md-nav__link">
-    <span class="md-ellipsis">
-      TL;DR
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#processing-speed-expectation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Processing speed expectation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cif" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cif
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cifensemble" class="md-nav__link">
-    <span class="md-ellipsis">
-      CifEnsemble
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#research-projects-using-cifkit" class="md-nav__link">
-    <span class="md-ellipsis">
-      Research projects using cifkit
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-ask-for-help" class="md-nav__link">
-    <span class="md-ellipsis">
-      How to ask for help
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-contribute-to-cifkit" class="md-nav__link">
-    <span class="md-ellipsis">
-      How to contribute to cifkit
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributors" class="md-nav__link">
-    <span class="md-ellipsis">
-      Contributors
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#citation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Citation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#other-links" class="md-nav__link">
-    <span class="md-ellipsis">
-      Other links
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="notebooks/01_cif/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    CIF
-    
-  </span>
-  
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">cifkit</a>
+      </nav>
 
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="notebooks/02_cif_ensemble/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    CifEnsemble
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    API Reference
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">cifkit documentation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-  
-  
-
-
-<h1 id="getting-started">Getting started</h1>
-<h2 id="statement-of-need">Statement of need</h2>
-<p><code>cifkit</code> uses .cif files by offering higher-level functions and variables that
-enable users to perform complex tasks efficiently with a few lines of code.
-<code>cifkit</code> distinguishes itself from existing libraries by offering higher-level
-functions and variables that allow solid-state synthesists to obtain intuitive
-and measurable properties impactful properties. It facilitates the visualization
-of coordination geometry from each site using four coordination determination
-methods and extracts physics-based features like volume and packing
-efficiency—crucial for structural analysis in machine learning tasks. Moreover,
-<code>cifkit</code> extracts atomic mixing information at the bond pair level, tasks that
-would otherwise require extensive manual effort using GUI-based tools like
-VESTA, Diamond, and CrystalMaker.</p>
-<p><code>cifkit</code> further enhances its utility by providing functions for sorting,
-preprocessing, and analyzing the distribution of underlying CIF files. It
-systematically addresses common issues in CIF files from databases, such as
-incorrect loop values and missing fractional coordinates, by standardizing and
-filtering out ill-formatted files. The package also preprocesses atomic site
-labels, transforming labels like 'M1' to 'Fe1' in files with atomic mixing for
-improved visualization and pattern matching. Beyond error correction, <code>cifkit</code>
-offers functionalities to copy, move, and sort files based on attributes such as
-coordination numbers, space groups, unit cells, and shortest distances. It
-excels in visualizing and cataloging CIF files, organizing them by supercell
-size, tags, coordination numbers, elements, and atomic mixing.</p>
-<h2 id="tldr">TL;DR</h2>
-<p><code>cifkit</code> provides higher-level functions in just a few lines of code.</p>
-<ul>
-<li><strong>Coordination geometry</strong> - <code>cifkit</code> provides functions for visualing
-  coordination geometry from each site and extracts physics-based features like
-  volume and packing efficiency in each polyhedron.</li>
-<li><strong>Atomic mixing</strong> - <code>cifkit</code> extracts atomic mixing information at the bond
-  pair level—tasks that would otherwise require extensive manual effort using
-  GUI-based tools like VESTA, Diamond, and CrystalMaker.</li>
-<li><strong>Filter</strong> - <code>cifkit</code> offers features for preprocessing. It systematically
-  addresses common issues in CIF files from databases, such as incorrect loop
-  values and missing fractional coordinates, by standardizing and filtering out
-  ill-formatted files. It also preprocesses atomic site labels, transforming
-  labels such as 'M1' to 'Fe1' in files with atomic mixing.</li>
-<li><strong>Sort</strong> - <code>cifkit</code> allows you to copy, move, and sort <code>.cif</code> files based on
-  attributes such as coordination numbers, space groups, unit cells, shortest
-  distances, elements, and more.</li>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="title">
+<h1>cifkit documentation<a class="headerlink" href="#title" title="Link to this heading"></a></h1>
+<p><img alt="Python - Version" src="https://img.shields.io/pypi/pyversions/cifkit" /> <a class="reference external" href="https://pypi.python.org/pypi/cifkit"><img alt="PyPi version" src="https://img.shields.io/pypi/v/cifkit.svg" /></a> <a class="reference external" href="https://anaconda.org/conda-forge/cifkit"><img alt="Conda version" src="https://img.shields.io/conda/vn/conda-forge/cifkit" /></a></p>
+<div class="line-block">
+<div class="line">Last updated May 21, 2025.</div>
+</div>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cifkit
+</pre></div>
+</div>
+<p>Welcome to the <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> documentation!</p>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> - A Python package for coordination geometry and atomic site analysis.</p>
+</section>
+<section id="statement-of-need">
+<h2>Statement of need<a class="headerlink" href="#statement-of-need" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> uses .cif files by offering higher-level functions and
+variables that enable users to perform complex tasks efficiently with a
+few lines of code. <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> distinguishes itself from existing
+libraries by offering higher-level functions and variables that allow
+solid-state synthesists to obtain intuitive and measurable properties
+impactful properties. It facilitates the visualization of coordination
+geometry from each site using four coordination determination methods
+and extracts physics-based features like volume and packing
+efficiency—crucial for structural analysis in machine learning tasks.
+Moreover, <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> extracts atomic mixing information at the bond pair
+level, tasks that would otherwise require extensive manual effort using
+GUI-based tools like VESTA, Diamond, and CrystalMaker.</p>
+</section>
+<section id="tl-dr">
+<h2>TL;DR<a class="headerlink" href="#tl-dr" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> provides higher-level functions in just a few lines of code.</p>
+<ul class="simple">
+<li><p><strong>Coordination geometry</strong> - <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> provides functions for
+visualing coordination geometry from each site and extracts
+physics-based features like volume and packing efficiency in each
+polyhedron.</p></li>
+<li><p><strong>Atomic mixing</strong> - <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> extracts atomic mixing information at
+the bond pair level—tasks that would otherwise require extensive
+manual effort using GUI-based tools like VESTA, Diamond, and
+CrystalMaker.</p></li>
+<li><p><strong>Filter</strong> - <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> offers features for preprocessing. It
+systematically addresses common issues in CIF files from databases,
+such as incorrect loop values and missing fractional coordinates, by
+standardizing and filtering out ill-formatted files. It also
+preprocesses atomic site labels, transforming labels such as ‘M1’ to
+‘Fe1’ in files with atomic mixing.</p></li>
+<li><p><strong>Sort</strong> - <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> allows you to copy, move, and sort <code class="docutils literal notranslate"><span class="pre">.cif</span></code>
+files based on attributes such as coordination numbers, space groups,
+unit cells, shortest distances, elements, and more.</p></li>
 </ul>
-<h2 id="processing-speed-expectation">Processing speed expectation</h2>
-<p>Processing approximately 10,000 .cif files on a standard laptop (iMac with M1
-chip) may take about 30 to 60 minutes. At this rate, we can process nearly all
-.cif files within 1–2 days.</p>
-<h2 id="installation">Installation</h2>
-<p>Python 3.10, 3.11, 3.12 are supported.</p>
-<p><img alt="Python - Version" src="https://img.shields.io/pypi/pyversions/cifkit" />
-<a href="https://pypi.python.org/pypi/cifkit"><img alt="PyPi version" src="https://img.shields.io/pypi/v/cifkit.svg" /></a>
-<a href="https://anaconda.org/conda-forge/cifkit"><img alt="Conda version" src="https://img.shields.io/conda/vn/conda-forge/cifkit" /></a></p>
-<p>pip install</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>cifkit
-</code></pre></div>
-<h2 id="overview">Overview</h2>
-<p><code>cifkit</code> provide two primary classes: <code>Cif</code> and <code>CifEnsemble</code>.</p>
-<h3 id="cif">Cif</h3>
-<p><code>Cif</code> is initialized with a <code>.cif</code> file path. It parses the <code>.cif</code> file,
-generates supercells, and computes nearest neighbors. It also determines
-coordination numbers using four different methods and generates polyhedrons for
-each site.</p>
-<p>The example below uses <code>cifkit</code> to visualize the polyhedron generated from each
-atomic site based on the coordination number geometry.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">Cif</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="s2">&quot;your_cif_file_path&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">site_labels</span> <span class="o">=</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># Loop through each site label</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">site_labels</span><span class="p">:</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="c1"># Dipslay each polyhedron, .png saved for each label</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div>
-<p><img alt="Polyhedron generation" src="assets/img/ErCoIn-polyhedron.png" /></p>
-<h3 id="cifensemble">CifEnsemble</h3>
-<p><code>CifEnsemble</code> is initialized with a folder path containing <code>.cif</code> files. It
-identifies unique attributes, such as space groups and elements, across the
-<code>.cif</code> files, moves and copies files based on these attributes. It generates
-histograms for all attributes.</p>
+</section>
+<section id="processing-speed-expectation">
+<h2>Processing speed expectation<a class="headerlink" href="#processing-speed-expectation" title="Link to this heading"></a></h2>
+<p>Processing approximately 10,000 .cif files on a standard laptop (iMac
+with M1 chip) may take about 30 to 60 minutes. At this rate, we can
+process nearly all .cif files within 1–2 days.</p>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> provide two primary classes: <code class="docutils literal notranslate"><span class="pre">Cif</span></code> and <code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code>.</p>
+<section id="cif">
+<h3>Cif<a class="headerlink" href="#cif" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Cif</span></code> is initialized with a <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file path. It parses the <code class="docutils literal notranslate"><span class="pre">.cif</span></code>
+file, generates supercells, and computes nearest neighbors. It also
+determines coordination numbers using four different methods and
+generates polyhedrons for each site.</p>
+<p>The example below uses <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> to visualize the polyhedron generated
+from each atomic site based on the coordination number geometry.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span>
+
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="s2">&quot;your_cif_file_path&quot;</span><span class="p">)</span>
+<span class="n">site_labels</span> <span class="o">=</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span>
+
+<span class="c1"># Loop through each site label</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">site_labels</span><span class="p">:</span>
+    <span class="c1"># Dipslay each polyhedron, .png saved for each label</span>
+    <span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id1">
+<img alt="Polyhedron generation" src="_images/ErCoIn-polyhedron.png" />
+<figcaption>
+<p><span class="caption-text">Polyhedron generation</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="cifensemble">
+<h3>CifEnsemble<a class="headerlink" href="#cifensemble" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code> is initialized with a folder path containing <code class="docutils literal notranslate"><span class="pre">.cif</span></code>
+files. It identifies unique attributes, such as space groups and
+elements, across the <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files, moves and copies files based on
+these attributes. It generates histograms for all attributes.</p>
 <p>The following example generates a distribution of structure.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">cifkit</span> <span class="kn">import</span> <span class="n">CifEnsemble</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="s2">&quot;your_cif_containing_folder_path&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">generate_structure_histogram</span><span class="p">()</span>
-</code></pre></div>
-<p><img alt="structure distribution" src="assets/img/histogram-structure.png" /></p>
-<p>Basde on your visual histogram above, you can copy and move .cif files based on
-specific attributes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Return file paths matching structures either Co1.75Ge or CoIn2</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">([</span><span class="s2">&quot;Co1.75Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;CoIn2&quot;</span><span class="p">])</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Return file path matching CeAl2Ga2</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">(</span><span class="s2">&quot;CeAl2Ga2&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="research-projects-using-cifkit">Research projects using <code>cifkit</code></h2>
-<p>The below projects uses the <code>Cif</code> and <code>CifEnsemble</code> classes for research
-applications.</p>
-<ul>
-<li>CIF Bond Analyzer (CBA) - extract and visualize bonding patterns -
-  <a href="https://doi.org/10.1016/j.jallcom.2023.173241">DOI</a> |
-  <a href="https://github.com/bobleesj/cif-bond-analyzer">GitHub</a> |
-  <a href="https://bobleesj.github.io/files/presentation/2024-GRC-poster.pdf">Poster</a></li>
-<li>Structure Analysis/Featurizer (SAF) - build geometric features for binary,
-  ternary compounds -
-  <a href="https://github.com/bobleesj/structure-analyzer-featurizer">GitHub</a></li>
-<li>CIF Cleaner - move, copy .cif files based on attributes
-  <a href="https://github.com/bobleesj/cif-cleaner">GitHub</a></li>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifEnsemble</span>
+
+<span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="s2">&quot;your_cif_containing_folder_path&quot;</span><span class="p">)</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_structure_histogram</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id2">
+<img alt="structure distribution" src="_images/histogram-structure.png" />
+<figcaption>
+<p><span class="caption-text">structure distribution</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Basde on your visual histogram above, you can copy and move .cif files
+based on specific attributes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Return file paths matching structures either Co1.75Ge or CoIn2</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">([</span><span class="s2">&quot;Co1.75Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;CoIn2&quot;</span><span class="p">])</span>
+
+<span class="c1"># Return file path matching CeAl2Ga2</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">(</span><span class="s2">&quot;CeAl2Ga2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="research-projects-using-cifkit">
+<h2>Research projects using <code class="docutils literal notranslate"><span class="pre">cifkit</span></code><a class="headerlink" href="#research-projects-using-cifkit" title="Link to this heading"></a></h2>
+<p>The below projects uses the <code class="docutils literal notranslate"><span class="pre">Cif</span></code> and <code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code> classes for
+research applications.</p>
+<ul class="simple">
+<li><p>CIF Bond Analyzer (CBA) - extract and visualize bonding patterns -
+<a class="reference external" href="https://doi.org/10.1016/j.jallcom.2023.173241">DOI</a> |
+<a class="reference external" href="https://github.com/bobleesj/cif-bond-analyzer">GitHub</a> |
+<a class="reference external" href="https://bobleesj.github.io/files/presentation/2024-GRC-poster.pdf">Poster</a></p></li>
+<li><p>Structure Analysis/Featurizer (SAF) - build geometric features for
+binary, ternary compounds -
+<a class="reference external" href="https://github.com/bobleesj/structure-analyzer-featurizer">GitHub</a></p></li>
+<li><p>CIF Cleaner - move, copy .cif files based on attributes
+<a class="reference external" href="https://github.com/bobleesj/cif-cleaner">GitHub</a></p></li>
 </ul>
-<h2 id="how-to-ask-for-help">How to ask for help</h2>
-<p><code>cifkit</code> is also designed for experimental materials scientists and chemists.</p>
-<ul>
-<li>If you have any issues or questions, please feel free to reach out to Bob Lee
-  <a href="https://github.com/bobleesj">@bobleesj</a> or
-  <a href="https://github.com/bobleesj/cifkit/issues">leave an issue</a>.</li>
+</section>
+<section id="how-to-ask-for-help">
+<h2>How to ask for help<a class="headerlink" href="#how-to-ask-for-help" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> is also designed for experimental materials scientists and
+chemists.</p>
+<ul class="simple">
+<li><p>If you have any issues or questions, please feel free to reach out to
+Bob Lee <a class="reference external" href="https://github.com/bobleesj">&#64;bobleesj</a> or <a class="reference external" href="https://github.com/bobleesj/cifkit/issues">leave an
+issue</a>.</p></li>
 </ul>
-<h2 id="how-to-contribute-to-cifkit">How to contribute to <code>cifkit</code></h2>
-<p>Here is how you can contribute to the <code>cifkit</code> project if you found it helpful:</p>
-<ul>
-<li>Star the repository on GitHub and recommend it to your colleagues who might
-  find <code>cifkit</code> helpful as well.
-  <a href="https://github.com/bobleesj/cifkit/stargazers"><img alt="Star GitHub repository" src="https://img.shields.io/github/stars/bobleesj/cifkit.svg?style=social" /></a></li>
-<li>Create a new issue for any bugs or feature requests
-  <a href="https://github.com/bobleesj/cifkit/issues">here</a></li>
-<li>Fork the repository and consider contributing changes via a pull request.
-  <a href="https://github.com/bobleesj/cifkit/fork"><img alt="Fork GitHub repository" src="https://img.shields.io/github/forks/bobleesj/cifkit?style=social" /></a>.
-  Check out
-  <a href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
-  for instructions.</li>
-<li>If you have any suggestions or need further clarification on how to use
-  <code>cifkit</code>, please reach out to Bob Lee
-  (<a href="https://github.com/bobleesj">@bobleesj</a>).</li>
+</section>
+<section id="how-to-contribute-to-cifkit">
+<h2>How to contribute to <code class="docutils literal notranslate"><span class="pre">cifkit</span></code><a class="headerlink" href="#how-to-contribute-to-cifkit" title="Link to this heading"></a></h2>
+<p>Here is how you can contribute to the <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> project if you found it
+helpful:</p>
+<ul class="simple">
+<li><p>Star the repository on GitHub and recommend it to your colleagues who
+might find <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> helpful as well. <a class="reference external" href="https://github.com/bobleesj/cifkit/stargazers"><img alt="Star GitHub repository" src="https://img.shields.io/github/stars/bobleesj/cifkit.svg?style=social" /></a></p></li>
+<li><p>Create a new issue for any bugs or feature requests
+<a class="reference external" href="https://github.com/bobleesj/cifkit/issues">here</a></p></li>
+<li><p>Fork the repository and consider contributing changes via a pull
+request. <a class="reference external" href="https://github.com/bobleesj/cifkit/fork"><img alt="Fork GitHub repository" src="https://img.shields.io/github/forks/bobleesj/cifkit?style=social" /></a>. Check out
+<a class="reference external" href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+for instructions.</p></li>
+<li><p>If you have any suggestions or need further clarification on how to
+use <code class="docutils literal notranslate"><span class="pre">cifkit</span></code>, please reach out to Bob Lee
+(<a class="reference external" href="https://github.com/bobleesj">&#64;bobleesj</a>).</p></li>
 </ul>
-<h2 id="contributors">Contributors</h2>
-<p><code>cifkit</code> has been greatly enhanced thanks to the contributions from a diverse
-group of researchers:</p>
-<ul>
-<li>Anton Oliynyk: original ideation with <code>.cif</code> files</li>
-<li>Alex Vtorov: tool recommendation for polyhedron visualization</li>
-<li>Danila Shiryaev: testing as beta user</li>
-<li>Fabian Zills (<a href="https://github.com/PythonFZ">@PythonFZ</a>): suggested tooling
-  improvements</li>
-<li>Emil Jaffal (<a href="https://github.com/EmilJaffal">@EmilJaffal</a>): initial testing
-  and bug report</li>
-<li>Nikhil Kumar Barua: initial testing and bug report</li>
-<li>Nishant Yadav (<a href="https://github.com/sethisiddha1998">@sethisiddha1998</a>):
-  initial testing and bug report</li>
-<li>Siddha Sankalpa Sethi (<a href="https://github.com/runzsh">@runzsh</a>): initial testing
-  and bug report in initial testing and initial testing and bug report</li>
+</section>
+<section id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> has been greatly enhanced thanks to the contributions from a
+diverse group of researchers:</p>
+<ul class="simple">
+<li><p>Anton Oliynyk: original ideation with <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files</p></li>
+<li><p>Alex Vtorov: tool recommendation for polyhedron visualization</p></li>
+<li><p>Danila Shiryaev: testing as beta user</p></li>
+<li><p>Fabian Zills (<a class="reference external" href="https://github.com/PythonFZ">&#64;PythonFZ</a>): suggested
+tooling improvements</p></li>
+<li><p>Emil Jaffal (<a class="reference external" href="https://github.com/EmilJaffal">&#64;EmilJaffal</a>):
+initial testing and bug report</p></li>
+<li><p>Nikhil Kumar Barua: initial testing and bug report</p></li>
+<li><p>Nishant Yadav
+(<a class="reference external" href="https://github.com/sethisiddha1998">&#64;sethisiddha1998</a>): initial
+testing and bug report</p></li>
+<li><p>Siddha Sankalpa Sethi (<a class="reference external" href="https://github.com/runzsh">&#64;runzsh</a>):
+initial testing and bug report in initial testing and initial testing
+and bug report</p></li>
 </ul>
 <p>We welcome all forms of contributions from the community. Your ideas and
 improvements are valued and appreciated.</p>
-<h2 id="citation">Citation</h2>
-<p>Please consider citing <code>cifkit</code> if it has been useful for your research:</p>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Link to this heading"></a></h2>
+<p>Please consider citing <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> if it has been useful for your
+research:</p>
 <blockquote>
-<p>Note: the <code>cifkit</code> manuscript is also under reviewed by the Journal of Open
-Source Software.</p>
-</blockquote>
-<p><a href="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19"><img src="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19/status.svg"></a></p>
-<h2 id="other-links">Other links</h2>
-<ul>
-<li><a href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">Contribution guide</a></li>
-<li><a href="https://github.com/bobleesj/cifkit/blob/main/LICENSE">MIT license</a></li>
+<div><p>Note: the <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> manuscript is also under reviewed by the Journal
+of Open Source Software.</p>
+</div></blockquote>
+</section>
+<section id="other-links">
+<h2>Other links<a class="headerlink" href="#other-links" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">Contribution
+guide</a></p></li>
+<li><p><a class="reference external" href="https://github.com/bobleesj/cifkit/blob/main/LICENSE">MIT
+license</a></p></li>
 </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
-  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
-
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
-</button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-        
-          
-          <a href="notebooks/01_cif/" class="md-footer__link md-footer__link--next" aria-label="Next: CIF">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                CIF
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
+<div class="toctree-wrapper compound">
 </div>
-      
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> is built and maintained with <a class="reference external" href="https://scikit-package.github.io/scikit-package/">scikit-package</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="notebooks/01_cif.html" class="btn btn-neutral float-right" title="CIF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
   </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    
-      
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.footer", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
-    
-    
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
-      
-    
-  </body>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

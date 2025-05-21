@@ -1,0 +1,978 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.models.cif_ensemble &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cifkit.models.cif_ensemble</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cifkit.models.cif_ensemble</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.figures.histogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_histogram</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">move_files_based_on_errors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.cif_editor</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit_cif_file_based_on_db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.folder</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy_files</span><span class="p">,</span> <span class="n">get_file_paths</span><span class="p">,</span> <span class="n">move_files</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.log_messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifEnsembleLog</span>
+
+
+<div class="viewcode-block" id="CifEnsemble">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CifEnsemble</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cif_dir_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">add_nested_files</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">preprocess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a CifEnsemble object, containing a collection of Cif</span>
+<span class="sd">        objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cif_dir_path : str</span>
+<span class="sd">            Path to the folder path containing .cif file(s).</span>
+<span class="sd">        add_nested_files : bool, optional</span>
+<span class="sd">            Option to include .cif files contained in sub-directories within cif_dir_path</span>
+<span class="sd">            , by default False</span>
+<span class="sd">        preprocess : bool, optional</span>
+<span class="sd">            Option to edit .cif files before initializing each into a Cif object,</span>
+<span class="sd">            by default True. Preprocess modifies atomic site labels in</span>
+<span class="sd">            atom_site_label. Some site labels may contain a comma or a symbol like M</span>
+<span class="sd">            due to atomic mixing. It reformats each atom_site_label so it can be</span>
+<span class="sd">            parsed into an element type matching atom_site_type_symbol. For PCD</span>
+<span class="sd">            databases, addresses in publ_author_address often have an incorrect</span>
+<span class="sd">            format requiring manual modifications. It also relocates any ill-formatted</span>
+<span class="sd">            files, such as those with duplicate labels in atom_site_label, missing</span>
+<span class="sd">            fractional coordinates, or files requiring supercell generation.</span>
+
+<span class="sd">        logging_enabled : bool, optional</span>
+<span class="sd">            Option to log while pre-processing Cif objects, by default False</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dir_path: str</span>
+<span class="sd">            Path to the folder containing .cif files</span>
+<span class="sd">        file_paths: list[str]</span>
+<span class="sd">            List of file paths to .cif files</span>
+<span class="sd">        cifs: list[Cif]</span>
+<span class="sd">            List of Cif objects</span>
+<span class="sd">        file_count: int</span>
+<span class="sd">            Number of .cif files in the folder</span>
+<span class="sd">        logging_enabled: bool</span>
+<span class="sd">            Option to log while pre-processing Cif objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Process each file, handling exceptions that may occur</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logging_enabled</span> <span class="o">=</span> <span class="n">logging_enabled</span>
+        <span class="n">file_paths</span> <span class="o">=</span> <span class="n">get_file_paths</span><span class="p">(</span>
+            <span class="n">cif_dir_path</span><span class="p">,</span> <span class="n">add_nested_files</span><span class="o">=</span><span class="n">add_nested_files</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span> <span class="o">=</span> <span class="n">cif_dir_path</span>
+
+        <span class="k">if</span> <span class="n">preprocess</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log_info</span><span class="p">(</span><span class="n">CifEnsembleLog</span><span class="o">.</span><span class="n">PREPROCESSING</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">file_paths</span><span class="p">:</span>
+                <span class="n">edit_cif_file_based_on_db</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="c1"># Move ill-formatted files after pre-processing</span>
+            <span class="n">move_files_based_on_errors</span><span class="p">(</span><span class="n">cif_dir_path</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">)</span>
+
+        <span class="c1"># Initialize new files after ill-formatted files are moved</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_paths</span> <span class="o">=</span> <span class="n">get_file_paths</span><span class="p">(</span>
+            <span class="n">cif_dir_path</span><span class="p">,</span> <span class="n">add_nested_files</span><span class="o">=</span><span class="n">add_nested_files</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_paths</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initializing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">file_count</span><span class="si">}</span><span class="s2"> Cif objects...&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">logging_enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Cif</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">Cif</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">is_formatted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_paths</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Cif</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">Cif</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">is_formatted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_paths</span>
+            <span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished initialization!&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_log_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log a formatted message if logging is enabled.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logging_enabled</span><span class="p">:</span>
+            <span class="n">formatted_message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dir_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">formatted_message</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_unique_property_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return unique values for a given property from cifs.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span>
+            <span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_formulas</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique formulas from all .cif files in the folder.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set[str]</span>
+<span class="sd">            unique formulas</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_formulas</span>
+<span class="sd">        {&quot;EuIr2Ge2&quot;, &quot;CeRu2Ge2&quot;, &quot;LaRu2Ge2&quot;, &quot;Mo&quot;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values</span><span class="p">(</span><span class="s2">&quot;formula&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_structures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique structures from all .cif files in the folder.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_structures</span>
+<span class="sd">        {&quot;CeAl2Ga2&quot;, &quot;W&quot;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values</span><span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique formulas from all .cif files in the folder.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_tags</span>
+<span class="sd">        {&quot;hex&quot;, &quot;rt&quot;, &quot;rt_hex&quot;, &quot;&quot;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_space_group_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique space groups from all .cif files in the folder.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_space_group_names</span>
+<span class="sd">        {&quot;I4/mmm&quot;, &quot;Im-3m&quot;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values</span><span class="p">(</span><span class="s2">&quot;space_group_name&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_space_group_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique space groups from all .cif files in the folder.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_space_group_numbers</span>
+<span class="sd">        {139, 229}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values</span><span class="p">(</span><span class="s2">&quot;space_group_number&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_site_mixing_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique site mixing types from all .cif files in the folder.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_site_mixing_types</span>
+<span class="sd">        {&quot;deficiency_without_atomic_mixing&quot;, &quot;full_occupancy&quot;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values</span><span class="p">(</span><span class="s2">&quot;site_mixing_type&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_composition_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique composition types from all .cif files in the folder.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_composition_types</span>
+<span class="sd">        {1, 3}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values</span><span class="p">(</span><span class="s2">&quot;composition_type&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_unique_property_values_from_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">unique_values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span>
+            <span class="n">unique_values</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">property_name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">unique_values</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unique elements from all .cif files in the folder.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble.unique_elements_stats</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;Ce&quot;: 1,</span>
+<span class="sd">            &quot;Eu&quot;: 1,</span>
+<span class="sd">            &quot;Ge&quot;: 3,</span>
+<span class="sd">            &quot;Ir&quot;: 1,</span>
+<span class="sd">            &quot;La&quot;: 1,</span>
+<span class="sd">            &quot;Mo&quot;: 3,</span>
+<span class="sd">            &quot;Ru&quot;: 2,</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values_from_set</span><span class="p">(</span><span class="s2">&quot;unique_elements&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_unique_values_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set[str]</span>
+<span class="sd">            Unique coordination number values by minimum distance method from all .cif</span>
+<span class="sd">            files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values_from_set</span><span class="p">(</span>
+            <span class="s2">&quot;CN_unique_values_by_min_dist_method&quot;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_unique_values_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set[str]</span>
+<span class="sd">            Unique coordination number by best methods from all .cif files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_unique_property_values_from_set</span><span class="p">(</span>
+            <span class="s2">&quot;CN_unique_values_by_best_methods&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_attribute_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method to compute the count of each unique value of a given</span>
+<span class="sd">        attribute across all Cif objects.&quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="n">transform</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">transform</span>
+                <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="c1"># Flatten the list if the attribute is a set of elements</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">set</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">structure_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;formula&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tag_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">space_group_number_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;space_group_number&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">space_group_name_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;space_group_name&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">composition_type_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;composition_type&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_elements_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;unique_elements&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">site_mixing_type_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;site_mixing_type&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">supercell_size_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;supercell_points&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_CN_values_by_min_dist_method_stat</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;CN_unique_values_by_min_dist_method&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unique_CN_values_by_method_methods_stat</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_stats</span><span class="p">(</span><span class="s2">&quot;CN_unique_values_by_best_methods&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_collect_cif_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generic method to collect data from CIF files based on an</span>
+<span class="sd">        attribute.&quot;&quot;&quot;</span>
+        <span class="n">collected_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span>
+            <span class="n">attr_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attr_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">transform</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">attr_value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">attr_value</span>
+                <span class="n">collected_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cif</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No valid </span><span class="si">{</span><span class="n">attribute</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">cif</span><span class="o">.</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">collected_data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">minimum_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_cif_data</span><span class="p">(</span><span class="s2">&quot;shortest_distance&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">supercell_atom_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_cif_data</span><span class="p">(</span><span class="s2">&quot;supercell_atom_count&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_filter_by_single_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">cif_file_paths</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span>
+            <span class="n">property_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">property_value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                <span class="n">cif_file_paths</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cif_file_paths</span>
+
+    <span class="c1"># With sets</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_filter_contains_any</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">cif_file_paths</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span>
+            <span class="n">property_value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="n">property_value</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">values</span><span class="p">):</span>
+                <span class="n">cif_file_paths</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cif_file_paths</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_filter_exact_match</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">cif_file_paths</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span>
+            <span class="n">property_value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">property_value</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+                <span class="n">cif_file_paths</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cif_file_paths</span>
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_formulas">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_formulas">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_formulas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_single_value</span><span class="p">(</span><span class="s2">&quot;formula&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_structures">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_structures">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_structures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_single_value</span><span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_space_group_names">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_space_group_names">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_space_group_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_single_value</span><span class="p">(</span><span class="s2">&quot;space_group_name&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_space_group_numbers">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_space_group_numbers">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_space_group_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_single_value</span><span class="p">(</span><span class="s2">&quot;space_group_number&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_site_mixing_types">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_site_mixing_types">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_site_mixing_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_single_value</span><span class="p">(</span><span class="s2">&quot;site_mixing_type&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_tags">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_tags">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_single_value</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_composition_types">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_composition_types">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_composition_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_single_value</span><span class="p">(</span><span class="s2">&quot;composition_type&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Filter with setsz</span>
+<div class="viewcode-block" id="CifEnsemble.filter_by_elements_containing">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_elements_containing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_elements_containing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_contains_any</span><span class="p">(</span><span class="s2">&quot;unique_elements&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_elements_exact_matching">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_elements_exact_matching">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_elements_exact_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_exact_match</span><span class="p">(</span><span class="s2">&quot;unique_elements&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter by CN</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_CN_min_dist_method_containing">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_min_dist_method_containing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_CN_min_dist_method_containing</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_contains_any</span><span class="p">(</span>
+            <span class="s2">&quot;CN_unique_values_by_min_dist_method&quot;</span><span class="p">,</span> <span class="n">values</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_CN_min_dist_method_exact_matching">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_min_dist_method_exact_matching">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_CN_min_dist_method_exact_matching</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_exact_match</span><span class="p">(</span>
+            <span class="s2">&quot;CN_unique_values_by_min_dist_method&quot;</span><span class="p">,</span> <span class="n">values</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_CN_best_methods_containing">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_best_methods_containing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_CN_best_methods_containing</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_contains_any</span><span class="p">(</span>
+            <span class="s2">&quot;CN_unique_values_by_best_methods&quot;</span><span class="p">,</span> <span class="n">values</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_CN_best_methods_exact_matching">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_best_methods_exact_matching">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_CN_best_methods_exact_matching</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_exact_match</span><span class="p">(</span>
+            <span class="s2">&quot;CN_unique_values_by_best_methods&quot;</span><span class="p">,</span> <span class="n">values</span>
+        <span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_filter_by_range</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="nb">property</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">cif_file_paths</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span>
+            <span class="n">property_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cif</span><span class="p">,</span> <span class="nb">property</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">property_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">property_value</span> <span class="o">&lt;</span> <span class="nb">min</span> <span class="ow">or</span> <span class="n">property_value</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">cif_file_paths</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cif_file_paths</span>
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_min_distance">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_min_distance">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_min_distance</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">min_distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_range</span><span class="p">(</span>
+            <span class="s2">&quot;shortest_distance&quot;</span><span class="p">,</span> <span class="n">min_distance</span><span class="p">,</span> <span class="n">max_distance</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.filter_by_supercell_count">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.filter_by_supercell_count">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_supercell_count</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">min_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_by_range</span><span class="p">(</span>
+            <span class="s2">&quot;supercell_atom_count&quot;</span><span class="p">,</span>
+            <span class="n">min_count</span><span class="p">,</span>
+            <span class="n">max_count</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.move_cif_files">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.move_cif_files">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_cif_files</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">to_directory_path</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move a set of CIF files to a destination directory.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_paths : set[str]</span>
+<span class="sd">            Set of file paths to CIF files.</span>
+<span class="sd">        to_directory_path : str</span>
+<span class="sd">            Destination directory path.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; file_paths = {</span>
+<span class="sd">            &quot;tests/data/cif/ensemble_test/300169.cif&quot;,</span>
+<span class="sd">            &quot;tests/data/cif/ensemble_test/300170.cif&quot;,</span>
+<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; dest_dir_path = &quot;tests/data/cif/ensemble_new_dir&quot;</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble_test.move_cif_files(file_paths, dest_dir_path)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">move_files</span><span class="p">(</span><span class="n">to_directory_path</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">file_paths</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.copy_cif_files">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.copy_cif_files">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">copy_cif_files</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">to_directory_path</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Copy a set of CIF files to a destination directory.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_paths : set[str]</span>
+<span class="sd">            Set of file paths to CIF files.</span>
+<span class="sd">        to_directory_path : str</span>
+<span class="sd">            Destination directory path.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; file_paths = {</span>
+<span class="sd">            &quot;tests/data/cif/ensemble_test/300169.cif&quot;,</span>
+<span class="sd">            &quot;tests/data/cif/ensemble_test/300170.cif&quot;,</span>
+<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; dest_dir_path = &quot;tests/data/cif/ensemble_new_dir&quot;</span>
+<span class="sd">        &gt;&gt;&gt; cif_ensemble_test.copy_cif_files(file_paths, dest_dir_path)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">copy_files</span><span class="p">(</span><span class="n">to_directory_path</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">file_paths</span><span class="p">))</span></div>
+
+
+    <span class="c1"># FIXME: refactor this section to maintain DRY principle</span>
+
+<div class="viewcode-block" id="CifEnsemble.generate_structure_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_structure_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_structure_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;structure&#39; property from CIF files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;structure&#39; statistics of the CIF</span>
+<span class="sd">        files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be saved to</span>
+<span class="sd">        that directory. If &#39;output_dir&#39; is not specified, the image will be saved to the</span>
+<span class="sd">        directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;structure&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">structure_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_formula_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_formula_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_formula_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;formula&#39; property from CIF files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;formula&#39; statistics of the CIF</span>
+<span class="sd">        files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be saved to</span>
+<span class="sd">        that directory. If &#39;output_dir&#39; is not specified, the image will be saved to the</span>
+<span class="sd">        directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;formula&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">formula_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_tag_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_tag_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_tag_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;tag&#39; property from CIF files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;tag&#39; statistics of the CIF</span>
+<span class="sd">        files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be saved to</span>
+<span class="sd">        that directory. If &#39;output_dir&#39; is not specified, the image will be saved to the</span>
+<span class="sd">        directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;tag&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tag_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_space_group_number_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_space_group_number_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_space_group_number_histogram</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;space_group_number&#39; property from CIF</span>
+<span class="sd">        files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;space_group_number&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;space_group_number&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">space_group_number_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_space_group_name_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_space_group_name_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_space_group_name_histogram</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;space_group_name&#39; property from CIF</span>
+<span class="sd">        files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;space_group_name&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;space_group_name&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">space_group_name_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_supercell_size_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_supercell_size_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_supercell_size_histogram</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;supercell_count&#39; property from CIF</span>
+<span class="sd">        files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;supercell_count&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;supercell_size&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">supercell_size_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_elements_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_elements_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_elements_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;unique_elements&#39; property from CIF</span>
+<span class="sd">        files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;unique_elements&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;elements&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_CN_by_min_dist_method_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_CN_by_min_dist_method_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_CN_by_min_dist_method_histogram</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;CN_by_min&#39; property from CIF files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;CN_by_min&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;CN_by_min_dist_method&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_CN_values_by_min_dist_method_stat</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_CN_by_best_methods_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_CN_by_best_methods_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_CN_by_best_methods_histogram</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;CN_by_best_methods&#39; property from CIF</span>
+<span class="sd">        files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;CN_by_best_methods&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;CN_by_best_methods&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_CN_values_by_method_methods_stat</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_composition_type_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_composition_type_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_composition_type_histogram</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;composition_type&#39; property from CIF</span>
+<span class="sd">        files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;composition_type&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;composition_type&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">composition_type_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CifEnsemble.generate_site_mixing_type_histogram">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif_ensemble.html#cifkit.models.cif_ensemble.CifEnsemble.generate_site_mixing_type_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_site_mixing_type_histogram</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a histogram of the &#39;site_mixing_type&#39; property from CIF</span>
+<span class="sd">        files.</span>
+
+<span class="sd">        This method creates a histogram based on the &#39;site_mixing_type&#39; statistics of</span>
+<span class="sd">        the CIF files. If &#39;output_dir&#39; is specified, the histogram image (.png) will be</span>
+<span class="sd">        saved to that directory. If &#39;output_dir&#39; is not specified, the image will be saved</span>
+<span class="sd">        to the directory specified by &#39;self.dir_path&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        display : bool, optional</span>
+<span class="sd">            If True, the plot is displayed using plt.show(). Default is False.</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            The directory path where the histogram should be saved. If None,</span>
+<span class="sd">            the histogram is saved in the directory defined by &#39;self.dir_path&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plot_histogram</span><span class="p">(</span>
+            <span class="s2">&quot;site_mixing_type&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">site_mixing_type_stats</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dir_path</span><span class="p">,</span>
+            <span class="n">display</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

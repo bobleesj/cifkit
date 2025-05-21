@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.models.cif_ensemble module &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cifkit.occupancy package" href="cifkit.occupancy.html" />
+    <link rel="prev" title="cifkit.models.cif module" href="cifkit.models.cif.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="cifkit.html">Package API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cifkit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cifkit.coordination.html">cifkit.coordination package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.data.html">cifkit.data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.figures.html">cifkit.figures package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="cifkit.models.html">cifkit.models package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="cifkit.models.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cifkit.models.html#module-cifkit.models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.occupancy.html">cifkit.occupancy package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.preprocessors.html">cifkit.preprocessors package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.html">cifkit.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.html#module-cifkit">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="cifkit.html">cifkit package</a></li>
+          <li class="breadcrumb-item"><a href="cifkit.models.html">cifkit.models package</a></li>
+      <li class="breadcrumb-item active">cifkit.models.cif_ensemble module</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/api/cifkit.models.cif_ensemble.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-cifkit.models.cif_ensemble">
+<span id="cifkit-models-cif-ensemble-module"></span><h1>cifkit.models.cif_ensemble module<a class="headerlink" href="#module-cifkit.models.cif_ensemble" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.models.cif_ensemble.</span></span><span class="sig-name descname"><span class="pre">CifEnsemble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cif_dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_nested_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.CN_unique_values_by_best_methods">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_unique_values_by_best_methods</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.CN_unique_values_by_best_methods" title="Link to this definition"></a></dt>
+<dd><p>returns: Unique coordination number by best methods from all .cif files.
+:rtype: set[str]</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.CN_unique_values_by_min_dist_method">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_unique_values_by_min_dist_method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.CN_unique_values_by_min_dist_method" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>returns: Unique coordination number values by minimum distance method from all .cif</dt><dd><p>files.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.composition_type_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">composition_type_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.composition_type_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.copy_cif_files">
+<span class="sig-name descname"><span class="pre">copy_cif_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_directory_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.copy_cif_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.copy_cif_files" title="Link to this definition"></a></dt>
+<dd><p>Copy a set of CIF files to a destination directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_paths</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – Set of file paths to CIF files.</p></li>
+<li><p><strong>to_directory_path</strong> (<em>str</em>) – Destination directory path.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">file_paths</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">    &quot;tests/data/cif/ensemble_test/300169.cif&quot;,</span>
+<span class="go">    &quot;tests/data/cif/ensemble_test/300170.cif&quot;,</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dest_dir_path</span> <span class="o">=</span> <span class="s2">&quot;tests/data/cif/ensemble_new_dir&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble_test</span><span class="o">.</span><span class="n">copy_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_best_methods_containing">
+<span class="sig-name descname"><span class="pre">filter_by_CN_best_methods_containing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_CN_best_methods_containing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_best_methods_containing" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_best_methods_exact_matching">
+<span class="sig-name descname"><span class="pre">filter_by_CN_best_methods_exact_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_CN_best_methods_exact_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_best_methods_exact_matching" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_min_dist_method_containing">
+<span class="sig-name descname"><span class="pre">filter_by_CN_min_dist_method_containing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_CN_min_dist_method_containing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_min_dist_method_containing" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_min_dist_method_exact_matching">
+<span class="sig-name descname"><span class="pre">filter_by_CN_min_dist_method_exact_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_CN_min_dist_method_exact_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_CN_min_dist_method_exact_matching" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_composition_types">
+<span class="sig-name descname"><span class="pre">filter_by_composition_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_composition_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_composition_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_elements_containing">
+<span class="sig-name descname"><span class="pre">filter_by_elements_containing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_elements_containing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_elements_containing" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_elements_exact_matching">
+<span class="sig-name descname"><span class="pre">filter_by_elements_exact_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_elements_exact_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_elements_exact_matching" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_formulas">
+<span class="sig-name descname"><span class="pre">filter_by_formulas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_formulas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_formulas" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_min_distance">
+<span class="sig-name descname"><span class="pre">filter_by_min_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_min_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_min_distance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_site_mixing_types">
+<span class="sig-name descname"><span class="pre">filter_by_site_mixing_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_site_mixing_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_site_mixing_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_space_group_names">
+<span class="sig-name descname"><span class="pre">filter_by_space_group_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_space_group_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_space_group_names" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_space_group_numbers">
+<span class="sig-name descname"><span class="pre">filter_by_space_group_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_space_group_numbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_space_group_numbers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_structures">
+<span class="sig-name descname"><span class="pre">filter_by_structures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_structures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_structures" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_supercell_count">
+<span class="sig-name descname"><span class="pre">filter_by_supercell_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_supercell_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_supercell_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.filter_by_tags">
+<span class="sig-name descname"><span class="pre">filter_by_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.filter_by_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.filter_by_tags" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.formula_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">formula_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.formula_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_CN_by_best_methods_histogram">
+<span class="sig-name descname"><span class="pre">generate_CN_by_best_methods_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_CN_by_best_methods_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_CN_by_best_methods_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘CN_by_best_methods’ property from CIF
+files.</p>
+<p>This method creates a histogram based on the ‘CN_by_best_methods’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_CN_by_min_dist_method_histogram">
+<span class="sig-name descname"><span class="pre">generate_CN_by_min_dist_method_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_CN_by_min_dist_method_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_CN_by_min_dist_method_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘CN_by_min’ property from CIF files.</p>
+<p>This method creates a histogram based on the ‘CN_by_min’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_composition_type_histogram">
+<span class="sig-name descname"><span class="pre">generate_composition_type_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_composition_type_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_composition_type_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘composition_type’ property from CIF
+files.</p>
+<p>This method creates a histogram based on the ‘composition_type’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_elements_histogram">
+<span class="sig-name descname"><span class="pre">generate_elements_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_elements_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_elements_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘unique_elements’ property from CIF
+files.</p>
+<p>This method creates a histogram based on the ‘unique_elements’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_formula_histogram">
+<span class="sig-name descname"><span class="pre">generate_formula_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_formula_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_formula_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘formula’ property from CIF files.</p>
+<p>This method creates a histogram based on the ‘formula’ statistics of the CIF
+files. If ‘output_dir’ is specified, the histogram image (.png) will be saved to
+that directory. If ‘output_dir’ is not specified, the image will be saved to the
+directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_site_mixing_type_histogram">
+<span class="sig-name descname"><span class="pre">generate_site_mixing_type_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_site_mixing_type_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_site_mixing_type_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘site_mixing_type’ property from CIF
+files.</p>
+<p>This method creates a histogram based on the ‘site_mixing_type’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_space_group_name_histogram">
+<span class="sig-name descname"><span class="pre">generate_space_group_name_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_space_group_name_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_space_group_name_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘space_group_name’ property from CIF
+files.</p>
+<p>This method creates a histogram based on the ‘space_group_name’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_space_group_number_histogram">
+<span class="sig-name descname"><span class="pre">generate_space_group_number_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_space_group_number_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_space_group_number_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘space_group_number’ property from CIF
+files.</p>
+<p>This method creates a histogram based on the ‘space_group_number’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_structure_histogram">
+<span class="sig-name descname"><span class="pre">generate_structure_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_structure_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_structure_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘structure’ property from CIF files.</p>
+<p>This method creates a histogram based on the ‘structure’ statistics of the CIF
+files. If ‘output_dir’ is specified, the histogram image (.png) will be saved to
+that directory. If ‘output_dir’ is not specified, the image will be saved to the
+directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_supercell_size_histogram">
+<span class="sig-name descname"><span class="pre">generate_supercell_size_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_supercell_size_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_supercell_size_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘supercell_count’ property from CIF
+files.</p>
+<p>This method creates a histogram based on the ‘supercell_count’ statistics of
+the CIF files. If ‘output_dir’ is specified, the histogram image (.png) will be
+saved to that directory. If ‘output_dir’ is not specified, the image will be saved
+to the directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.generate_tag_histogram">
+<span class="sig-name descname"><span class="pre">generate_tag_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.generate_tag_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.generate_tag_histogram" title="Link to this definition"></a></dt>
+<dd><p>Generate a histogram of the ‘tag’ property from CIF files.</p>
+<p>This method creates a histogram based on the ‘tag’ statistics of the CIF
+files. If ‘output_dir’ is specified, the histogram image (.png) will be saved to
+that directory. If ‘output_dir’ is not specified, the image will be saved to the
+directory specified by ‘self.dir_path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the plot is displayed using plt.show(). Default is False.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory path where the histogram should be saved. If None,
+the histogram is saved in the directory defined by ‘self.dir_path’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.minimum_distances">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minimum_distances</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.minimum_distances" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.move_cif_files">
+<span class="sig-name descname"><span class="pre">move_cif_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_directory_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif_ensemble.html#CifEnsemble.move_cif_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.move_cif_files" title="Link to this definition"></a></dt>
+<dd><p>Move a set of CIF files to a destination directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_paths</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – Set of file paths to CIF files.</p></li>
+<li><p><strong>to_directory_path</strong> (<em>str</em>) – Destination directory path.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">file_paths</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">    &quot;tests/data/cif/ensemble_test/300169.cif&quot;,</span>
+<span class="go">    &quot;tests/data/cif/ensemble_test/300170.cif&quot;,</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dest_dir_path</span> <span class="o">=</span> <span class="s2">&quot;tests/data/cif/ensemble_new_dir&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble_test</span><span class="o">.</span><span class="n">move_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.site_mixing_type_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">site_mixing_type_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.site_mixing_type_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.space_group_name_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">space_group_name_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.space_group_name_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.space_group_number_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">space_group_number_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.space_group_number_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.structure_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">structure_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.structure_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.supercell_atom_counts">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">supercell_atom_counts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.supercell_atom_counts" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.supercell_size_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">supercell_size_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.supercell_size_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.tag_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tag_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.tag_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_CN_values_by_method_methods_stat">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_CN_values_by_method_methods_stat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_CN_values_by_method_methods_stat" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_CN_values_by_min_dist_method_stat">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_CN_values_by_min_dist_method_stat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_CN_values_by_min_dist_method_stat" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_composition_types">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_composition_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_composition_types" title="Link to this definition"></a></dt>
+<dd><p>Get unique composition types from all .cif files in the folder.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_composition_types</span>
+<span class="go">{1, 3}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_elements">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_elements</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_elements" title="Link to this definition"></a></dt>
+<dd><p>Get unique elements from all .cif files in the folder.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_elements_stats</span>
+<span class="go">{</span>
+<span class="go">    &quot;Ce&quot;: 1,</span>
+<span class="go">    &quot;Eu&quot;: 1,</span>
+<span class="go">    &quot;Ge&quot;: 3,</span>
+<span class="go">    &quot;Ir&quot;: 1,</span>
+<span class="go">    &quot;La&quot;: 1,</span>
+<span class="go">    &quot;Mo&quot;: 3,</span>
+<span class="go">    &quot;Ru&quot;: 2,</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_elements_stats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_elements_stats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_elements_stats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_formulas">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_formulas</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_formulas" title="Link to this definition"></a></dt>
+<dd><p>Get unique formulas from all .cif files in the folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>unique formulas</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>set[str]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_formulas</span>
+<span class="go">{&quot;EuIr2Ge2&quot;, &quot;CeRu2Ge2&quot;, &quot;LaRu2Ge2&quot;, &quot;Mo&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_site_mixing_types">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_site_mixing_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_site_mixing_types" title="Link to this definition"></a></dt>
+<dd><p>Get unique site mixing types from all .cif files in the folder.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_site_mixing_types</span>
+<span class="go">{&quot;deficiency_without_atomic_mixing&quot;, &quot;full_occupancy&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_space_group_names">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_space_group_names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_space_group_names" title="Link to this definition"></a></dt>
+<dd><p>Get unique space groups from all .cif files in the folder.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_space_group_names</span>
+<span class="go">{&quot;I4/mmm&quot;, &quot;Im-3m&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_space_group_numbers">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_space_group_numbers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_space_group_numbers" title="Link to this definition"></a></dt>
+<dd><p>Get unique space groups from all .cif files in the folder.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_space_group_numbers</span>
+<span class="go">{139, 229}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_structures">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_structures</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_structures" title="Link to this definition"></a></dt>
+<dd><p>Get unique structures from all .cif files in the folder.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_structures</span>
+<span class="go">{&quot;CeAl2Ga2&quot;, &quot;W&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif_ensemble.CifEnsemble.unique_tags">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.models.cif_ensemble.CifEnsemble.unique_tags" title="Link to this definition"></a></dt>
+<dd><p>Get unique formulas from all .cif files in the folder.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif_ensemble</span><span class="o">.</span><span class="n">unique_tags</span>
+<span class="go">{&quot;hex&quot;, &quot;rt&quot;, &quot;rt_hex&quot;, &quot;&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cifkit.models.cif.html" class="btn btn-neutral float-left" title="cifkit.models.cif module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cifkit.occupancy.html" class="btn btn-neutral float-right" title="cifkit.occupancy package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

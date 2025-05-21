@@ -1,0 +1,1015 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.models.cif &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cifkit.models.cif</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cifkit.models.cif</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Bond pair</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.bond_distance</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_shortest_distance_per_bond_pair</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.composition</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">compute_avg_CN</span><span class="p">,</span>
+    <span class="n">get_bond_counts</span><span class="p">,</span>
+    <span class="n">get_bond_fractions</span><span class="p">,</span>
+    <span class="n">get_unique_CN_values</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.connection</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_CN_connections_by_best_methods</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.filter</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">find_best_polyhedron</span><span class="p">,</span>
+    <span class="n">get_CN_connections_by_min_dist_method</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_polyhedron_coordinates_labels</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.method</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_CN_max_gap_per_site</span>
+
+<span class="c1"># Site info</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.site_distance</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_shortest_distance</span><span class="p">,</span>
+    <span class="n">get_shortest_distance_per_site</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Radius</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.data.radius_handler</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">compute_radius_sum</span><span class="p">,</span>
+    <span class="n">get_is_radius_data_available</span><span class="p">,</span>
+    <span class="n">get_radius_values_per_element</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.figures</span><span class="w"> </span><span class="kn">import</span> <span class="n">polyhedron</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.occupancy.mixing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_mixing_type_per_pair_dict</span><span class="p">,</span>
+    <span class="n">get_site_mixing_type</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.environment</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_site_connections</span>
+
+<span class="c1"># Coordination number</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.environment_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">flat_site_connections</span>
+
+<span class="c1"># Supercell generation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.supercell</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_supercell_points</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.supercell_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cell_atom_count</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.bond_pair</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_bond_pairs</span><span class="p">,</span>
+    <span class="n">get_pairs_sorted_by_mendeleev</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Edit .cif file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.cif_editor</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit_cif_file_based_on_db</span>
+
+<span class="c1"># Parser .cif file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.cif_parser</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_cif_block</span><span class="p">,</span>
+    <span class="n">get_formula_structure_weight_s_group</span><span class="p">,</span>
+    <span class="n">get_loop_values</span><span class="p">,</span>
+    <span class="n">get_tag_from_third_line</span><span class="p">,</span>
+    <span class="n">get_unique_elements_from_loop</span><span class="p">,</span>
+    <span class="n">get_unique_site_labels</span><span class="p">,</span>
+    <span class="n">get_unitcell_angles_rad</span><span class="p">,</span>
+    <span class="n">get_unitcell_lengths</span><span class="p">,</span>
+    <span class="n">parse_atom_site_occupancy_info</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Identify .cif database source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.cif_sourcer</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cif_db_source</span>
+
+<span class="c1"># Utility</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.log_messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifLog</span>
+
+
+<div class="viewcode-block" id="ensure_connections">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.ensure_connections">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ensure_connections</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For accessing lazy properties and methods, compute connections.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">compute_connections</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<span class="c1"># Global logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="Cif">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Cif</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_formatted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes an object from a .cif file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_path : str</span>
+<span class="sd">            Path to the .cif file.</span>
+<span class="sd">        is_formatted : bool, optional</span>
+<span class="sd">            If False, preprocess the .cif file to ensure compatibility with the</span>
+<span class="sd">            gemmi library. Default is False.</span>
+<span class="sd">        logging_enabled : bool, optional</span>
+<span class="sd">            Enables detailed logging during initialization and for distance</span>
+<span class="sd">            calculations. Default is False.</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_path : str</span>
+<span class="sd">            Path to the CIF file from which data is loaded.</span>
+<span class="sd">        logging_enabled : bool</span>
+<span class="sd">            Enables detailed logging for initialization and distance</span>
+<span class="sd">            alculations if set to True.</span>
+<span class="sd">        file_name : str</span>
+<span class="sd">            Base name of the CIF file, extracted from `file_path`.</span>
+<span class="sd">        file_name_without_ext : str</span>
+<span class="sd">            File name without its extension, useful for referencing or</span>
+<span class="sd">            generating derivative files.</span>
+<span class="sd">        db_source : str</span>
+<span class="sd">            Source database (e.g., ICSD, MP, CCDC, PCD) from which the CIF file</span>
+<span class="sd">            originates, determined at runtime.</span>
+<span class="sd">        unitcell_lengths : list[float]</span>
+<span class="sd">            List of unit cell lengths for the crystal structure, typically in</span>
+<span class="sd">            Angstroms.</span>
+<span class="sd">        unitcell_angles : list[float]</span>
+<span class="sd">            List of unit cell angles in radians, ordered by alpha, beta, gamma.</span>
+<span class="sd">        site_labels : list[str]</span>
+<span class="sd">            Lists all unique atomic site labels.</span>
+<span class="sd">        unique_elements : set[str]</span>
+<span class="sd">            Set of unique chemical elements present in the CIF file.</span>
+<span class="sd">        atom_site_info : dict[str, any]</span>
+<span class="sd">            Dictionary containing detailed information about each atomic site</span>
+<span class="sd">            including element, site occupancy,</span>
+<span class="sd">            fractional coordinates, symmetry, and multiplicity.</span>
+<span class="sd">        composition_type : int</span>
+<span class="sd">            Number of unique elements present in the .cif file, e.g., 1 for</span>
+<span class="sd">            unary, 2 for binary, etc.</span>
+<span class="sd">        tag : str</span>
+<span class="sd">            Additional tag associated with the CIF data, parsed from the third</span>
+<span class="sd">            line of PCD .cif files.</span>
+<span class="sd">        bond_pairs : set[tuple[str, str]]</span>
+<span class="sd">            Set of tuples representing bonded pairs of elements.</span>
+<span class="sd">        site_label_pairs : set[tuple[str, str]]</span>
+<span class="sd">            Set of tuples representing pairs of atomic site labels.</span>
+<span class="sd">        bond_pairs_sorted_by_mendeleev : set[tuple[str, str]]</span>
+<span class="sd">            Set of bonded pairs sorted according to Mendeleev Numbers.</span>
+<span class="sd">        site_label_pairs_sorted_by_mendeleev : set[tuple[str, str]]</span>
+<span class="sd">            Set of site label pairs sorted by Mendeleev Numbers.</span>
+<span class="sd">        site_mixing_type : str</span>
+<span class="sd">            Descriptor of the mixing type, categorized into four types:</span>
+<span class="sd">            Full occupancy is assigned when a single atomic site occupies</span>
+<span class="sd">            the fractional coordinate with an occupancy value of 1.</span>
+<span class="sd">            Full occupancy with mixing is assigned when multiple atomic sites</span>
+<span class="sd">            collectively occupy the fractional coordinate to a sum of 1.</span>
+<span class="sd">            Deficiency without mixing is assigned when a single atomic site occupying</span>
+<span class="sd">            the fractional coordinate with a sum less than 1.</span>
+<span class="sd">            Deficiency with atomic mixing is assigned when multiple atomic sites occupy</span>
+<span class="sd">            the fractional coordinate with a sum less than 1.</span>
+<span class="sd">        is_radius_data_available : bool</span>
+<span class="sd">            Indicates whether Pauling and CIF atomic radii are available for</span>
+<span class="sd">            all elements in the .cif file.</span>
+<span class="sd">        mixing_info_per_label_pair : dict</span>
+<span class="sd">            Dictionary mapping pairs of labels to their mixing information.</span>
+<span class="sd">        mixing_info_per_label_pair_sorted_by_mendeleev : dict</span>
+<span class="sd">            Same as `mixing_info_per_label_pair`, but sorted according to</span>
+<span class="sd">            Mendeleev numbers.</span>
+<span class="sd">        unitcell_points : list[list[tuple[float, float, float, str]]]</span>
+<span class="sd">            List of points defining the unit cell; each point contains</span>
+<span class="sd">            fractional coordinates and a site label.</span>
+<span class="sd">        supercell_points : list[list[tuple[float, float, float, str]]]</span>
+<span class="sd">            List of points defining the supercell of the cell For each .cif file,</span>
+<span class="sd">            a unit cell is generated by applying the symmetry operations.</span>
+<span class="sd">            A supercell is generated by applying ±1 shifts from the unit cell.</span>
+<span class="sd">        unitcell_atom_count : int</span>
+<span class="sd">            Total count of atoms within the unit cell.</span>
+<span class="sd">        supercell_atom_count : int</span>
+<span class="sd">            Total count of atoms within the generated supercell</span>
+<span class="sd">            incorporating ±1, ±1, ±1 translations.</span>
+<span class="sd">        connections : None or dict</span>
+<span class="sd">            Initially None, intended to store connection data related to</span>
+<span class="sd">            the crystal structure. Connections are computed lazily and are</span>
+<span class="sd">            only calculated when first needed by a method or property requiring them.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logging_enabled</span> <span class="o">=</span> <span class="n">logging_enabled</span>
+
+        <span class="c1"># Initialize the Cif object with the file path.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name_without_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db_source</span> <span class="o">=</span> <span class="n">get_cif_db_source</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+
+        <span class="c1"># Private attribute to store connections</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_pair_distance</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Pre-process if .cif has not been formatted</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_formatted</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preprocess</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_data</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_log_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log a formatted message if logging is enabled.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logging_enabled</span><span class="p">:</span>
+            <span class="n">formatted_message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">file_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span>
+            <span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">formatted_message</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess each .cif file before initializng and separate files with</span>
+<span class="sd">        error.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_info</span><span class="p">(</span><span class="n">CifLog</span><span class="o">.</span><span class="n">PREPROCESSING</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">edit_cif_file_based_on_db</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load data from the .cif file and extract attributes.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_info</span><span class="p">(</span><span class="n">CifLog</span><span class="o">.</span><span class="n">LOADING_DATA</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_block</span> <span class="o">=</span> <span class="n">get_cif_block</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_cif_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_supercell</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_cif_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse the main CIF data from the block.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loop_values</span> <span class="o">=</span> <span class="n">get_loop_values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_lengths</span> <span class="o">=</span> <span class="n">get_unitcell_lengths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_angles</span> <span class="o">=</span> <span class="n">get_unitcell_angles_rad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span> <span class="o">=</span> <span class="n">get_unique_site_labels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span> <span class="o">=</span> <span class="n">get_unique_elements_from_loop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop_values</span><span class="p">)</span>
+        <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">space_group_number</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">space_group_name</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">get_formula_structure_weight_s_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atom_site_info</span> <span class="o">=</span> <span class="n">parse_atom_site_occupancy_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composition_type</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">get_tag_from_third_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db_source</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bond_pairs</span> <span class="o">=</span> <span class="n">get_bond_pairs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site_label_pairs</span> <span class="o">=</span> <span class="n">get_bond_pairs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bond_pairs_sorted_by_mendeleev</span> <span class="o">=</span> <span class="n">get_pairs_sorted_by_mendeleev</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site_label_pairs_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_pairs_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site_mixing_type</span> <span class="o">=</span> <span class="n">get_site_mixing_type</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_site_info</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_radius_data_available</span> <span class="o">=</span> <span class="n">get_is_radius_data_available</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mixing_info_per_label_pair</span> <span class="o">=</span> <span class="n">get_mixing_type_per_pair_dict</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">site_label_pairs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_site_info</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mixing_info_per_label_pair_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_mixing_type_per_pair_dict</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">site_label_pairs_sorted_by_mendeleev</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">atom_site_info</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate supercell information based on the unit cell data.</span>
+
+<span class="sd">        This method calculates the supercell points and atom counts based</span>
+<span class="sd">        on the unit cell data. It uses the `get_supercell_points` and</span>
+<span class="sd">        `get_cell_atom_count` functions to perform the calculations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Method implementation goes here</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_points</span> <span class="o">=</span> <span class="n">get_supercell_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supercell_points</span> <span class="o">=</span> <span class="n">get_supercell_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_atom_count</span> <span class="o">=</span> <span class="n">get_cell_atom_count</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unitcell_points</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supercell_atom_count</span> <span class="o">=</span> <span class="n">get_cell_atom_count</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_points</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Cif.compute_connections">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.compute_connections">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cutoff_radius</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute onnection network, shortest distances, bond counts, and</span>
+<span class="sd">        coordination numbers (CN). These prperties are lazily loaded to avoid</span>
+<span class="sd">        unnecessary computation during the initialization and pre-processing</span>
+<span class="sd">        step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cutoff_radius : float, optional</span>
+<span class="sd">            The distance threshold in Angstroms used to consider two atoms as connected,</span>
+<span class="sd">            by default 10.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_info</span><span class="p">(</span><span class="n">CifLog</span><span class="o">.</span><span class="n">COMPUTE_CONNECTIONS</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="n">get_site_connections</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_lengths</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_angles</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_points</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">supercell_points</span><span class="p">,</span>
+            <span class="n">cutoff_radius</span><span class="o">=</span><span class="n">cutoff_radius</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connections_flattened</span> <span class="o">=</span> <span class="n">flat_site_connections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_distance</span> <span class="o">=</span> <span class="n">get_shortest_distance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
+
+        <span class="c1"># Shortest distance per bond pair</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_bond_pair_distance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_shortest_distance_per_bond_pair</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connections_flattened</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Shortest distance per site</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_site_pair_distance</span> <span class="o">=</span> <span class="n">get_shortest_distance_per_site</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Parse individual radii per element</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius_values</span> <span class="o">=</span> <span class="n">get_radius_values_per_element</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius_sum</span> <span class="o">=</span> <span class="n">compute_radius_sum</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_radius_data_available</span>
+        <span class="p">)</span>
+
+        <span class="c1"># CN max gap per site</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_gap_per_site</span> <span class="o">=</span> <span class="n">compute_CN_max_gap_per_site</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius_sum</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_radius_data_available</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">site_mixing_type</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Find the best methods</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_best_methods</span> <span class="o">=</span> <span class="n">find_best_polyhedron</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Get CN connections by the best methods</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_best_methods</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_CN_connections_by_best_methods</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CN_best_methods</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Get CN connections by the best methods</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_min_dist_method</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_CN_connections_by_min_dist_method</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># Bond counts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method</span> <span class="o">=</span> <span class="n">get_bond_counts</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods</span> <span class="o">=</span> <span class="n">get_bond_counts</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Bond counts sorted by mendeleev</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_bond_counts</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span><span class="p">,</span>
+                <span class="n">sorted_by_mendeleev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_bond_counts</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span><span class="p">,</span>
+                <span class="n">sorted_by_mendeleev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Bond fractions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_min_dist_method</span> <span class="o">=</span> <span class="n">get_bond_fractions</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_min_dist_method</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods</span> <span class="o">=</span> <span class="n">get_bond_fractions</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_best_methods</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Bond fractions sorted by Mendeleev</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_bond_fractions</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_bond_fractions</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_best_methods_sorted_by_mendeleev</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Unique CN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_unique_values_by_min_dist_method</span> <span class="o">=</span> <span class="n">get_unique_CN_values</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_unique_values_by_best_methods</span> <span class="o">=</span> <span class="n">get_unique_CN_values</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Avg CN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_min_dist_method</span> <span class="o">=</span> <span class="n">compute_avg_CN</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_best_methods</span> <span class="o">=</span> <span class="n">compute_avg_CN</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Max CN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_min_dist_method</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_min_dist_method</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_best_methods</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_best_methods</span>
+        <span class="p">)</span>
+        <span class="c1"># Min CN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_min_dist_method</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_min_dist_method</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_best_methods</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_best_methods</span>
+        <span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shortest_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lazily retrieve the shortest atomic distance within the crystal</span>
+<span class="sd">        structure. This property is lazily loaded and ensures all necessary</span>
+<span class="sd">        connections are computed beforehand using the `@ensure_connections`</span>
+<span class="sd">        decorator. The computation calculates the minimum distance between any</span>
+<span class="sd">        pairs of atoms based on the connection data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The shortest distance between any two connected atoms in the</span>
+<span class="sd">            crystal structure, in Angstroms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_distance</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connections_flattened</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transform site connections into a sorted list of tuples, each</span>
+<span class="sd">        containing a pair of alphabetically sorted element symbols and the</span>
+<span class="sd">        distance between them.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[tuple[tuple[str, str], float]]</span>
+<span class="sd">            A sorted list of tuples, each containing a pair of alphabetically</span>
+<span class="sd">            sorted element symbols and the distance between them.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif = Cif(&quot;path/to/cif/file.cif&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; cif.connections_flattened</span>
+<span class="sd">        [((&quot;In&quot;, &quot;Rh&quot;), 2.697), ((&quot;In&quot;, &quot;Rh&quot;), 2.697)]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connections_flattened</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shortest_bond_pair_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine the minimum distance for all possible unique pair of</span>
+<span class="sd">        elements. This property uses lazily loaded connections to compute the</span>
+<span class="sd">        distance if they are not already available.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[tuple[str, str], float]</span>
+<span class="sd">            Dictionary where each key is a tuple of element symbols and the float value</span>
+<span class="sd">            is the distance between pair of elements in Angstroms.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif.shortest_bond_pair_distance</span>
+<span class="sd">        {</span>
+<span class="sd">            (&quot;In&quot;, &quot;In&quot;): 3.244,</span>
+<span class="sd">            (&quot;In&quot;, &quot;Rh&quot;): 2.697,</span>
+<span class="sd">            (&quot;In&quot;, &quot;U&quot;): 3.21,</span>
+<span class="sd">            (&quot;Rh&quot;, &quot;Rh&quot;): 3.881,</span>
+<span class="sd">            (&quot;Rh&quot;, &quot;U&quot;): 2.983,</span>
+<span class="sd">            (&quot;U&quot;, &quot;U&quot;): 3.881,</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_bond_pair_distance</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shortest_site_pair_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the shortest distance from each unique atomic site in the</span>
+<span class="sd">        crystal structure. This property uses lazily loaded connections to</span>
+<span class="sd">        compute these distances if they are not already available.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, tuple[str, float]]</span>
+<span class="sd">             dictionary where each key is an atomic label and the value is a</span>
+<span class="sd">             tuple containing the label of the closest atomic site and the</span>
+<span class="sd">             shortest distance to it in Angstroms</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif.shortest_site_pair_distance</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;In1&quot;: (&quot;Rh2&quot;, 2.697),</span>
+<span class="sd">            &quot;Rh1&quot;: (&quot;In1&quot;, 2.852),</span>
+<span class="sd">            &quot;Rh2&quot;: (&quot;In1&quot;, 2.697),</span>
+<span class="sd">            &quot;U1&quot;: (&quot;Rh1&quot;, 2.984),</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_site_pair_distance</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">radius_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve CIF radius, CIF_refined radius, and Pauling C12 radius for</span>
+<span class="sd">        each element.</span>
+
+<span class="sd">        This property uses lazy loading to compute or retrieve radius values only when</span>
+<span class="sd">        needed, optimizing performance. The CIF radius and Pauling C12 radius are standard</span>
+<span class="sd">        values sourced from `data/radius.py` for each element. In contrast, the</span>
+<span class="sd">        CIF_refined radius is calculated based on bonding distances to ensure accuracy</span>
+<span class="sd">        across different environments.</span>
+
+<span class="sd">        - **CIF_radius**: The standard radius value commonly determined from</span>
+<span class="sd">        elemental .cif files, the approximate size of an atom within a crystal structure.</span>
+<span class="sd">        - **CIF_radius_refined**: An optimized radius calculated to ensure that, across</span>
+<span class="sd">        all bonding pairs, the sum of the two radii in a bonded pair attempts to</span>
+<span class="sd">        matches the shortest unique observed bond distances. This refinement is designed</span>
+<span class="sd">        to improve packing efficiency within a coordination polyhedron.</span>
+<span class="sd">        - **Pauling_radius_CN12**: The Pauling radius of the element, calculated with a</span>
+<span class="sd">        coordination number (CN) of 12, providing a basis for comparison with other radius</span>
+<span class="sd">        types.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, dict[str, float]]</span>
+<span class="sd">            A dictionary where each key is an atomic label (e.g., &quot;In&quot;, &quot;Rh&quot;, &quot;U&quot;), and</span>
+<span class="sd">            the corresponding value is a dictionary with radius information in Angstroms:</span>
+
+<span class="sd">            - `CIF_radius` (float): The standard CIF radius.</span>
+<span class="sd">            - `CIF_radius_refined` (float): The optimized radius based on CIF radius.</span>
+<span class="sd">            - `Pauling_radius_CN12` (float): The Pauling radius with a coordination</span>
+<span class="sd">            number of 12, parsed from literature.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif.radius_values</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;In&quot;: {</span>
+<span class="sd">                &quot;CIF_radius&quot;: 1.624,</span>
+<span class="sd">                &quot;CIF_radius_refined&quot;: 1.328,</span>
+<span class="sd">                &quot;Pauling_radius_CN12&quot;: 1.66,</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;Rh&quot;: {</span>
+<span class="sd">                &quot;CIF_radius&quot;: 1.345,</span>
+<span class="sd">                &quot;CIF_radius_refined&quot;: 1.369,</span>
+<span class="sd">                &quot;Pauling_radius_CN12&quot;: 1.342,</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;U&quot;: {</span>
+<span class="sd">                &quot;CIF_radius&quot;: 1.377,</span>
+<span class="sd">                &quot;CIF_radius_refined&quot;: 1.614,</span>
+<span class="sd">                &quot;Pauling_radius_CN12&quot;: 1.516,</span>
+<span class="sd">            },</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius_values</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">radius_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the sum of CIF radius, CIF_refined radius, and Pauling C12</span>
+<span class="sd">        radius for the shortest bonding pairs of elements.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str : dict[str:float]]</span>
+<span class="sd">            Dictionary where each key is a radius type and the value is a dictionary</span>
+<span class="sd">            with the key being a bond pair of elements and the value being the total</span>
+<span class="sd">            radius in Angstroms.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif.radius_values</span>
+<span class="sd">        &gt;&gt;&gt;  {</span>
+<span class="sd">            &quot;CIF_radius_sum&quot;: {</span>
+<span class="sd">                &quot;In-In&quot;: 3.248,</span>
+<span class="sd">                &quot;In-Rh&quot;: 2.969,</span>
+<span class="sd">                &quot;In-U&quot;: 3.001,</span>
+<span class="sd">                &quot;Rh-Rh&quot;: 2.69,</span>
+<span class="sd">                &quot;Rh-U&quot;: 2.722,</span>
+<span class="sd">                &quot;U-U&quot;: 2.754,</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;CIF_radius_refined_sum&quot;: {</span>
+<span class="sd">                &quot;In-In&quot;: 2.657,</span>
+<span class="sd">                &quot;In-Rh&quot;: 2.697,</span>
+<span class="sd">                &quot;In-U&quot;: 2.943,</span>
+<span class="sd">                &quot;Rh-Rh&quot;: 2.737,</span>
+<span class="sd">                &quot;Rh-U&quot;: 2.983,</span>
+<span class="sd">                &quot;U-U&quot;: 3.229,</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;Pauling_radius_sum&quot;: {</span>
+<span class="sd">                &quot;In-In&quot;: 3.32,</span>
+<span class="sd">                &quot;In-Rh&quot;: 3.002,</span>
+<span class="sd">                &quot;In-U&quot;: 3.176,</span>
+<span class="sd">                &quot;Rh-Rh&quot;: 2.684,</span>
+<span class="sd">                &quot;Rh-U&quot;: 2.858,</span>
+<span class="sd">                &quot;U-U&quot;: 3.032,</span>
+<span class="sd">            },</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius_sum</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_max_gap_per_site</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determines the maximum gap in coordination number (CN) for each</span>
+<span class="sd">        atomic site.</span>
+
+<span class="sd">        For each atomic site, considers the first 20 nearest neighbors. The distances</span>
+<span class="sd">        to these neighbors are normalized based on four methods:</span>
+
+<span class="sd">        - `dist_by_shortest_dist`: Normalization by the shortest distance from the site.</span>
+<span class="sd">        - `dist_by_CIF_radius_sum`: Normalization by the sum of CIF radii.</span>
+<span class="sd">        - `dist_by_CIF_radius_refined_sum`: Normalization by the sum of refined CIF radii.</span>
+<span class="sd">        - `dist_by_Pauling_radius_sum`: Normalization by the sum of Pauling radii.</span>
+
+<span class="sd">        The radius sums are calculated for each element pair involved. For each</span>
+<span class="sd">        normalization method, the maximum gap is determined as the largest difference</span>
+<span class="sd">        between consecutive normalized distances (i.e., the difference between the nth</span>
+<span class="sd">        and (n-1)th neighbors).</span>
+
+<span class="sd">        This CN gap provides insight into the bonding relevance for each site.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict of dict of dict</span>
+<span class="sd">            A dictionary where each key represents an atomic site, mapping to another</span>
+<span class="sd">            dictionary with normalization methods as keys. Each normalization method</span>
+<span class="sd">            contains a dictionary with:</span>
+
+<span class="sd">            - `max_gap` (float): The maximum gap in the normalized distances.</span>
+<span class="sd">            - `CN` (int): Coordination number based on the normalization method.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; cif.CN_max_gap_per_site</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;In1&quot;: {</span>
+<span class="sd">                &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.306, &quot;CN&quot;: 14},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.39, &quot;CN&quot;: 14},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.341, &quot;CN&quot;: 12},</span>
+<span class="sd">                &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.398, &quot;CN&quot;: 14},</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;U1&quot;: {</span>
+<span class="sd">                &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.197, &quot;CN&quot;: 11},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.312, &quot;CN&quot;: 11},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.27, &quot;CN&quot;: 17},</span>
+<span class="sd">                &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.256, &quot;CN&quot;: 17},</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;Rh1&quot;: {</span>
+<span class="sd">                &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.315, &quot;CN&quot;: 9},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.347, &quot;CN&quot;: 9},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.418, &quot;CN&quot;: 9},</span>
+<span class="sd">                &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.402, &quot;CN&quot;: 9},</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;Rh2&quot;: {</span>
+<span class="sd">                &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.31, &quot;CN&quot;: 9},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.324, &quot;CN&quot;: 9},</span>
+<span class="sd">                &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.397, &quot;CN&quot;: 9},</span>
+<span class="sd">                &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.380, &quot;CN&quot;: 9},</span>
+<span class="sd">            },</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_gap_per_site</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determines the optimal coordination method for each atomic site.</span>
+
+<span class="sd">        For each atomic site, the coordination polyhedron is generated for each method</span>
+<span class="sd">        in `self.CN_max_gap_per_site`. The method with the smallest value of</span>
+<span class="sd">        `polyhedron_metrics[&quot;distance_from_avg_point_to_center&quot;]`, indicating the highest</span>
+<span class="sd">        symmetry of the polyhedron, is selected as the &quot;best method&quot; among the four</span>
+<span class="sd">        methods used to determine the CN gap in `self.CN_max_gap_per_site`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, dict[str, float | int | str]]]</span>
+<span class="sd">            Dictionary where each key represents an atomic site, and the corresponding</span>
+<span class="sd">            value is a dictionary containing:</span>
+
+<span class="sd">            - `volume_of_polyhedron` (float): The volume of the polyhedron surrounding</span>
+<span class="sd">            the atomic site.</span>
+<span class="sd">            - `distance_from_avg_point_to_center` (float): The average distance from</span>
+<span class="sd">            the polyhedron&#39;s vertices  to its geometric center, used as a measure of</span>
+<span class="sd">            symmetry.</span>
+<span class="sd">            - `number_of_vertices` (int): The number of vertices in the coordination</span>
+<span class="sd">            polyhedron.</span>
+<span class="sd">            - `number_of_edges` (int): The number of edges connecting vertices in the</span>
+<span class="sd">            polyhedron.</span>
+<span class="sd">            - `number_of_faces` (int): The number of faces in the coordination polyhedron.</span>
+<span class="sd">            - `shortest_distance_to_face` (float): The shortest distance between the</span>
+<span class="sd">            atomic site and the nearest face.</span>
+<span class="sd">            - `shortest_distance_to_edge` (float): The shortest distance between the</span>
+<span class="sd">            atomic site and the nearest edge.</span>
+<span class="sd">            - `volume_of_inscribed_sphere` (float): Volume of the largest sphere that can</span>
+<span class="sd">            it inside the polyhedron.</span>
+<span class="sd">            - `packing_efficiency` (float): A measure of how efficiently the polyhedron</span>
+<span class="sd">            is packed around the atomic site.</span>
+<span class="sd">            - `method_used` (str): The name of the chosen method</span>
+<span class="sd">            (e.g., `dist_by_shortest_dist`) providing the  highest symmetry based on</span>
+<span class="sd">            `distance_from_avg_point_to_center`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; CN_best_methods = cif_URhIn.CN_best_methods</span>
+<span class="sd">        &gt;&gt;&gt; CN_best_methods[&quot;In1&quot;][&quot;number_of_vertices&quot;] == 14</span>
+<span class="sd">        &gt;&gt;&gt; CN_best_methods[&quot;Rh2&quot;][&quot;number_of_vertices&quot;] == 9</span>
+<span class="sd">        &gt;&gt;&gt; CN_best_methods[&quot;In1&quot;][&quot;method_used&quot;] == &quot;dist_by_shortest_dist&quot;</span>
+<span class="sd">        &gt;&gt;&gt; CN_best_methods[&quot;Rh2&quot;][&quot;method_used&quot;] == &quot;dist_by_shortest_dist&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_best_methods</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_connections_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_best_methods</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_connections_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_min_dist_method</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute avg, min, max, unique for best and min_dist method</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># 1.1 Bond counts</span>
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods</span>
+
+    <span class="c1"># 1.2 Bond counts sorted by mendeleev</span>
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_best_methods_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods_sorted_by_mendeleev</span>
+
+    <span class="c1"># 2.1 Bond fractions</span>
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_min_dist_method</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods</span>
+
+    <span class="c1"># 2.2. Bond fractions sorted by Mendeleev</span>
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span>
+
+    <span class="c1"># Unique CN</span>
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_unique_values_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_unique_values_by_min_dist_method</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_unique_values_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_unique_values_by_best_methods</span>
+
+    <span class="c1"># Average CN</span>
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_avg_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_min_dist_method</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_avg_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_best_methods</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_max_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_min_dist_method</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_max_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_best_methods</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_min_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_min_dist_method</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CN_min_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_best_methods</span>
+
+<div class="viewcode-block" id="Cif.get_polyhedron_labels_by_CN_min_dist_method">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method">[docs]</a>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_polyhedron_labels_by_CN_min_dist_method</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="n">get_polyhedron_coordinates_labels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span><span class="p">,</span> <span class="n">label</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cif.get_polyhedron_labels_by_CN_best_methods">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods">[docs]</a>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_polyhedron_labels_by_CN_best_methods</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="n">get_polyhedron_coordinates_labels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span><span class="p">,</span> <span class="n">label</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cif.plot_polyhedron">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.plot_polyhedron">[docs]</a>
+    <span class="nd">@ensure_connections</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_polyhedron</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">site_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">is_displayed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to plot a polyhedron structure and optionally saves it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        site_label : str</span>
+<span class="sd">            Central site label for the polyhedron</span>
+<span class="sd">        show_labels : bool, optional</span>
+<span class="sd">            Whether to display vertex labels, by default True</span>
+<span class="sd">        is_displayed : bool, optional</span>
+<span class="sd">            Display plot interactively, by default False</span>
+<span class="sd">        output_dir : str, optional</span>
+<span class="sd">            Directory to save the plot, by default None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">coords</span><span class="p">,</span> <span class="n">vertex_labels</span> <span class="o">=</span> <span class="n">get_polyhedron_coordinates_labels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span><span class="p">,</span> <span class="n">site_label</span>
+        <span class="p">)</span>
+        <span class="n">polyhedron</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">coords</span><span class="p">,</span>
+            <span class="n">vertex_labels</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span>
+            <span class="n">show_labels</span><span class="p">,</span>
+            <span class="n">is_displayed</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

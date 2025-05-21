@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.utils.cif_parser &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cifkit.utils.cif_parser</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cifkit.utils.cif_parser</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Parses attributes from a .cif file.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">gemmi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gemmi.cif</span><span class="w"> </span><span class="kn">import</span> <span class="n">Block</span><span class="p">,</span> <span class="n">Column</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">unit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.error_messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifParserError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.string_parser</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">clean_parsed_structure</span><span class="p">,</span>
+    <span class="n">get_atom_type_from_label</span><span class="p">,</span>
+    <span class="n">get_string_to_formatted_float</span><span class="p">,</span>
+    <span class="n">strip_numbers_and_symbols</span><span class="p">,</span>
+    <span class="n">trim_string</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_cif_block">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_cif_block">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_cif_block</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Block</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return CIF block from file path.&quot;&quot;&quot;</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">gemmi</span><span class="o">.</span><span class="n">cif</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">sole_block</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">block</span></div>
+
+
+
+<div class="viewcode-block" id="get_unitcell_lengths">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unitcell_lengths">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unitcell_lengths</span><span class="p">(</span>
+    <span class="n">block</span><span class="p">:</span> <span class="n">Block</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the unit cell lengths.&quot;&quot;&quot;</span>
+    <span class="n">keys_lengths</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;_cell_length_a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_cell_length_b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_cell_length_c&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">find_value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_lengths</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">lengths</span></div>
+
+
+
+<div class="viewcode-block" id="get_unitcell_angles_rad">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unitcell_angles_rad">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unitcell_angles_rad</span><span class="p">(</span>
+    <span class="n">block</span><span class="p">:</span> <span class="n">Block</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the unit cell angles.&quot;&quot;&quot;</span>
+
+    <span class="n">keys_angles</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;_cell_angle_alpha&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_cell_angle_beta&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_cell_angle_gamma&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">angles</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">find_value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_angles</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">unit</span><span class="o">.</span><span class="n">get_radians_from_degrees</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_loop_tags">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_loop_tags">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_loop_tags</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return tags commonly used for atomic description.&quot;&quot;&quot;</span>
+    <span class="n">loop_tags</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;_atom_site_label&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_atom_site_type_symbol&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_atom_site_symmetry_multiplicity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_atom_site_Wyckoff_symbol&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_atom_site_fract_x&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_atom_site_fract_y&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_atom_site_fract_z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_atom_site_occupancy&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">loop_tags</span></div>
+
+
+
+<div class="viewcode-block" id="get_loop_values">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_loop_values">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_loop_values</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="n">Block</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Column</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve a list of predefined loop tags for atomic site description.</span>
+
+<span class="sd">    If a tag is not found, None is inserted in its place in the list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">loop_tags</span> <span class="o">=</span> <span class="n">get_loop_tags</span><span class="p">()</span>
+
+    <span class="c1"># Use a list comprehension with conditional handling for missing tags</span>
+    <span class="n">loop_values</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">block</span><span class="o">.</span><span class="n">find_loop</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span> <span class="k">if</span> <span class="n">block</span><span class="o">.</span><span class="n">find_loop</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">loop_tags</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">loop_values</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_label_count">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_label_count">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_label_count</span><span class="p">(</span><span class="n">loop_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Count the number of labels in the loop.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_elements_from_loop">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_elements_from_loop">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_elements_from_loop</span><span class="p">(</span><span class="n">loop_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of alphabetically sorted unique elements from loop</span>
+<span class="sd">    values.&quot;&quot;&quot;</span>
+    <span class="n">num_atom_labels</span> <span class="o">=</span> <span class="n">get_unique_label_count</span><span class="p">(</span><span class="n">loop_values</span><span class="p">)</span>
+    <span class="n">unique_elements</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_atom_labels</span><span class="p">):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">strip_numbers_and_symbols</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">unique_elements</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">unique_elements</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_site_labels">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_site_labels">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_site_labels</span><span class="p">(</span><span class="n">loop_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of atom labels from loop values.&quot;&quot;&quot;</span>
+    <span class="n">num_atom_labels</span> <span class="o">=</span> <span class="n">get_unique_label_count</span><span class="p">(</span><span class="n">loop_values</span><span class="p">)</span>
+    <span class="n">label_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_atom_labels</span><span class="p">):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">loop_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">label_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">label_list</span></div>
+
+
+
+<div class="viewcode-block" id="get_label_occupancy_coordinates">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_label_occupancy_coordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_label_occupancy_coordinates</span><span class="p">(</span>
+    <span class="n">loop_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">i</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return atom information (label, occupancy, coordinates) for the i-th</span>
+<span class="sd">    atom.&quot;&quot;&quot;</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">loop_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">occupancy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">coordinates</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span>
+        <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span>
+        <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">label</span><span class="p">,</span> <span class="n">occupancy</span><span class="p">,</span> <span class="n">coordinates</span></div>
+
+
+
+<div class="viewcode-block" id="get_loop_value_dict">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_loop_value_dict">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_loop_value_dict</span><span class="p">(</span>
+    <span class="n">loop_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a dictionary containing CIF loop values for each label.&quot;&quot;&quot;</span>
+    <span class="n">loop_value_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">num_of_atom_labels</span> <span class="o">=</span> <span class="n">get_unique_label_count</span><span class="p">(</span><span class="n">loop_values</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_atom_labels</span><span class="p">):</span>
+        <span class="p">(</span>
+            <span class="n">label</span><span class="p">,</span>
+            <span class="n">occupancy</span><span class="p">,</span>
+            <span class="n">coordinates</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">get_label_occupancy_coordinates</span><span class="p">(</span><span class="n">loop_values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">loop_value_dict</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;occupancy&quot;</span><span class="p">:</span> <span class="n">occupancy</span><span class="p">,</span>
+            <span class="s2">&quot;coords&quot;</span><span class="p">:</span> <span class="n">coordinates</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">loop_value_dict</span></div>
+
+
+
+<div class="viewcode-block" id="get_start_end_line_indexes">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_start_end_line_indexes">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_start_end_line_indexes</span><span class="p">(</span>
+    <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start_keyword</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the starting and ending indexes of the lines in atom_site_loop.&quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">start_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Find the start index</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">start_keyword</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">start_index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">break</span>
+
+    <span class="c1"># Find the end index</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_index</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">end_index</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">start_index</span><span class="p">,</span> <span class="n">end_index</span></div>
+
+
+
+<div class="viewcode-block" id="get_line_content_from_tag">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_line_content_from_tag">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_line_content_from_tag</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start_keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a list containing file content with starting keyword.</span>
+
+<span class="sd">    This function only appropriate for PCD format for removing the</span>
+<span class="sd">    author section.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start_index</span><span class="p">,</span> <span class="n">end_index</span> <span class="o">=</span> <span class="n">get_start_end_line_indexes</span><span class="p">(</span>
+        <span class="n">file_path</span><span class="p">,</span> <span class="n">start_keyword</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">start_index</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">end_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="c1"># Extract the content between start_index and end_index</span>
+    <span class="n">content_lines</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">content_lines</span></div>
+
+
+
+<div class="viewcode-block" id="get_formula_structure_weight_s_group">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_formula_structure_weight_s_group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_formula_structure_weight_s_group</span><span class="p">(</span>
+    <span class="n">block</span><span class="p">:</span> <span class="n">Block</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the unit cell lengths.&quot;&quot;&quot;</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;_chemical_formula_structural&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_chemical_name_structure_type&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_chemical_formula_weight&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_space_group_IT_number&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_space_group_name_H-M_alt&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[(</span><span class="n">block</span><span class="o">.</span><span class="n">find_value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+
+    <span class="c1"># Process each value, only if it is not None</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">clean_parsed_structure</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">s_group_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">trim_string</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span> <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">s_group_name</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">s_group_num</span><span class="p">,</span> <span class="n">s_group_name</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_formulas_structures_weights_s_groups">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_formulas_structures_weights_s_groups">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_formulas_structures_weights_s_groups</span><span class="p">(</span>
+    <span class="n">file_path_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all unique structures, formulas, weights, space groups.</span>
+
+<span class="sd">    This function requires no initialization and should be more</span>
+<span class="sd">    efficient in analyzing and filtering a dataset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">formulas</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">s_group_nums</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">s_group_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">file_path_list</span><span class="p">:</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">get_cif_block</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="p">(</span>
+            <span class="n">formula</span><span class="p">,</span>
+            <span class="n">structure</span><span class="p">,</span>
+            <span class="n">weight</span><span class="p">,</span>
+            <span class="n">s_group_num</span><span class="p">,</span>
+            <span class="n">s_group_name</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">get_formula_structure_weight_s_group</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+
+        <span class="n">formulas</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+        <span class="n">structures</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+        <span class="n">weights</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+        <span class="n">s_group_nums</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s_group_num</span><span class="p">)</span>
+        <span class="n">s_group_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s_group_name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">formulas</span><span class="p">,</span> <span class="n">structures</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">s_group_nums</span><span class="p">,</span> <span class="n">s_group_names</span></div>
+
+
+
+<div class="viewcode-block" id="get_tag_from_third_line">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_tag_from_third_line">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tag_from_third_line</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">db_source</span><span class="o">=</span><span class="s2">&quot;PCD&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the tag from the provided CIF file path appropriate for PCD db</span>
+<span class="sd">    source only.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">db_source</span> <span class="o">==</span> <span class="s2">&quot;PCD&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Read first three lines</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>  <span class="c1"># First line</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>  <span class="c1"># Second line</span>
+        <span class="n">third_line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># Third line</span>
+        <span class="n">third_line</span> <span class="o">=</span> <span class="n">third_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Split based on &#39;#&#39; and filter out empty strings</span>
+        <span class="n">third_line_parts</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">part</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">third_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="p">]</span>
+
+        <span class="n">formula_tag</span> <span class="o">=</span> <span class="n">third_line_parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">formula_tag</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+        <span class="c1"># Return concatenated string of parts excluding the first one</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="parse_atom_site_occupancy_info">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.parse_atom_site_occupancy_info">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_atom_site_occupancy_info</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse atom site loop information including element, occupancy,</span>
+<span class="sd">    fractional coordinates, multiplicity, and wyckoff symbol.&quot;&quot;&quot;</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="n">get_cif_block</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="n">loop_vals</span> <span class="o">=</span> <span class="n">get_loop_values</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+    <span class="n">label_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">loop_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">parsed_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">label_count</span><span class="p">):</span>
+        <span class="c1"># Safely extract data, assuming the possibility of None values in columns</span>
+        <span class="n">atom_site_label</span> <span class="o">=</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">strip_numbers_and_symbols</span><span class="p">(</span><span class="n">loop_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">symmetry_multiplicity</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">loop_vals</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">wyckoff_symbol</span> <span class="o">=</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">x_frac_coord</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_vals</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">y_frac_coord</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_vals</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">z_frac_coord</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_vals</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">site_occupancy</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_string_to_formatted_float</span><span class="p">(</span><span class="n">loop_vals</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">loop_vals</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="n">parsed_data</span><span class="p">[</span><span class="n">atom_site_label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;element&quot;</span><span class="p">:</span> <span class="n">element</span><span class="p">,</span>
+            <span class="s2">&quot;site_occupancy&quot;</span><span class="p">:</span> <span class="n">site_occupancy</span><span class="p">,</span>
+            <span class="s2">&quot;x_frac_coord&quot;</span><span class="p">:</span> <span class="n">x_frac_coord</span><span class="p">,</span>  <span class="c1"># Clearly label as fractional</span>
+            <span class="s2">&quot;y_frac_coord&quot;</span><span class="p">:</span> <span class="n">y_frac_coord</span><span class="p">,</span>  <span class="c1"># Clearly label as fractional</span>
+            <span class="s2">&quot;z_frac_coord&quot;</span><span class="p">:</span> <span class="n">z_frac_coord</span><span class="p">,</span>  <span class="c1"># Clearly label as fractional</span>
+            <span class="s2">&quot;symmetry_multiplicity&quot;</span><span class="p">:</span> <span class="n">symmetry_multiplicity</span><span class="p">,</span>
+            <span class="s2">&quot;wyckoff_symbol&quot;</span><span class="p">:</span> <span class="n">wyckoff_symbol</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">parsed_data</span></div>
+
+
+
+<div class="viewcode-block" id="check_unique_atom_site_labels">
+<a class="viewcode-back" href="../../../api/cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.check_unique_atom_site_labels">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_unique_atom_site_labels</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether all parsed atom site labels are unique.&quot;&quot;&quot;</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="n">get_cif_block</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+    <span class="n">loop_values</span> <span class="o">=</span> <span class="n">get_loop_values</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+
+    <span class="c1"># Check how many unique labels - use _atom_site_label of length 4</span>
+    <span class="n">label_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">loop_values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">CifParserError</span><span class="o">.</span><span class="n">MISSING_LOOP_VALUES</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="n">unique_site_labels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="c1"># Collect all the site labels to a set</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">label_count</span><span class="p">):</span>
+        <span class="n">unique_site_labels</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+
+    <span class="c1"># Check the element can be parsed from the label</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">label_count</span><span class="p">):</span>
+        <span class="n">parsed_site_label</span> <span class="o">=</span> <span class="n">loop_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">parsed_element</span> <span class="o">=</span> <span class="n">loop_values</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">parsed_element</span> <span class="o">=</span> <span class="n">strip_numbers_and_symbols</span><span class="p">(</span><span class="n">parsed_element</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">get_atom_type_from_label</span><span class="p">(</span><span class="n">parsed_site_label</span><span class="p">)</span> <span class="o">!=</span> <span class="n">parsed_element</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">CifParserError</span><span class="o">.</span><span class="n">INVALID_PARSED_ELEMENT</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># Check all the site labels are unique</span>
+    <span class="k">if</span> <span class="n">label_count</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_site_labels</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">CifParserError</span><span class="o">.</span><span class="n">DUPLICATE_LABELS</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

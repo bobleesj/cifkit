@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.utils package &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cifkit.utils.bond_pair module" href="cifkit.utils.bond_pair.html" />
+    <link rel="prev" title="cifkit.preprocessors.supercell_util module" href="cifkit.preprocessors.supercell_util.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="cifkit.html">Package API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cifkit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cifkit.coordination.html">cifkit.coordination package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.data.html">cifkit.data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.figures.html">cifkit.figures package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.models.html">cifkit.models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.occupancy.html">cifkit.occupancy package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.preprocessors.html">cifkit.preprocessors package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cifkit.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cifkit.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.html#module-cifkit">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="cifkit.html">cifkit package</a></li>
+      <li class="breadcrumb-item active">cifkit.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/api/cifkit.utils.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cifkit-utils-package">
+<h1>cifkit.utils package<a class="headerlink" href="#cifkit-utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.bond_pair.html">cifkit.utils.bond_pair module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.bond_pair.html#cifkit.utils.bond_pair.get_bond_pairs"><code class="docutils literal notranslate"><span class="pre">get_bond_pairs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.bond_pair.html#cifkit.utils.bond_pair.get_pairs_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">get_pairs_sorted_by_mendeleev()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.bond_pair.html#cifkit.utils.bond_pair.order_tuple_pair_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">order_tuple_pair_by_mendeleev()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.cif_editor.html">cifkit.utils.cif_editor module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_editor.html#cifkit.utils.cif_editor.add_hashtag_in_first_line"><code class="docutils literal notranslate"><span class="pre">add_hashtag_in_first_line()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_editor.html#cifkit.utils.cif_editor.edit_cif_file_based_on_db"><code class="docutils literal notranslate"><span class="pre">edit_cif_file_based_on_db()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_editor.html#cifkit.utils.cif_editor.remove_author_loop"><code class="docutils literal notranslate"><span class="pre">remove_author_loop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.cif_parser.html">cifkit.utils.cif_parser module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.check_unique_atom_site_labels"><code class="docutils literal notranslate"><span class="pre">check_unique_atom_site_labels()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_cif_block"><code class="docutils literal notranslate"><span class="pre">get_cif_block()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_formula_structure_weight_s_group"><code class="docutils literal notranslate"><span class="pre">get_formula_structure_weight_s_group()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_label_occupancy_coordinates"><code class="docutils literal notranslate"><span class="pre">get_label_occupancy_coordinates()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_line_content_from_tag"><code class="docutils literal notranslate"><span class="pre">get_line_content_from_tag()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_loop_tags"><code class="docutils literal notranslate"><span class="pre">get_loop_tags()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_loop_value_dict"><code class="docutils literal notranslate"><span class="pre">get_loop_value_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_loop_values"><code class="docutils literal notranslate"><span class="pre">get_loop_values()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_start_end_line_indexes"><code class="docutils literal notranslate"><span class="pre">get_start_end_line_indexes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_tag_from_third_line"><code class="docutils literal notranslate"><span class="pre">get_tag_from_third_line()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_elements_from_loop"><code class="docutils literal notranslate"><span class="pre">get_unique_elements_from_loop()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_formulas_structures_weights_s_groups"><code class="docutils literal notranslate"><span class="pre">get_unique_formulas_structures_weights_s_groups()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_label_count"><code class="docutils literal notranslate"><span class="pre">get_unique_label_count()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unique_site_labels"><code class="docutils literal notranslate"><span class="pre">get_unique_site_labels()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unitcell_angles_rad"><code class="docutils literal notranslate"><span class="pre">get_unitcell_angles_rad()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.get_unitcell_lengths"><code class="docutils literal notranslate"><span class="pre">get_unitcell_lengths()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_parser.html#cifkit.utils.cif_parser.parse_atom_site_occupancy_info"><code class="docutils literal notranslate"><span class="pre">parse_atom_site_occupancy_info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.cif_sourcer.html">cifkit.utils.cif_sourcer module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.cif_sourcer.html#cifkit.utils.cif_sourcer.get_cif_db_source"><code class="docutils literal notranslate"><span class="pre">get_cif_db_source()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.distance.html">cifkit.utils.distance module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.distance.html#cifkit.utils.distance.calc_dist_two_cart_points"><code class="docutils literal notranslate"><span class="pre">calc_dist_two_cart_points()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.error_messages.html">cifkit.utils.error_messages module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.CifParserError"><code class="docutils literal notranslate"><span class="pre">CifParserError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.CifParserError.DUPLICATE_LABELS"><code class="docutils literal notranslate"><span class="pre">CifParserError.DUPLICATE_LABELS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.CifParserError.INVALID_LOOP_TAGS"><code class="docutils literal notranslate"><span class="pre">CifParserError.INVALID_LOOP_TAGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.CifParserError.INVALID_PARSED_ELEMENT"><code class="docutils literal notranslate"><span class="pre">CifParserError.INVALID_PARSED_ELEMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.CifParserError.MISSING_COORDINATES"><code class="docutils literal notranslate"><span class="pre">CifParserError.MISSING_COORDINATES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.CifParserError.MISSING_LOOP_VALUES"><code class="docutils literal notranslate"><span class="pre">CifParserError.MISSING_LOOP_VALUES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.CifParserError.SYMMETRY_OPERATION_ERROR"><code class="docutils literal notranslate"><span class="pre">CifParserError.SYMMETRY_OPERATION_ERROR</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.FileError"><code class="docutils literal notranslate"><span class="pre">FileError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.FileError.FILE_IS_EMPTY"><code class="docutils literal notranslate"><span class="pre">FileError.FILE_IS_EMPTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.FileError.FILE_NOT_FOUND"><code class="docutils literal notranslate"><span class="pre">FileError.FILE_NOT_FOUND</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.GeneralError"><code class="docutils literal notranslate"><span class="pre">GeneralError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.GeneralError.EMPTY_STRING_INPUT"><code class="docutils literal notranslate"><span class="pre">GeneralError.EMPTY_STRING_INPUT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.GeneralError.INVALID_CIF_BLOCK"><code class="docutils literal notranslate"><span class="pre">GeneralError.INVALID_CIF_BLOCK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.GeneralError.INVALID_TYPE"><code class="docutils literal notranslate"><span class="pre">GeneralError.INVALID_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.GeneralError.NON_ALPHABETIC_START"><code class="docutils literal notranslate"><span class="pre">GeneralError.NON_ALPHABETIC_START</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.GeneralError.NON_MATCHING_ELEMENT"><code class="docutils literal notranslate"><span class="pre">GeneralError.NON_MATCHING_ELEMENT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.OccupancyError"><code class="docutils literal notranslate"><span class="pre">OccupancyError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.error_messages.html#cifkit.utils.error_messages.OccupancyError.INVALID_MIXING_TYPE"><code class="docutils literal notranslate"><span class="pre">OccupancyError.INVALID_MIXING_TYPE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.folder.html">cifkit.utils.folder module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.check_file_exists"><code class="docutils literal notranslate"><span class="pre">check_file_exists()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.check_file_not_empty"><code class="docutils literal notranslate"><span class="pre">check_file_not_empty()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.copy_files"><code class="docutils literal notranslate"><span class="pre">copy_files()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.get_file_count"><code class="docutils literal notranslate"><span class="pre">get_file_count()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.get_file_path"><code class="docutils literal notranslate"><span class="pre">get_file_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.get_file_paths"><code class="docutils literal notranslate"><span class="pre">get_file_paths()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.make_output_folder"><code class="docutils literal notranslate"><span class="pre">make_output_folder()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.folder.html#cifkit.utils.folder.move_files"><code class="docutils literal notranslate"><span class="pre">move_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.formula.html">cifkit.utils.formula module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_normalized_formula"><code class="docutils literal notranslate"><span class="pre">get_normalized_formula()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_parsed_formula"><code class="docutils literal notranslate"><span class="pre">get_parsed_formula()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_parsed_norm_formula"><code class="docutils literal notranslate"><span class="pre">get_parsed_norm_formula()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_subscripted_formula"><code class="docutils literal notranslate"><span class="pre">get_subscripted_formula()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_unique_element_count"><code class="docutils literal notranslate"><span class="pre">get_unique_element_count()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_unique_elements"><code class="docutils literal notranslate"><span class="pre">get_unique_elements()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_unique_elements_from_formulas"><code class="docutils literal notranslate"><span class="pre">get_unique_elements_from_formulas()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.formula.html#cifkit.utils.formula.get_validated_formula_label"><code class="docutils literal notranslate"><span class="pre">get_validated_formula_label()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.log_messages.html">cifkit.utils.log_messages module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.log_messages.html#cifkit.utils.log_messages.CifEnsembleLog"><code class="docutils literal notranslate"><span class="pre">CifEnsembleLog</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.log_messages.html#cifkit.utils.log_messages.CifEnsembleLog.PREPROCESSING"><code class="docutils literal notranslate"><span class="pre">CifEnsembleLog.PREPROCESSING</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.log_messages.html#cifkit.utils.log_messages.CifLog"><code class="docutils literal notranslate"><span class="pre">CifLog</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.log_messages.html#cifkit.utils.log_messages.CifLog.COMPUTE_CONNECTIONS"><code class="docutils literal notranslate"><span class="pre">CifLog.COMPUTE_CONNECTIONS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.log_messages.html#cifkit.utils.log_messages.CifLog.LOADING_DATA"><code class="docutils literal notranslate"><span class="pre">CifLog.LOADING_DATA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.log_messages.html#cifkit.utils.log_messages.CifLog.PREPROCESSING"><code class="docutils literal notranslate"><span class="pre">CifLog.PREPROCESSING</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.prompt.html">cifkit.utils.prompt module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.prompt.html#cifkit.utils.prompt.log_connected_points"><code class="docutils literal notranslate"><span class="pre">log_connected_points()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.prompt.html#cifkit.utils.prompt.log_save_file_message"><code class="docutils literal notranslate"><span class="pre">log_save_file_message()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.random.html">cifkit.utils.random module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.random.html#cifkit.utils.random.generate_random_numbers"><code class="docutils literal notranslate"><span class="pre">generate_random_numbers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.sort.html">cifkit.utils.sort module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.sort.html#cifkit.utils.sort.sort_element_pair_tuples"><code class="docutils literal notranslate"><span class="pre">sort_element_pair_tuples()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.string_parser.html">cifkit.utils.string_parser module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.string_parser.html#cifkit.utils.string_parser.clean_parsed_structure"><code class="docutils literal notranslate"><span class="pre">clean_parsed_structure()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.string_parser.html#cifkit.utils.string_parser.get_atom_type_from_label"><code class="docutils literal notranslate"><span class="pre">get_atom_type_from_label()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.string_parser.html#cifkit.utils.string_parser.get_string_to_formatted_float"><code class="docutils literal notranslate"><span class="pre">get_string_to_formatted_float()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.string_parser.html#cifkit.utils.string_parser.strip_numbers_and_symbols"><code class="docutils literal notranslate"><span class="pre">strip_numbers_and_symbols()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.string_parser.html#cifkit.utils.string_parser.trim_string"><code class="docutils literal notranslate"><span class="pre">trim_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cifkit.utils.unit.html">cifkit.utils.unit module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.unit.html#cifkit.utils.unit.fractional_to_cartesian"><code class="docutils literal notranslate"><span class="pre">fractional_to_cartesian()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.unit.html#cifkit.utils.unit.get_radians_from_degrees"><code class="docutils literal notranslate"><span class="pre">get_radians_from_degrees()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.unit.html#cifkit.utils.unit.round_dict_values"><code class="docutils literal notranslate"><span class="pre">round_dict_values()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cifkit.utils.unit.html#cifkit.utils.unit.round_float"><code class="docutils literal notranslate"><span class="pre">round_float()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-cifkit.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cifkit.utils" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cifkit.preprocessors.supercell_util.html" class="btn btn-neutral float-left" title="cifkit.preprocessors.supercell_util module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cifkit.utils.bond_pair.html" class="btn btn-neutral float-right" title="cifkit.utils.bond_pair module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

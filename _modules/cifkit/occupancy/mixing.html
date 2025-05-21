@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cifkit.occupancy.mixing &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_cif.html">CIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cifkit.occupancy.mixing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cifkit.occupancy.mixing</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.error_messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">OccupancyError</span>
+
+
+<div class="viewcode-block" id="frac_coordinates">
+<a class="viewcode-back" href="../../../api/cifkit.occupancy.mixing.html#cifkit.occupancy.mixing.frac_coordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">frac_coordinates</span><span class="p">(</span><span class="n">atom_site_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a tuple of fractional coordinates.&quot;&quot;&quot;</span>
+    <span class="n">x_frac</span> <span class="o">=</span> <span class="n">atom_site_info</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="s2">&quot;x_frac_coord&quot;</span><span class="p">]</span>
+    <span class="n">y_frac</span> <span class="o">=</span> <span class="n">atom_site_info</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="s2">&quot;y_frac_coord&quot;</span><span class="p">]</span>
+    <span class="n">z_frac</span> <span class="o">=</span> <span class="n">atom_site_info</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="s2">&quot;z_frac_coord&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x_frac</span><span class="p">,</span> <span class="n">y_frac</span><span class="p">,</span> <span class="n">z_frac</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_coord_occupancy_sum">
+<a class="viewcode-back" href="../../../api/cifkit.occupancy.mixing.html#cifkit.occupancy.mixing.compute_coord_occupancy_sum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_coord_occupancy_sum</span><span class="p">(</span>
+    <span class="n">site_labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">atom_site_info</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute sum of occupancy per each coordinate.&quot;&quot;&quot;</span>
+    <span class="n">coord_occupancy_sum</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">site_labels</span><span class="p">:</span>
+        <span class="n">occupancy</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+            <span class="n">atom_site_info</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="s2">&quot;site_occupancy&quot;</span><span class="p">],</span> <span class="mi">6</span>
+        <span class="p">)</span>  <span class="c1"># Round occupancy to 6 decimal places</span>
+        <span class="n">coordinates</span> <span class="o">=</span> <span class="n">frac_coordinates</span><span class="p">(</span><span class="n">atom_site_info</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="c1"># Calculate the sum and round it</span>
+        <span class="n">current_sum</span> <span class="o">=</span> <span class="n">coord_occupancy_sum</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">occupancy</span>
+        <span class="n">coord_occupancy_sum</span><span class="p">[</span><span class="n">coordinates</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">current_sum</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">coord_occupancy_sum</span></div>
+
+
+
+<div class="viewcode-block" id="get_site_mixing_type">
+<a class="viewcode-back" href="../../../api/cifkit.occupancy.mixing.html#cifkit.occupancy.mixing.get_site_mixing_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_site_mixing_type</span><span class="p">(</span><span class="n">site_labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">atom_site_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get file-level atomic site mixing info.&quot;&quot;&quot;</span>
+
+    <span class="n">is_full_occupancy</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">coord_occupancy_sum</span> <span class="o">=</span> <span class="n">compute_coord_occupancy_sum</span><span class="p">(</span>
+        <span class="n">site_labels</span><span class="p">,</span> <span class="n">atom_site_info</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Now check summed occupancies</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">occupancy_sum</span> <span class="ow">in</span> <span class="n">coord_occupancy_sum</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">occupancy_sum</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">is_full_occupancy</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Check for atomic mixing</span>
+    <span class="n">num_atom_labels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">site_labels</span><span class="p">)</span>
+    <span class="n">is_atomic_mixing</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord_occupancy_sum</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_atom_labels</span>
+
+    <span class="k">if</span> <span class="n">is_atomic_mixing</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_full_occupancy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;deficiency_atomic_mixing&quot;</span>
+
+    <span class="k">elif</span> <span class="n">is_atomic_mixing</span> <span class="ow">and</span> <span class="n">is_full_occupancy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;full_occupancy_atomic_mixing&quot;</span>
+
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">is_atomic_mixing</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_full_occupancy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;deficiency_without_atomic_mixing&quot;</span>
+
+    <span class="k">elif</span> <span class="n">is_full_occupancy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;full_occupancy&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">OccupancyError</span><span class="o">.</span><span class="n">INVALID_MIXING_TYPE</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_mixing_type_per_pair_dict">
+<a class="viewcode-back" href="../../../api/cifkit.occupancy.mixing.html#cifkit.occupancy.mixing.get_mixing_type_per_pair_dict">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_mixing_type_per_pair_dict</span><span class="p">(</span>
+    <span class="n">site_labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">label_pairs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">atom_site_info</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a dictionary, alphabetically sorted pair.&quot;&quot;&quot;</span>
+    <span class="n">coord_occupancy_sum</span> <span class="o">=</span> <span class="n">compute_coord_occupancy_sum</span><span class="p">(</span>
+        <span class="n">site_labels</span><span class="p">,</span> <span class="n">atom_site_info</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Store categorizy per pair</span>
+    <span class="n">atom_site_pair_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">label_pairs</span><span class="p">:</span>
+        <span class="n">first_label</span> <span class="o">=</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">second_label</span> <span class="o">=</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">first_label_coord</span> <span class="o">=</span> <span class="n">frac_coordinates</span><span class="p">(</span><span class="n">atom_site_info</span><span class="p">,</span> <span class="n">first_label</span><span class="p">)</span>
+        <span class="n">second_label_coord</span> <span class="o">=</span> <span class="n">frac_coordinates</span><span class="p">(</span><span class="n">atom_site_info</span><span class="p">,</span> <span class="n">second_label</span><span class="p">)</span>
+        <span class="n">first_label_occ</span> <span class="o">=</span> <span class="n">atom_site_info</span><span class="p">[</span><span class="n">first_label</span><span class="p">][</span><span class="s2">&quot;site_occupancy&quot;</span><span class="p">]</span>
+        <span class="n">second_label_occ</span> <span class="o">=</span> <span class="n">atom_site_info</span><span class="p">[</span><span class="n">second_label</span><span class="p">][</span><span class="s2">&quot;site_occupancy&quot;</span><span class="p">]</span>
+        <span class="c1"># Step 1. &quot;full_occupancy&quot;</span>
+        <span class="k">if</span> <span class="n">first_label_occ</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">second_label_occ</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">atom_site_pair_dict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;full_occupancy&quot;</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Step 2. Check deficiecny at the pair level</span>
+        <span class="n">is_first_label_site_deficient</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">is_second_label_deficient</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">first_label_occ</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">second_label_occ</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">coord_occupancy_sum</span><span class="p">[</span><span class="n">first_label_coord</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">is_first_label_site_deficient</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">is_first_label_site_deficient</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">if</span> <span class="n">coord_occupancy_sum</span><span class="p">[</span><span class="n">second_label_coord</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">is_second_label_deficient</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">is_second_label_deficient</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Step 3. Check mixing at the pair level</span>
+        <span class="c1"># Subtract current label coordinates occupancy from the sum</span>
+        <span class="c1"># If is zero, then no atomic mixing</span>
+
+        <span class="n">is_first_label_atomic_mixed</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">is_second_label_atomic_mixed</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">coord_occupancy_sum</span><span class="p">[</span><span class="n">first_label_coord</span><span class="p">]</span> <span class="o">-</span> <span class="n">first_label_occ</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">is_first_label_atomic_mixed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_first_label_atomic_mixed</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">coord_occupancy_sum</span><span class="p">[</span><span class="n">second_label_coord</span><span class="p">]</span> <span class="o">-</span> <span class="n">second_label_occ</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">is_second_label_atomic_mixed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_second_label_atomic_mixed</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Step 4. Assign category for each label pair</span>
+        <span class="c1"># Check 1. One of the labels is deficient</span>
+        <span class="c1"># Check 2. Both labels are not atomic mixed</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_first_label_site_deficient</span> <span class="ow">or</span> <span class="n">is_second_label_deficient</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="ow">not</span> <span class="n">is_first_label_atomic_mixed</span>
+            <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_second_label_atomic_mixed</span>
+        <span class="p">):</span>
+            <span class="n">atom_site_pair_dict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;deficiency_without_atomic_mixing&quot;</span>
+
+        <span class="c1"># Check 1. Both labels are not deficient</span>
+        <span class="c1"># Check 2. At least one label is atomic mixed</span>
+        <span class="c1"># Assign &quot;2&quot; for &quot;full_occupancy_atomic_mixing&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="ow">not</span> <span class="n">is_first_label_site_deficient</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_second_label_deficient</span>
+        <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">is_first_label_atomic_mixed</span> <span class="ow">or</span> <span class="n">is_second_label_atomic_mixed</span><span class="p">):</span>
+            <span class="n">atom_site_pair_dict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;full_occupancy_atomic_mixing&quot;</span>
+
+        <span class="c1"># Assign &quot;1&quot; for &quot;deficiency_with_atomic_mixing&quot;</span>
+        <span class="c1"># Check 1. At least one label is deficient</span>
+        <span class="c1"># Check 2. At least one label mixed</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_first_label_site_deficient</span> <span class="ow">or</span> <span class="n">is_second_label_deficient</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">is_first_label_atomic_mixed</span> <span class="ow">or</span> <span class="n">is_second_label_atomic_mixed</span>
+        <span class="p">):</span>
+            <span class="n">atom_site_pair_dict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;deficiency_with_atomic_mixing&quot;</span>
+
+    <span class="k">return</span> <span class="n">atom_site_pair_dict</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

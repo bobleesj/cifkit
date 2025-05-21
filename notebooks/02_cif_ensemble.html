@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CifEnsemble &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cifkit package" href="../api/cifkit.html" />
+    <link rel="prev" title="CIF" href="01_cif.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_cif.html">CIF</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CifEnsemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Initialize-with-nested-files">Initialize with nested files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-instant-properties">Get instant properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-individual-.cif-properties">Get individual .cif properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-unique-properties">Get unique properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-overall-stats-by-attribute">Get overall stats by attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Filter-.cif-containing-specific-attributes">Filter .cif containing specific attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Filter-.cif-by-specific-attributes">Filter .cif by specific attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Filter-by-range">Filter by range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Move-and-copy-files">Move and copy files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Generate-histograms">Generate histograms</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CifEnsemble</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/notebooks/02_cif_ensemble.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="CifEnsemble">
+<h1>CifEnsemble<a class="headerlink" href="#CifEnsemble" title="Link to this heading"></a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">demo_folder_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Initialize-with-nested-files">
+<h2>Initialize with nested files<a class="headerlink" href="#Initialize-with-nested-files" title="Link to this heading"></a></h2>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">add_nested_files</span></code> flag to include <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files that are located in folders within the folder path provided.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="c1"># Initialize with nested .cif files in the folder</span>
+<span class="n">ensemble_nested</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">demo_folder_path</span><span class="p">,</span> <span class="n">add_nested_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-instant-properties">
+<h2>Get instant properties<a class="headerlink" href="#Get-instant-properties" title="Link to this heading"></a></h2>
+<p>Once the object is created, you can get instant properties suhc as file count, folder path, etc.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get .cif file count in the folder</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File count:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">file_count</span><span class="p">)</span> <span class="c1"># 6</span>
+
+<span class="c1"># Get the directory path</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory path:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">dir_path</span><span class="p">)</span>
+
+<span class="c1"># Get all file paths in the folder</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File paths:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">file_paths</span><span class="p">)</span>
+
+<span class="c1"># Get all Cif objects initialized</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cif objects:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">cifs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-individual-.cif-properties">
+<h2>Get individual .cif properties<a class="headerlink" href="#Get-individual-.cif-properties" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code> object contains a property called <code class="docutils literal notranslate"><span class="pre">cifs</span></code> which contains a list of <code class="docutils literal notranslate"><span class="pre">Cif</span></code> objects. You may loop through each to access both instant and computed properties described in the previous <code class="docutils literal notranslate"><span class="pre">CIF</span></code> section.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print each property for each .cif file</span>
+<span class="k">for</span> <span class="n">cif</span> <span class="ow">in</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">cifs</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">cif</span><span class="o">.</span><span class="n">file_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formula:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tag:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mixing type:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_mixing_type</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique bond pairs:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">bond_pairs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-unique-properties">
+<h2>Get unique properties<a class="headerlink" href="#Get-unique-properties" title="Link to this heading"></a></h2>
+<p>You can get all unique attributes such as formulas, elements, etc in the folder.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get unique formulas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique formulas:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_formulas</span><span class="p">)</span>
+
+<span class="c1"># Get unique elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique elements:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
+
+<span class="c1"># Get unique structures</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique structures:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_structures</span><span class="p">)</span>
+
+<span class="c1"># Get unique atomix mixing types</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique atomic mixing types:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_site_mixing_types</span><span class="p">)</span>
+
+<span class="c1"># Get unique elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique elements including nested:&quot;</span><span class="p">,</span> <span class="n">ensemble_nested</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
+
+<span class="c1"># Get unique space group names</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique space group names:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_names</span><span class="p">)</span>
+
+<span class="c1"># Get unique space group numbers</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique space group numbers:&quot;</span><span class="p">,</span><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_numbers</span><span class="p">)</span>
+
+<span class="c1"># Get unique tags</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique tags:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_tags</span><span class="p">)</span>
+
+<span class="c1"># Get unique composition types</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique composition types:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_composition_types</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-overall-stats-by-attribute">
+<h2>Get overall stats by attribute<a class="headerlink" href="#Get-overall-stats-by-attribute" title="Link to this heading"></a></h2>
+<p>Get the number of files for each unique properties.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get file count per structure</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Structure stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">structure_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per formula</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formula stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">formula_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per tag</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tag stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">tag_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per space group number</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Space group number stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">space_group_number_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per space group name</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Space group name stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">space_group_name_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per composition type</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Composition type stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">composition_type_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per Element</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique elements stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_elements_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per site mixing type</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Site mixing type stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">site_mixing_type_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per supercell atom count</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Supercell size stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">supercell_size_stats</span><span class="p">)</span>
+
+<span class="c1"># Get file count per CN value by min dist method</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CN value using min dist method stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_CN_values_by_min_dist_method_stat</span><span class="p">)</span>
+
+<span class="c1"># Get file count per CN value by best methods</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CN value using best methods stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_CN_values_by_method_methods_stat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Filter-.cif-containing-specific-attributes">
+<h2>Filter .cif containing specific attributes<a class="headerlink" href="#Filter-.cif-containing-specific-attributes" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Return file paths by formulas</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_formulas</span><span class="p">([</span><span class="s2">&quot;ErCoIn&quot;</span><span class="p">,</span> <span class="s2">&quot;Er10Co9In20&quot;</span><span class="p">])</span>
+
+<span class="c1"># Return file paths by structures</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">([</span><span class="s2">&quot;Mn5Si3&quot;</span><span class="p">])</span>
+
+<span class="c1"># Return file paths by space group names</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_space_group_names</span><span class="p">([</span><span class="s2">&quot;P4/mmm&quot;</span><span class="p">])</span>
+
+<span class="c1"># Return file paths by space group numbers</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_space_group_numbers</span><span class="p">([</span><span class="mi">123</span><span class="p">])</span>
+
+<span class="c1"># Return file paths by site mixing types</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_site_mixing_types</span><span class="p">([</span><span class="s2">&quot;full_occupancy&quot;</span><span class="p">])</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_site_mixing_types</span><span class="p">([</span><span class="s2">&quot;full_occupancy&quot;</span><span class="p">,</span> <span class="s2">&quot;deficiency_without_atomic_mixing&quot;</span><span class="p">])</span>
+
+<span class="c1"># Return file paths by composition types (1-&gt; unary, 2-&gt; binary)</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_composition_types</span><span class="p">([</span><span class="mi">3</span><span class="p">])</span>
+<br/><br/></pre></div>
+</div>
+</div>
+</section>
+<section id="Filter-.cif-by-specific-attributes">
+<h2>Filter .cif by specific attributes<a class="headerlink" href="#Filter-.cif-by-specific-attributes" title="Link to this heading"></a></h2>
+<p>Filter .cif files either containing a set of items or files that exactly contain the values passed. <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> supports elements and coordination numbers.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing Er or Co or In:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_elements_containing</span><span class="p">([</span><span class="s2">&quot;Er&quot;</span><span class="p">,</span> <span class="s2">&quot;Co&quot;</span><span class="p">,</span> <span class="s2">&quot;In&quot;</span><span class="p">]))</span> <span class="c1">#</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing Er and In:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_elements_exact_matching</span><span class="p">([</span><span class="s2">&quot;Er&quot;</span><span class="p">,</span> <span class="s2">&quot;In&quot;</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing CN value of 15:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_min_dist_method_containing</span><span class="p">([</span><span class="mi">15</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_best_methods_containing</span><span class="p">([</span><span class="mi">15</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing CN value of 11, 14, and 15:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_min_dist_method_exact_matching</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_best_methods_exact_matching</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Filter-by-range">
+<h2>Filter by range<a class="headerlink" href="#Filter-by-range" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Return a set of .cif file paths with min distance between 1.0 Å and 3.0 Å</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File paths with min distance between 1.0 Å and 3.0 Å:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_min_distance</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">))</span>
+
+<span class="c1"># Return a set of .cif file paths with supercell atom count above 500 and below 3000.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File paths with supercell atom count above 500 and below 3000:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_supercell_count</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">3000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Move-and-copy-files">
+<h2>Move and copy files<a class="headerlink" href="#Move-and-copy-files" title="Link to this heading"></a></h2>
+<p>Assume you have a set of file paths filered using the functions described in the previous section. Since we are using Jupyter and with predefined examples, you need to provide <code class="docutils literal notranslate"><span class="pre">file_paths</span></code> and <code class="docutils literal notranslate"><span class="pre">dest_dir_path</span></code> for your system.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_paths</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;tests/data/cif/ensemble_test/300169.cif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tests/data/cif/ensemble_test/300171.cif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tests/data/cif/ensemble_test/300170.cif&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># To move files</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">move_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+
+<span class="c1"># To copy files</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">copy_cif_files</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="Generate-histograms">
+<h2>Generate histograms<a class="headerlink" href="#Generate-histograms" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn_big_folder_path</span><span class="p">)</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_structure_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_formula_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_tag_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_space_group_number_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_space_group_name_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_supercell_size_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_elements_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_CN_by_min_dist_method_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_CN_by_best_methods_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_composition_type_histogram</span><span class="p">()</span>
+<span class="n">ensemble</span><span class="o">.</span><span class="n">generate_site_mixing_type_histogram</span><span class="p">()</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd"># Optional: Specify the output directory where the .png file will be saved.</span>
+<span class="sd">ensemble.generate_site_mixing_type_histogram(output_dir=&quot;path/to/directory&quot;)</span>
+
+<span class="sd"># Optional: Call plt.show() to display the histogram on screen.</span>
+<span class="sd">ensemble.generate_site_mixing_type_histogram(display=True)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01_cif.html" class="btn btn-neutral float-left" title="CIF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api/cifkit.html" class="btn btn-neutral float-right" title="cifkit package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

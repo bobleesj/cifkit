@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CIF &mdash; cifkit 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CifEnsemble" href="02_cif_ensemble.html" />
+    <link rel="prev" title="cifkit documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            cifkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CIF</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Get-instant-properties---parsed-information">Get instant properties - parsed information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#How-tag-is-parsed">How tag is parsed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-instant-properties---bond-pairs">Get instant properties - bond pairs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#How-atomic-mixing-type-is-defined">How atomic mixing type is defined</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-computed-properties---nearest-connections-per-site">Get computed properties - nearest connections per site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-computed-properties---distances">Get computed properties - distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Get-computed-properties---coordination-numbers">Get computed properties - coordination numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Draw-polyhedrons">Draw polyhedrons</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_cif_ensemble.html">CifEnsemble</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/cifkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cifkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CIF</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/notebooks/01_cif.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="CIF">
+<h1>CIF<a class="headerlink" href="#CIF" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cif</span></code> class generates an object for each <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file. Each object can</p>
+<ul class="simple">
+<li><p>compute the coordination numbers for each site label using four methods</p></li>
+<li><p>compute bond fractions and bond counts at each site within the specified cutoff radius or based on -coordination number geometry</p></li>
+<li><p>categorize atomic mixing at bond-pair and file levels</p></li>
+<li><p>list all possible bond and label pairs derived from the formula</p></li>
+<li><p>generate a unit cell and a supercell by applying ±1 shifts</p></li>
+<li><p>parse formulas, structures, tags, space group names, supercell sizes, and elements</p></li>
+</ul>
+<p>You can initialize <code class="docutils literal notranslate"><span class="pre">Cif</span></code> object using a file path to the <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file. Or you can simply use the example <code class="docutils literal notranslate"><span class="pre">.cif</span></code> provided in <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> below.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> we provide .cif files that can be accessed through <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">cifkit</span> <span class="pre">import</span> <span class="pre">Example</span></code> as shown below. For advancuser, these example .cif files are located under <code class="docutils literal notranslate"><span class="pre">src/cifkit/data</span></code> in the package.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span>
+
+<span class="c1"># Initialize with the example file provided</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">Er10Co9In20_file_path</span><span class="p">)</span>
+
+<span class="c1"># Print attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File name:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formula:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique element:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Get-instant-properties---parsed-information">
+<h2>Get instant properties - parsed information<a class="headerlink" href="#Get-instant-properties---parsed-information" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cif</span></code> class provides a set of accessible properties that can be accessed. Each object is initialized with the <code class="docutils literal notranslate"><span class="pre">file_path</span></code> to the <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Utility function for printing dictionary</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">prettify_dict</span><span class="p">(</span><span class="n">dict_data</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">dict_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+
+<span class="c1"># Print instantly available properties</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formula:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Structure:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique elements:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unitcell lengths:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">unitcell_lengths</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unitcell angles:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">unitcell_angles</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Site labels:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weight:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atomic mixing type:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_mixing_type</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Space group number:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">space_group_number</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Space group number:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">space_group_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Composition type:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">composition_type</span><span class="p">)</span> <span class="c1"># 3 -&gt; Ternary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tag:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atom_site_info:&quot;</span><span class="p">,</span> <span class="n">prettify_dict</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">atom_site_info</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Wyckoff_symbol of Er1:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">atom_site_info</span><span class="p">[</span><span class="s2">&quot;Er&quot;</span><span class="p">][</span><span class="s2">&quot;wyckoff_symbol&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<section id="How-tag-is-parsed">
+<h3>How tag is parsed<a class="headerlink" href="#How-tag-is-parsed" title="Link to this heading"></a></h3>
+<p>Tag is parsed from the third line of each <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file. Some databases such as Pearson’s Crystal Data offers tags for each file.</p>
+</section>
+</section>
+<section id="Get-instant-properties---bond-pairs">
+<h2>Get instant properties - bond pairs<a class="headerlink" href="#Get-instant-properties---bond-pairs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The following code returns all possible element and site pairs from the formula in the .cif file.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">mixing_info_per_label_pair</span></code> and <code class="docutils literal notranslate"><span class="pre">mixing_info_per_label_pair_sorted_by_mendeleev</span></code> return site mixing information at the pair level.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+
+<span class="c1"># Utility function for printing a set of tuples</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_tuples</span><span class="p">(</span><span class="n">tuples</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># All bond pairs</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All possible bond pairs:&quot;</span><span class="p">)</span>
+<span class="n">print_tuples</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">bond_pairs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All possible bond pairs sorted by Mendeleev:&quot;</span><span class="p">)</span>
+<span class="n">print_tuples</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">bond_pairs_sorted_by_mendeleev</span><span class="p">)</span>
+
+<span class="c1"># All label pairs</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All possible label pairs from the formula:&quot;</span><span class="p">)</span>
+<span class="n">print_tuples</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">site_label_pairs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All possible label pairs sorted by Mendeleev:&quot;</span><span class="p">)</span>
+<span class="n">print_tuples</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">site_label_pairs_sorted_by_mendeleev</span><span class="p">)</span>
+
+<span class="c1"># Atomic mixing per pair</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Atomic mixing per label pair:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">cif</span><span class="o">.</span><span class="n">mixing_info_per_label_pair</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Atomic mixing per label pair sorted by Mendeleev:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">mixing_info_per_label_pair_sorted_by_mendeleev</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<section id="How-atomic-mixing-type-is-defined">
+<h3>How atomic mixing type is defined<a class="headerlink" href="#How-atomic-mixing-type-is-defined" title="Link to this heading"></a></h3>
+<p>Each bonding pair or each file is defined with one of four atomic mixing categories:</p>
+<ul class="simple">
+<li><p><strong>Full occupancy</strong> is assigned when a single atomic site occupies the fractional coordinate with an occupancy value of 1.</p></li>
+<li><p><strong>Full occupancy with atomic mixing</strong> is assigned when multiple atomic sites collectively occupy the fractional coordinate to a sum of 1.</p></li>
+<li><p><strong>Deficiency without atomic mixing</strong> is assigned when a single atomic site occupying the fractional coordinate with a sum less than 1.</p></li>
+<li><p><strong>Deficiency with atomic mixing</strong> is assigned when multiple atomic sites occupy the fractional coordinate with a sum less than 1.</p></li>
+</ul>
+</section>
+</section>
+<section id="Get-computed-properties---nearest-connections-per-site">
+<h2>Get computed properties - nearest connections per site<a class="headerlink" href="#Get-computed-properties---nearest-connections-per-site" title="Link to this heading"></a></h2>
+<p>This section involves computing distances between atoms. Unlike instant properties, these properties may require extensive computation, typically ranging from 1-2 seconds for larger supercells containing more than 3,000 atoms.</p>
+<p>These properties are loaded lazily, meaning accessing any of the properties will execute <code class="docutils literal notranslate"><span class="pre">compute_connections()</span></code> internally. This function will then compute <code class="docutils literal notranslate"><span class="pre">connections</span></code>, providing all the nearest neighbors for each site.</p>
+<p>There are options in the <code class="docutils literal notranslate"><span class="pre">Cif</span></code> class to use either the <code class="docutils literal notranslate"><span class="pre">by_d_min_method</span></code> or <code class="docutils literal notranslate"><span class="pre">by_best_methods</span></code>. Please refer to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> for complete documentation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_connected_points</span><span class="p">(</span><span class="n">all_labels_connections</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility function for printing connections per site label</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">connections</span> <span class="ow">in</span> <span class="n">all_labels_connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Atom site </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span>
+            <span class="n">connected_label</span><span class="p">,</span>
+            <span class="n">dist</span><span class="p">,</span>
+            <span class="n">coords_1</span><span class="p">,</span>
+            <span class="n">coords_2</span><span class="p">,</span>
+        <span class="p">)</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">connected_label</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">coords_1</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">coords_2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Initialize</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+
+<span class="c1"># Print CN Connections</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Find CN_connections_by_min_dist_method:&quot;</span><span class="p">)</span>
+<span class="n">print_connected_points</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Find CN_connections_by_best_methods:&quot;</span><span class="p">)</span>
+<span class="n">print_connected_points</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-computed-properties---distances">
+<h2>Get computed properties - distances<a class="headerlink" href="#Get-computed-properties---distances" title="Link to this heading"></a></h2>
+<p>You can get the shortest distance from each site label or the shortest distance for each possible bond pair.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest distance:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_distance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest bond pair distances:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest site pair distances:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_site_pair_distance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-computed-properties---coordination-numbers">
+<h2>Get computed properties - coordination numbers<a class="headerlink" href="#Get-computed-properties---coordination-numbers" title="Link to this heading"></a></h2>
+<p>Compute <code class="docutils literal notranslate"><span class="pre">avg</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">unique</span></code> of coordination numbers determined by one of the best methods or min distance method.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+
+<span class="c1"># Bond counts</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_count_by_min_dist_method:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_count_by_min_dist_method</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_count_by_min_dist_method_sorted_by_mendeleev:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_count_by_best_methods:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_count_by_best_methods</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_count_by_best_methods_sorted_by_mendeleev:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_count_by_best_methods_sorted_by_mendeleev</span><span class="p">)</span>
+
+<span class="c1"># Bond fractions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_fractions_by_min_dist_method:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_fractions_by_min_dist_method</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_fractions_by_best_methods:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_fractions_by_best_methods</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_fractions_by_best_methods_sorted_by_mendeleev:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span><span class="p">)</span>
+
+<span class="c1"># Unique coordination numbers</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_unique_values_by_min_dist_method&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_unique_values_by_min_dist_method</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_unique_values_by_best_methods&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_unique_values_by_best_methods</span><span class="p">)</span>
+
+<span class="c1"># Average coordination number</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_avg_by_min_dist_method:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_avg_by_min_dist_method</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_avg_by_best_methods: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_avg_by_best_methods</span><span class="p">)</span>
+
+<span class="c1"># Min coordination number</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_max_by_min_dist_method:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_max_by_min_dist_method</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_max_by_best_methods:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_max_by_best_methods</span><span class="p">)</span>
+
+<span class="c1"># Max coordination number</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_min_by_min_dist_method:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_min_by_min_dist_method</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_min_by_best_methods:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_min_by_best_methods</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Draw-polyhedrons">
+<h2>Draw polyhedrons<a class="headerlink" href="#Draw-polyhedrons" title="Link to this heading"></a></h2>
+<p>You may use <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code> notebook or a python script to execute the following to generate and save a polyhedron generated from each site and the nearest neighbor atoms are determined from the coordination number geometry.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># For Jupyter Notebook only</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+
+<span class="c1"># Enter site labels. you can get site labels using cif.labels</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Site labels:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="s2">&quot;In1&quot;</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="cifkit documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="02_cif_ensemble.html" class="btn btn-neutral float-right" title="CifEnsemble" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Sangjoon Lee.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
