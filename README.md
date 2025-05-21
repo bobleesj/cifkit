@@ -6,8 +6,8 @@
 
 <a href="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19"><img src="https://joss.theoj.org/papers/9016ae27b8c6fddffaae5aeb8be18d19/status.svg"></a>
 
-![Logo light mode](doc/img/logo-black.png#gh-light-mode-only "cifkit logo light")
-![Logo dark mode](doc/img/logo-color.png#gh-dark-mode-only "cifkit logo dark")
+![Logo light mode](doc/source/img/logo-black.png#gh-light-mode-only "cifkit logo light")
+![Logo dark mode](doc/source/img/logo-color.png#gh-dark-mode-only "cifkit logo dark")
 
 `cifkit` is designed to provide a set of fully-tested utility functions and
 variables for handling large datasets, on the order of tens of thousands, of
@@ -49,7 +49,7 @@ for label in site_labels:
     cif.plot_polyhedron(label, is_displayed=True)
 ```
 
-![Polyhedron generation](doc/img/ErCoIn-polyhedron.png)
+![Polyhedron generation](doc/source/img/ErCoIn-polyhedron.png)
 
 ### Example Usage 2 - sort
 
@@ -62,7 +62,7 @@ ensemble = CifEnsemble("your_folder_path_containing_cif_files")
 ensemble.generate_structure_histogram()
 ```
 
-![structure distribution](doc/img/histogram-structure.png)
+![structure distribution](doc/source/img/histogram-structure.png)
 
 Basde on your visual histogram above, you can copy and move .cif files based on
 specific attributes:
