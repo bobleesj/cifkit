@@ -249,7 +249,6 @@ Other links
    :hidden:
    :caption: OTHER
 
-   Package API <api/cifkit>
    release
    license
 
