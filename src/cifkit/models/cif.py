@@ -349,7 +349,7 @@ class Cif:
 
             # Get CN connections by the best methods
             self._CN_connections_by_min_dist_method = (
-                    get_CN_connections_by_min_dist_method(
+                get_CN_connections_by_min_dist_method(
                     self.CN_max_gap_per_site, self.connections
                 )
             )
