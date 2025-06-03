@@ -124,7 +124,7 @@ def shift_and_append_points(
 
     # Method 1 - No sfhits
     # Method 2 - +1 +1 +1 shifts
-    # Method 3 - +-2 +-2 +-2 shifts
+    # Method 3 - +-2 +-2 +-2 shifts (5*5*5 of the unit cell)
 
     if supercell_generation_method == 1:
         shifts = np.array([[0, 0, 0]])
