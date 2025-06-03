@@ -37,6 +37,7 @@ def test_shift_points_based_on_supercell_size_shift_by_one():
         [1, 1, 1],
     ]
 
+
 def test_shift_points_based_on_supercell_size_shift_by_two():
     actual_points_shifted = _shift_xyz_plus_minus(2)
     # Shift +/- 2 in each direction, expected 5 by 5 by 5 supercell (125 unit cells)

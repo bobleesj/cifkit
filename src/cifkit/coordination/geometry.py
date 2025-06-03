@@ -33,59 +33,56 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
         neighbor_atoms_coord, central_atom_coord
     )
 
-    try:
-        edges = set()
-        for simplex in hull.simplices:
-            for i in range(-1, len(simplex) - 1):
-                if (simplex[i], simplex[i + 1]) not in edges and (
-                    simplex[i + 1],
-                    simplex[i],
-                ) not in edges:
-                    edges.add((simplex[i], simplex[i + 1]))
+    edges = set()
+    for simplex in hull.simplices:
+        for i in range(-1, len(simplex) - 1):
+            if (simplex[i], simplex[i + 1]) not in edges and (
+                simplex[i + 1],
+                simplex[i],
+            ) not in edges:
+                edges.add((simplex[i], simplex[i + 1]))
 
-        # Basic polyhedron info
-        number_of_edges = len(edges)
-        number_of_faces = len(hull.simplices)
-        number_of_vertices = len(neighbor_atoms_coord)
-        # More advanced polyhedron info
-        face_centers = np.mean(neighbor_atoms_coord[hull.simplices], axis=1)
-        distances_to_faces = np.linalg.norm(
-            face_centers - central_atom_coord, axis=1
-        )
-        shortest_distance_to_face = np.min(distances_to_faces)
-        edge_centers = np.array(
-            [
-                (neighbor_atoms_coord[edge[0]] + neighbor_atoms_coord[edge[1]])
-                / 2
-                for edge in edges
-            ]
-        )
-        distances_to_edges = np.linalg.norm(
-            edge_centers - central_atom_coord, axis=1
-        )
-        shortest_distance_to_edge = np.min(distances_to_edges)
-        radius_of_inscribed_sphere = shortest_distance_to_face
-        volume_of_inscribed_sphere = (
-            4 / 3 * np.pi * radius_of_inscribed_sphere**3
-        )
-        packing_efficiency = volume_of_inscribed_sphere / hull.volume
-        data = {
-            "volume_of_polyhedron": hull.volume,
-            "distance_from_avg_point_to_center": distance_to_center,
-            "number_of_vertices": number_of_vertices,
-            "number_of_edges": number_of_edges,
-            "number_of_faces": number_of_faces,
-            "shortest_distance_to_face": shortest_distance_to_face,
-            "shortest_distance_to_edge": shortest_distance_to_edge,
-            "volume_of_inscribed_sphere": volume_of_inscribed_sphere,
-            "packing_efficiency": packing_efficiency,
-        }
+    # Basic polyhedron info
+    number_of_edges = len(edges)
+    print(number_of_edges)
+    number_of_faces = len(hull.simplices)
+    number_of_vertices = len(neighbor_atoms_coord)
+    # More advanced polyhedron info
+    face_centers = np.mean(neighbor_atoms_coord[hull.simplices], axis=1)
+    distances_to_faces = np.linalg.norm(
+        face_centers - central_atom_coord, axis=1
+    )
+    shortest_distance_to_face = np.min(distances_to_faces)
+    edge_centers = np.array(
+        [
+            (neighbor_atoms_coord[edge[0]] + neighbor_atoms_coord[edge[1]]) / 2
+            for edge in edges
+        ]
+    )
+    distances_to_edges = np.linalg.norm(
+        edge_centers - central_atom_coord, axis=1
+    )
+    shortest_distance_to_edge = np.min(distances_to_edges)
+    radius_of_inscribed_sphere = shortest_distance_to_face
+    volume_of_inscribed_sphere = 4 / 3 * np.pi * radius_of_inscribed_sphere**3
+    packing_efficiency = volume_of_inscribed_sphere / hull.volume
+    data = {
+        "volume_of_polyhedron": hull.volume,
+        "distance_from_avg_point_to_center": distance_to_center,
+        "number_of_vertices": number_of_vertices,
+        "number_of_edges": number_of_edges,
+        "number_of_faces": number_of_faces,
+        "shortest_distance_to_face": shortest_distance_to_face,
+        "shortest_distance_to_edge": shortest_distance_to_edge,
+        "volume_of_inscribed_sphere": volume_of_inscribed_sphere,
+        "packing_efficiency": packing_efficiency,
+    }
 
-        return round_dict_values(data)
+    return round_dict_values(data)
 
-    except Exception as e:
-        print(f"Error computing polyhedron metrics: {e}")
-        return None
+    # except Exception as e:
+    #     print(f"Error computing polyhedron metrics: {e}")
+    #     return None
 
 
 def _compute_center_of_mass_and_distance(

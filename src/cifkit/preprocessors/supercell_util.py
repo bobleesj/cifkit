@@ -7,11 +7,12 @@ def get_cell_atom_count(supercell_points) -> int:
 
 
 def _shift_xyz_plus_minus(size) -> list[int]:
-    """
-    Provide 1D array for all crystal directions. Please check
-    the "test_supercell_utils.py to see examples. This function is
-    important in order to shift crystal coordinates from the unit cell
-    to the coordinates of the supercell that is created by shifting."
+    """Provide 1D array for all crystal directions.
+
+    Please check the "test_supercell_utils.py to see examples. This
+    function is important in order to shift crystal coordinates from the
+    unit cell to the coordinates of the supercell that is created by
+    shifting."
     """
     arrays = []
     dimensions = np.arange(-size, size + 1, 1)

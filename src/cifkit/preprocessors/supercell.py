@@ -2,8 +2,8 @@ import gemmi
 import numpy as np
 from gemmi.cif import Block
 
-from cifkit.utils import cif_parser
 from cifkit.preprocessors import supercell_util
+from cifkit.utils import cif_parser
 
 
 def get_supercell_points(
@@ -120,12 +120,13 @@ def shift_and_append_points(
     atom_site_label: str,
     supercell_generation_method: int,
 ):
-    """Shift and duplicate points to create a supercell."""
+    """Shift the unit cell's array of coordinates in the crystal frame to form
+    the array containing the coordinates of the supercell.
 
     # Method 1 - No sfhits
-    # Method 2 - +1 +1 +1 shifts
+    # Method 2 - +1 +1 +1 shifts (This rarely used)
     # Method 3 - +-2 +-2 +-2 shifts (5*5*5 of the unit cell)
-
+    """
     if supercell_generation_method == 1:
         shifts = np.array([[0, 0, 0]])
         shifted_points = points[:, None, :] + shifts
