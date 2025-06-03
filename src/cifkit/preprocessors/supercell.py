@@ -3,6 +3,7 @@ import numpy as np
 from gemmi.cif import Block
 
 from cifkit.utils import cif_parser
+from cifkit.preprocessors import supercell_util
 
 
 def get_supercell_points(
@@ -123,11 +124,11 @@ def shift_and_append_points(
 
     # Method 1 - No sfhits
     # Method 2 - +1 +1 +1 shifts
-    # Method 3 - +-1 +-1 +-1 shifts
+    # Method 3 - +-2 +-2 +-2 shifts
 
     if supercell_generation_method == 1:
         shifts = np.array([[0, 0, 0]])
-        shifted_points = points[:, None, :] + shifts[None, :, :]
+        shifted_points = points[:, None, :] + shifts
         all_points = []
         for point_group in shifted_points:
             for point in point_group:
@@ -148,7 +149,7 @@ def shift_and_append_points(
                 [1, 1, 1],
             ]
         )
-        shifted_points = points[:, None, :] + shifts[None, :, :]
+        shifted_points = points[:, None, :] + shifts
         all_points = []
         for point_group in shifted_points:
             for point in point_group:
@@ -158,43 +159,12 @@ def shift_and_append_points(
         return all_points
 
     if supercell_generation_method == 3:
-        shifts = np.array(
-            [
-                [0, 0, 0],
-                [1, 0, 0],
-                [0, 1, 0],
-                [0, 0, 1],
-                [-1, 0, 0],
-                [0, -1, 0],
-                [0, 0, -1],
-                [1, 1, 0],
-                [1, -1, 0],
-                [-1, 1, 0],
-                [-1, -1, 0],
-                [1, 0, 1],
-                [1, 0, -1],
-                [0, 1, 1],
-                [0, 1, -1],
-                [-1, 0, 1],
-                [-1, 0, -1],
-                [0, -1, 1],
-                [0, -1, -1],
-                [1, 1, 1],
-                [1, 1, -1],
-                [1, -1, 1],
-                [1, -1, -1],
-                [-1, 1, 1],
-                [-1, 1, -1],
-                [-1, -1, 1],
-                [-1, -1, -1],
-            ]
-        )
-
-        shifted_points = points[:, None, :] + shifts[None, :, :]
+        shift_array = supercell_util._shift_xyz_plus_minus(2)
+        shift_array = np.array(shift_array)
+        shifted_points = points[:, None, :] + shift_array
         all_points = []
         for point_group in shifted_points:
             for point in point_group:
                 new_point = (*np.round(point, 5), atom_site_label)
                 all_points.append(new_point)
-
         return all_points
