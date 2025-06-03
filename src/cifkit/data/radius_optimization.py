@@ -10,10 +10,8 @@ def generate_adjacent_pairs(
     elements: list[str],
 ) -> list[tuple[str, str]]:
     """Generate a list of tuples, where each tuple is a pair of adjacent atom
-    labels."""
-
-    # Binary -> [('In', 'Rh')]
-    # Ternary -> [('In', 'Rh'), ('Rh', 'U')]
+    labels.
+    """
     label_to_pair = [
         (elements[i], elements[i + 1]) for i in range(len(elements) - 1)
     ]
@@ -35,26 +33,30 @@ def constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
 
 
 def get_refined_CIF_radius(
-    elements: list[str], shortest_distances: dict
+    elements: list[str], shortest_distances: dict, sort_elements=True
 ) -> dict[str, float]:
     """Optimize CIF radii given atom labels and their shortest pair distance
-    constraints."""
-    sorted_elements = sorted(elements)
+    constraints.
+
+    Assume there are 3 compounds, R-M-X. Then the shortest distance between
+    R-M and M-X are as the two constraints for optmizing radius values. 
+    By default, we don't want to sort it.
+    """
     radii_data = get_radius_data()
     original_radii = np.array(
-        [radii_data[label]["CIF_radius"] for label in sorted_elements]
+        [radii_data[label]["CIF_radius"] for label in elements]
     )
-
-    label_to_pair = generate_adjacent_pairs(sorted_elements)
-
+    if sort_elements:
+        elements = sorted(elements)
+    label_to_pair = generate_adjacent_pairs(elements)
     # Constraints setup
     constraints = []
     for pair in label_to_pair:
         dist = shortest_distances[pair]
-        # print(
-        #     f"Setting constraint for {pair[0]}-{pair[1]} with distance {dist}"
-        # )
-        i, j = sorted_elements.index(pair[0]), sorted_elements.index(pair[1])
+        print(
+            f"Setting constraint for {pair[0]}-{pair[1]} with distance {dist}"
+        )
+        i, j = elements.index(pair[0]), elements.index(pair[1])
         constraints.append(
             {
                 "type": "eq",
@@ -65,7 +67,6 @@ def get_refined_CIF_radius(
                 ),
             }
         )
-
     result = minimize(
         objective,
         original_radii,
@@ -74,9 +75,9 @@ def get_refined_CIF_radius(
         options={"disp": False},
     )
 
-    # if result.success:
-    #     print("Optimization succeeded.")
-    # else:
-    #     print("Optimization failed:", result.message)
+    if result.success:
+        print("Optimization succeeded.")
+    else:
+        print("Optimization failed:", result.message)
 
-    return dict(zip(sorted_elements, result.x))
+    return dict(zip(elements, result.x))

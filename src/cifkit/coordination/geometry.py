@@ -44,7 +44,6 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
 
     # Basic polyhedron info
     number_of_edges = len(edges)
-    print(number_of_edges)
     number_of_faces = len(hull.simplices)
     number_of_vertices = len(neighbor_atoms_coord)
     # More advanced polyhedron info
