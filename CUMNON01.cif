@@ -51,10 +51,7 @@ _atom_type_description
 _atom_type_scat_dispersion_real
 _atom_type_scat_dispersion_imag
 _atom_type_scat_source
-C C 0.0033 0.0016 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
-H H 0.0000 0.0000 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
-Cl Cl 0.1484 0.1585 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
-N N 0.0061 0.0033 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
+
 Sb Sb -0.5866 1.5461 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
 
 _shelx_space_group_comment       
@@ -214,12 +211,6 @@ _atom_site_refinement_flags_occupancy
 _atom_site_disorder_assembly
 _atom_site_disorder_group
 Sb01 Sb 0.72720(2) 0.75124(2) 0.76339(2) 0.01418(4) Uani 1 1 d . . . . .
-Cl02 Cl 1.06915(5) 0.61559(4) 0.79269(4) 0.01906(8) Uani 1 1 d . . . . .
-Cl03 Cl 0.85829(5) 0.89198(4) 0.48561(4) 0.01875(8) Uani 1 1 d . . . . .
-Cl04 Cl 0.40731(5) 0.85128(4) 0.76035(4) 0.02187(9) Uani 1 1 d . . . . .
-Cl05 Cl 0.73659(6) 0.95456(4) 0.85849(4) 0.02207(9) Uani 1 1 d . . . . .
-Cl06 Cl 0.58731(5) 0.64882(4) 1.01542(4) 0.01960(8) Uani 1 1 d . . . . .
-Cl07 Cl 0.77470(6) 0.46668(4) 0.65077(4) 0.02291(9) Uani 1 1 d . . . . .
 
 loop_
 _atom_site_aniso_label
@@ -230,12 +221,6 @@ _atom_site_aniso_U_23
 _atom_site_aniso_U_13
 _atom_site_aniso_U_12
 Sb01 0.01489(6) 0.01375(6) 0.01541(6) -0.00082(4) -0.00650(4) -0.00413(4)
-Cl02 0.01791(19) 0.01896(18) 0.02105(19) -0.00432(15) -0.00783(16) -0.00220(15)
-Cl03 0.02043(19) 0.01730(18) 0.01950(18) -0.00397(15) -0.00688(15) -0.00442(15)
-Cl04 0.01674(19) 0.0245(2) 0.0248(2) 0.00181(16) -0.00996(16) -0.00405(15)
-Cl05 0.0297(2) 0.01741(19) 0.0236(2) -0.00314(15) -0.01226(17) -0.00717(16)
-Cl06 0.01943(19) 0.02377(19) 0.01831(18) 0.00210(15) -0.00808(15) -0.00942(15)
-Cl07 0.0296(2) 0.0213(2) 0.0221(2) -0.00072(16) -0.01320(17) -0.00713(16)
 
 
 _geom_special_details            
