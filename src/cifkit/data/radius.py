@@ -80,7 +80,7 @@ def get_radius_data() -> dict:
         "Br": [1.141, 1.659],
         "I": [1.359, 1.338],
         "Tc": [1.355, 1.803],
-        "Pm": [1.797, 1.635]
+        "Pm": [1.797, 1.635],
     }
     data: dict = {
         k: {"CIF_radius": v[0], "Pauling_radius_CN12": v[1]}
