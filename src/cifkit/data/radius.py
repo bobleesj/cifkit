@@ -72,6 +72,15 @@ def get_radius_data() -> dict:
         "W": [1.364, 1.394],
         "Zn": [1.333, 1.379],
         "Zr": [1.553, 1.597],
+        # Below values were interpolated using GPR
+        "N": [0.536, 0.880],
+        "O": [0.611, 1.115],
+        "F": [0.709, 1.600],
+        "Cl": [0.968, 1.448],
+        "Br": [1.141, 1.659],
+        "I": [1.359, 1.338],
+        "Tc": [1.355, 1.803],
+        "Pm": [1.797, 1.635]
     }
     data: dict = {
         k: {"CIF_radius": v[0], "Pauling_radius_CN12": v[1]}
