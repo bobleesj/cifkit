@@ -10,8 +10,7 @@ def generate_adjacent_pairs(
     elements: list[str],
 ) -> list[tuple[str, str]]:
     """Generate a list of tuples, where each tuple is a pair of adjacent atom
-    labels.
-    """
+    labels."""
     label_to_pair = [
         (elements[i], elements[i + 1]) for i in range(len(elements) - 1)
     ]
@@ -38,9 +37,9 @@ def get_refined_CIF_radius(
     """Optimize CIF radii given atom labels and their shortest pair distance
     constraints.
 
-    Assume there are 3 compounds, R-M-X. Then the shortest distance between
-    R-M and M-X are as the two constraints for optmizing radius values. 
-    By default, we don't want to sort it.
+    Assume there are 3 compounds, R-M-X. Then the shortest distance
+    between R-M and M-X are as the two constraints for optmizing radius
+    values. By default, we don't want to sort it.
     """
     radii_data = get_radius_data()
     original_radii = np.array(
