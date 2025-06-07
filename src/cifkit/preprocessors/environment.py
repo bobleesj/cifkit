@@ -65,11 +65,9 @@ def get_nearest_dists_per_site(
                 lengths,
                 angles_rad,
             )
-
             # Calculate the dist between two points
             dist = distance.calc_dist_two_cart_points(cart_1, cart_2)
             dist = float(np.round(dist, 3))
-
             # Check the dist
             if dist < cutoff_radius and dist > 0.1:
                 point_2_info.append(
@@ -102,9 +100,7 @@ def get_most_connected_point_per_site(
     """Identify the reference point with the highest number of connections
     within the 50 shortest distances from a set of distances."""
     sorted_unique_dists = sorted(dist_set)
-    # Get the 30 shortest distances
     shortest_dists = sorted_unique_dists[:50]
-
     # Variables to track the reference point with the highest count
     max_count = 0
     max_ref_point = None

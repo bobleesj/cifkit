@@ -91,7 +91,7 @@ def plot(
                 )
 
     delaunay = Delaunay(points)
-    hull = ConvexHull(points)
+    hull = ConvexHull(points, qhull_options="QJ")
 
     edges = set()
     for simplex in delaunay.simplices:

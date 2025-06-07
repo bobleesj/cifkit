@@ -6,3 +6,7 @@ mater
 
 ;; Frobenius norm used in np.linalg.norm
 fro
+
+;; Compounds and elements
+Nd
+Te

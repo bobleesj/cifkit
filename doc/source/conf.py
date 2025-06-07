@@ -56,7 +56,7 @@ extensions = [
 
 # JUPYTER NOTEBOOKS
 nbsphinx_allow_errors = True
-nbsphinx_execute = 'never'
+nbsphinx_execute = "never"
 
 apidoc_module_dir = "../../src/cifkit"
 apidoc_output_dir = "api"
