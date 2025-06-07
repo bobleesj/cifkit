@@ -17,8 +17,6 @@ def get_mendeleev_nums_from_pair_tuple(
     mendeleev_numbers = mendeleev.numbers
     # Get Mendeleev number for the first element, default to 0 if not found
     first_mendeleev_num = mendeleev_numbers.get(first_element, 0)
-
     # Get Mendeleev number for the second element, default to 0 if not found
     second_mendeleev_num = mendeleev_numbers.get(second_element, 0)
-
     return first_mendeleev_num, second_mendeleev_num

@@ -32,7 +32,6 @@ def find_best_polyhedron(max_gaps_per_label, connections):
             # Try to make a polyhedron
             try:
                 hull = ConvexHull(polyhedron_points, qhull_options="QJ")
-
             except Exception:
                 print(
                     f"Error in polyhedron calculation for"
@@ -44,7 +43,6 @@ def find_best_polyhedron(max_gaps_per_label, connections):
             polyhedron_metrics = compute_polyhedron_metrics(
                 polyhedron_points, hull
             )
-
             # If there is no metrics, then skip the method
             if polyhedron_metrics is None:
                 continue

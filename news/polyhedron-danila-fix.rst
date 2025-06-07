@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* <news item>
+* Catch error for the polyhedron when the volumn cannot be calculated due to flat surface.
 
 **Security:**
 
