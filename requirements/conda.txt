@@ -3,4 +3,4 @@ matplotlib-base
 numpy
 pyvista
 scipy
-bobleesj.utils.sources import mendeleev
+bobleesj.utils
