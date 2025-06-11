@@ -80,5 +80,4 @@ def get_refined_CIF_radius(
         print("CIF radius optimization succeeded.")
     else:
         print("CIF radius optimization failed:", result.message)
-
-    return dict(zip(elements, result.x))
+    return dict(zip(elements, result.x)), result.fun

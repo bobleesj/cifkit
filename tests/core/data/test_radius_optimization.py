@@ -19,11 +19,11 @@ def test_binary_refined_radius():
         ("Co", "Co"): 2.363,
         ("Dy", "Co"): 2.782,
     }
-    result = radius_opt.get_refined_CIF_radius(
+    optimized_radii, obj_value = radius_opt.get_refined_CIF_radius(
         [A, B], shortest_bond_pair_distance
     )
     diff = DeepDiff(
-        result,
+        optimized_radii,
         {
             "Dy": np.float64(1.6062119417614027),
             "Co": np.float64(1.1757880582385976),
@@ -31,6 +31,7 @@ def test_binary_refined_radius():
         significant_digits=4,
     )
     assert diff == {}
+    assert obj_value == pytest.approx(0.010449041063004245, abs=1e-6)
 
 
 @pytest.mark.parametrize(
@@ -59,10 +60,9 @@ def test_ternary_refined_radius_parametrized(shortest_bond_pair_distance):
     M = "Rh"
     X = "In"
 
-    optimized_radii = radius_opt.get_refined_CIF_radius(
+    optimized_radii, obj_value = radius_opt.get_refined_CIF_radius(
         [R, M, X], shortest_bond_pair_distance
     )
-
     expected_radii = {
         "U": np.float64(1.6143481586494364),
         "Rh": np.float64(1.3686518413505637),
@@ -71,6 +71,7 @@ def test_ternary_refined_radius_parametrized(shortest_bond_pair_distance):
 
     diff = DeepDiff(optimized_radii, expected_radii, significant_digits=4)
     assert diff == {}
+    assert obj_value == pytest.approx(0.06316210952489595, abs=1e-6)
 
 
 @pytest.mark.parametrize(
