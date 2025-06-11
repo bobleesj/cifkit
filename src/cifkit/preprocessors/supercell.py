@@ -8,7 +8,7 @@ from cifkit.utils import cif_parser
 
 def get_supercell_points(
     block,
-    supercell_generation_method,
+    supercell_size: int,
 ) -> list[tuple[float, float, float, str]]:
     """Return supercell points."""
     supercell_points = []
@@ -24,7 +24,7 @@ def get_supercell_points(
             shift_and_append_points(
                 points,
                 atom_site_label,
-                supercell_generation_method,
+                supercell_size,
             )
         )
 
@@ -124,7 +124,7 @@ def shift_and_append_points(
     the array containing the coordinates of the supercell.
 
     # Method 1 - No sfhits
-    # Method 2 - +1 +1 +1 shifts (This rarely used)
+    # Method 2 - +-1 +-1 +-1 shifts (This rarely used)
     # Method 3 - +-2 +-2 +-2 shifts (5*5*5 of the unit cell)
     """
     if supercell_generation_method == 1:
@@ -138,25 +138,14 @@ def shift_and_append_points(
         return all_points
 
     if supercell_generation_method == 2:
-        shifts = np.array(
-            [
-                [0, 0, 0],
-                [1, 0, 0],
-                [0, 1, 0],
-                [0, 0, 1],
-                [1, 1, 0],
-                [1, 0, 1],
-                [0, 1, 1],
-                [1, 1, 1],
-            ]
-        )
-        shifted_points = points[:, None, :] + shifts
+        shift_array = supercell_util._shift_xyz_plus_minus(1)
+        shift_array = np.array(shift_array)
+        shifted_points = points[:, None, :] + shift_array
         all_points = []
         for point_group in shifted_points:
             for point in point_group:
                 new_point = (*np.round(point, 5), atom_site_label)
                 all_points.append(new_point)
-
         return all_points
 
     if supercell_generation_method == 3:

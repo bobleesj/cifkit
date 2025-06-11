@@ -1,19 +1,8 @@
 import numpy as np
 from bobleesj.utils.sources import radius
-
 from cifkit.data.radius_optimization import get_refined_CIF_radius
 from cifkit.utils.unit import round_dict_values
 
-
-def get_is_radius_data_available(elements: list[str]) -> bool:
-    """Check if both CIF and Pauling radius data are available for each element
-    in the list."""
-    data = radius.data()
-    for element in elements:
-        element_data = data.get(element, {})
-        if not ("CIF" in element_data and "Pauling_CN12" in element_data):
-            return False
-    return True
 
 
 def get_CIF_pauling_radius(elements: list[str]) -> dict:
@@ -25,7 +14,6 @@ def get_CIF_pauling_radius(elements: list[str]) -> dict:
             "CIF_radius": data[atom]["CIF"],
             "Pauling_radius_CN12": data[atom]["Pauling_CN12"],
         }
-
     return radii
 
 
@@ -33,17 +21,17 @@ def get_radius_values_per_element(
     elements: list[str], shortest_bond_distances
 ) -> dict[str : dict[str:float]]:
     """Merge CIF and Pauling radius data with CIF refined radius data."""
-    is_radius_data_available = get_is_radius_data_available(elements)
+    is_radius_data_available = radius.are_available(elements)
     if not is_radius_data_available:
         return None
     CIF_pauling_rad = get_CIF_pauling_radius(elements)
-    CIF_refined_rad = get_refined_CIF_radius(elements, shortest_bond_distances)
+    CIF_refined_rad, _ = get_refined_CIF_radius(elements, shortest_bond_distances)
     combined_radii = {}
     for element in elements:
         combined_radii[element] = {
             "CIF_radius": CIF_pauling_rad[element]["CIF_radius"],
             "CIF_radius_refined": float(
-                np.round(CIF_refined_rad.get(element), 3)
+            np.round(CIF_refined_rad.get(element), 3)
             ),
             "Pauling_radius_CN12": CIF_pauling_rad[element][
                 "Pauling_radius_CN12"
