@@ -1,6 +1,6 @@
 **Added:**
 
-* <news item>
+* Add unit tests for refined CIF radius for binary and ternary.
 
 **Changed:**
 
@@ -12,7 +12,7 @@
 
 **Removed:**
 
-* <news item>
+* Remove hard coded data for CIF and Pauling CN12 radius values. Retrive them from bobleesj.utils.
 
 **Fixed:**
 
