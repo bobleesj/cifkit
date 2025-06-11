@@ -1,7 +1,6 @@
 import pytest
 
 from cifkit import Cif, CifEnsemble
-
 from cifkit.coordination import composition, filter
 from cifkit.preprocessors import environment, environment_util, supercell
 from cifkit.utils import cif_parser, folder
@@ -68,6 +67,8 @@ Cif - ICSD demo file
 @pytest.fixture(scope="module")
 def file_path_ICSD_formatted():
     return "tests/data/cif/sources/ICSD/EntryWithCollCode43054_formatted.cif"
+
+
 """
 Cif - URhIn
 """

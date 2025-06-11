@@ -84,22 +84,6 @@ def ensure_connections(func):
     return wrapper
 
 
-def ensure_CN_determined(func):
-    """For accessing lazy CN properties and methods, compute coordination
-    numbers."""
-
-    def wrapper(self, *args, **kwargs):
-        # Check whether connections are computed, otherwise run them
-        if self.connections is None:
-            self.compute_connections()
-        # Check whether CN is computed, otherwise run them
-        if self._CN_max_gap_per_site is None:
-            self.determine_CN()
-        return func(self, *args, **kwargs)
-
-    return wrapper
-
-
 # Global logging
 logging.basicConfig(
     level=logging.INFO,
@@ -328,20 +312,16 @@ class Cif:
             self.supercell_points,
             cutoff_radius=cutoff_radius,
         )
-
         self._connections_flattened = flat_site_connections(self.connections)
         self._shortest_distance = get_shortest_distance(self.connections)
-
         # Shortest distance per bond pair
         self._shortest_bond_pair_distance = (
             get_shortest_distance_per_bond_pair(self.connections_flattened)
         )
-
         # Shortest distance per site
         self._shortest_site_pair_distance = get_shortest_distance_per_site(
             self.connections
         )
-
         # Parse individual radii per element
         self._radius_values = get_radius_values_per_element(
             list(self.unique_elements), self.shortest_bond_pair_distance
@@ -350,7 +330,7 @@ class Cif:
             self.radius_values, self.is_radius_data_available
         )
 
-    def determine_CN(self) -> None:
+    def compute_CN(self) -> None:
         """Compute onnection network, shortest distances, bond counts, and
         coordination numbers (CN). These prperties are lazily loaded to avoid
         unnecessary computation during the initialization and pre-processing
@@ -659,7 +639,6 @@ class Cif:
         return self._radius_sum
 
     @property
-    @ensure_CN_determined
     def CN_max_gap_per_site(self):
         """Determines the maximum gap in coordination number (CN) for each
         atomic site.
@@ -722,7 +701,6 @@ class Cif:
         return self._CN_max_gap_per_site
 
     @property
-    @ensure_CN_determined
     def CN_best_methods(self):
         """Determines the optimal coordination method for each atomic site.
 
@@ -771,12 +749,10 @@ class Cif:
         return self._CN_best_methods
 
     @property
-    @ensure_CN_determined
     def CN_connections_by_best_methods(self):
         return self._CN_connections_by_best_methods
 
     @property
-    @ensure_CN_determined
     def CN_connections_by_min_dist_method(self):
         return self._CN_connections_by_min_dist_method
 
@@ -786,91 +762,74 @@ class Cif:
 
     # 1.1 Bond counts
     @property
-    @ensure_CN_determined
     def CN_bond_count_by_min_dist_method(self):
         return self._CN_bond_count_by_min_dist_method
 
     @property
-    @ensure_CN_determined
     def CN_bond_count_by_best_methods(self):
         return self._CN_bond_count_by_best_methods
 
     # 1.2 Bond counts sorted by mendeleev
     @property
-    @ensure_CN_determined
     def CN_bond_count_by_min_dist_method_sorted_by_mendeleev(self):
         return self._CN_bond_count_by_min_dist_method_sorted_by_mendeleev
 
     @property
-    @ensure_CN_determined
     def CN_bond_count_by_best_methods_sorted_by_mendeleev(self):
         return self._CN_bond_count_by_best_methods_sorted_by_mendeleev
 
     # 2.1 Bond fractions
     @property
-    @ensure_CN_determined
     def CN_bond_fractions_by_min_dist_method(self):
         return self._CN_bond_fractions_by_min_dist_method
 
     @property
-    @ensure_CN_determined
     def CN_bond_fractions_by_best_methods(self):
         return self._CN_bond_fractions_by_best_methods
 
     # 2.2. Bond fractions sorted by Mendeleev
     @property
-    @ensure_CN_determined
     def CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev(self):
         return self._CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev
 
     @property
-    @ensure_CN_determined
     def CN_bond_fractions_by_best_methods_sorted_by_mendeleev(self):
         return self._CN_bond_fractions_by_best_methods_sorted_by_mendeleev
 
     # Unique CN
     @property
-    @ensure_CN_determined
     def CN_unique_values_by_min_dist_method(self):
         return self._CN_unique_values_by_min_dist_method
 
     @property
-    @ensure_CN_determined
     def CN_unique_values_by_best_methods(self):
         return self._CN_unique_values_by_best_methods
 
     # Average CN
     @property
-    @ensure_CN_determined
     def CN_avg_by_min_dist_method(self):
         return self._CN_avg_by_min_dist_method
 
     @property
-    @ensure_CN_determined
     def CN_avg_by_best_methods(self):
         return self._CN_avg_by_best_methods
 
     @property
-    @ensure_CN_determined
     def CN_max_by_min_dist_method(self):
         return self._CN_max_by_min_dist_method
 
     @property
-    @ensure_CN_determined
     def CN_max_by_best_methods(self):
         return self._CN_max_by_best_methods
 
     @property
-    @ensure_CN_determined
     def CN_min_by_min_dist_method(self):
         return self._CN_min_by_min_dist_method
 
     @property
-    @ensure_CN_determined
     def CN_min_by_best_methods(self):
         return self._CN_min_by_best_methods
 
-    @ensure_CN_determined
     def get_polyhedron_labels_by_CN_min_dist_method(
         self, label: str
     ) -> tuple[list[list[float]], list[str]]:
@@ -878,7 +837,6 @@ class Cif:
             self.CN_connections_by_min_dist_method, label
         )
 
-    @ensure_CN_determined
     def get_polyhedron_labels_by_CN_best_methods(
         self, label: str
     ) -> tuple[list[list[float]], list[str]]:
@@ -886,7 +844,6 @@ class Cif:
             self.CN_connections_by_best_methods, label
         )
 
-    @ensure_CN_determined
     def plot_polyhedron(
         self,
         site_label: str,

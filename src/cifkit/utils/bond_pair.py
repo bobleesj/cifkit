@@ -17,7 +17,6 @@ def get_pairs_sorted_by_mendeleev(
 ) -> set[tuple[str, str]]:
     """Generate all unique pairs, each tuple sorted by the Mendeleeve
     number."""
-
     pairs = get_bond_pairs(labels)
     sorted_pairs = {order_tuple_pair_by_mendeleev(pair) for pair in pairs}
     return sorted_pairs
@@ -28,15 +27,15 @@ def order_tuple_pair_by_mendeleev(label_pair_tuple):
     first_label = label_pair_tuple[0]
     second_label = label_pair_tuple[1]
     (
-        first_mendeleev_num,
-        second_mendeleev_num,
+        first_mend_num,
+        second_mend_num,
     ) = get_mendeleev_nums_from_pair_tuple(label_pair_tuple)
 
     # If first element num is smaller
-    if first_mendeleev_num > second_mendeleev_num:
+    if first_mend_num > second_mend_num:
         return (second_label, first_label)
     # If first and second, same number, sort alphabetically
-    elif first_mendeleev_num == second_mendeleev_num:
+    elif first_mend_num == second_mend_num:
         return tuple(sorted(label_pair_tuple))
     # If it in correct order, return as it is
     else:
