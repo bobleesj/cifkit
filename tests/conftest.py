@@ -12,6 +12,12 @@ def cif_CUMNON_sb() -> Cif:
     return Cif("tests/data/cifs/CUMNON01_sb_only.cif")
 
 
+@pytest.fixture
+def Dy2Co17_cif() -> Cif:
+    cif = Cif("tests/data/cif/radius/binary/Dy2Co17.cif")
+    return cif
+
+
 """
 CifEnsemble - histogram test
 """
@@ -62,16 +68,14 @@ CifEnsemble - histogram test
 # @pytest.fixture(scope="module")
 # def file_path_ICSD_formatted():
 #     return "tests/data/cif/sources/ICSD/EntryWithCollCode43054_formatted.cif"
+"""
+Cif - URhIn
+"""
 
 
-# """
-# Cif - URhIn
-# """
-
-
-# @pytest.fixture(scope="module")
-# def file_path_URhIn():
-#     return "tests/data/cif/URhIn.cif"
+@pytest.fixture(scope="module")
+def file_path_URhIn():
+    return "tests/data/cif/URhIn.cif"
 
 
 # @pytest.fixture(scope="module")

@@ -3,17 +3,18 @@ import numpy as np
 from cifkit.data.radius import get_radius_data
 from cifkit.data.radius_optimization import get_refined_CIF_radius
 from cifkit.utils.unit import round_dict_values
+from bobleesj.utils.sources import radius
 
 
 def get_is_radius_data_available(elements: list[str]) -> bool:
     """Check if both CIF and Pauling radius data are available for each element
     in the list."""
-    data = get_radius_data()
+    data = radius.data()
     for element in elements:
         element_data = data.get(element, {})
         if not (
-            "CIF_radius" in element_data
-            and "Pauling_radius_CN12" in element_data
+            "CIF" in element_data
+            and "Pauling_CN12" in element_data
         ):
             return False
     return True
@@ -21,12 +22,12 @@ def get_is_radius_data_available(elements: list[str]) -> bool:
 
 def get_CIF_pauling_radius(elements: list[str]) -> dict:
     """Return CIF and Pualing data for a list of elements."""
-    data = get_radius_data()
+    data = radius.data()
     radii = {}
     for atom in elements:
         radii[atom] = {
-            "CIF_radius": data[atom]["CIF_radius"],
-            "Pauling_radius_CN12": data[atom]["Pauling_radius_CN12"],
+            "CIF_radius": data[atom]["CIF"],
+            "Pauling_radius_CN12": data[atom]["Pauling_CN12"],
         }
 
     return radii
@@ -40,10 +41,8 @@ def get_radius_values_per_element(
 
     if not is_radius_data_available:
         return None
-
     CIF_pauling_rad = get_CIF_pauling_radius(elements)
     CIF_refined_rad = get_refined_CIF_radius(elements, shortest_bond_distances)
-
     combined_radii = {}
     for element in elements:
         combined_radii[element] = {
@@ -73,12 +72,10 @@ def compute_radius_sum(
         "CIF_radius_refined_sum": {},
         "Pauling_radius_sum": {},
     }
-
     # Calculate pair sums for each unique combination of elements
     for i, elem_i in enumerate(elements):
         for j in range(i, len(elements)):
             elem_j = elements[j]
-
             # Element pair label, e.g., A-B or A-A
             pair_label = (
                 f"{elem_i}-{elem_j}" if i != j else f"{elem_i}-{elem_i}"
@@ -100,5 +97,4 @@ def compute_radius_sum(
                 + radius_values[elem_j]["Pauling_radius_CN12"],
                 3,
             )
-
     return pair_distances

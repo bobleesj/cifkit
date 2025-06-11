@@ -38,7 +38,6 @@ def find_best_polyhedron(max_gaps_per_label, connections):
                     f"{label} using {method} - Skip"
                 )
                 continue  # Move to the next method
-
             # Returns non if there is any error
             polyhedron_metrics = compute_polyhedron_metrics(
                 polyhedron_points, hull

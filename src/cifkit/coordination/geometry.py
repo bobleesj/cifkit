@@ -64,8 +64,10 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
     try:
         packing_efficiency = volume_of_inscribed_sphere / hull.volume
     except Exception as e:
-        print(f"Error computing polyhedron volumne: {e}. "
-              "Please check whether the polyhedron is flat.")
+        print(
+            f"Error computing polyhedron volumne: {e}. "
+            "Please check whether the polyhedron is flat."
+        )
         return None
     data = {
         "volume_of_polyhedron": hull.volume,
@@ -80,8 +82,6 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
     }
 
     return round_dict_values(data)
-
-    
 
 
 def _compute_center_of_mass_and_distance(
