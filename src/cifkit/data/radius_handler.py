@@ -1,8 +1,8 @@
 import numpy as np
 from bobleesj.utils.sources import radius
+
 from cifkit.data.radius_optimization import get_refined_CIF_radius
 from cifkit.utils.unit import round_dict_values
-
 
 
 def get_CIF_pauling_radius(elements: list[str]) -> dict:
@@ -25,13 +25,15 @@ def get_radius_values_per_element(
     if not is_radius_data_available:
         return None
     CIF_pauling_rad = get_CIF_pauling_radius(elements)
-    CIF_refined_rad, _ = get_refined_CIF_radius(elements, shortest_bond_distances)
+    CIF_refined_rad, _ = get_refined_CIF_radius(
+        elements, shortest_bond_distances
+    )
     combined_radii = {}
     for element in elements:
         combined_radii[element] = {
             "CIF_radius": CIF_pauling_rad[element]["CIF_radius"],
             "CIF_radius_refined": float(
-            np.round(CIF_refined_rad.get(element), 3)
+                np.round(CIF_refined_rad.get(element), 3)
             ),
             "Pauling_radius_CN12": CIF_pauling_rad[element][
                 "Pauling_radius_CN12"
@@ -44,7 +46,6 @@ def compute_radius_sum(
     radius_values: dict[str : dict[str:float]], is_radius_data_available: bool
 ) -> dict[str : dict[str:float]]:
     """Compute the sum of two radii."""
-
     if not is_radius_data_available:
         return None
 

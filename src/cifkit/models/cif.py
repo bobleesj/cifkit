@@ -75,14 +75,19 @@ from cifkit.utils.log_messages import CifLog
 
 def ensure_connections(func):
     """For accessing lazy properties and methods, compute connections."""
+
     def wrapper(self, *args, **kwargs):
         if self.connections is None:
             self.compute_connections()
         return func(self, *args, **kwargs)
+
     return wrapper
 
+
 def ensure_CN_determined(func):
-    """For accessing lazy CN properties and methods, compute coordination numbers."""
+    """For accessing lazy CN properties and methods, compute coordination
+    numbers."""
+
     def wrapper(self, *args, **kwargs):
         # Check whether connections are computed, otherwise run them
         if self.connections is None:
@@ -91,7 +96,9 @@ def ensure_CN_determined(func):
         if self._CN_max_gap_per_site is None:
             self.determine_CN()
         return func(self, *args, **kwargs)
+
     return wrapper
+
 
 # Global logging
 logging.basicConfig(
@@ -102,7 +109,12 @@ logging.basicConfig(
 
 class Cif:
     def __init__(
-        self, file_path: str, is_formatted=False, logging_enabled=False, supercell_size=3) -> None:
+        self,
+        file_path: str,
+        is_formatted=False,
+        logging_enabled=False,
+        supercell_size=3,
+    ) -> None:
         """Initialize an object from a .cif file.
 
         Parameters
@@ -118,8 +130,8 @@ class Cif:
         compute_CN : bool=True
             If True, computes coordination numbers (CN) and related metrics.
         supercell_size : int, optional
-            Size of the supercell to be generated. Default is 3. 
-            Method 1 - No shifts  
+            Size of the supercell to be generated. Default is 3.
+            Method 1 - No shifts
             Method 2 - ±1 shifts  (3x3x3 of the unit cell)
             Method 3 - ±2 shifts (5×5×5 of the unit cell)
 
@@ -265,7 +277,9 @@ class Cif:
         self.site_mixing_type = get_site_mixing_type(
             self.site_labels, self.atom_site_info
         )
-        self.is_radius_data_available = radius.are_available(list(self.unique_elements))
+        self.is_radius_data_available = radius.are_available(
+            list(self.unique_elements)
+        )
         self.mixing_info_per_label_pair = get_mixing_type_per_pair_dict(
             self.site_labels, self.site_label_pairs, self.atom_site_info
         )
@@ -286,7 +300,9 @@ class Cif:
         """
         # Method implementation goes here
         self.unitcell_points = get_supercell_points(self._block, 1)
-        self.supercell_points = get_supercell_points(self._block, supercell_size)
+        self.supercell_points = get_supercell_points(
+            self._block, supercell_size
+        )
         self.unitcell_atom_count = get_cell_atom_count(self.unitcell_points)
         self.supercell_atom_count = get_cell_atom_count(self.supercell_points)
 
@@ -328,13 +344,11 @@ class Cif:
 
         # Parse individual radii per element
         self._radius_values = get_radius_values_per_element(
-            list[self.unique_elements], self.shortest_bond_pair_distance
+            list(self.unique_elements), self.shortest_bond_pair_distance
         )
-
         self._radius_sum = compute_radius_sum(
             self.radius_values, self.is_radius_data_available
         )
-
 
     def determine_CN(self) -> None:
         """Compute onnection network, shortest distances, bond counts, and
