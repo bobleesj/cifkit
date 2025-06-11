@@ -34,7 +34,6 @@ def get_radius_values_per_element(
 ) -> dict[str : dict[str:float]]:
     """Merge CIF and Pauling radius data with CIF refined radius data."""
     is_radius_data_available = get_is_radius_data_available(elements)
-
     if not is_radius_data_available:
         return None
     CIF_pauling_rad = get_CIF_pauling_radius(elements)
@@ -50,7 +49,6 @@ def get_radius_values_per_element(
                 "Pauling_radius_CN12"
             ],
         }
-
     return round_dict_values(combined_radii)
 
 
