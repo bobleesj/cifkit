@@ -25,14 +25,12 @@ def get_polyhedron_coordinates_labels(
 
 def compute_polyhedron_metrics(polyhedron_points, hull):
     """Compute various metrics related to a given polyhedron."""
-
     neighbor_atoms_coord = np.array(polyhedron_points[:-1])
     central_atom_coord = np.array(polyhedron_points[-1])
     # Convert to NumPy array excluding the last element
     _, distance_to_center = _compute_center_of_mass_and_distance(
         neighbor_atoms_coord, central_atom_coord
     )
-
     edges = set()
     for simplex in hull.simplices:
         for i in range(-1, len(simplex) - 1):
@@ -41,7 +39,6 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
                 simplex[i],
             ) not in edges:
                 edges.add((simplex[i], simplex[i + 1]))
-
     # Basic polyhedron info
     number_of_edges = len(edges)
     number_of_faces = len(hull.simplices)
@@ -64,7 +61,14 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
     shortest_distance_to_edge = np.min(distances_to_edges)
     radius_of_inscribed_sphere = shortest_distance_to_face
     volume_of_inscribed_sphere = 4 / 3 * np.pi * radius_of_inscribed_sphere**3
-    packing_efficiency = volume_of_inscribed_sphere / hull.volume
+    try:
+        packing_efficiency = volume_of_inscribed_sphere / hull.volume
+    except Exception as e:
+        print(
+            f"Error computing polyhedron volumne: {e}. "
+            "Please check whether the polyhedron is flat."
+        )
+        return None
     data = {
         "volume_of_polyhedron": hull.volume,
         "distance_from_avg_point_to_center": distance_to_center,
@@ -78,10 +82,6 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
     }
 
     return round_dict_values(data)
-
-    # except Exception as e:
-    #     print(f"Error computing polyhedron metrics: {e}")
-    #     return None
 
 
 def _compute_center_of_mass_and_distance(

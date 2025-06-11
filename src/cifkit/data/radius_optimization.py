@@ -1,30 +1,36 @@
 from functools import partial
 
 import numpy as np
+from bobleesj.utils.sources import radius
 from scipy.optimize import minimize
 
-from cifkit.data.radius import get_radius_data
 
-
-def generate_adjacent_pairs(
+def _generate_adjacent_pairs(
     elements: list[str],
 ) -> list[tuple[str, str]]:
     """Generate a list of tuples, where each tuple is a pair of adjacent atom
-    labels."""
-    label_to_pair = [
+    labels.
+
+    Examples
+    --------
+    >>> _generate_adjacent_pairs(["Dy", "Co"])
+    [("Dy", "Co")]
+    >>> )_generate_adjacent_pairs(["U", "Rh", "In"])
+    [("U", "Rh"), ("Rh", "In")]
+    """
+    element_pairs = [
         (elements[i], elements[i + 1]) for i in range(len(elements) - 1)
     ]
-    return label_to_pair
+    return element_pairs
 
 
-def objective(params, original_radii: list[float]) -> list[float]:
-    """Calculate the objective function value,which is the sum of squared
+def _objective(params, original_radii: list[float]) -> list[float]:
+    """Calculate the objective function value, which is the sum of squared
     percent differences between original and refined radii."""
-
     return np.sum(((original_radii - params) / original_radii) ** 2)
 
 
-def constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
+def _constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
     """Enforce that the sum of the radii of the pair does not exceed the
     shortest allowed distance between them."""
     i, j = index_pair
@@ -32,26 +38,23 @@ def constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
 
 
 def get_refined_CIF_radius(
-    elements: list[str], shortest_distances: dict, sort_elements=True
+    elements: list[str], shortest_distances: dict
 ) -> dict[str, float]:
-    """Optimize CIF radii given atom labels and their shortest pair distance
-    constraints.
-
-    Assume there are 3 compounds, R-M-X. Then the shortest distance
-    between R-M and M-X are as the two constraints for optmizing radius
-    values. By default, we don't want to sort it.
-    """
-    radii_data = get_radius_data()
+    """Optimize CIF radii given elements and their shortest pair distance
+    constraints."""
+    radii_data = radius.data()
     original_radii = np.array(
-        [radii_data[label]["CIF_radius"] for label in elements]
+        [radii_data[element]["CIF"] for element in elements]
     )
-    if sort_elements:
-        elements = sorted(elements)
-    label_to_pair = generate_adjacent_pairs(elements)
+    element_pairs = _generate_adjacent_pairs(elements)
     # Constraints setup
     constraints = []
-    for pair in label_to_pair:
-        dist = shortest_distances[pair]
+    for pair in element_pairs:
+        print("Setting constraint for", pair)
+        # Get the shortest distance for the pair, considering both orders
+        dist = shortest_distances.get(pair) or shortest_distances.get(
+            (pair[1], pair[0])
+        )
         print(
             f"Setting constraint for {pair[0]}-{pair[1]} with distance {dist}"
         )
@@ -60,23 +63,22 @@ def get_refined_CIF_radius(
             {
                 "type": "eq",
                 "fun": partial(
-                    constraint,
+                    _constraint,
                     index_pair=(i, j),
                     shortest_distance=dist,
                 ),
             }
         )
     result = minimize(
-        objective,
+        _objective,
         original_radii,
         args=(original_radii,),
         constraints=constraints,
         options={"disp": False},
     )
-
     if result.success:
-        print("Optimization succeeded.")
+        print("CIF radius optimization succeeded.")
     else:
-        print("Optimization failed:", result.message)
+        print("CIF radius optimization failed:", result.message)
 
     return dict(zip(elements, result.x))
