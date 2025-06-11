@@ -1,6 +1,15 @@
-import numpy as np
+from cifkit.preprocessors.supercell_util import (
+    _shift_xyz_plus_minus,
+    get_cell_atom_count,
+)
 
-from cifkit.preprocessors.supercell_util import _shift_xyz_plus_minus
+
+def test_get_cell_atom_count_no_shift(unitcell_points_URhIn):
+    assert get_cell_atom_count(unitcell_points_URhIn) == 22
+
+
+def test_get_cell_atom_count_full_shift(supercell_points_URhIn):
+    assert get_cell_atom_count(supercell_points_URhIn) == 336
 
 
 def test_shift_points_based_on_supercell_size_shift_by_one():

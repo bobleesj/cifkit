@@ -38,10 +38,12 @@ def _constraint(params, index_pair: tuple[int, int], shortest_distance: dict):
 
 
 def get_refined_CIF_radius(
-    elements: list[str], shortest_distances: dict
+    elements: list[str], shortest_distances: dict, elements_ordered=True
 ) -> dict[str, float]:
     """Optimize CIF radii given elements and their shortest pair distance
     constraints."""
+    if elements_ordered:
+        elements = sorted(elements)
     radii_data = radius.data()
     original_radii = np.array(
         [radii_data[element]["CIF"] for element in elements]

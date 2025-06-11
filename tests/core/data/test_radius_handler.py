@@ -1,9 +1,9 @@
 import pytest
+from bobleesj.utils.sources import radius
 
 from cifkit.data.radius_handler import (
     compute_radius_sum,
     get_CIF_pauling_radius,
-    get_is_radius_data_available,
 )
 
 
@@ -48,4 +48,4 @@ def test_compute_radius_sum(radius_data_URhIn, radius_sum_data_URhIn):
     ],
 )
 def test_check_radius_data_available(elements, expected):
-    assert get_is_radius_data_available(elements) == expected
+    assert radius.are_available(elements) == expected

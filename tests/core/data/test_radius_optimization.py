@@ -20,7 +20,7 @@ def test_binary_refined_radius():
         ("Dy", "Co"): 2.782,
     }
     optimized_radii, obj_value = radius_opt.get_refined_CIF_radius(
-        [A, B], shortest_bond_pair_distance
+        [A, B], shortest_bond_pair_distance, elements_ordered=False
     )
     diff = DeepDiff(
         optimized_radii,
@@ -61,7 +61,7 @@ def test_ternary_refined_radius_parametrized(shortest_bond_pair_distance):
     X = "In"
 
     optimized_radii, obj_value = radius_opt.get_refined_CIF_radius(
-        [R, M, X], shortest_bond_pair_distance
+        [R, M, X], shortest_bond_pair_distance, elements_ordered=False
     )
     expected_radii = {
         "U": np.float64(1.6143481586494364),
