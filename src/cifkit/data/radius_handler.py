@@ -1,6 +1,5 @@
 import numpy as np
 
-from cifkit.data.radius import get_radius_data
 from cifkit.data.radius_optimization import get_refined_CIF_radius
 from cifkit.utils.unit import round_dict_values
 from bobleesj.utils.sources import radius

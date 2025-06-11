@@ -1,12 +1,12 @@
 import pytest
 
-from cifkit.data.radius import get_radius_data
+from bobleesj.utils.sources import radius
 
 
 @pytest.mark.fast
 def test_get_radius_data():
     # Call the function to get the radii data
-    radii_data = get_radius_data()
+    radii_data = radius.data()
     test_elements = ["Si", "Fe", "Co", "U"]
     for element in test_elements:
         assert element in radii_data
