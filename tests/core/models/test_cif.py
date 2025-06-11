@@ -550,6 +550,7 @@ def test_plot_polyhedron_with_output_folder_given(cif_URhIn):
 Test error during init
 """
 
+
 @pytest.mark.fast
 def test_init_error_duplicate_label():
     file_path = "tests/data/cif/error/duplicate_labels/457848.cif"
@@ -567,7 +568,6 @@ def test_init_error_coord_missing():
         Cif(file_path)
 
     assert "contains no atomic label and type." in str(e.value)
-
 
 
 """
