@@ -1,8 +1,8 @@
 import numpy as np
+from bobleesj.utils.sources import radius
 
 from cifkit.data.radius_optimization import get_refined_CIF_radius
 from cifkit.utils.unit import round_dict_values
-from bobleesj.utils.sources import radius
 
 
 def get_is_radius_data_available(elements: list[str]) -> bool:
@@ -11,10 +11,7 @@ def get_is_radius_data_available(elements: list[str]) -> bool:
     data = radius.data()
     for element in elements:
         element_data = data.get(element, {})
-        if not (
-            "CIF" in element_data
-            and "Pauling_CN12" in element_data
-        ):
+        if not ("CIF" in element_data and "Pauling_CN12" in element_data):
             return False
     return True
 
