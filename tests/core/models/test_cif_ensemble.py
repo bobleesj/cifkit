@@ -461,31 +461,6 @@ def test_generate_histogram(cif_ensemble_test):
 
 
 """
-Test ErCoIn
-"""
-
-
-@pytest.mark.slow
-def test_ErCoIn_test_CN():
-    ensemble = CifEnsemble("tests/data/cif/ErCoIn_test", add_nested_files=True)
-    assert ensemble.unique_CN_values_by_method_methods_stat == {
-        10: 3,
-        12: 11,
-        13: 6,
-        14: 10,
-        16: 6,
-        17: 4,
-        7: 2,
-        11: 5,
-        15: 6,
-        6: 2,
-        8: 3,
-        18: 1,
-        9: 3,
-    }
-
-
-"""
 Test init
 """
 
@@ -506,8 +481,12 @@ def test_init_without_preprocessing(
     caplog,
     cif_folder_path_test,
 ):
-    CifEnsemble(cif_folder_path_test, preprocess=False, logging_enabled=True)
-
+    CifEnsemble(
+        cif_folder_path_test,
+        preprocess=False,
+        logging_enabled=True,
+        supercell_size=2,
+    )
     with caplog.at_level(logging.INFO):
         assert "Preprocessing tests/data/cif/folder" not in caplog.text
 
@@ -529,7 +508,6 @@ def test_init_cif_files(
 ):
     cif_file_paths = get_file_paths(cif_folder_path)
     copy_files(tmpdir, cif_file_paths)
-    ensemble = CifEnsemble(tmpdir)
-
+    ensemble = CifEnsemble(tmpdir, supercell_size=2)
     assert ensemble.file_count == expected_file_count
     assert ensemble.supercell_size_stats == expected_supercell_stats

@@ -24,7 +24,7 @@ CifEnsemble - histogram test
 
 @pytest.fixture(scope="module")
 def cif_ensemble_histogram_test() -> CifEnsemble:
-    return CifEnsemble("tests/data/cif/histogram")
+    return CifEnsemble("tests/data/cif/histogram", supercell_size=2)
 
 
 """
@@ -34,7 +34,7 @@ CifEnsemble - test folder
 
 @pytest.fixture(scope="module")
 def cif_ensemble_test() -> CifEnsemble:
-    return CifEnsemble("tests/data/cif/ensemble_test")
+    return CifEnsemble("tests/data/cif/ensemble_test", supercell_size=2)
 
 
 # Folder

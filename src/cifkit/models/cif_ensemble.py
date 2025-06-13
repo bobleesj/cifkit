@@ -16,6 +16,7 @@ class CifEnsemble:
         add_nested_files=False,
         preprocess=True,
         logging_enabled=False,
+        supercell_size=3,
     ) -> None:
         """Initialize a CifEnsemble object, containing a collection of Cif
         objects.
@@ -78,12 +79,19 @@ class CifEnsemble:
 
         if logging_enabled:
             self.cifs: list[Cif] = [
-                Cif(file_path, is_formatted=True, logging_enabled=True)
+                Cif(
+                    file_path,
+                    is_formatted=True,
+                    logging_enabled=True,
+                    supercell_size=supercell_size,
+                )
                 for file_path in self.file_paths
             ]
         else:
             self.cifs: list[Cif] = [
-                Cif(file_path, is_formatted=True)
+                Cif(
+                    file_path, is_formatted=True, supercell_size=supercell_size
+                )
                 for file_path in self.file_paths
             ]
         print("Finished initialization!")
@@ -342,6 +350,7 @@ class CifEnsemble:
         cif_file_paths = set()
         for cif in self.cifs:
             property_value: str = getattr(cif, property_name)
+            cif.compute_CN()
             if any(val in property_value for val in values):
                 cif_file_paths.add(cif.file_path)
         return cif_file_paths
@@ -352,6 +361,7 @@ class CifEnsemble:
         cif_file_paths = set()
         for cif in self.cifs:
             property_value: str = getattr(cif, property_name)
+            cif.compute_CN()
             if property_value == set(values):
                 cif_file_paths.add(cif.file_path)
         return cif_file_paths
