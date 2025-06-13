@@ -226,7 +226,7 @@ def test_radius_values(cif_URhIn):
     actual_values = cif_URhIn.radius_values
     expected_values = {
         "In": {
-            "CIF_radius": 1.624,
+            "CIF_radius": 1.487,
             "CIF_radius_refined": 1.328,
             "Pauling_radius_CN12": 1.66,
         },

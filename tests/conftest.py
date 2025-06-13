@@ -17,6 +17,14 @@ def Dy2Co17_cif() -> Cif:
     return cif
 
 
+@pytest.fixture
+def Tb4RhInGe4_cif() -> Cif:
+    cif = Cif(
+        "tests/data/cif/radius/quaternary/Tb4RhInGe4.cif", supercell_size=2
+    )
+    return cif
+
+
 """
 CifEnsemble - histogram test
 """
