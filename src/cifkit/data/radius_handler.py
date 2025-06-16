@@ -20,24 +20,19 @@ def get_CIF_pauling_radius(elements: list[str]) -> dict:
 def get_radius_values_per_element(
     elements: list[str], shortest_bond_distances
 ) -> dict[str : dict[str:float]]:
-    """Merge CIF and Pauling radius data with CIF refined radius data."""
+    """Merge CIF and Pauling radius data with CIF refined radius
+    data."""
     is_radius_data_available = radius.are_available(elements)
     if not is_radius_data_available:
         return None
     CIF_pauling_rad = get_CIF_pauling_radius(elements)
-    CIF_refined_rad, _ = get_refined_CIF_radius(
-        elements, shortest_bond_distances
-    )
+    CIF_refined_rad, _ = get_refined_CIF_radius(elements, shortest_bond_distances)
     combined_radii = {}
     for element in elements:
         combined_radii[element] = {
             "CIF_radius": CIF_pauling_rad[element]["CIF_radius"],
-            "CIF_radius_refined": float(
-                np.round(CIF_refined_rad.get(element), 3)
-            ),
-            "Pauling_radius_CN12": CIF_pauling_rad[element][
-                "Pauling_radius_CN12"
-            ],
+            "CIF_radius_refined": float(np.round(CIF_refined_rad.get(element), 3)),
+            "Pauling_radius_CN12": CIF_pauling_rad[element]["Pauling_radius_CN12"],
         }
     return round_dict_values(combined_radii)
 
@@ -60,14 +55,11 @@ def compute_radius_sum(
         for j in range(i, len(elements)):
             elem_j = elements[j]
             # Element pair label, e.g., A-B or A-A
-            pair_label = (
-                f"{elem_i}-{elem_j}" if i != j else f"{elem_i}-{elem_i}"
-            )
+            pair_label = f"{elem_i}-{elem_j}" if i != j else f"{elem_i}-{elem_i}"
 
             # Sum radii for each radius type
             pair_distances["CIF_radius_sum"][pair_label] = round(
-                radius_values[elem_i]["CIF_radius"]
-                + radius_values[elem_j]["CIF_radius"],
+                radius_values[elem_i]["CIF_radius"] + radius_values[elem_j]["CIF_radius"],
                 3,
             )
             pair_distances["CIF_radius_refined_sum"][pair_label] = round(

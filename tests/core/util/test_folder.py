@@ -103,9 +103,7 @@ def test_check_file_not_empty(tmp_path):
     empty_file.touch()  # Create an empty file
     with pytest.raises(ValueError) as e:
         check_file_not_empty(str(empty_file))
-    assert str(e.value) == FileError.FILE_IS_EMPTY.value.format(
-        file_path=empty_file
-    )
+    assert str(e.value) == FileError.FILE_IS_EMPTY.value.format(file_path=empty_file)
 
 
 def test_move_files(tmp_path, cif_folder_path_test, file_paths_test):
@@ -140,9 +138,7 @@ def test_copy_files(tmp_path, cif_folder_path_test, file_paths_test):
     destination_files = get_file_paths(str(dest_dir))
 
     # Extract basenames and sort to ensure order does not affect comparison
-    source_basenames = sorted(
-        [Path(file_path).name for file_path in source_files]
-    )
+    source_basenames = sorted([Path(file_path).name for file_path in source_files])
     destination_basenames = sorted(
         [Path(file_path).name for file_path in destination_files]
     )

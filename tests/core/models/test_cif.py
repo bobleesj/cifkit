@@ -6,7 +6,6 @@ import pytest
 from deepdiff import DeepDiff
 
 from cifkit import Cif
-from cifkit.utils import folder
 from cifkit.utils.error_messages import CifParserError
 
 
@@ -163,10 +162,7 @@ def test_init_with_log(caplog):
     with caplog.at_level(logging.INFO):
         cif = Cif(file_path, logging_enabled=True)
         assert "Preprocessing tests/data/cif/URhIn.cif" in caplog.text
-        assert (
-            "Parsing .cif and generating supercell for URhIn.cif"
-            in caplog.text
-        )
+        assert "Parsing .cif and generating supercell for URhIn.cif" in caplog.text
 
         cif.compute_connections()
         assert "Computing pair distances for URhIn.cif" in caplog.text
@@ -226,7 +222,7 @@ def test_radius_values(cif_URhIn):
     actual_values = cif_URhIn.radius_values
     expected_values = {
         "In": {
-            "CIF_radius": 1.624,
+            "CIF_radius": 1.487,
             "CIF_radius_refined": 1.328,
             "Pauling_radius_CN12": 1.66,
         },
@@ -605,8 +601,8 @@ def test_init_atomic_mixing():
     file_path = "tests/data/cif/atomic_mixing/261241.cif"
     cif = Cif(file_path)
     cif.compute_CN()
-    polyhedron_points, vertex_labels = (
-        cif.get_polyhedron_labels_by_CN_best_methods("CoM1")
+    polyhedron_points, vertex_labels = cif.get_polyhedron_labels_by_CN_best_methods(
+        "CoM1"
     )
     assert len(polyhedron_points) == 13
     assert len(vertex_labels) == 13

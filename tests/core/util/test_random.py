@@ -12,10 +12,5 @@ def test_generate_random_numbers():
     assert all(low <= x <= high for x in int_results)
 
     # Test type and lengths
-    assert (
-        all(isinstance(x, int) for x in int_results) and len(int_results) == 10
-    )
-    assert (
-        all(isinstance(x, float) for x in float_results)
-        and len(float_results) == 10
-    )
+    assert all(isinstance(x, int) for x in int_results) and len(int_results) == 10
+    assert all(isinstance(x, float) for x in float_results) and len(float_results) == 10

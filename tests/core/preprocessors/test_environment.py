@@ -5,8 +5,8 @@ from cifkit.preprocessors.environment import remove_duplicate_connections
 
 
 def assert_minimum_distance(label, connections_dict, expected_min_distance):
-    """Asserts that the minimum distance for a given label in the connections
-    dictionary matches the expected minimum distance."""
+    """Asserts that the minimum distance for a given label in the
+    connections dictionary matches the expected minimum distance."""
     connections = connections_dict.get(label, [])
 
     # Check if there are any connections, and calculate the minimum distance

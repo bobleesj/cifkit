@@ -1,7 +1,8 @@
 def get_shortest_distance_per_bond_pair(
     flattened_connections: list[tuple[tuple[str, str], float]],
 ) -> dict[tuple[str, str], float]:
-    """Determine the min distance for all possible unique pair of elements."""
+    """Determine the min distance for all possible unique pair of
+    elements."""
 
     # Initialize the dictionary with a specific type
     min_dist_per_element_pair: dict[tuple[str, str], float] = {}

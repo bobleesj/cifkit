@@ -9,17 +9,15 @@ from cifkit.utils.cif_sourcer import get_cif_db_source
 
 
 def remove_author_loop(file_path: str) -> None:
-    """Remove the author section from a .cif file to prevent parsing problems
-    caused by a wrongly formatted author block.
+    """Remove the author section from a .cif file to prevent parsing
+    problems caused by a wrongly formatted author block.
 
     This is a common issue in PCD files.
     """
     (
         start_index,
         end_index,
-    ) = cif_parser.get_start_end_line_indexes(
-        file_path, "_publ_author_address"
-    )
+    ) = cif_parser.get_start_end_line_indexes(file_path, "_publ_author_address")
 
     with open(file_path, "r") as f:
         original_lines = f.readlines()
