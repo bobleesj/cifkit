@@ -27,11 +27,7 @@ def get_string_to_formatted_float(str_value: str) -> float:
     """Remove parentheses from a value string and convert to float."""
     str_value = str_value.strip()
 
-    return (
-        float(str_value.split("(")[0])
-        if "(" in str_value
-        else float(str_value)
-    )
+    return float(str_value.split("(")[0]) if "(" in str_value else float(str_value)
 
 
 def trim_string(formula: str) -> str:
@@ -45,7 +41,8 @@ def clean_parsed_structure(structure_type: str) -> str:
 
 
 def strip_numbers_and_symbols(value: str) -> str:
-    """Removes all digits and '+' and '-' characters from the input string.
+    """Removes all digits and '+' and '-' characters from the input
+    string.
 
     Some ICSD, COD have charges in atomic site element e.g. "Fe0+".
     """

@@ -118,9 +118,6 @@ Here is how you can contribute to the `cifkit` project if you found it helpful:
   `cifkit`, please reach out to Bob Lee
   ([@bobleesj](https://github.com/bobleesj)).
 
-## To render documentation
+## Acknowledgements
 
-```bash
-pip install -r requirements/docs.txt
-mkdocs serve
-```
+`cifkit` is maintained and developed with the help of `scikit-package` (https://scikit-package.github.io/scikit-package/).

@@ -65,6 +65,11 @@ coverage.xml
 
 # Sphinx documentation
 docs/build/
+doc/_build/
+tests/data
+AXUGAE.cif
+FIXVUH.cif
+NUMSIB.cif
 docs/source/generated/
 
 # pytest

@@ -44,9 +44,7 @@ def get_normalized_formula(formula: str, demical_places=3) -> str:
         else:
             normalized_index = float(element_index) / index_sum
 
-        normalized_formula_parts.append(
-            f"{element}{normalized_index:.{demical_places}f}"
-        )
+        normalized_formula_parts.append(f"{element}{normalized_index:.{demical_places}f}")
 
     # Join all parts into one string for the normalized formula
     normalized_formula = "".join(normalized_formula_parts)
@@ -54,8 +52,8 @@ def get_normalized_formula(formula: str, demical_places=3) -> str:
 
 
 def get_parsed_norm_formula(formula: str) -> list[tuple[str, str]]:
-    """Return a list of tuples, each tuple containing element and normalized
-    index."""
+    """Return a list of tuples, each tuple containing element and
+    normalized index."""
     normalized_formula = get_normalized_formula(formula)
     parsed_normalized_formula = get_parsed_formula(normalized_formula)
     return parsed_normalized_formula

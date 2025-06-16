@@ -22,7 +22,9 @@ from pathlib import Path
 try:
     fullversion = version("cifkit")
 except Exception:
-    fullversion = "No version found. The correct version will appear in the released version."
+    fullversion = (
+        "No version found. The correct version will appear in the released version."
+    )
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
