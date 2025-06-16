@@ -8,8 +8,8 @@ from scipy.optimize import minimize
 def _generate_adjacent_pairs(
     elements: list[str],
 ) -> list[tuple[str, str]]:
-    """Generate a list of tuples, where each tuple is a pair of adjacent atom
-    labels.
+    """Generate a list of tuples, where each tuple is a pair of adjacent
+    atom labels.
 
     Examples
     --------
@@ -18,15 +18,13 @@ def _generate_adjacent_pairs(
     >>> )_generate_adjacent_pairs(["U", "Rh", "In"])
     [("U", "Rh"), ("Rh", "In")]
     """
-    element_pairs = [
-        (elements[i], elements[i + 1]) for i in range(len(elements) - 1)
-    ]
+    element_pairs = [(elements[i], elements[i + 1]) for i in range(len(elements) - 1)]
     return element_pairs
 
 
 def _objective(params, original_radii: list[float]) -> list[float]:
-    """Calculate the objective function value, which is the sum of squared
-    percent differences between original and refined radii."""
+    """Calculate the objective function value, which is the sum of
+    squared percent differences between original and refined radii."""
     return np.sum(((original_radii - params) / original_radii) ** 2)
 
 
@@ -42,9 +40,9 @@ def get_refined_CIF_radius(
     shortest_distances: dict[tuple[str, str], float],
     elements_ordered=True,
 ) -> dict[str, float]:
-    """
-    Optimize CIF radii for a set of elements given (1) their adjacent pairwise
-    distance constraints (2) size order of the original CIF radii.
+    """Optimize CIF radii for a set of elements given (1) their adjacent
+    pairwise distance constraints (2) size order of the original CIF
+    radii.
 
     Parameters
     ----------
@@ -67,9 +65,7 @@ def get_refined_CIF_radius(
     if elements_ordered:
         elements = sorted(elements)
     radius_data = radius.data()
-    original_radii = np.array(
-        [radius_data[element]["CIF"] for element in elements]
-    )
+    original_radii = np.array([radius_data[element]["CIF"] for element in elements])
     original_radii_dict = {elem: radius_data[elem]["CIF"] for elem in elements}
     index_map = {element: idx for idx, element in enumerate(elements)}
     element_pairs = _generate_adjacent_pairs(elements)
@@ -80,12 +76,8 @@ def get_refined_CIF_radius(
     for pair in element_pairs:
         print("Setting constraint for", pair)
         # Get the shortest distance for the pair, considering both orders
-        dist = shortest_distances.get(pair) or shortest_distances.get(
-            (pair[1], pair[0])
-        )
-        print(
-            f"Setting constraint for {pair[0]}-{pair[1]} with distance {dist}"
-        )
+        dist = shortest_distances.get(pair) or shortest_distances.get((pair[1], pair[0]))
+        print(f"Setting constraint for {pair[0]}-{pair[1]} with distance {dist}")
         i, j = elements.index(pair[0]), elements.index(pair[1])
         constraints.append(
             {
@@ -110,12 +102,9 @@ def get_refined_CIF_radius(
 
     for e1, e2 in zip(ordered_by_size, ordered_by_size[1:]):
         i, j = index_map[e1], index_map[e2]
-        constraints.append(
-            {"type": "ineq", "fun": _make_inequality(i, j, epsilon)}
-        )
-        
+        constraints.append({"type": "ineq", "fun": _make_inequality(i, j, epsilon)})
     # Note, it appears that after the default iteration of 100 times, the
-    # optmization does not converge but the results are still reasonable
+    # optimization does not converge but the results are still reasonable
     # with the low objective function value.
     result = minimize(
         _objective,
@@ -132,4 +121,4 @@ def get_refined_CIF_radius(
     #     print("Objective function value:", result.fun)
     # else:
     #     print("CIF radius optimization failed:", result.message)
-    return dict(zip(elements, result.x)), result.fun
+    return dict(zip(elements, result.x)), float(result.fun)

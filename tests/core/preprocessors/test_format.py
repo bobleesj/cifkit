@@ -156,15 +156,9 @@ def test_preprocess_cif_file_on_label_element_type_mixed():
             assert len(lines) == 13
             assert lines[0].strip() == "Er7 Er 16 h 0.06284 0.06662 0.39495 1"
             assert lines[9].strip() == "Er13A Er 4 c 0.75 0.25 0.14542 0.83(2)"
-            assert (
-                lines[10].strip() == "In13B In 4 c 0.75 0.25 0.14542 0.17(2)"
-            )
-            assert (
-                lines[11].strip() == "In13A In 4 c 0.75 0.25 0.59339 0.93(3)"
-            )
-            assert (
-                lines[12].strip() == "Co13B Co 4 c 0.75 0.25 0.59339 0.07(3)"
-            )
+            assert lines[10].strip() == "In13B In 4 c 0.75 0.25 0.14542 0.17(2)"
+            assert lines[11].strip() == "In13A In 4 c 0.75 0.25 0.59339 0.93(3)"
+            assert lines[12].strip() == "Co13B Co 4 c 0.75 0.25 0.59339 0.07(3)"
 
         # Type 9
         if filename == "1200981.cif":

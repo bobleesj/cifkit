@@ -4,8 +4,8 @@ from cifkit.data.mendeleeve_handler import get_mendeleev_nums_from_pair_tuple
 
 
 def get_bond_pairs(labels: list[str]) -> set[tuple[str, str]]:
-    """Generate all possible unique pairs, each tuple sorted alphabetically,
-    including pairs with identical elements."""
+    """Generate all possible unique pairs, each tuple sorted
+    alphabetically, including pairs with identical elements."""
     # Generate all combinations of two labels (this time including identical pairs)
     possible_pairs = product(labels, repeat=2)
     sorted_pairs = [tuple(sorted((a, b))) for a, b in possible_pairs]

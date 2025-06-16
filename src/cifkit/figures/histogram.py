@@ -131,9 +131,7 @@ def plot_histogram(attribute, stats, dir_path, display, output_dir):
                 "key_data_type": "string",
             },
         }
-    generate_histogram(
-        histogram["data"], histogram["settings"], display, output_dir
-    )
+    generate_histogram(histogram["data"], histogram["settings"], display, output_dir)
 
     # Make a default folder if the output folder is not provided
 
@@ -146,9 +144,7 @@ def generate_histogram(data, settings, display, output_dir: str) -> None:
 
     if settings.get("key_data_type") == "float":
         # If keys are supposed to be numeric but are strings, convert them
-        data = {
-            float(key): data[key] for key in sorted(data.keys(), key=float)
-        }
+        data = {float(key): data[key] for key in sorted(data.keys(), key=float)}
     if settings.get("key_data_type") == "int":
         data = {int(key): data[key] for key in sorted(data.keys(), key=int)}
 

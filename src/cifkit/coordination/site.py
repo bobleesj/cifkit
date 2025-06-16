@@ -4,8 +4,8 @@ from cifkit.utils import sort, string_parser
 def get_min_distance_pair(
     connections: dict,
 ) -> tuple[tuple[str, str], float]:
-    """Return an alphabetically sorted element pair with the global minimum
-    distance in the entire supercell."""
+    """Return an alphabetically sorted element pair with the global
+    minimum distance in the entire supercell."""
     sorted_tuples = get_min_distance_pair_per_site_label(connections)
     min_dist_tuple = sorted_tuples[0]
     return min_dist_tuple

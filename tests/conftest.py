@@ -19,9 +19,7 @@ def Dy2Co17_cif() -> Cif:
 
 @pytest.fixture
 def Tb4RhInGe4_cif() -> Cif:
-    cif = Cif(
-        "tests/data/cif/radius/quaternary/Tb4RhInGe4.cif", supercell_size=2
-    )
+    cif = Cif("tests/data/cif/radius/quaternary/Tb4RhInGe4.cif", supercell_size=2)
     return cif
 
 
@@ -277,9 +275,7 @@ def max_gaps_per_label_URhIn():
 
 
 @pytest.fixture(scope="module")
-def CN_connections_by_min_dist_URhIn(
-    max_gaps_per_label_URhIn, connections_URhIn
-):
+def CN_connections_by_min_dist_URhIn(max_gaps_per_label_URhIn, connections_URhIn):
     return filter.get_CN_connections_by_min_dist_method(
         max_gaps_per_label_URhIn, connections_URhIn
     )

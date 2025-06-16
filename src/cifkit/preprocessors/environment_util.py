@@ -6,8 +6,8 @@ from cifkit.utils.string_parser import get_atom_type_from_label
 def flat_site_connections(
     site_connections: dict,
 ) -> list[tuple[tuple[str, str], float]]:
-    """Transform site connections into a sorted list of tuples, each containing
-    a pair of alphabetically distance."""
+    """Transform site connections into a sorted list of tuples, each
+    containing a pair of alphabetically distance."""
     flattened_points = []
     for site_label, connections in site_connections.items():
         for connection in connections:
@@ -34,7 +34,8 @@ def calculate_normalized_distances(connections):
 
 
 def calculate_normalized_dist_diffs(normalized_distances):
-    """Calculate differences between consecutive normalized distances."""
+    """Calculate differences between consecutive normalized
+    distances."""
     normalized_dist_diffs = [
         normalized_distances[k + 1] - normalized_distances[k]
         for k in range(len(normalized_distances) - 1)

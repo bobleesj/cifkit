@@ -1,7 +1,4 @@
-from cifkit.preprocessors.supercell_util import (
-    _shift_xyz_plus_minus,
-    get_cell_atom_count,
-)
+from cifkit.preprocessors.supercell_util import _shift_xyz_plus_minus, get_cell_atom_count
 
 
 def test_get_cell_atom_count_no_shift(unitcell_points_URhIn):

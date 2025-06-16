@@ -47,9 +47,7 @@ def test_get_loop_tags():
         "_atom_site_occupancy",
     ]
 
-    assert (
-        get_loop_tags() == expected_tags
-    ), CifParserError.INVALID_LOOP_TAGS.value
+    assert get_loop_tags() == expected_tags, CifParserError.INVALID_LOOP_TAGS.value
 
 
 def test_get_loop_values(cif_block_URhIn):
@@ -109,16 +107,12 @@ def test_get_atom_labels(loop_values_URhIn):
 
 
 def test_get_label_occupancy_coordinates(loop_values_URhIn):
-    label, occupacny, coordinates = get_label_occupancy_coordinates(
-        loop_values_URhIn, 0
-    )
+    label, occupacny, coordinates = get_label_occupancy_coordinates(loop_values_URhIn, 0)
     assert label == "In1"
     assert occupacny == 1.0
     assert coordinates == (0.2505, 0.0, 0.5)
 
-    label, occupacny, coordinates = get_label_occupancy_coordinates(
-        loop_values_URhIn, 1
-    )
+    label, occupacny, coordinates = get_label_occupancy_coordinates(loop_values_URhIn, 1)
     assert label == "U1"
     assert occupacny == 1.0
     assert coordinates == (0.5925, 0.0, 0.0)
@@ -149,9 +143,7 @@ def test_get_start_end_line_indexes():
 
 
 def test_get_line_content_from_tag(file_path_URhIn):
-    content_lines = get_line_content_from_tag(
-        file_path_URhIn, "_atom_site_occupancy"
-    )
+    content_lines = get_line_content_from_tag(file_path_URhIn, "_atom_site_occupancy")
 
     assert len(content_lines) == 4
     assert content_lines[0].strip() == "In1 In 3 g 0.2505 0 0.5 1"
@@ -305,19 +297,12 @@ def test_get_parsed_atom_site_occupancy_info_with_braket():
 def test_check_unique_atom_site_labels(file_path_URhIn):
     check_unique_atom_site_labels(file_path_URhIn)
 
-    duplicate_labels_file_path = (
-        "tests/data/cif/bad_cif_format/duplicate_labels.cif"
-    )
+    duplicate_labels_file_path = "tests/data/cif/bad_cif_format/duplicate_labels.cif"
     with pytest.raises(ValueError) as e:
         check_unique_atom_site_labels(duplicate_labels_file_path)
     assert str(e.value) == "The file contains duplicate atom site labels."
 
-    unparsable_file_path = (
-        "tests/data/cif/bad_cif_format/label_element_different.cif"
-    )
+    unparsable_file_path = "tests/data/cif/bad_cif_format/label_element_different.cif"
     with pytest.raises(ValueError) as e:
         check_unique_atom_site_labels(unparsable_file_path)
-    assert (
-        str(e.value)
-        == "The element was not correctly parsed from the site label."
-    )
+    assert str(e.value) == "The element was not correctly parsed from the site label."

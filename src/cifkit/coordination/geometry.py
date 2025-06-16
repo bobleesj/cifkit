@@ -45,9 +45,7 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
     number_of_vertices = len(neighbor_atoms_coord)
     # More advanced polyhedron info
     face_centers = np.mean(neighbor_atoms_coord[hull.simplices], axis=1)
-    distances_to_faces = np.linalg.norm(
-        face_centers - central_atom_coord, axis=1
-    )
+    distances_to_faces = np.linalg.norm(face_centers - central_atom_coord, axis=1)
     shortest_distance_to_face = np.min(distances_to_faces)
     edge_centers = np.array(
         [
@@ -55,9 +53,7 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
             for edge in edges
         ]
     )
-    distances_to_edges = np.linalg.norm(
-        edge_centers - central_atom_coord, axis=1
-    )
+    distances_to_edges = np.linalg.norm(edge_centers - central_atom_coord, axis=1)
     shortest_distance_to_edge = np.min(distances_to_edges)
     radius_of_inscribed_sphere = shortest_distance_to_face
     volume_of_inscribed_sphere = 4 / 3 * np.pi * radius_of_inscribed_sphere**3
@@ -84,11 +80,9 @@ def compute_polyhedron_metrics(polyhedron_points, hull):
     return round_dict_values(data)
 
 
-def _compute_center_of_mass_and_distance(
-    neighbor_atoms_coord, central_atom_coord
-):
-    """Calculate the center of mass of a polyhedron and the distance from the
-    center of mass to a given point."""
+def _compute_center_of_mass_and_distance(neighbor_atoms_coord, central_atom_coord):
+    """Calculate the center of mass of a polyhedron and the distance
+    from the center of mass to a given point."""
     center_of_mass = np.mean(neighbor_atoms_coord, axis=0)
     vector_to_center_of_mass = center_of_mass - central_atom_coord
     distance_to_center = np.linalg.norm(vector_to_center_of_mass)

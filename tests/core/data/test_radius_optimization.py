@@ -82,6 +82,7 @@ def test_ternary_refined_radius_parametrized(shortest_bond_pair_distance):
     assert diff == {}
     assert obj_value == pytest.approx(0.013553279301314749, abs=1e-3)
 
+
 def test_quaternary_refined_radius_parametrized(Tb4RhInGe4_cif):
     assert Tb4RhInGe4_cif.shortest_bond_pair_distance == {
         ("Ge", "Rh"): 2.47,
