@@ -98,10 +98,10 @@ class Cif:
             Path to the .cif file.
         is_formatted : bool, default
             If False, preprocess the .cif file to ensure compatibility with the
-            gemmi library./
+            gemmi library.
         logging_enabled : bool, default False
             Enables detailed logging during initialization and for distance
-            calculations. Default is False.
+            calculations.
         supercell_size : int, default 3
             Size of the supercell to be generated. Default is 3.
             Method 1 - No shifts
