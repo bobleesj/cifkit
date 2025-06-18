@@ -88,6 +88,7 @@ class Cif:
         is_formatted=False,
         logging_enabled=False,
         supercell_size=3,
+        compute_CN=False,
     ) -> None:
         """Initialize an object from a .cif file.
 
@@ -95,19 +96,19 @@ class Cif:
         ----------
         file_path : str
             Path to the .cif file.
-        is_formatted : bool, optional
+        is_formatted : bool, default
             If False, preprocess the .cif file to ensure compatibility with the
-            gemmi library. Default is False.
-        logging_enabled : bool, optional
+            gemmi library./
+        logging_enabled : bool, default False
             Enables detailed logging during initialization and for distance
             calculations. Default is False.
-        compute_CN : bool=True
-            If True, computes coordination numbers (CN) and related metrics.
-        supercell_size : int, optional
+        supercell_size : int, default 3
             Size of the supercell to be generated. Default is 3.
             Method 1 - No shifts
             Method 2 - ±1 shifts  (3x3x3 of the unit cell)
             Method 3 - ±2 shifts (5×5×5 of the unit cell)
+        compute_CN : bool, default False
+            Option to compute CN related metrics for each Cif object.
 
         Attributes
         ----------
@@ -189,7 +190,6 @@ class Cif:
 
         self.file_path = file_path
         self.logging_enabled = logging_enabled
-
         # Initialize the Cif object with the file path.
         self.file_name = os.path.basename(file_path)
         self.file_name_without_ext = os.path.splitext(self.file_name)[0]
@@ -201,6 +201,8 @@ class Cif:
         if not is_formatted:
             self._preprocess()
         self._load_data(supercell_size)
+        if compute_CN:
+            self.compute_CN()
 
     def _log_info(self, message):
         """Log a formatted message if logging is enabled."""
@@ -329,6 +331,7 @@ class Cif:
         """
 
         # CN max gap per site
+        print("We are computing CN")
         self._CN_max_gap_per_site = compute_CN_max_gap_per_site(
             self.radius_sum,
             self.connections,

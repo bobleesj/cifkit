@@ -543,7 +543,23 @@ def test_plot_polyhedron_with_output_folder_given(cif_URhIn):
 
 
 """
-Test error during init
+Test init
+"""
+
+
+def test_init_cif_with_CN_computed():
+    file_path = "tests/data/cif/URhIn.cif"
+    cif = Cif(file_path, compute_CN=True, supercell_size=2)
+    assert cif.CN_bond_count_by_best_methods == {
+        "In1": {("In", "Rh"): 4, ("In", "U"): 6, ("In", "In"): 4},
+        "U1": {("Rh", "U"): 5, ("In", "U"): 6, ("U", "U"): 6},
+        "Rh1": {("In", "Rh"): 3, ("Rh", "U"): 6},
+        "Rh2": {("In", "Rh"): 6, ("Rh", "U"): 3},
+    }
+
+
+"""
+Test init error
 """
 
 

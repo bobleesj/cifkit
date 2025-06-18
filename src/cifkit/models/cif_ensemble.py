@@ -17,6 +17,7 @@ class CifEnsemble:
         preprocess=True,
         logging_enabled=False,
         supercell_size=3,
+        compute_CN=False,
     ) -> None:
         """Initialize a CifEnsemble object, containing a collection of
         Cif objects.
@@ -38,6 +39,8 @@ class CifEnsemble:
             format requiring manual modifications. It also relocates any ill-formatted
             files, such as those with duplicate labels in atom_site_label, missing
             fractional coordinates, or files requiring supercell generation.
+        compute_CN : bool, default False
+            Option to compute coordination numbers for each Cif object.
 
         logging_enabled : bool, optional
             Option to log while pre-processing Cif objects, by default False
@@ -74,18 +77,19 @@ class CifEnsemble:
         print(f"Initializing {self.file_count} Cif objects...")
 
         if logging_enabled:
-            self.cifs: list[Cif] = [
+            self.cifs = [
                 Cif(
                     file_path,
                     is_formatted=True,
                     logging_enabled=True,
                     supercell_size=supercell_size,
+                    compute_CN=compute_CN,
                 )
                 for file_path in self.file_paths
             ]
         else:
-            self.cifs: list[Cif] = [
-                Cif(file_path, is_formatted=True, supercell_size=supercell_size)
+            self.cifs = [
+                Cif(file_path, is_formatted=True, supercell_size=supercell_size, compute_CN=compute_CN)
                 for file_path in self.file_paths
             ]
         print("Finished initialization!")
