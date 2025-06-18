@@ -17,7 +17,7 @@ def find_best_polyhedron(max_gaps_per_label, connections):
 
         for method, CN_data in CN_data_per_method.items():
             # Take only the top-N connections as determined by CN
-            connection_data = connections[label][:CN_data['CN']]
+            connection_data = connections[label][: CN_data["CN"]]
             if len(connection_data) < 4:
                 continue
 
@@ -27,7 +27,7 @@ def find_best_polyhedron(max_gaps_per_label, connections):
 
             # Compute hull on neighbor points only
             try:
-                hull = ConvexHull(neighbor_points, qhull_options='QJ')
+                hull = ConvexHull(neighbor_points, qhull_options="QJ")
             except Exception:
                 print(
                     f"Error in polyhedron calculation for"
@@ -43,14 +43,14 @@ def find_best_polyhedron(max_gaps_per_label, connections):
             if metrics is None:
                 continue
 
-            dist = metrics['distance_from_avg_point_to_center']
+            dist = metrics["distance_from_avg_point_to_center"]
             if dist < min_distance_to_center:
                 min_distance_to_center = dist
                 best_polyhedron_metrics = metrics
                 best_method_used = method
 
         if best_polyhedron_metrics:
-            best_polyhedron_metrics['method_used'] = best_method_used
+            best_polyhedron_metrics["method_used"] = best_method_used
             best_polyhedrons[label] = best_polyhedron_metrics
 
     return best_polyhedrons
