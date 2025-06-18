@@ -89,7 +89,12 @@ class CifEnsemble:
             ]
         else:
             self.cifs = [
-                Cif(file_path, is_formatted=True, supercell_size=supercell_size, compute_CN=compute_CN)
+                Cif(
+                    file_path,
+                    is_formatted=True,
+                    supercell_size=supercell_size,
+                    compute_CN=compute_CN,
+                )
                 for file_path in self.file_paths
             ]
         print("Finished initialization!")
