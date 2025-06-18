@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* Fixed error in polyhedron volume caclulation for CN=5 and other polyhedrons with central atom on the same plane with equatorial atoms.
+* Fix error in polyhedron volume calculation for CN=5 and other polyhedrons with central atom on the same plane with equatorial atoms.
 
 **Security:**
 
