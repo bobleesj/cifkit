@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* polyhedron analysis upgrade: amount of supported polyhedrons shapes is increased
+* Fixed error in polyhedron volume caclulation for CN=5 and other polyhedrons with central atom on the same plane with equatorial atoms.
 
 **Security:**
 
