@@ -15,51 +15,44 @@ def find_best_polyhedron(max_gaps_per_label, connections):
         best_polyhedron_metrics = None
         best_method_used = None
 
-        # Loop through each method
         for method, CN_data in CN_data_per_method.items():
+            # Take only the top-N connections as determined by CN
             connection_data = connections[label][: CN_data["CN"]]
-            polyhedron_points = []
-
-            # Only if there are 4 or more points in the polyhedron
-            if len(connection_data) > 3:
-                for connection in connection_data:
-                    polyhedron_points.append(connection[3])
-            else:
+            if len(connection_data) < 4:
                 continue
 
-            # Add the central atom as the last element
-            polyhedron_points.append(connection_data[0][2])
+            # Extract neighbor coords and central atom
+            neighbor_points = [c[3] for c in connection_data]
+            central_point = connection_data[0][2]
 
-            # Try to make a polyhedron
+            # Compute hull on neighbor points only
             try:
-                hull = ConvexHull(polyhedron_points, qhull_options="QJ")
+                hull = ConvexHull(neighbor_points, qhull_options="QJ")
             except Exception:
                 print(
                     f"Error in polyhedron calculation for"
                     f"{label} using {method} - Skip"
                 )
-                continue  # Move to the next method
-            # Returns non if there is any error
-            polyhedron_metrics = compute_polyhedron_metrics(polyhedron_points, hull)
-            # If there is no metrics, then skip the method
-            if polyhedron_metrics is None:
                 continue
 
-            if (
-                polyhedron_metrics["distance_from_avg_point_to_center"]
-                < min_distance_to_center
-            ):
-                min_distance_to_center = polyhedron_metrics[
-                    "distance_from_avg_point_to_center"
-                ]
-                best_polyhedron_metrics = polyhedron_metrics
+            # Prepare full point set for metrics (neighbors + central)
+            points_for_metrics = neighbor_points + [central_point]
+
+            # Compute metrics
+            metrics = compute_polyhedron_metrics(points_for_metrics, hull)
+            if metrics is None:
+                continue
+
+            dist = metrics["distance_from_avg_point_to_center"]
+            if dist < min_distance_to_center:
+                min_distance_to_center = dist
+                best_polyhedron_metrics = metrics
                 best_method_used = method
 
         if best_polyhedron_metrics:
-            best_polyhedron_metrics["method_used"] = (
-                best_method_used  # Add method information to the metrics
-            )
+            best_polyhedron_metrics["method_used"] = best_method_used
             best_polyhedrons[label] = best_polyhedron_metrics
+
     return best_polyhedrons
 
 
