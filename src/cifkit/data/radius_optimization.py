@@ -39,6 +39,7 @@ def get_refined_CIF_radius(
     elements: list[str],
     shortest_distances: dict[tuple[str, str], float],
     elements_ordered=True,
+    use_size_constraint=True,
 ) -> dict[str, float]:
     """Optimize CIF radii for a set of elements given (1) their adjacent
     pairwise distance constraints (2) size order of the original CIF
@@ -51,9 +52,14 @@ def get_refined_CIF_radius(
     shortest_distances : dict[tuple[str, str], float]
         Dictionary of shortest pairwise distances between element pairs.
         Keys should be tuples of two element symbols (e.g., ('Fe', 'Ge')).
-    elements_ordered : bool=True
-        If True (default), the elements will be sorted before processing.
-        This affects how adjacency is defined when generating element pairs.
+    elements_ordered : bool, default True
+        The elements will be sorted before processing.
+        This affects how adjacency interatomic bond pairs is defined
+        when generating element pairs.
+    use_size_constraint : bool, default True
+        Use the radius size order constraint. If True, the optimization
+        will ensure that the refined radii maintain the original size order
+        of the CIF radii. If False, this constraint is not applied.
 
     Returns
     -------
@@ -100,9 +106,10 @@ def get_refined_CIF_radius(
     def _make_inequality(i, j, epsilon=1e-4):
         return lambda x: x[i] - x[j] - epsilon
 
-    for e1, e2 in zip(ordered_by_size, ordered_by_size[1:]):
-        i, j = index_map[e1], index_map[e2]
-        constraints.append({"type": "ineq", "fun": _make_inequality(i, j, epsilon)})
+    if use_size_constraint:
+        for e1, e2 in zip(ordered_by_size, ordered_by_size[1:]):
+            i, j = index_map[e1], index_map[e2]
+            constraints.append({"type": "ineq", "fun": _make_inequality(i, j, epsilon)})
     # Note, it appears that after the default iteration of 100 times, the
     # optimization does not converge but the results are still reasonable
     # with the low objective function value.
