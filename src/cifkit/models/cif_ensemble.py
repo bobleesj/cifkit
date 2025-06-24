@@ -39,24 +39,23 @@ class CifEnsemble:
             format requiring manual modifications. It also relocates any ill-formatted
             files, such as those with duplicate labels in atom_site_label, missing
             fractional coordinates, or files requiring supercell generation.
-        compute_CN : bool, default False
+        compute_CN : bool, optional
             Option to compute coordination numbers for each Cif object.
-
         logging_enabled : bool, optional
             Option to log while pre-processing Cif objects, by default False
 
         Attributes
         ----------
         dir_path: str
-            Path to the folder containing .cif files
+            The path to the folder containing .cif files
         file_paths: list[str]
-            List of file paths to .cif files
+            The pist of file paths to .cif files
         cifs: list[Cif]
-            List of Cif objects
+            The list of Cif objects
         file_count: int
-            Number of .cif files in the folder
+            The number of .cif files in the folder
         logging_enabled: bool
-            Option to log while pre-processing Cif objects
+            The option to log while pre-processing Cif objects
         """
 
         # Process each file, handling exceptions that may occur
