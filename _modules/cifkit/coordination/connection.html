@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -85,11 +82,9 @@
   <h1>Source code for cifkit.coordination.connection</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="get_CN_connections_by_best_methods">
 <a class="viewcode-back" href="../../../api/cifkit.coordination.connection.html#cifkit.coordination.connection.get_CN_connections_by_best_methods">[docs]</a>
-<span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_CN_connections_by_best_methods</span><span class="p">(</span>
-    <span class="n">best_methods</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="nb">dict</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve connections limited by the number of vertices (CN) for each</span>
-<span class="sd">    label.&quot;&quot;&quot;</span>
+<span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_CN_connections_by_best_methods</span><span class="p">(</span><span class="n">best_methods</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve connections limited by the number of vertices (CN) for</span>
+<span class="sd">    each label.&quot;&quot;&quot;</span>
     <span class="n">CN_connections</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">best_methods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>

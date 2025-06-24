@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -91,13 +88,11 @@
 <div class="viewcode-block" id="get_bond_pairs">
 <a class="viewcode-back" href="../../../api/cifkit.utils.bond_pair.html#cifkit.utils.bond_pair.get_bond_pairs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_bond_pairs</span><span class="p">(</span><span class="n">labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate all possible unique pairs, each tuple sorted alphabetically,</span>
-<span class="sd">    including pairs with identical elements.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate all possible unique pairs, each tuple sorted</span>
+<span class="sd">    alphabetically, including pairs with identical elements.&quot;&quot;&quot;</span>
     <span class="c1"># Generate all combinations of two labels (this time including identical pairs)</span>
     <span class="n">possible_pairs</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
     <span class="n">sorted_pairs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)))</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">possible_pairs</span><span class="p">]</span>
-
     <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">sorted_pairs</span><span class="p">)</span></div>
 
 
@@ -109,7 +104,6 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate all unique pairs, each tuple sorted by the Mendeleeve</span>
 <span class="sd">    number.&quot;&quot;&quot;</span>
-
     <span class="n">pairs</span> <span class="o">=</span> <span class="n">get_bond_pairs</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
     <span class="n">sorted_pairs</span> <span class="o">=</span> <span class="p">{</span><span class="n">order_tuple_pair_by_mendeleev</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">sorted_pairs</span></div>
@@ -122,20 +116,17 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Order a pair of elements based on Mendeleev numbers.&quot;&quot;&quot;</span>
     <span class="n">first_label</span> <span class="o">=</span> <span class="n">label_pair_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">second_label</span> <span class="o">=</span> <span class="n">label_pair_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
     <span class="p">(</span>
-        <span class="n">first_mendeleev_num</span><span class="p">,</span>
-        <span class="n">second_mendeleev_num</span><span class="p">,</span>
+        <span class="n">first_mend_num</span><span class="p">,</span>
+        <span class="n">second_mend_num</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">=</span> <span class="n">get_mendeleev_nums_from_pair_tuple</span><span class="p">(</span><span class="n">label_pair_tuple</span><span class="p">)</span>
 
     <span class="c1"># If first element num is smaller</span>
-    <span class="k">if</span> <span class="n">first_mendeleev_num</span> <span class="o">&gt;</span> <span class="n">second_mendeleev_num</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">first_mend_num</span> <span class="o">&gt;</span> <span class="n">second_mend_num</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">second_label</span><span class="p">,</span> <span class="n">first_label</span><span class="p">)</span>
-
     <span class="c1"># If first and second, same number, sort alphabetically</span>
-    <span class="k">elif</span> <span class="n">first_mendeleev_num</span> <span class="o">==</span> <span class="n">second_mendeleev_num</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">first_mend_num</span> <span class="o">==</span> <span class="n">second_mend_num</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">label_pair_tuple</span><span class="p">))</span>
-
     <span class="c1"># If it in correct order, return as it is</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">label_pair_tuple</span></div>

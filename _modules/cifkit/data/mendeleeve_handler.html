@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -83,7 +80,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for cifkit.data.mendeleeve_handler</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.data.mendeleev</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_mendeleev_numbers</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bobleesj.utils.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">mendeleev</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">string_parser</span>
 
 
@@ -98,16 +96,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Parse the first and second elements</span>
     <span class="n">first_element</span> <span class="o">=</span> <span class="n">string_parser</span><span class="o">.</span><span class="n">get_atom_type_from_label</span><span class="p">(</span><span class="n">label_pair_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">second_element</span> <span class="o">=</span> <span class="n">string_parser</span><span class="o">.</span><span class="n">get_atom_type_from_label</span><span class="p">(</span>
-        <span class="n">label_pair_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="p">)</span>
-    <span class="n">mendeleev_numbers</span> <span class="o">=</span> <span class="n">get_mendeleev_numbers</span><span class="p">()</span>
+    <span class="n">second_element</span> <span class="o">=</span> <span class="n">string_parser</span><span class="o">.</span><span class="n">get_atom_type_from_label</span><span class="p">(</span><span class="n">label_pair_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">mendeleev_numbers</span> <span class="o">=</span> <span class="n">mendeleev</span><span class="o">.</span><span class="n">numbers</span>
     <span class="c1"># Get Mendeleev number for the first element, default to 0 if not found</span>
     <span class="n">first_mendeleev_num</span> <span class="o">=</span> <span class="n">mendeleev_numbers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">first_element</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
     <span class="c1"># Get Mendeleev number for the second element, default to 0 if not found</span>
     <span class="n">second_mendeleev_num</span> <span class="o">=</span> <span class="n">mendeleev_numbers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">second_element</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">first_mendeleev_num</span><span class="p">,</span> <span class="n">second_mendeleev_num</span></div>
 
 </pre></div>

@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -87,6 +84,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">gemmi.cif</span><span class="w"> </span><span class="kn">import</span> <span class="n">Block</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors</span><span class="w"> </span><span class="kn">import</span> <span class="n">supercell_util</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">cif_parser</span>
 
 
@@ -94,7 +92,7 @@
 <a class="viewcode-back" href="../../../api/cifkit.preprocessors.supercell.html#cifkit.preprocessors.supercell.get_supercell_points">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_supercell_points</span><span class="p">(</span>
     <span class="n">block</span><span class="p">,</span>
-    <span class="n">supercell_generation_method</span><span class="p">,</span>
+    <span class="n">supercell_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return supercell points.&quot;&quot;&quot;</span>
     <span class="n">supercell_points</span> <span class="o">=</span> <span class="p">[]</span>
@@ -110,7 +108,7 @@
             <span class="n">shift_and_append_points</span><span class="p">(</span>
                 <span class="n">points</span><span class="p">,</span>
                 <span class="n">atom_site_label</span><span class="p">,</span>
-                <span class="n">supercell_generation_method</span><span class="p">,</span>
+                <span class="n">supercell_size</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -123,8 +121,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">get_unitcell_coords_for_all_labels</span><span class="p">(</span>
     <span class="n">block</span><span class="p">:</span> <span class="n">Block</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the new coordinates after applying symmetry operations to the</span>
-<span class="sd">    initial coordinates.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the new coordinates after applying symmetry operations to</span>
+<span class="sd">    the initial coordinates.&quot;&quot;&quot;</span>
 
     <span class="n">loop_values</span> <span class="o">=</span> <span class="n">cif_parser</span><span class="o">.</span><span class="n">get_loop_values</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
     <span class="n">loop_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">loop_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -221,15 +219,16 @@
     <span class="n">atom_site_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">supercell_generation_method</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shift and duplicate points to create a supercell.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shift the unit cell&#39;s array of coordinates in the crystal frame</span>
+<span class="sd">    to form the array containing the coordinates of the supercell.</span>
 
-    <span class="c1"># Method 1 - No sfhits</span>
-    <span class="c1"># Method 2 - +1 +1 +1 shifts</span>
-    <span class="c1"># Method 3 - +-1 +-1 +-1 shifts</span>
-
+<span class="sd">    # Method 1 - No sfhits</span>
+<span class="sd">    # Method 2 - +-1 +-1 +-1 shifts (This rarely used)</span>
+<span class="sd">    # Method 3 - +-2 +-2 +-2 shifts (5*5*5 of the unit cell)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">supercell_generation_method</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-        <span class="n">shifted_points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">shifts</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">shifted_points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">shifts</span>
         <span class="n">all_points</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">point_group</span> <span class="ow">in</span> <span class="n">shifted_points</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">point_group</span><span class="p">:</span>
@@ -238,67 +237,25 @@
         <span class="k">return</span> <span class="n">all_points</span>
 
     <span class="k">if</span> <span class="n">supercell_generation_method</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
-        <span class="n">shifted_points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">shifts</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">shift_array</span> <span class="o">=</span> <span class="n">supercell_util</span><span class="o">.</span><span class="n">_shift_xyz_plus_minus</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">shift_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shift_array</span><span class="p">)</span>
+        <span class="n">shifted_points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">shift_array</span>
         <span class="n">all_points</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">point_group</span> <span class="ow">in</span> <span class="n">shifted_points</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">point_group</span><span class="p">:</span>
                 <span class="n">new_point</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">atom_site_label</span><span class="p">)</span>
                 <span class="n">all_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_point</span><span class="p">)</span>
-
         <span class="k">return</span> <span class="n">all_points</span>
 
     <span class="k">if</span> <span class="n">supercell_generation_method</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
-
-        <span class="n">shifted_points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">shifts</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">shift_array</span> <span class="o">=</span> <span class="n">supercell_util</span><span class="o">.</span><span class="n">_shift_xyz_plus_minus</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">shift_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shift_array</span><span class="p">)</span>
+        <span class="n">shifted_points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">shift_array</span>
         <span class="n">all_points</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">point_group</span> <span class="ow">in</span> <span class="n">shifted_points</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">point_group</span><span class="p">:</span>
                 <span class="n">new_point</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">atom_site_label</span><span class="p">)</span>
                 <span class="n">all_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_point</span><span class="p">)</span>
-
         <span class="k">return</span> <span class="n">all_points</span></div>
 
 </pre></div>

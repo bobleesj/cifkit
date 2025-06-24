@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -159,9 +156,7 @@
                 <span class="p">)</span>
 
             <span class="c1"># Compute normalized distances</span>
-            <span class="n">norm_dist_by_min_dist</span> <span class="o">=</span> <span class="n">compute_normalized_value</span><span class="p">(</span>
-                <span class="n">pair_dist</span><span class="p">,</span> <span class="n">shortest_dist</span>
-            <span class="p">)</span>
+            <span class="n">norm_dist_by_min_dist</span> <span class="o">=</span> <span class="n">compute_normalized_value</span><span class="p">(</span><span class="n">pair_dist</span><span class="p">,</span> <span class="n">shortest_dist</span><span class="p">)</span>
             <span class="c1"># Store distances</span>
             <span class="k">if</span> <span class="n">use_all_methods</span><span class="p">:</span>
                 <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span>
@@ -184,13 +179,8 @@
                         <span class="nb">abs</span><span class="p">(</span><span class="n">norm_distance</span> <span class="o">-</span> <span class="n">previous_values</span><span class="p">[</span><span class="n">method</span><span class="p">]),</span>
                         <span class="mi">3</span><span class="p">,</span>
                     <span class="p">)</span>
-                    <span class="k">if</span> <span class="p">(</span>
-                        <span class="n">current_gap</span>
-                        <span class="o">&gt;</span> <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span><span class="s2">&quot;max_gap&quot;</span><span class="p">]</span>
-                    <span class="p">):</span>
-                        <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span>
-                            <span class="s2">&quot;max_gap&quot;</span>
-                        <span class="p">]</span> <span class="o">=</span> <span class="n">current_gap</span>
+                    <span class="k">if</span> <span class="n">current_gap</span> <span class="o">&gt;</span> <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span><span class="s2">&quot;max_gap&quot;</span><span class="p">]:</span>
+                        <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span><span class="s2">&quot;max_gap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_gap</span>
                         <span class="n">max_gaps_per_label</span><span class="p">[</span><span class="n">ref_label</span><span class="p">][</span><span class="n">method</span><span class="p">][</span><span class="s2">&quot;CN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
 
                 <span class="n">previous_values</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">norm_distance</span>
@@ -211,8 +201,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">get_rad_sum_value</span><span class="p">(</span>
     <span class="n">rad_sum_data</span><span class="p">,</span> <span class="n">method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ref_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">other_label</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the sum of radii value for a given pair of elements, ensuring the</span>
-<span class="sd">    pair is alphabetically sorted.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the sum of radii value for a given pair of elements,</span>
+<span class="sd">    ensuring the pair is alphabetically sorted.&quot;&quot;&quot;</span>
 
     <span class="c1"># Extract the element types from the labels</span>
     <span class="n">ref_element</span> <span class="o">=</span> <span class="n">get_atom_type_from_label</span><span class="p">(</span><span class="n">ref_label</span><span class="p">)</span>
@@ -226,9 +216,7 @@
     <span class="k">if</span> <span class="n">method_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rad_sum_data</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Method </span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2"> not found in rad_sum&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rad_sum_data</span><span class="p">[</span><span class="n">method_name</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> not found in method </span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2"> of rad_sum&quot;</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> not found in method </span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2"> of rad_sum&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">rad_sum_data</span><span class="p">[</span><span class="n">method_name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span></div>
 

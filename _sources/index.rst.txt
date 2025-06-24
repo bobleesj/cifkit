@@ -243,12 +243,6 @@ Other links
    :caption: REFERENCE
 
    Package API <api/cifkit>
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: OTHER
-
    release
    license
 

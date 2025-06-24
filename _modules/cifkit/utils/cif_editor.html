@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -96,17 +93,15 @@
 <div class="viewcode-block" id="remove_author_loop">
 <a class="viewcode-back" href="../../../api/cifkit.utils.cif_editor.html#cifkit.utils.cif_editor.remove_author_loop">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_author_loop</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove the author section from a .cif file to prevent parsing problems</span>
-<span class="sd">    caused by a wrongly formatted author block.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove the author section from a .cif file to prevent parsing</span>
+<span class="sd">    problems caused by a wrongly formatted author block.</span>
 
 <span class="sd">    This is a common issue in PCD files.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="p">(</span>
         <span class="n">start_index</span><span class="p">,</span>
         <span class="n">end_index</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">=</span> <span class="n">cif_parser</span><span class="o">.</span><span class="n">get_start_end_line_indexes</span><span class="p">(</span>
-        <span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;_publ_author_address&quot;</span>
-    <span class="p">)</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">cif_parser</span><span class="o">.</span><span class="n">get_start_end_line_indexes</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;_publ_author_address&quot;</span><span class="p">)</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">original_lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>

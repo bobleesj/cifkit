@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -86,96 +83,136 @@
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bobleesj.utils.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">radius</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.data.radius</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_radius_data</span>
 
-
-<div class="viewcode-block" id="generate_adjacent_pairs">
-<a class="viewcode-back" href="../../../api/cifkit.data.radius_optimization.html#cifkit.data.radius_optimization.generate_adjacent_pairs">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_adjacent_pairs</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_generate_adjacent_pairs</span><span class="p">(</span>
     <span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a list of tuples, where each tuple is a pair of adjacent atom</span>
-<span class="sd">    labels.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a list of tuples, where each tuple is a pair of adjacent</span>
+<span class="sd">    atom labels.</span>
 
-    <span class="c1"># Binary -&gt; [(&#39;In&#39;, &#39;Rh&#39;)]</span>
-    <span class="c1"># Ternary -&gt; [(&#39;In&#39;, &#39;Rh&#39;), (&#39;Rh&#39;, &#39;U&#39;)]</span>
-    <span class="n">label_to_pair</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">elements</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="p">]</span>
-    <span class="k">return</span> <span class="n">label_to_pair</span></div>
-
-
-
-<div class="viewcode-block" id="objective">
-<a class="viewcode-back" href="../../../api/cifkit.data.radius_optimization.html#cifkit.data.radius_optimization.objective">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">original_radii</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the objective function value,which is the sum of squared</span>
-<span class="sd">    percent differences between original and refined radii.&quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">original_radii</span> <span class="o">-</span> <span class="n">params</span><span class="p">)</span> <span class="o">/</span> <span class="n">original_radii</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; _generate_adjacent_pairs([&quot;Dy&quot;, &quot;Co&quot;])</span>
+<span class="sd">    [(&quot;Dy&quot;, &quot;Co&quot;)]</span>
+<span class="sd">    &gt;&gt;&gt; )_generate_adjacent_pairs([&quot;U&quot;, &quot;Rh&quot;, &quot;In&quot;])</span>
+<span class="sd">    [(&quot;U&quot;, &quot;Rh&quot;), (&quot;Rh&quot;, &quot;In&quot;)]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">element_pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">elements</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">element_pairs</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_objective</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">original_radii</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the objective function value, which is the sum of</span>
+<span class="sd">    squared percent differences between original and refined radii.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">original_radii</span> <span class="o">-</span> <span class="n">params</span><span class="p">)</span> <span class="o">/</span> <span class="n">original_radii</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
-<div class="viewcode-block" id="constraint">
-<a class="viewcode-back" href="../../../api/cifkit.data.radius_optimization.html#cifkit.data.radius_optimization.constraint">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">constraint</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">index_pair</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">shortest_distance</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_constraint</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">index_pair</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">shortest_distance</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enforce that the sum of the radii of the pair does not exceed the</span>
 <span class="sd">    shortest allowed distance between them.&quot;&quot;&quot;</span>
     <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">index_pair</span>
-    <span class="k">return</span> <span class="n">shortest_distance</span> <span class="o">-</span> <span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="n">j</span><span class="p">])</span></div>
-
+    <span class="k">return</span> <span class="n">shortest_distance</span> <span class="o">-</span> <span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="get_refined_CIF_radius">
 <a class="viewcode-back" href="../../../api/cifkit.data.radius_optimization.html#cifkit.data.radius_optimization.get_refined_CIF_radius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_refined_CIF_radius</span><span class="p">(</span>
-    <span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">shortest_distances</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">shortest_distances</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">elements_ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_size_constraint</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Optimize CIF radii given atom labels and their shortest pair distance</span>
-<span class="sd">    constraints.&quot;&quot;&quot;</span>
-    <span class="n">sorted_elements</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
-    <span class="n">radii_data</span> <span class="o">=</span> <span class="n">get_radius_data</span><span class="p">()</span>
-    <span class="n">original_radii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">radii_data</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="s2">&quot;CIF_radius&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">sorted_elements</span><span class="p">]</span>
-    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Optimize CIF radii for a set of elements given (1) their adjacent</span>
+<span class="sd">    pairwise distance constraints (2) size order of the original CIF</span>
+<span class="sd">    radii.</span>
 
-    <span class="n">label_to_pair</span> <span class="o">=</span> <span class="n">generate_adjacent_pairs</span><span class="p">(</span><span class="n">sorted_elements</span><span class="p">)</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    elements : list[str]</span>
+<span class="sd">        List of chemical element symbols to optimize radii for.</span>
+<span class="sd">    shortest_distances : dict[tuple[str, str], float]</span>
+<span class="sd">        Dictionary of shortest pairwise distances between element pairs.</span>
+<span class="sd">        Keys should be tuples of two element symbols (e.g., (&#39;Fe&#39;, &#39;Ge&#39;)).</span>
+<span class="sd">    elements_ordered : bool, default True</span>
+<span class="sd">        The elements will be sorted before processing.</span>
+<span class="sd">        This affects how adjacency interatomic bond pairs is defined</span>
+<span class="sd">        when generating element pairs.</span>
+<span class="sd">    use_size_constraint : bool, default True</span>
+<span class="sd">        Use the radius size order constraint. If True, the optimization</span>
+<span class="sd">        will ensure that the refined radii maintain the original size order</span>
+<span class="sd">        of the CIF radii. If False, this constraint is not applied.</span>
 
-    <span class="c1"># Constraints setup</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict[str, float]</span>
+<span class="sd">        Dictionary mapping each element to its optimized CIF radius.</span>
+<span class="sd">    float</span>
+<span class="sd">        Value of the objective function (sum of squared deviations from original radii).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">elements_ordered</span><span class="p">:</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+    <span class="n">radius_data</span> <span class="o">=</span> <span class="n">radius</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="n">original_radii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">radius_data</span><span class="p">[</span><span class="n">element</span><span class="p">][</span><span class="s2">&quot;CIF&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">])</span>
+    <span class="n">original_radii_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">elem</span><span class="p">:</span> <span class="n">radius_data</span><span class="p">[</span><span class="n">elem</span><span class="p">][</span><span class="s2">&quot;CIF&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">}</span>
+    <span class="n">index_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">element</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">)}</span>
+    <span class="n">element_pairs</span> <span class="o">=</span> <span class="n">_generate_adjacent_pairs</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+    <span class="c1"># Set of constraints for interatomic distances</span>
+    <span class="c1"># For ternary, it would be the distance between A-B and B-C pairs</span>
+    <span class="c1"># For quaternary, it would be A-B, B-C, C-D pairs, etc.</span>
     <span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">label_to_pair</span><span class="p">:</span>
-        <span class="n">dist</span> <span class="o">=</span> <span class="n">shortest_distances</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span>
-        <span class="c1"># print(</span>
-        <span class="c1">#     f&quot;Setting constraint for {pair[0]}-{pair[1]} with distance {dist}&quot;</span>
-        <span class="c1"># )</span>
-        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">sorted_elements</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">sorted_elements</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">element_pairs</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting constraint for&quot;</span><span class="p">,</span> <span class="n">pair</span><span class="p">)</span>
+        <span class="c1"># Get the shortest distance for the pair, considering both orders</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">shortest_distances</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="ow">or</span> <span class="n">shortest_distances</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setting constraint for </span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> with distance </span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">elements</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="n">partial</span><span class="p">(</span>
-                    <span class="n">constraint</span><span class="p">,</span>
+                    <span class="n">_constraint</span><span class="p">,</span>
                     <span class="n">index_pair</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span>
                     <span class="n">shortest_distance</span><span class="o">=</span><span class="n">dist</span><span class="p">,</span>
                 <span class="p">),</span>
             <span class="p">}</span>
         <span class="p">)</span>
+    <span class="c1"># Another set of constraints that refined radii maintain the original size order.</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-4</span>
+    <span class="c1"># Sort elements by original CIF radius (descending)</span>
+    <span class="n">ordered_by_size</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="n">elements</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">el</span><span class="p">:</span> <span class="n">original_radii_dict</span><span class="p">[</span><span class="n">el</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 
+    <span class="c1"># Helper to avoid lambda late binding</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_inequality</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon</span>
+
+    <span class="k">if</span> <span class="n">use_size_constraint</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ordered_by_size</span><span class="p">,</span> <span class="n">ordered_by_size</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">index_map</span><span class="p">[</span><span class="n">e1</span><span class="p">],</span> <span class="n">index_map</span><span class="p">[</span><span class="n">e2</span><span class="p">]</span>
+            <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ineq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="n">_make_inequality</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)})</span>
+    <span class="c1"># Note, it appears that after the default iteration of 100 times, the</span>
+    <span class="c1"># optimization does not converge but the results are still reasonable</span>
+    <span class="c1"># with the low objective function value.</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span>
-        <span class="n">objective</span><span class="p">,</span>
+        <span class="n">_objective</span><span class="p">,</span>
         <span class="n">original_radii</span><span class="p">,</span>
         <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">original_radii</span><span class="p">,),</span>
         <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span>
-        <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;disp&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+        <span class="n">options</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;disp&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">},</span>
     <span class="p">)</span>
-
     <span class="c1"># if result.success:</span>
-    <span class="c1">#     print(&quot;Optimization succeeded.&quot;)</span>
+    <span class="c1">#     print(&quot;CIF radius optimization succeeded.&quot;)</span>
+    <span class="c1">#     print(&quot;Optimized radii:&quot;, result.x)</span>
+    <span class="c1">#     print(&quot;Objective function value:&quot;, result.fun)</span>
     <span class="c1"># else:</span>
-    <span class="c1">#     print(&quot;Optimization failed:&quot;, result.message)</span>
-
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sorted_elements</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">))</span></div>
+    <span class="c1">#     print(&quot;CIF radius optimization failed:&quot;, result.message)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)),</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span></div>
 
 </pre></div>
 

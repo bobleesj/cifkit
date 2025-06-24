@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -218,9 +215,7 @@
                 <span class="s2">&quot;key_data_type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">}</span>
-    <span class="n">generate_histogram</span><span class="p">(</span>
-        <span class="n">histogram</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">histogram</span><span class="p">[</span><span class="s2">&quot;settings&quot;</span><span class="p">],</span> <span class="n">display</span><span class="p">,</span> <span class="n">output_dir</span>
-    <span class="p">)</span></div>
+    <span class="n">generate_histogram</span><span class="p">(</span><span class="n">histogram</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">histogram</span><span class="p">[</span><span class="s2">&quot;settings&quot;</span><span class="p">],</span> <span class="n">display</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span></div>
 
 
     <span class="c1"># Make a default folder if the output folder is not provided</span>
@@ -236,9 +231,7 @@
 
     <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;key_data_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
         <span class="c1"># If keys are supposed to be numeric but are strings, convert them</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="nb">float</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="p">}</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="nb">float</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="nb">float</span><span class="p">)}</span>
     <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;key_data_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;int&quot;</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="nb">int</span><span class="p">)}</span>
 

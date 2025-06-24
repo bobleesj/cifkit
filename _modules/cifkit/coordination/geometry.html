@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -115,87 +112,69 @@
 <a class="viewcode-back" href="../../../api/cifkit.coordination.geometry.html#cifkit.coordination.geometry.compute_polyhedron_metrics">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_polyhedron_metrics</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">,</span> <span class="n">hull</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute various metrics related to a given polyhedron.&quot;&quot;&quot;</span>
+    <span class="n">neighbor_atoms_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">central_atom_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># Convert to NumPy array excluding the last element</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">distance_to_center</span> <span class="o">=</span> <span class="n">_compute_center_of_mass_and_distance</span><span class="p">(</span>
+        <span class="n">neighbor_atoms_coord</span><span class="p">,</span> <span class="n">central_atom_coord</span>
+    <span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">simplex</span> <span class="ow">in</span> <span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">simplex</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">simplex</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">simplex</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edges</span> <span class="ow">and</span> <span class="p">(</span>
+                <span class="n">simplex</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">simplex</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">simplex</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">simplex</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+    <span class="c1"># Basic polyhedron info</span>
+    <span class="n">number_of_edges</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+    <span class="n">number_of_faces</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span>
+    <span class="n">number_of_vertices</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbor_atoms_coord</span><span class="p">)</span>
+    <span class="c1"># More advanced polyhedron info</span>
+    <span class="n">face_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">neighbor_atoms_coord</span><span class="p">[</span><span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">distances_to_faces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">face_centers</span> <span class="o">-</span> <span class="n">central_atom_coord</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">shortest_distance_to_face</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">distances_to_faces</span><span class="p">)</span>
+    <span class="n">edge_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">neighbor_atoms_coord</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">neighbor_atoms_coord</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">distances_to_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">edge_centers</span> <span class="o">-</span> <span class="n">central_atom_coord</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">shortest_distance_to_edge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">distances_to_edges</span><span class="p">)</span>
+    <span class="n">radius_of_inscribed_sphere</span> <span class="o">=</span> <span class="n">shortest_distance_to_face</span>
+    <span class="n">volume_of_inscribed_sphere</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius_of_inscribed_sphere</span><span class="o">**</span><span class="mi">3</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">central_atom_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="c1"># Convert to NumPy array excluding the last element</span>
-        <span class="n">polyhedron_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="n">_</span><span class="p">,</span> <span class="n">distance_to_center</span> <span class="o">=</span> <span class="n">compute_center_of_mass_and_distance</span><span class="p">(</span>
-            <span class="n">polyhedron_points</span><span class="p">,</span> <span class="n">hull</span><span class="p">,</span> <span class="n">central_atom_coord</span>
-        <span class="p">)</span>
-
-        <span class="n">edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">simplex</span> <span class="ow">in</span> <span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">simplex</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">simplex</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">simplex</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edges</span> <span class="ow">and</span> <span class="p">(</span>
-                    <span class="n">simplex</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
-                    <span class="n">simplex</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                <span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
-                    <span class="n">edges</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">simplex</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">simplex</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
-
-        <span class="c1"># Basic polyhedron info</span>
-        <span class="n">number_of_edges</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
-        <span class="n">number_of_faces</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span>
-        <span class="n">number_of_vertices</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">)</span>
-
-        <span class="n">face_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">[</span><span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">distances_to_faces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
-            <span class="n">face_centers</span> <span class="o">-</span> <span class="n">central_atom_coord</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-        <span class="p">)</span>
-        <span class="n">shortest_distance_to_face</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">distances_to_faces</span><span class="p">)</span>
-
-        <span class="n">edge_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="p">(</span><span class="n">polyhedron_points</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">polyhedron_points</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="o">/</span> <span class="mi">2</span>
-                <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
-        <span class="n">distances_to_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
-            <span class="n">edge_centers</span> <span class="o">-</span> <span class="n">central_atom_coord</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-        <span class="p">)</span>
-        <span class="n">shortest_distance_to_edge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">distances_to_edges</span><span class="p">)</span>
-
-        <span class="n">radius_of_inscribed_sphere</span> <span class="o">=</span> <span class="n">shortest_distance_to_face</span>
-
-        <span class="n">volume_of_inscribed_sphere</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="mi">4</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius_of_inscribed_sphere</span><span class="o">**</span><span class="mi">3</span>
-        <span class="p">)</span>
-
         <span class="n">packing_efficiency</span> <span class="o">=</span> <span class="n">volume_of_inscribed_sphere</span> <span class="o">/</span> <span class="n">hull</span><span class="o">.</span><span class="n">volume</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Error computing polyhedron volume: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;Please check whether the polyhedron is flat.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;volume_of_polyhedron&quot;</span><span class="p">:</span> <span class="n">hull</span><span class="o">.</span><span class="n">volume</span><span class="p">,</span>
+        <span class="s2">&quot;distance_from_avg_point_to_center&quot;</span><span class="p">:</span> <span class="n">distance_to_center</span><span class="p">,</span>
+        <span class="s2">&quot;number_of_vertices&quot;</span><span class="p">:</span> <span class="n">number_of_vertices</span><span class="p">,</span>
+        <span class="s2">&quot;number_of_edges&quot;</span><span class="p">:</span> <span class="n">number_of_edges</span><span class="p">,</span>
+        <span class="s2">&quot;number_of_faces&quot;</span><span class="p">:</span> <span class="n">number_of_faces</span><span class="p">,</span>
+        <span class="s2">&quot;shortest_distance_to_face&quot;</span><span class="p">:</span> <span class="n">shortest_distance_to_face</span><span class="p">,</span>
+        <span class="s2">&quot;shortest_distance_to_edge&quot;</span><span class="p">:</span> <span class="n">shortest_distance_to_edge</span><span class="p">,</span>
+        <span class="s2">&quot;volume_of_inscribed_sphere&quot;</span><span class="p">:</span> <span class="n">volume_of_inscribed_sphere</span><span class="p">,</span>
+        <span class="s2">&quot;packing_efficiency&quot;</span><span class="p">:</span> <span class="n">packing_efficiency</span><span class="p">,</span>
+    <span class="p">}</span>
 
-        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;volume_of_polyhedron&quot;</span><span class="p">:</span> <span class="n">hull</span><span class="o">.</span><span class="n">volume</span><span class="p">,</span>
-            <span class="s2">&quot;distance_from_avg_point_to_center&quot;</span><span class="p">:</span> <span class="n">distance_to_center</span><span class="p">,</span>
-            <span class="s2">&quot;number_of_vertices&quot;</span><span class="p">:</span> <span class="n">number_of_vertices</span><span class="p">,</span>
-            <span class="s2">&quot;number_of_edges&quot;</span><span class="p">:</span> <span class="n">number_of_edges</span><span class="p">,</span>
-            <span class="s2">&quot;number_of_faces&quot;</span><span class="p">:</span> <span class="n">number_of_faces</span><span class="p">,</span>
-            <span class="s2">&quot;shortest_distance_to_face&quot;</span><span class="p">:</span> <span class="n">shortest_distance_to_face</span><span class="p">,</span>
-            <span class="s2">&quot;shortest_distance_to_edge&quot;</span><span class="p">:</span> <span class="n">shortest_distance_to_edge</span><span class="p">,</span>
-            <span class="s2">&quot;volume_of_inscribed_sphere&quot;</span><span class="p">:</span> <span class="n">volume_of_inscribed_sphere</span><span class="p">,</span>
-            <span class="s2">&quot;packing_efficiency&quot;</span><span class="p">:</span> <span class="n">packing_efficiency</span><span class="p">,</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="n">round_dict_values</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="c1"># print(f&quot;Error computing polyhedron metrics: {e}&quot;)</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
+    <span class="k">return</span> <span class="n">round_dict_values</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 
 
-<div class="viewcode-block" id="compute_center_of_mass_and_distance">
-<a class="viewcode-back" href="../../../api/cifkit.coordination.geometry.html#cifkit.coordination.geometry.compute_center_of_mass_and_distance">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_center_of_mass_and_distance</span><span class="p">(</span>
-    <span class="n">polyhedron_points</span><span class="p">,</span> <span class="n">hull</span><span class="p">,</span> <span class="n">central_atom_coord</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the center of mass of a polyhedron and the distance from the</span>
-<span class="sd">    center of mass to a given point.&quot;&quot;&quot;</span>
-    <span class="n">center_of_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">polyhedron_points</span><span class="p">[</span><span class="n">hull</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_compute_center_of_mass_and_distance</span><span class="p">(</span><span class="n">neighbor_atoms_coord</span><span class="p">,</span> <span class="n">central_atom_coord</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the center of mass of a polyhedron and the distance</span>
+<span class="sd">    from the center of mass to a given point.&quot;&quot;&quot;</span>
+    <span class="n">center_of_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">neighbor_atoms_coord</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">vector_to_center_of_mass</span> <span class="o">=</span> <span class="n">center_of_mass</span> <span class="o">-</span> <span class="n">central_atom_coord</span>
     <span class="n">distance_to_center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vector_to_center_of_mass</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">center_of_mass</span><span class="p">,</span> <span class="n">distance_to_center</span></div>
-
+    <span class="k">return</span> <span class="n">center_of_mass</span><span class="p">,</span> <span class="n">distance_to_center</span>
 </pre></div>
 
            </div>

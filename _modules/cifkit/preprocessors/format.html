@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -112,9 +109,7 @@
             <span class="n">site_label</span><span class="p">,</span> <span class="n">atom_type_symbol</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The file contains no atomic label and type.&quot;</span><span class="p">)</span>
-        <span class="n">atom_type_from_label</span> <span class="o">=</span> <span class="n">string_parser</span><span class="o">.</span><span class="n">get_atom_type_from_label</span><span class="p">(</span>
-            <span class="n">site_label</span>
-        <span class="p">)</span>
+        <span class="n">atom_type_from_label</span> <span class="o">=</span> <span class="n">string_parser</span><span class="o">.</span><span class="n">get_atom_type_from_label</span><span class="p">(</span><span class="n">site_label</span><span class="p">)</span>
         <span class="n">unique_elements</span> <span class="o">=</span> <span class="n">cif_parser</span><span class="o">.</span><span class="n">get_unique_elements_from_loop</span><span class="p">(</span><span class="n">loop_values</span><span class="p">)</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Type 8. Ex) 1817279.cif.</span>
 
@@ -157,9 +152,7 @@
             <span class="ow">and</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
         <span class="p">):</span>
             <span class="c1"># Uppercase the last character</span>
-            <span class="n">modified_label</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">site_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-            <span class="p">)</span>
+            <span class="n">modified_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
             <span class="c1"># Modify the label</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">modified_label</span><span class="p">)</span>  <span class="c1"># Modify the line</span>
@@ -199,9 +192,7 @@
                 <span class="ow">and</span> <span class="n">site_label</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
                 <span class="ow">and</span> <span class="n">site_label</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
             <span class="p">):</span>
-                <span class="n">new_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                    <span class="n">atom_type_from_label</span><span class="p">,</span> <span class="n">atom_type_symbol</span>
-                <span class="p">)</span>
+                <span class="n">new_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">atom_type_from_label</span><span class="p">,</span> <span class="n">atom_type_symbol</span><span class="p">)</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">new_label</span><span class="p">)</span>  <span class="c1"># Modify the line</span>
                 <span class="n">is_cif_file_updated</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -214,9 +205,7 @@
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">site_label</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">site_label</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
-                <span class="n">new_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                    <span class="n">atom_type_from_label</span><span class="p">,</span> <span class="n">atom_type_symbol</span>
-                <span class="p">)</span>
+                <span class="n">new_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">atom_type_from_label</span><span class="p">,</span> <span class="n">atom_type_symbol</span><span class="p">)</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">new_label</span><span class="p">)</span>
                 <span class="n">is_cif_file_updated</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -235,9 +224,7 @@
                 <span class="k">if</span> <span class="n">site_label</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">atom_type_symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
                     <span class="c1"># print(atom_type_label.lower(), atom_type_symbol.lower())</span>
                     <span class="c1"># Do not use get_atom_type since replace the entire label</span>
-                    <span class="n">new_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                        <span class="n">site_label</span><span class="p">,</span> <span class="n">atom_type_symbol</span>
-                    <span class="p">)</span>
+                    <span class="n">new_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">atom_type_symbol</span><span class="p">)</span>
                     <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">new_label</span><span class="p">)</span>
                     <span class="n">is_cif_file_updated</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -256,13 +243,8 @@
                 <span class="ow">and</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
             <span class="p">):</span>
                 <span class="n">first_two_label_characters</span> <span class="o">=</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span>
-                    <span class="n">first_two_label_characters</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                    <span class="o">==</span> <span class="n">atom_type_symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                <span class="p">):</span>
-                    <span class="n">modified_label</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="n">site_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                    <span class="p">)</span>
+                <span class="k">if</span> <span class="n">first_two_label_characters</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">atom_type_symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="n">modified_label</span> <span class="o">=</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
                     <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">modified_label</span><span class="p">)</span>
                     <span class="n">is_cif_file_updated</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -282,13 +264,8 @@
                 <span class="ow">and</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
             <span class="p">):</span>
                 <span class="n">first_two_label_characters</span> <span class="o">=</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span>
-                    <span class="n">first_two_label_characters</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                    <span class="o">!=</span> <span class="n">atom_type_symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                <span class="p">):</span>
-                    <span class="n">modified_label</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="n">atom_type_symbol</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-                    <span class="p">)</span>
+                <span class="k">if</span> <span class="n">first_two_label_characters</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="n">atom_type_symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="n">modified_label</span> <span class="o">=</span> <span class="n">atom_type_symbol</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
                     <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">modified_label</span><span class="p">)</span>
                     <span class="n">is_cif_file_updated</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -306,10 +283,7 @@
                 <span class="ow">and</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
             <span class="p">):</span>
                 <span class="n">first_two_label_characters</span> <span class="o">=</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span>
-                    <span class="n">first_two_label_characters</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                    <span class="o">!=</span> <span class="n">atom_type_symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                <span class="p">):</span>
+                <span class="k">if</span> <span class="n">first_two_label_characters</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="n">atom_type_symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
                     <span class="n">modified_label</span> <span class="o">=</span> <span class="n">atom_type_symbol</span> <span class="o">+</span> <span class="n">site_label</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
                     <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">site_label</span><span class="p">,</span> <span class="n">modified_label</span><span class="p">)</span>
                     <span class="n">is_cif_file_updated</span> <span class="o">=</span> <span class="kc">True</span>
@@ -323,9 +297,7 @@
         <span class="p">(</span>
             <span class="n">start_index</span><span class="p">,</span>
             <span class="n">end_index</span><span class="p">,</span>
-        <span class="p">)</span> <span class="o">=</span> <span class="n">cif_parser</span><span class="o">.</span><span class="n">get_start_end_line_indexes</span><span class="p">(</span>
-            <span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;_atom_site_occupancy&quot;</span>
-        <span class="p">)</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">cif_parser</span><span class="o">.</span><span class="n">get_start_end_line_indexes</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;_atom_site_occupancy&quot;</span><span class="p">)</span>
         <span class="c1"># Replace the specific section in original_lines with modified_lines</span>
         <span class="n">original_lines</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">modified_lines</span>
 

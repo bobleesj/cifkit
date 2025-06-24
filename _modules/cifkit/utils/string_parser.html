@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -117,11 +114,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove parentheses from a value string and convert to float.&quot;&quot;&quot;</span>
     <span class="n">str_value</span> <span class="o">=</span> <span class="n">str_value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="nb">float</span><span class="p">(</span><span class="n">str_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s2">&quot;(&quot;</span> <span class="ow">in</span> <span class="n">str_value</span>
-        <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">str_value</span><span class="p">)</span>
-    <span class="p">)</span></div>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">str_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;(&quot;</span> <span class="ow">in</span> <span class="n">str_value</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">str_value</span><span class="p">)</span></div>
 
 
 
@@ -144,7 +137,8 @@
 <div class="viewcode-block" id="strip_numbers_and_symbols">
 <a class="viewcode-back" href="../../../api/cifkit.utils.string_parser.html#cifkit.utils.string_parser.strip_numbers_and_symbols">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">strip_numbers_and_symbols</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes all digits and &#39;+&#39; and &#39;-&#39; characters from the input string.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes all digits and &#39;+&#39; and &#39;-&#39; characters from the input</span>
+<span class="sd">    string.</span>
 
 <span class="sd">    Some ICSD, COD have charges in atomic site element e.g. &quot;Fe0+&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>

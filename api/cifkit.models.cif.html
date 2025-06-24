@@ -72,9 +72,6 @@
 <li class="toctree-l2"><a class="reference internal" href="cifkit.html#module-cifkit">Module contents</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
@@ -109,7 +106,7 @@
 <span id="cifkit-models-cif-module"></span><h1>cifkit.models.cif module<a class="headerlink" href="#module-cifkit.models.cif" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.models.cif.</span></span><span class="sig-name descname"><span class="pre">Cif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_formatted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.models.cif.</span></span><span class="sig-name descname"><span class="pre">Cif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_formatted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_CN</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_avg_by_best_methods">
@@ -124,7 +121,55 @@
 <dl class="py property">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_best_methods">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_best_methods" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Determines the optimal coordination method for each atomic
+site.</p>
+<p>For each atomic site, the coordination polyhedron is generated for each method
+in <cite>self.CN_max_gap_per_site</cite>. The method with the smallest value of
+<cite>polyhedron_metrics[“distance_from_avg_point_to_center”]</cite>, indicating the highest
+symmetry of the polyhedron, is selected as the “best method” among the four
+methods used to determine the CN gap in <cite>self.CN_max_gap_per_site</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Dictionary where each key represents an atomic site, and the corresponding
+value is a dictionary containing:</p>
+<ul class="simple">
+<li><p><cite>volume_of_polyhedron</cite> (float): The volume of the polyhedron surrounding</p></li>
+</ul>
+<p>the atomic site.
+- <cite>distance_from_avg_point_to_center</cite> (float): The average distance from
+the polyhedron’s vertices  to its geometric center, used as a measure of
+symmetry.
+- <cite>number_of_vertices</cite> (int): The number of vertices in the coordination
+polyhedron.
+- <cite>number_of_edges</cite> (int): The number of edges connecting vertices in the
+polyhedron.
+- <cite>number_of_faces</cite> (int): The number of faces in the coordination polyhedron.
+- <cite>shortest_distance_to_face</cite> (float): The shortest distance between the
+atomic site and the nearest face.
+- <cite>shortest_distance_to_edge</cite> (float): The shortest distance between the
+atomic site and the nearest edge.
+- <cite>volume_of_inscribed_sphere</cite> (float): Volume of the largest sphere that can
+it inside the polyhedron.
+- <cite>packing_efficiency</cite> (float): A measure of how efficiently the polyhedron
+is packed around the atomic site.
+- <cite>method_used</cite> (str): The name of the chosen method
+(e.g., <cite>dist_by_shortest_dist</cite>) providing the  highest symmetry based on
+<cite>distance_from_avg_point_to_center</cite>.</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, dict[str, float | int | str]]]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span> <span class="o">=</span> <span class="n">cif_URhIn</span><span class="o">.</span><span class="n">CN_best_methods</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;In1&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_vertices&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;Rh2&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_vertices&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;In1&quot;</span><span class="p">][</span><span class="s2">&quot;method_used&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;dist_by_shortest_dist&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;Rh2&quot;</span><span class="p">][</span><span class="s2">&quot;method_used&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;dist_by_shortest_dist&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_count_by_best_methods">
@@ -189,7 +234,67 @@
 <dl class="py property">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_max_gap_per_site">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_max_gap_per_site</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_max_gap_per_site" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Determines the maximum gap in coordination number (CN) for
+each atomic site.</p>
+<p>For each atomic site, considers the first 20 nearest neighbors. The distances
+to these neighbors are normalized based on four methods:</p>
+<ul class="simple">
+<li><p><cite>dist_by_shortest_dist</cite>: Normalization by the shortest distance from the site.</p></li>
+<li><p><cite>dist_by_CIF_radius_sum</cite>: Normalization by the sum of CIF radii.</p></li>
+<li><p><cite>dist_by_CIF_radius_refined_sum</cite>: Normalization by the sum of refined CIF radii.</p></li>
+<li><p><cite>dist_by_Pauling_radius_sum</cite>: Normalization by the sum of Pauling radii.</p></li>
+</ul>
+<p>The radius sums are calculated for each element pair involved. For each
+normalization method, the maximum gap is determined as the largest difference
+between consecutive normalized distances (i.e., the difference between the nth
+and (n-1)th neighbors).</p>
+<p>This CN gap provides insight into the bonding relevance for each site.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>A dictionary where each key represents an atomic site, mapping to another
+dictionary with normalization methods as keys. Each normalization method
+contains a dictionary with:</p>
+<ul class="simple">
+<li><p><cite>max_gap</cite> (float): The maximum gap in the normalized distances.</p></li>
+<li><p><cite>CN</cite> (int): Coordination number based on the normalization method.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict of dict of dict</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span>
+<span class="go">{</span>
+<span class="go">    &quot;In1&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.306, &quot;CN&quot;: 14},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.39, &quot;CN&quot;: 14},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.341, &quot;CN&quot;: 12},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.398, &quot;CN&quot;: 14},</span>
+<span class="go">    },</span>
+<span class="go">    &quot;U1&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.197, &quot;CN&quot;: 11},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.312, &quot;CN&quot;: 11},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.27, &quot;CN&quot;: 17},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.256, &quot;CN&quot;: 17},</span>
+<span class="go">    },</span>
+<span class="go">    &quot;Rh1&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.315, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.347, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.418, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.402, &quot;CN&quot;: 9},</span>
+<span class="go">    },</span>
+<span class="go">    &quot;Rh2&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.31, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.324, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.397, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.380, &quot;CN&quot;: 9},</span>
+<span class="go">    },</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_min_by_best_methods">
@@ -212,16 +317,29 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cifkit.models.cif.Cif.compute_connections">
-<span class="sig-name descname"><span class="pre">compute_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.compute_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.compute_connections" title="Link to this definition"></a></dt>
-<dd><p>Compute onnection network, shortest distances, bond counts, and
-coordination numbers (CN). These prperties are lazily loaded to avoid
-unnecessary computation during the initialization and pre-processing
-step.</p>
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.compute_CN">
+<span class="sig-name descname"><span class="pre">compute_CN</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.compute_CN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.compute_CN" title="Link to this definition"></a></dt>
+<dd><p>Compute onnection network, shortest distances, bond counts,
+and coordination numbers (CN). These prperties are lazily loaded
+to avoid unnecessary computation during the initialization and
+pre-processing step.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cutoff_radius</strong> (<em>float</em><em>, </em><em>optional</em>) – The distance threshold in Angstroms used to consider two atoms as connected,
-by default 10.0</p>
+<dd class="field-odd"><p><strong>cutoff_radius</strong> (<em>float</em><em>, </em><em>default=10.0</em>) – The distance threshold in Angstroms used to consider two atoms as connected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.compute_connections">
+<span class="sig-name descname"><span class="pre">compute_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.compute_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.compute_connections" title="Link to this definition"></a></dt>
+<dd><p>Compute onnection network, shortest distances, bond counts,
+and coordination numbers (CN). These prperties are lazily loaded
+to avoid unnecessary computation during the initialization and
+pre-processing step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cutoff_radius</strong> (<em>float</em><em>, </em><em>default=10.0</em>) – The distance threshold in Angstroms used to consider two atoms as connected.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -233,18 +351,30 @@ by default 10.0</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods">
-<span class="sig-name descname"><span class="pre">get_polyhedron_labels_by_CN_best_methods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.get_polyhedron_labels_by_CN_best_methods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_polyhedron_labels_by_CN_best_methods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.get_polyhedron_labels_by_CN_best_methods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method">
-<span class="sig-name descname"><span class="pre">get_polyhedron_labels_by_CN_min_dist_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.get_polyhedron_labels_by_CN_min_dist_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_polyhedron_labels_by_CN_min_dist_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.get_polyhedron_labels_by_CN_min_dist_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.plot_polyhedron">
-<span class="sig-name descname"><span class="pre">plot_polyhedron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.plot_polyhedron"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.plot_polyhedron" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">plot_polyhedron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_displayed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/cifkit/models/cif.html#Cif.plot_polyhedron"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.Cif.plot_polyhedron" title="Link to this definition"></a></dt>
+<dd><p>Function to plot a polyhedron structure and optionally saves
+it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site_label</strong> (<em>str</em>) – Central site label for the polyhedron</p></li>
+<li><p><strong>show_labels</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display vertex labels, by default True</p></li>
+<li><p><strong>is_displayed</strong> (<em>bool</em><em>, </em><em>optional</em>) – Display plot interactively, by default False</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory to save the plot, by default None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="cifkit.models.cif.Cif.radius_sum">
@@ -276,7 +406,8 @@ by default 10.0</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.models.cif.ensure_connections">
 <span class="sig-prename descclassname"><span class="pre">cifkit.models.cif.</span></span><span class="sig-name descname"><span class="pre">ensure_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/models/cif.html#ensure_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.models.cif.ensure_connections" title="Link to this definition"></a></dt>
-<dd><p>For accessing lazy properties and methods, compute connections.</p>
+<dd><p>For accessing lazy properties and methods, compute
+connections.</p>
 </dd></dl>
 
 </section>

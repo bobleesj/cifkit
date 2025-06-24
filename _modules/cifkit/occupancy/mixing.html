@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -123,9 +120,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get file-level atomic site mixing info.&quot;&quot;&quot;</span>
 
     <span class="n">is_full_occupancy</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">coord_occupancy_sum</span> <span class="o">=</span> <span class="n">compute_coord_occupancy_sum</span><span class="p">(</span>
-        <span class="n">site_labels</span><span class="p">,</span> <span class="n">atom_site_info</span>
-    <span class="p">)</span>
+    <span class="n">coord_occupancy_sum</span> <span class="o">=</span> <span class="n">compute_coord_occupancy_sum</span><span class="p">(</span><span class="n">site_labels</span><span class="p">,</span> <span class="n">atom_site_info</span><span class="p">)</span>
 
     <span class="c1"># Now check summed occupancies</span>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">occupancy_sum</span> <span class="ow">in</span> <span class="n">coord_occupancy_sum</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -158,9 +153,7 @@
     <span class="n">site_labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">label_pairs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">atom_site_info</span><span class="p">:</span> <span class="nb">dict</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a dictionary, alphabetically sorted pair.&quot;&quot;&quot;</span>
-    <span class="n">coord_occupancy_sum</span> <span class="o">=</span> <span class="n">compute_coord_occupancy_sum</span><span class="p">(</span>
-        <span class="n">site_labels</span><span class="p">,</span> <span class="n">atom_site_info</span>
-    <span class="p">)</span>
+    <span class="n">coord_occupancy_sum</span> <span class="o">=</span> <span class="n">compute_coord_occupancy_sum</span><span class="p">(</span><span class="n">site_labels</span><span class="p">,</span> <span class="n">atom_site_info</span><span class="p">)</span>
 
     <span class="c1"># Store categorizy per pair</span>
     <span class="n">atom_site_pair_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -213,17 +206,16 @@
         <span class="c1"># Check 1. One of the labels is deficient</span>
         <span class="c1"># Check 2. Both labels are not atomic mixed</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">is_first_label_site_deficient</span> <span class="ow">or</span> <span class="n">is_second_label_deficient</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
-            <span class="ow">not</span> <span class="n">is_first_label_atomic_mixed</span>
-            <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_second_label_atomic_mixed</span>
+            <span class="ow">not</span> <span class="n">is_first_label_atomic_mixed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_second_label_atomic_mixed</span>
         <span class="p">):</span>
             <span class="n">atom_site_pair_dict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;deficiency_without_atomic_mixing&quot;</span>
 
         <span class="c1"># Check 1. Both labels are not deficient</span>
         <span class="c1"># Check 2. At least one label is atomic mixed</span>
         <span class="c1"># Assign &quot;2&quot; for &quot;full_occupancy_atomic_mixing&quot;</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="ow">not</span> <span class="n">is_first_label_site_deficient</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_second_label_deficient</span>
-        <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">is_first_label_atomic_mixed</span> <span class="ow">or</span> <span class="n">is_second_label_atomic_mixed</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">is_first_label_site_deficient</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_second_label_deficient</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">is_first_label_atomic_mixed</span> <span class="ow">or</span> <span class="n">is_second_label_atomic_mixed</span>
+        <span class="p">):</span>
             <span class="n">atom_site_pair_dict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;full_occupancy_atomic_mixing&quot;</span>
 
         <span class="c1"># Assign &quot;1&quot; for &quot;deficiency_with_atomic_mixing&quot;</span>

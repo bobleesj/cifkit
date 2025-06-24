@@ -72,9 +72,6 @@
 <li class="toctree-l2"><a class="reference internal" href="cifkit.html#module-cifkit">Module contents</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
@@ -119,7 +116,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.preprocessors.supercell.get_supercell_points">
-<span class="sig-prename descclassname"><span class="pre">cifkit.preprocessors.supercell.</span></span><span class="sig-name descname"><span class="pre">get_supercell_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell_generation_method</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/preprocessors/supercell.html#get_supercell_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.preprocessors.supercell.get_supercell_points" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cifkit.preprocessors.supercell.</span></span><span class="sig-name descname"><span class="pre">get_supercell_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/preprocessors/supercell.html#get_supercell_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.preprocessors.supercell.get_supercell_points" title="Link to this definition"></a></dt>
 <dd><p>Return supercell points.</p>
 </dd></dl>
 
@@ -133,14 +130,18 @@ symmetry operations.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.preprocessors.supercell.get_unitcell_coords_for_all_labels">
 <span class="sig-prename descclassname"><span class="pre">cifkit.preprocessors.supercell.</span></span><span class="sig-name descname"><span class="pre">get_unitcell_coords_for_all_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Block</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/preprocessors/supercell.html#get_unitcell_coords_for_all_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.preprocessors.supercell.get_unitcell_coords_for_all_labels" title="Link to this definition"></a></dt>
-<dd><p>Compute the new coordinates after applying symmetry operations to the
-initial coordinates.</p>
+<dd><p>Compute the new coordinates after applying symmetry operations to
+the initial coordinates.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.preprocessors.supercell.shift_and_append_points">
 <span class="sig-prename descclassname"><span class="pre">cifkit.preprocessors.supercell.</span></span><span class="sig-name descname"><span class="pre">shift_and_append_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_site_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell_generation_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/preprocessors/supercell.html#shift_and_append_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.preprocessors.supercell.shift_and_append_points" title="Link to this definition"></a></dt>
-<dd><p>Shift and duplicate points to create a supercell.</p>
+<dd><p>Shift the unit cell’s array of coordinates in the crystal frame
+to form the array containing the coordinates of the supercell.</p>
+<p># Method 1 - No sfhits
+# Method 2 - +-1 +-1 +-1 shifts (This rarely used)
+# Method 3 - +-2 +-2 +-2 shifts (5*5*5 of the unit cell)</p>
 </dd></dl>
 
 </section>

@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -93,8 +90,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">flat_site_connections</span><span class="p">(</span>
     <span class="n">site_connections</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform site connections into a sorted list of tuples, each containing</span>
-<span class="sd">    a pair of alphabetically distance.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform site connections into a sorted list of tuples, each</span>
+<span class="sd">    containing a pair of alphabetically distance.&quot;&quot;&quot;</span>
     <span class="n">flattened_points</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">site_label</span><span class="p">,</span> <span class="n">connections</span> <span class="ow">in</span> <span class="n">site_connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">connection</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
@@ -127,7 +124,8 @@
 <div class="viewcode-block" id="calculate_normalized_dist_diffs">
 <a class="viewcode-back" href="../../../api/cifkit.preprocessors.environment_util.html#cifkit.preprocessors.environment_util.calculate_normalized_dist_diffs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_normalized_dist_diffs</span><span class="p">(</span><span class="n">normalized_distances</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate differences between consecutive normalized distances.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate differences between consecutive normalized</span>
+<span class="sd">    distances.&quot;&quot;&quot;</span>
     <span class="n">normalized_dist_diffs</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">normalized_distances</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">normalized_distances</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">normalized_distances</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>

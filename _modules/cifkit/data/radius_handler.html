@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -84,41 +81,23 @@
              
   <h1>Source code for cifkit.data.radius_handler</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bobleesj.utils.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">radius</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.data.radius</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_radius_data</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.data.radius_optimization</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_refined_CIF_radius</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.unit</span><span class="w"> </span><span class="kn">import</span> <span class="n">round_dict_values</span>
-
-
-<div class="viewcode-block" id="get_is_radius_data_available">
-<a class="viewcode-back" href="../../../api/cifkit.data.radius_handler.html#cifkit.data.radius_handler.get_is_radius_data_available">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_is_radius_data_available</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if both CIF and Pauling radius data are available for each element</span>
-<span class="sd">    in the list.&quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">get_radius_data</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
-        <span class="n">element_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
-            <span class="s2">&quot;CIF_radius&quot;</span> <span class="ow">in</span> <span class="n">element_data</span>
-            <span class="ow">and</span> <span class="s2">&quot;Pauling_radius_CN12&quot;</span> <span class="ow">in</span> <span class="n">element_data</span>
-        <span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="kc">True</span></div>
-
 
 
 <div class="viewcode-block" id="get_CIF_pauling_radius">
 <a class="viewcode-back" href="../../../api/cifkit.data.radius_handler.html#cifkit.data.radius_handler.get_CIF_pauling_radius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_CIF_pauling_radius</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return CIF and Pualing data for a list of elements.&quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">get_radius_data</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">radius</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
     <span class="n">radii</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
         <span class="n">radii</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;CIF_radius&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">atom</span><span class="p">][</span><span class="s2">&quot;CIF_radius&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;Pauling_radius_CN12&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">atom</span><span class="p">][</span><span class="s2">&quot;Pauling_radius_CN12&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;CIF_radius&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">atom</span><span class="p">][</span><span class="s2">&quot;CIF&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;Pauling_radius_CN12&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">atom</span><span class="p">][</span><span class="s2">&quot;Pauling_CN12&quot;</span><span class="p">],</span>
         <span class="p">}</span>
-
     <span class="k">return</span> <span class="n">radii</span></div>
 
 
@@ -128,27 +107,20 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">get_radius_values_per_element</span><span class="p">(</span>
     <span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">shortest_bond_distances</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">:</span><span class="nb">float</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Merge CIF and Pauling radius data with CIF refined radius data.&quot;&quot;&quot;</span>
-    <span class="n">is_radius_data_available</span> <span class="o">=</span> <span class="n">get_is_radius_data_available</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
-
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Merge CIF and Pauling radius data with CIF refined radius</span>
+<span class="sd">    data.&quot;&quot;&quot;</span>
+    <span class="n">is_radius_data_available</span> <span class="o">=</span> <span class="n">radius</span><span class="o">.</span><span class="n">are_available</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_radius_data_available</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-
     <span class="n">CIF_pauling_rad</span> <span class="o">=</span> <span class="n">get_CIF_pauling_radius</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
-    <span class="n">CIF_refined_rad</span> <span class="o">=</span> <span class="n">get_refined_CIF_radius</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">shortest_bond_distances</span><span class="p">)</span>
-
+    <span class="n">CIF_refined_rad</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_refined_CIF_radius</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">shortest_bond_distances</span><span class="p">)</span>
     <span class="n">combined_radii</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
         <span class="n">combined_radii</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;CIF_radius&quot;</span><span class="p">:</span> <span class="n">CIF_pauling_rad</span><span class="p">[</span><span class="n">element</span><span class="p">][</span><span class="s2">&quot;CIF_radius&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;CIF_radius_refined&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">CIF_refined_rad</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
-            <span class="p">),</span>
-            <span class="s2">&quot;Pauling_radius_CN12&quot;</span><span class="p">:</span> <span class="n">CIF_pauling_rad</span><span class="p">[</span><span class="n">element</span><span class="p">][</span>
-                <span class="s2">&quot;Pauling_radius_CN12&quot;</span>
-            <span class="p">],</span>
+            <span class="s2">&quot;CIF_radius_refined&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">CIF_refined_rad</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="mi">3</span><span class="p">)),</span>
+            <span class="s2">&quot;Pauling_radius_CN12&quot;</span><span class="p">:</span> <span class="n">CIF_pauling_rad</span><span class="p">[</span><span class="n">element</span><span class="p">][</span><span class="s2">&quot;Pauling_radius_CN12&quot;</span><span class="p">],</span>
         <span class="p">}</span>
-
     <span class="k">return</span> <span class="n">round_dict_values</span><span class="p">(</span><span class="n">combined_radii</span><span class="p">)</span></div>
 
 
@@ -159,7 +131,6 @@
     <span class="n">radius_values</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">:</span><span class="nb">float</span><span class="p">]],</span> <span class="n">is_radius_data_available</span><span class="p">:</span> <span class="nb">bool</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">:</span><span class="nb">float</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the sum of two radii.&quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_radius_data_available</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
@@ -169,21 +140,16 @@
         <span class="s2">&quot;CIF_radius_refined_sum&quot;</span><span class="p">:</span> <span class="p">{},</span>
         <span class="s2">&quot;Pauling_radius_sum&quot;</span><span class="p">:</span> <span class="p">{},</span>
     <span class="p">}</span>
-
     <span class="c1"># Calculate pair sums for each unique combination of elements</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">elem_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)):</span>
             <span class="n">elem_j</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-
             <span class="c1"># Element pair label, e.g., A-B or A-A</span>
-            <span class="n">pair_label</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">elem_i</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">elem_j</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">elem_i</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">elem_i</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
+            <span class="n">pair_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">elem_i</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">elem_j</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">elem_i</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">elem_i</span><span class="si">}</span><span class="s2">&quot;</span>
 
             <span class="c1"># Sum radii for each radius type</span>
             <span class="n">pair_distances</span><span class="p">[</span><span class="s2">&quot;CIF_radius_sum&quot;</span><span class="p">][</span><span class="n">pair_label</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
-                <span class="n">radius_values</span><span class="p">[</span><span class="n">elem_i</span><span class="p">][</span><span class="s2">&quot;CIF_radius&quot;</span><span class="p">]</span>
-                <span class="o">+</span> <span class="n">radius_values</span><span class="p">[</span><span class="n">elem_j</span><span class="p">][</span><span class="s2">&quot;CIF_radius&quot;</span><span class="p">],</span>
+                <span class="n">radius_values</span><span class="p">[</span><span class="n">elem_i</span><span class="p">][</span><span class="s2">&quot;CIF_radius&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">radius_values</span><span class="p">[</span><span class="n">elem_j</span><span class="p">][</span><span class="s2">&quot;CIF_radius&quot;</span><span class="p">],</span>
                 <span class="mi">3</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">pair_distances</span><span class="p">[</span><span class="s2">&quot;CIF_radius_refined_sum&quot;</span><span class="p">][</span><span class="n">pair_label</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
@@ -196,7 +162,6 @@
                 <span class="o">+</span> <span class="n">radius_values</span><span class="p">[</span><span class="n">elem_j</span><span class="p">][</span><span class="s2">&quot;Pauling_radius_CN12&quot;</span><span class="p">],</span>
                 <span class="mi">3</span><span class="p">,</span>
             <span class="p">)</span>
-
     <span class="k">return</span> <span class="n">pair_distances</span></div>
 
 </pre></div>

@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -184,7 +181,7 @@
                 <span class="p">)</span>
 
     <span class="n">delaunay</span> <span class="o">=</span> <span class="n">Delaunay</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-    <span class="n">hull</span> <span class="o">=</span> <span class="n">ConvexHull</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+    <span class="n">hull</span> <span class="o">=</span> <span class="n">ConvexHull</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">qhull_options</span><span class="o">=</span><span class="s2">&quot;QJ&quot;</span><span class="p">)</span>
 
     <span class="n">edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">simplex</span> <span class="ow">in</span> <span class="n">delaunay</span><span class="o">.</span><span class="n">simplices</span><span class="p">:</span>

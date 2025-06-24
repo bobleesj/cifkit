@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -155,11 +152,9 @@
                 <span class="n">lengths</span><span class="p">,</span>
                 <span class="n">angles_rad</span><span class="p">,</span>
             <span class="p">)</span>
-
             <span class="c1"># Calculate the dist between two points</span>
             <span class="n">dist</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">calc_dist_two_cart_points</span><span class="p">(</span><span class="n">cart_1</span><span class="p">,</span> <span class="n">cart_2</span><span class="p">)</span>
             <span class="n">dist</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-
             <span class="c1"># Check the dist</span>
             <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">cutoff_radius</span> <span class="ow">and</span> <span class="n">dist</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
                 <span class="n">point_2_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -189,15 +184,12 @@
 
 <div class="viewcode-block" id="get_most_connected_point_per_site">
 <a class="viewcode-back" href="../../../api/cifkit.preprocessors.environment.html#cifkit.preprocessors.environment.get_most_connected_point_per_site">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_most_connected_point_per_site</span><span class="p">(</span>
-    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dist_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">dist_set</span><span class="p">:</span> <span class="nb">set</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify the reference point with the highest number of connections</span>
-<span class="sd">    within the 50 shortest distances from a set of distances.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_most_connected_point_per_site</span><span class="p">(</span><span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dist_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">dist_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify the reference point with the highest number of</span>
+<span class="sd">    connections within the 50 shortest distances from a set of</span>
+<span class="sd">    distances.&quot;&quot;&quot;</span>
     <span class="n">sorted_unique_dists</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dist_set</span><span class="p">)</span>
-    <span class="c1"># Get the 30 shortest distances</span>
     <span class="n">shortest_dists</span> <span class="o">=</span> <span class="n">sorted_unique_dists</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span>
-
     <span class="c1"># Variables to track the reference point with the highest count</span>
     <span class="n">max_count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">max_ref_point</span> <span class="o">=</span> <span class="kc">None</span>
@@ -233,16 +225,15 @@
 <div class="viewcode-block" id="remove_duplicate_connections">
 <a class="viewcode-back" href="../../../api/cifkit.preprocessors.environment.html#cifkit.preprocessors.environment.remove_duplicate_connections">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_duplicate_connections</span><span class="p">(</span><span class="n">connections</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove duplicate connections based on the last set of coordinates.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove duplicate connections based on the last set of</span>
+<span class="sd">    coordinates.&quot;&quot;&quot;</span>
     <span class="n">unique_connections</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="n">unique_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
             <span class="c1"># The tuple representing the endpoint coordinates is item[3]</span>
-            <span class="n">coords</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
-                <span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-            <span class="p">)</span>  <span class="c1"># Need to convert list to tuple to use it in a set</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># Need to convert list to tuple to use it in a set</span>
             <span class="k">if</span> <span class="n">coords</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
                 <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
                 <span class="n">unique_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>

@@ -72,9 +72,6 @@
 <li class="toctree-l2"><a class="reference internal" href="cifkit.html#module-cifkit">Module contents</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
@@ -129,8 +126,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.utils.cif_parser.get_label_occupancy_coordinates">
 <span class="sig-prename descclassname"><span class="pre">cifkit.utils.cif_parser.</span></span><span class="sig-name descname"><span class="pre">get_label_occupancy_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loop_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/utils/cif_parser.html#get_label_occupancy_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.cif_parser.get_label_occupancy_coordinates" title="Link to this definition"></a></dt>
-<dd><p>Return atom information (label, occupancy, coordinates) for the i-th
-atom.</p>
+<dd><p>Return atom information (label, occupancy, coordinates) for the
+i-th atom.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -156,21 +153,23 @@ author section.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.utils.cif_parser.get_loop_values">
 <span class="sig-prename descclassname"><span class="pre">cifkit.utils.cif_parser.</span></span><span class="sig-name descname"><span class="pre">get_loop_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Block</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Column</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/utils/cif_parser.html#get_loop_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.cif_parser.get_loop_values" title="Link to this definition"></a></dt>
-<dd><p>Retrieve a list of predefined loop tags for atomic site description.</p>
+<dd><p>Retrieve a list of predefined loop tags for atomic site
+description.</p>
 <p>If a tag is not found, None is inserted in its place in the list.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.utils.cif_parser.get_start_end_line_indexes">
 <span class="sig-prename descclassname"><span class="pre">cifkit.utils.cif_parser.</span></span><span class="sig-name descname"><span class="pre">get_start_end_line_indexes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_keyword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/utils/cif_parser.html#get_start_end_line_indexes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.cif_parser.get_start_end_line_indexes" title="Link to this definition"></a></dt>
-<dd><p>Find the starting and ending indexes of the lines in atom_site_loop.</p>
+<dd><p>Find the starting and ending indexes of the lines in
+atom_site_loop.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cifkit.utils.cif_parser.get_tag_from_third_line">
 <span class="sig-prename descclassname"><span class="pre">cifkit.utils.cif_parser.</span></span><span class="sig-name descname"><span class="pre">get_tag_from_third_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PCD'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/cifkit/utils/cif_parser.html#get_tag_from_third_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.cif_parser.get_tag_from_third_line" title="Link to this definition"></a></dt>
-<dd><p>Extract the tag from the provided CIF file path appropriate for PCD db
-source only.</p>
+<dd><p>Extract the tag from the provided CIF file path appropriate for
+PCD db source only.</p>
 </dd></dl>
 
 <dl class="py function">

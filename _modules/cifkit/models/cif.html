@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -86,10 +83,10 @@
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">bobleesj.utils.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">radius</span>
+
 <span class="c1"># Bond pair</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.bond_distance</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_shortest_distance_per_bond_pair</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.bond_distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_shortest_distance_per_bond_pair</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.coordination.composition</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">compute_avg_CN</span><span class="p">,</span>
     <span class="n">get_bond_counts</span><span class="p">,</span>
@@ -111,16 +108,9 @@
 <span class="p">)</span>
 
 <span class="c1"># Radius</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.data.radius_handler</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">compute_radius_sum</span><span class="p">,</span>
-    <span class="n">get_is_radius_data_available</span><span class="p">,</span>
-    <span class="n">get_radius_values_per_element</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.data.radius_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_radius_sum</span><span class="p">,</span> <span class="n">get_radius_values_per_element</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.figures</span><span class="w"> </span><span class="kn">import</span> <span class="n">polyhedron</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.occupancy.mixing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_mixing_type_per_pair_dict</span><span class="p">,</span>
-    <span class="n">get_site_mixing_type</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.occupancy.mixing</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_mixing_type_per_pair_dict</span><span class="p">,</span> <span class="n">get_site_mixing_type</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.environment</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_site_connections</span>
 
 <span class="c1"># Coordination number</span>
@@ -129,10 +119,7 @@
 <span class="c1"># Supercell generation</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.supercell</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_supercell_points</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.preprocessors.supercell_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cell_atom_count</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.bond_pair</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_bond_pairs</span><span class="p">,</span>
-    <span class="n">get_pairs_sorted_by_mendeleev</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.bond_pair</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_bond_pairs</span><span class="p">,</span> <span class="n">get_pairs_sorted_by_mendeleev</span>
 
 <span class="c1"># Edit .cif file</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils.cif_editor</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit_cif_file_based_on_db</span>
@@ -160,7 +147,8 @@
 <div class="viewcode-block" id="ensure_connections">
 <a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.ensure_connections">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ensure_connections</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;For accessing lazy properties and methods, compute connections.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For accessing lazy properties and methods, compute</span>
+<span class="sd">    connections.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -182,20 +170,32 @@
 <a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Cif</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_formatted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">False</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">is_formatted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">supercell_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">compute_CN</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes an object from a .cif file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize an object from a .cif file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        file_path : str</span>
 <span class="sd">            Path to the .cif file.</span>
-<span class="sd">        is_formatted : bool, optional</span>
+<span class="sd">        is_formatted : bool, default</span>
 <span class="sd">            If False, preprocess the .cif file to ensure compatibility with the</span>
-<span class="sd">            gemmi library. Default is False.</span>
-<span class="sd">        logging_enabled : bool, optional</span>
+<span class="sd">            gemmi library.</span>
+<span class="sd">        logging_enabled : bool, default False</span>
 <span class="sd">            Enables detailed logging during initialization and for distance</span>
-<span class="sd">            calculations. Default is False.</span>
+<span class="sd">            calculations.</span>
+<span class="sd">        supercell_size : int, default 3</span>
+<span class="sd">            Size of the supercell to be generated. Default is 3.</span>
+<span class="sd">            Method 1 - No shifts</span>
+<span class="sd">            Method 2 - ±1 shifts  (3x3x3 of the unit cell)</span>
+<span class="sd">            Method 3 - ±2 shifts (5×5×5 of the unit cell)</span>
+<span class="sd">        compute_CN : bool, default False</span>
+<span class="sd">            Option to compute CN related metrics for each Cif object.</span>
 
 <span class="sd">        Attributes</span>
 <span class="sd">        ----------</span>
@@ -277,21 +277,19 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logging_enabled</span> <span class="o">=</span> <span class="n">logging_enabled</span>
-
         <span class="c1"># Initialize the Cif object with the file path.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_name_without_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db_source</span> <span class="o">=</span> <span class="n">get_cif_db_source</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
-
         <span class="c1"># Private attribute to store connections</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_pair_distance</span> <span class="o">=</span> <span class="kc">None</span>
-
         <span class="c1"># Pre-process if .cif has not been formatted</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_formatted</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_preprocess</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_load_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_data</span><span class="p">(</span><span class="n">supercell_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">compute_CN</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">compute_CN</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_log_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Log a formatted message if logging is enabled.&quot;&quot;&quot;</span>
@@ -302,17 +300,17 @@
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">formatted_message</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess each .cif file before initializng and separate files with</span>
-<span class="sd">        error.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess each .cif file before initializng and separate</span>
+<span class="sd">        files with error.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_info</span><span class="p">(</span><span class="n">CifLog</span><span class="o">.</span><span class="n">PREPROCESSING</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="n">edit_cif_file_based_on_db</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">supercell_size</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load data from the .cif file and extract attributes.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_info</span><span class="p">(</span><span class="n">CifLog</span><span class="o">.</span><span class="n">LOADING_DATA</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_block</span> <span class="o">=</span> <span class="n">get_cif_block</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parse_cif_data</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_supercell</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_supercell</span><span class="p">(</span><span class="n">supercell_size</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_parse_cif_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse the main CIF data from the block.&quot;&quot;&quot;</span>
@@ -336,15 +334,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">bond_pairs_sorted_by_mendeleev</span> <span class="o">=</span> <span class="n">get_pairs_sorted_by_mendeleev</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">site_label_pairs_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_pairs_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site_label_pairs_sorted_by_mendeleev</span> <span class="o">=</span> <span class="n">get_pairs_sorted_by_mendeleev</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">site_mixing_type</span> <span class="o">=</span> <span class="n">get_site_mixing_type</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_site_info</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_radius_data_available</span> <span class="o">=</span> <span class="n">get_is_radius_data_available</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_radius_data_available</span> <span class="o">=</span> <span class="n">radius</span><span class="o">.</span><span class="n">are_available</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mixing_info_per_label_pair</span> <span class="o">=</span> <span class="n">get_mixing_type_per_pair_dict</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">site_labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">site_label_pairs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_site_info</span>
         <span class="p">)</span>
@@ -356,7 +352,7 @@
             <span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">supercell_size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate supercell information based on the unit cell data.</span>
 
 <span class="sd">        This method calculates the supercell points and atom counts based</span>
@@ -365,23 +361,22 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Method implementation goes here</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_points</span> <span class="o">=</span> <span class="n">get_supercell_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">supercell_points</span> <span class="o">=</span> <span class="n">get_supercell_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supercell_points</span> <span class="o">=</span> <span class="n">get_supercell_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block</span><span class="p">,</span> <span class="n">supercell_size</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unitcell_atom_count</span> <span class="o">=</span> <span class="n">get_cell_atom_count</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unitcell_points</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">supercell_atom_count</span> <span class="o">=</span> <span class="n">get_cell_atom_count</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_points</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Cif.compute_connections">
 <a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.compute_connections">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cutoff_radius</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute onnection network, shortest distances, bond counts, and</span>
-<span class="sd">        coordination numbers (CN). These prperties are lazily loaded to avoid</span>
-<span class="sd">        unnecessary computation during the initialization and pre-processing</span>
-<span class="sd">        step.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute onnection network, shortest distances, bond counts,</span>
+<span class="sd">        and coordination numbers (CN). These prperties are lazily loaded</span>
+<span class="sd">        to avoid unnecessary computation during the initialization and</span>
+<span class="sd">        pre-processing step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        cutoff_radius : float, optional</span>
-<span class="sd">            The distance threshold in Angstroms used to consider two atoms as connected,</span>
-<span class="sd">            by default 10.0</span>
+<span class="sd">        cutoff_radius : float, default=10.0</span>
+<span class="sd">            The distance threshold in Angstroms used to consider two atoms as connected.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_info</span><span class="p">(</span><span class="n">CifLog</span><span class="o">.</span><span class="n">COMPUTE_CONNECTIONS</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="n">get_site_connections</span><span class="p">(</span>
@@ -394,30 +389,41 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">supercell_points</span><span class="p">,</span>
             <span class="n">cutoff_radius</span><span class="o">=</span><span class="n">cutoff_radius</span><span class="p">,</span>
         <span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">_connections_flattened</span> <span class="o">=</span> <span class="n">flat_site_connections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_distance</span> <span class="o">=</span> <span class="n">get_shortest_distance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">)</span>
-
         <span class="c1"># Shortest distance per bond pair</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_bond_pair_distance</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_shortest_distance_per_bond_pair</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connections_flattened</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_bond_pair_distance</span> <span class="o">=</span> <span class="n">get_shortest_distance_per_bond_pair</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connections_flattened</span>
         <span class="p">)</span>
-
         <span class="c1"># Shortest distance per site</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_shortest_site_pair_distance</span> <span class="o">=</span> <span class="n">get_shortest_distance_per_site</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
         <span class="p">)</span>
-
         <span class="c1"># Parse individual radii per element</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_radius_values</span> <span class="o">=</span> <span class="n">get_radius_values_per_element</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span>
+            <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span>
         <span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">_radius_sum</span> <span class="o">=</span> <span class="n">compute_radius_sum</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">radius_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_radius_data_available</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cif.compute_CN">
+<a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.compute_CN">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_CN</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute onnection network, shortest distances, bond counts,</span>
+<span class="sd">        and coordination numbers (CN). These prperties are lazily loaded</span>
+<span class="sd">        to avoid unnecessary computation during the initialization and</span>
+<span class="sd">        pre-processing step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cutoff_radius : float, default=10.0</span>
+<span class="sd">            The distance threshold in Angstroms used to consider two atoms as connected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># CN max gap per site</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We are computing CN&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_gap_per_site</span> <span class="o">=</span> <span class="n">compute_CN_max_gap_per_site</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">radius_sum</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">,</span>
@@ -431,17 +437,13 @@
         <span class="p">)</span>
 
         <span class="c1"># Get CN connections by the best methods</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_best_methods</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_CN_connections_by_best_methods</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">CN_best_methods</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
-            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_best_methods</span> <span class="o">=</span> <span class="n">get_CN_connections_by_best_methods</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_best_methods</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
         <span class="p">)</span>
 
         <span class="c1"># Get CN connections by the best methods</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_min_dist_method</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_CN_connections_by_min_dist_method</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
-            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_min_dist_method</span> <span class="o">=</span> <span class="n">get_CN_connections_by_min_dist_method</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span>
         <span class="p">)</span>
         <span class="c1"># Bond counts</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method</span> <span class="o">=</span> <span class="n">get_bond_counts</span><span class="p">(</span>
@@ -452,19 +454,15 @@
         <span class="p">)</span>
 
         <span class="c1"># Bond counts sorted by mendeleev</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_bond_counts</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span><span class="p">,</span>
-                <span class="n">sorted_by_mendeleev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span> <span class="o">=</span> <span class="n">get_bond_counts</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span><span class="p">,</span>
+            <span class="n">sorted_by_mendeleev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_bond_counts</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span><span class="p">,</span>
-                <span class="n">sorted_by_mendeleev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods_sorted_by_mendeleev</span> <span class="o">=</span> <span class="n">get_bond_counts</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span><span class="p">,</span>
+            <span class="n">sorted_by_mendeleev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Bond fractions</span>
@@ -477,15 +475,11 @@
 
         <span class="c1"># Bond fractions sorted by Mendeleev</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_bond_fractions</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span>
-            <span class="p">)</span>
+            <span class="n">get_bond_fractions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span><span class="p">)</span>
         <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">get_bond_fractions</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_best_methods_sorted_by_mendeleev</span>
-            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span> <span class="o">=</span> <span class="n">get_bond_fractions</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CN_bond_count_by_best_methods_sorted_by_mendeleev</span>
         <span class="p">)</span>
 
         <span class="c1"># Unique CN</span>
@@ -501,34 +495,25 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span>
         <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_best_methods</span> <span class="o">=</span> <span class="n">compute_avg_CN</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_best_methods</span> <span class="o">=</span> <span class="n">compute_avg_CN</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CN_connections_by_best_methods</span><span class="p">)</span>
 
         <span class="c1"># Max CN</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_min_dist_method</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_min_dist_method</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_best_methods</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_best_methods</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_min_dist_method</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_min_dist_method</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_best_methods</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_best_methods</span><span class="p">)</span>
         <span class="c1"># Min CN</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_min_dist_method</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_min_dist_method</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_best_methods</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_best_methods</span>
-        <span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_min_dist_method</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_min_dist_method</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_best_methods</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CN_unique_values_by_best_methods</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
     <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">shortest_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lazily retrieve the shortest atomic distance within the crystal</span>
-<span class="sd">        structure. This property is lazily loaded and ensures all necessary</span>
-<span class="sd">        connections are computed beforehand using the `@ensure_connections`</span>
-<span class="sd">        decorator. The computation calculates the minimum distance between any</span>
-<span class="sd">        pairs of atoms based on the connection data.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lazily retrieve the shortest atomic distance within the</span>
+<span class="sd">        crystal structure. This property is lazily loaded and ensures</span>
+<span class="sd">        all necessary connections are computed beforehand using the</span>
+<span class="sd">        `@ensure_connections` decorator. The computation calculates the</span>
+<span class="sd">        minimum distance between any pairs of atoms based on the</span>
+<span class="sd">        connection data.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -542,8 +527,8 @@
     <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">connections_flattened</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Transform site connections into a sorted list of tuples, each</span>
-<span class="sd">        containing a pair of alphabetically sorted element symbols and the</span>
-<span class="sd">        distance between them.</span>
+<span class="sd">        containing a pair of alphabetically sorted element symbols and</span>
+<span class="sd">        the distance between them.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -562,9 +547,9 @@
     <span class="nd">@property</span>
     <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">shortest_bond_pair_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine the minimum distance for all possible unique pair of</span>
-<span class="sd">        elements. This property uses lazily loaded connections to compute the</span>
-<span class="sd">        distance if they are not already available.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine the minimum distance for all possible unique pair</span>
+<span class="sd">        of elements. This property uses lazily loaded connections to</span>
+<span class="sd">        compute the distance if they are not already available.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -589,9 +574,10 @@
     <span class="nd">@property</span>
     <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">shortest_site_pair_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the shortest distance from each unique atomic site in the</span>
-<span class="sd">        crystal structure. This property uses lazily loaded connections to</span>
-<span class="sd">        compute these distances if they are not already available.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the shortest distance from each unique atomic site</span>
+<span class="sd">        in the crystal structure. This property uses lazily loaded</span>
+<span class="sd">        connections to compute these distances if they are not already</span>
+<span class="sd">        available.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -615,8 +601,8 @@
     <span class="nd">@property</span>
     <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">radius_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve CIF radius, CIF_refined radius, and Pauling C12 radius for</span>
-<span class="sd">        each element.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve CIF radius, CIF_refined radius, and Pauling C12</span>
+<span class="sd">        radius for each element.</span>
 
 <span class="sd">        This property uses lazy loading to compute or retrieve radius values only when</span>
 <span class="sd">        needed, optimizing performance. The CIF radius and Pauling C12 radius are standard</span>
@@ -671,8 +657,8 @@
     <span class="nd">@property</span>
     <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">radius_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the sum of CIF radius, CIF_refined radius, and Pauling C12</span>
-<span class="sd">        radius for the shortest bonding pairs of elements.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the sum of CIF radius, CIF_refined radius, and</span>
+<span class="sd">        Pauling C12 radius for the shortest bonding pairs of elements.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -715,10 +701,9 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius_sum</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_max_gap_per_site</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determines the maximum gap in coordination number (CN) for each</span>
-<span class="sd">        atomic site.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determines the maximum gap in coordination number (CN) for</span>
+<span class="sd">        each atomic site.</span>
 
 <span class="sd">        For each atomic site, considers the first 20 nearest neighbors. The distances</span>
 <span class="sd">        to these neighbors are normalized based on four methods:</span>
@@ -778,9 +763,9 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_gap_per_site</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determines the optimal coordination method for each atomic site.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determines the optimal coordination method for each atomic</span>
+<span class="sd">        site.</span>
 
 <span class="sd">        For each atomic site, the coordination polyhedron is generated for each method</span>
 <span class="sd">        in `self.CN_max_gap_per_site`. The method with the smallest value of</span>
@@ -827,12 +812,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_best_methods</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_connections_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_best_methods</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_connections_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_connections_by_min_dist_method</span>
 
@@ -842,93 +825,76 @@
 
     <span class="c1"># 1.1 Bond counts</span>
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods</span>
 
     <span class="c1"># 1.2 Bond counts sorted by mendeleev</span>
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_count_by_best_methods_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_count_by_best_methods_sorted_by_mendeleev</span>
 
     <span class="c1"># 2.1 Bond fractions</span>
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_min_dist_method</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods</span>
 
     <span class="c1"># 2.2. Bond fractions sorted by Mendeleev</span>
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span>
 
     <span class="c1"># Unique CN</span>
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_unique_values_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_unique_values_by_min_dist_method</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_unique_values_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_unique_values_by_best_methods</span>
 
     <span class="c1"># Average CN</span>
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_avg_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_min_dist_method</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_avg_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_avg_by_best_methods</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_max_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_min_dist_method</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_max_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_max_by_best_methods</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_min_by_min_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_min_dist_method</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CN_min_by_best_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CN_min_by_best_methods</span>
 
 <div class="viewcode-block" id="Cif.get_polyhedron_labels_by_CN_min_dist_method">
 <a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method">[docs]</a>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_polyhedron_labels_by_CN_min_dist_method</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
@@ -939,7 +905,6 @@
 
 <div class="viewcode-block" id="Cif.get_polyhedron_labels_by_CN_best_methods">
 <a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods">[docs]</a>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_polyhedron_labels_by_CN_best_methods</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
@@ -950,7 +915,6 @@
 
 <div class="viewcode-block" id="Cif.plot_polyhedron">
 <a class="viewcode-back" href="../../../api/cifkit.models.cif.html#cifkit.models.cif.Cif.plot_polyhedron">[docs]</a>
-    <span class="nd">@ensure_connections</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">plot_polyhedron</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">site_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -958,7 +922,8 @@
         <span class="n">is_displayed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to plot a polyhedron structure and optionally saves it.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to plot a polyhedron structure and optionally saves</span>
+<span class="sd">        it.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>

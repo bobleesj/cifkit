@@ -73,9 +73,6 @@
 <li class="toctree-l2"><a class="reference internal" href="cifkit.html#module-cifkit">Module contents</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
@@ -109,31 +106,33 @@
   <section id="module-cifkit.data.radius_optimization">
 <span id="cifkit-data-radius-optimization-module"></span><h1>cifkit.data.radius_optimization module<a class="headerlink" href="#module-cifkit.data.radius_optimization" title="Link to this heading"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cifkit.data.radius_optimization.constraint">
-<span class="sig-prename descclassname"><span class="pre">cifkit.data.radius_optimization.</span></span><span class="sig-name descname"><span class="pre">constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_pair</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortest_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cifkit/data/radius_optimization.html#constraint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.data.radius_optimization.constraint" title="Link to this definition"></a></dt>
-<dd><p>Enforce that the sum of the radii of the pair does not exceed the
-shortest allowed distance between them.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cifkit.data.radius_optimization.generate_adjacent_pairs">
-<span class="sig-prename descclassname"><span class="pre">cifkit.data.radius_optimization.</span></span><span class="sig-name descname"><span class="pre">generate_adjacent_pairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/data/radius_optimization.html#generate_adjacent_pairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.data.radius_optimization.generate_adjacent_pairs" title="Link to this definition"></a></dt>
-<dd><p>Generate a list of tuples, where each tuple is a pair of adjacent atom
-labels.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="cifkit.data.radius_optimization.get_refined_CIF_radius">
-<span class="sig-prename descclassname"><span class="pre">cifkit.data.radius_optimization.</span></span><span class="sig-name descname"><span class="pre">get_refined_CIF_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortest_distances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/data/radius_optimization.html#get_refined_CIF_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.data.radius_optimization.get_refined_CIF_radius" title="Link to this definition"></a></dt>
-<dd><p>Optimize CIF radii given atom labels and their shortest pair distance
-constraints.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cifkit.data.radius_optimization.objective">
-<span class="sig-prename descclassname"><span class="pre">cifkit.data.radius_optimization.</span></span><span class="sig-name descname"><span class="pre">objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_radii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/data/radius_optimization.html#objective"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.data.radius_optimization.objective" title="Link to this definition"></a></dt>
-<dd><p>Calculate the objective function value,which is the sum of squared
-percent differences between original and refined radii.</p>
+<span class="sig-prename descclassname"><span class="pre">cifkit.data.radius_optimization.</span></span><span class="sig-name descname"><span class="pre">get_refined_CIF_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortest_distances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements_ordered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_size_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cifkit/data/radius_optimization.html#get_refined_CIF_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.data.radius_optimization.get_refined_CIF_radius" title="Link to this definition"></a></dt>
+<dd><p>Optimize CIF radii for a set of elements given (1) their adjacent
+pairwise distance constraints (2) size order of the original CIF
+radii.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elements</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of chemical element symbols to optimize radii for.</p></li>
+<li><p><strong>shortest_distances</strong> (<em>dict</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Dictionary of shortest pairwise distances between element pairs.
+Keys should be tuples of two element symbols (e.g., (‘Fe’, ‘Ge’)).</p></li>
+<li><p><strong>elements_ordered</strong> (<em>bool</em><em>, </em><em>default True</em>) – The elements will be sorted before processing.
+This affects how adjacency interatomic bond pairs is defined
+when generating element pairs.</p></li>
+<li><p><strong>use_size_constraint</strong> (<em>bool</em><em>, </em><em>default True</em>) – Use the radius size order constraint. If True, the optimization
+will ensure that the refined radii maintain the original size order
+of the CIF radii. If False, this constraint is not applied.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>dict[str, float]</em> – Dictionary mapping each element to its optimized CIF radius.</p></li>
+<li><p><em>float</em> – Value of the objective function (sum of squared deviations from original radii).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

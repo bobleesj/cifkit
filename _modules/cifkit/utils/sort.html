@@ -51,9 +51,6 @@
 <p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/cifkit.html">Package API</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">OTHER</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
 </ul>
@@ -91,8 +88,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Alphabetically sort the pair tuple of elements.&quot;&quot;&quot;</span>
     <span class="c1"># First, sort the elements within each tuple</span>
     <span class="n">alp_sorted_tuples</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">((</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)),</span> <span class="n">distance</span><span class="p">)</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">element_pair_tuples</span>
+        <span class="p">((</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)),</span> <span class="n">distance</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">element_pair_tuples</span>
     <span class="p">]</span>
 
     <span class="c1"># Priotize alphabetic sort, and sort by distance</span>
