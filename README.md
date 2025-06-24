@@ -100,6 +100,25 @@ mentioned above.
 - [Contribution guide](https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md)
 - [MIT license](https://github.com/bobleesj/cifkit/blob/main/LICENSE)
 
+## Citation
+
+If you use `cifkit` in your publication, please cite
+
+```text
+@article{Lee2024,
+  author    = {Sangjoon Lee and Anton O. Oliynyk},
+  title     = {cifkit: A Python package for coordination geometry and atomic site analysis},
+  journal   = {Journal of Open Source Software},
+  year      = {2024},
+  volume    = {9},
+  number    = {103},
+  pages     = {7205},
+  publisher = {The Open Journal},
+  doi       = {10.21105/joss.07205},
+  url       = {https://doi.org/10.21105/joss.07205}
+}
+```
+
 ## How to contribute
 
 Here is how you can contribute to the `cifkit` project if you found it helpful:
