@@ -210,15 +210,6 @@ diverse group of researchers:
 We welcome all forms of contributions from the community. Your ideas and
 improvements are valued and appreciated.
 
-Citation
---------
-
-Please consider citing ``cifkit`` if it has been useful for your
-research:
-
-   Note: the ``cifkit`` manuscript is also under reviewed by the Journal
-   of Open Source Software.
-
 Other links
 -----------
 
