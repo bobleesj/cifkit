@@ -17,9 +17,6 @@ Installation
 
    pip install cifkit
 
-Welcome to the ``cifkit`` documentation!
-
-``cifkit`` - A Python package for coordination geometry and atomic site analysis.
 
 Citation
 --------
@@ -27,8 +24,6 @@ Citation
 If you use ``cifkit`` in your scientific publication, please cite the following:
 
 - *cifkit: A Python package for coordination geometry and atomic site analysis*. `https://doi.org/10.21105/joss.07205 <https://doi.org/10.21105/joss.07205>`_
-
-110178>`_
 
 Statement of need
 -----------------
@@ -142,21 +137,12 @@ based on specific attributes:
    # Return file path matching CeAl2Ga2
    ensemble.filter_by_structures("CeAl2Ga2")
 
-Research projects using ``cifkit``
+Research software using ``cifkit``
 ----------------------------------
 
-The below projects uses the ``Cif`` and ``CifEnsemble`` classes for
-research applications.
-
--  CIF Bond Analyzer (CBA) - extract and visualize bonding patterns -
-   `DOI <https://doi.org/10.1016/j.jallcom.2023.173241>`__ \|
-   `GitHub <https://github.com/bobleesj/cif-bond-analyzer>`__ \|
-   `Poster <https://bobleesj.github.io/files/presentation/2024-GRC-poster.pdf>`__
--  Structure Analysis/Featurizer (SAF) - build geometric features for
-   binary, ternary compounds -
-   `GitHub <https://github.com/bobleesj/structure-analyzer-featurizer>`__
--  CIF Cleaner - move, copy .cif files based on attributes
-   `GitHub <https://github.com/bobleesj/cif-cleaner>`__
+-  `CIF Bond Analyzer (CBA) <https://github.com/bobleesj/cif-bond-analyzer>`_
+-  `Structure Analysis/Featurizer (SAF) <https://github.com/bobleesj/structure-analyzer-featurizer>`_
+-  `CIF Cleaner <https://github.com/bobleesj/cif-cleaner>`_
 
 How to ask for help
 -------------------
