@@ -21,6 +21,15 @@ Welcome to the ``cifkit`` documentation!
 
 ``cifkit`` - A Python package for coordination geometry and atomic site analysis.
 
+Citation
+--------
+
+If you use ``cifkit`` in your scientific publication, please cite the following:
+
+- *cifkit: A Python package for coordination geometry and atomic site analysis*. `https://doi.org/10.21105/joss.07205 <https://doi.org/10.21105/joss.07205>`_
+
+110178>`_
+
 Statement of need
 -----------------
 
@@ -200,15 +209,6 @@ diverse group of researchers:
 
 We welcome all forms of contributions from the community. Your ideas and
 improvements are valued and appreciated.
-
-Citation
---------
-
-Please consider citing ``cifkit`` if it has been useful for your
-research:
-
-   Note: the ``cifkit`` manuscript is also under reviewed by the Journal
-   of Open Source Software.
 
 Other links
 -----------
