@@ -331,7 +331,6 @@ class Cif:
         """
 
         # CN max gap per site
-        print("We are computing CN")
         self._CN_max_gap_per_site = compute_CN_max_gap_per_site(
             self.radius_sum,
             self.connections,

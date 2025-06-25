@@ -102,7 +102,7 @@ mentioned above.
 
 ## Citation
 
-If you use `cifkit` in your publication, please cite
+If you use `cifkit` in your publication, please cite the following:
 
 ```text
 @article{Lee2024,
