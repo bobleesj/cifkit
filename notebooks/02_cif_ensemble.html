@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CifEnsemble &mdash; cifkit 0.0.1 documentation</title>
+  <title>CifEnsemble &mdash; cifkit 1.0.9rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=36add64d"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -101,10 +101,10 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifEnsemble</span>
 
 <span class="c1"># Initialize</span>
-<span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">demo_folder_path</span><span class="p">)</span>
+<span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="s2">&quot;path/to/your/cif/folder&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -116,7 +116,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="c1"># Initialize with nested .cif files in the folder</span>
-<span class="n">ensemble_nested</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">demo_folder_path</span><span class="p">,</span> <span class="n">add_nested_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ensemble_nested</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="s2">&quot;path/to/your/cif/folder&quot;</span><span class="p">,</span> <span class="n">add_nested_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -130,13 +130,10 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get .cif file count in the folder</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File count:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">file_count</span><span class="p">)</span> <span class="c1"># 6</span>
-
 <span class="c1"># Get the directory path</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory path:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">dir_path</span><span class="p">)</span>
-
 <span class="c1"># Get all file paths in the folder</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File paths:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">file_paths</span><span class="p">)</span>
-
 <span class="c1"># Get all Cif objects initialized</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cif objects:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">cifs</span><span class="p">)</span>
 </pre></div>
@@ -170,28 +167,20 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get unique formulas</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique formulas:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_formulas</span><span class="p">)</span>
-
 <span class="c1"># Get unique elements</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique elements:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
-
 <span class="c1"># Get unique structures</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique structures:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_structures</span><span class="p">)</span>
-
 <span class="c1"># Get unique atomix mixing types</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique atomic mixing types:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_site_mixing_types</span><span class="p">)</span>
-
 <span class="c1"># Get unique elements</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique elements including nested:&quot;</span><span class="p">,</span> <span class="n">ensemble_nested</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
-
 <span class="c1"># Get unique space group names</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique space group names:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_names</span><span class="p">)</span>
-
 <span class="c1"># Get unique space group numbers</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique space group numbers:&quot;</span><span class="p">,</span><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_numbers</span><span class="p">)</span>
-
 <span class="c1"># Get unique tags</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique tags:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_tags</span><span class="p">)</span>
-
 <span class="c1"># Get unique composition types</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique composition types:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_composition_types</span><span class="p">)</span>
 </pre></div>
@@ -207,34 +196,24 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get file count per structure</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Structure stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">structure_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per formula</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formula stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">formula_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per tag</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tag stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">tag_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per space group number</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Space group number stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">space_group_number_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per space group name</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Space group name stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">space_group_name_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per composition type</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Composition type stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">composition_type_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per Element</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique elements stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_elements_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per site mixing type</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Site mixing type stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">site_mixing_type_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per supercell atom count</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Supercell size stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">supercell_size_stats</span><span class="p">)</span>
-
 <span class="c1"># Get file count per CN value by min dist method</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CN value using min dist method stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_CN_values_by_min_dist_method_stat</span><span class="p">)</span>
-
 <span class="c1"># Get file count per CN value by best methods</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CN value using best methods stats:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_CN_values_by_method_methods_stat</span><span class="p">)</span>
 </pre></div>
@@ -249,20 +228,16 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Return file paths by formulas</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_formulas</span><span class="p">([</span><span class="s2">&quot;ErCoIn&quot;</span><span class="p">,</span> <span class="s2">&quot;Er10Co9In20&quot;</span><span class="p">])</span>
-
 <span class="c1"># Return file paths by structures</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_structures</span><span class="p">([</span><span class="s2">&quot;Mn5Si3&quot;</span><span class="p">])</span>
-
 <span class="c1"># Return file paths by space group names</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_space_group_names</span><span class="p">([</span><span class="s2">&quot;P4/mmm&quot;</span><span class="p">])</span>
-
 <span class="c1"># Return file paths by space group numbers</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_space_group_numbers</span><span class="p">([</span><span class="mi">123</span><span class="p">])</span>
 
 <span class="c1"># Return file paths by site mixing types</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_site_mixing_types</span><span class="p">([</span><span class="s2">&quot;full_occupancy&quot;</span><span class="p">])</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_site_mixing_types</span><span class="p">([</span><span class="s2">&quot;full_occupancy&quot;</span><span class="p">,</span> <span class="s2">&quot;deficiency_without_atomic_mixing&quot;</span><span class="p">])</span>
-
 <span class="c1"># Return file paths by composition types (1-&gt; unary, 2-&gt; binary)</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_composition_types</span><span class="p">([</span><span class="mi">3</span><span class="p">])</span>
 <br/><br/></pre></div>
@@ -278,14 +253,11 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing Er or Co or In:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_elements_containing</span><span class="p">([</span><span class="s2">&quot;Er&quot;</span><span class="p">,</span> <span class="s2">&quot;Co&quot;</span><span class="p">,</span> <span class="s2">&quot;In&quot;</span><span class="p">]))</span> <span class="c1">#</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing Er and In:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_elements_exact_matching</span><span class="p">([</span><span class="s2">&quot;Er&quot;</span><span class="p">,</span> <span class="s2">&quot;In&quot;</span><span class="p">]))</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing CN value of 15:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_min_dist_method_containing</span><span class="p">([</span><span class="mi">15</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_best_methods_containing</span><span class="p">([</span><span class="mi">15</span><span class="p">]))</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File paths containing CN value of 11, 14, and 15:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_min_dist_method_exact_matching</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_CN_best_methods_exact_matching</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]))</span>
@@ -301,7 +273,6 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Return a set of .cif file paths with min distance between 1.0 Å and 3.0 Å</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File paths with min distance between 1.0 Å and 3.0 Å:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_min_distance</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">))</span>
-
 <span class="c1"># Return a set of .cif file paths with supercell atom count above 500 and below 3000.</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File paths with supercell atom count above 500 and below 3000:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_supercell_count</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">3000</span><span class="p">))</span>
 </pre></div>

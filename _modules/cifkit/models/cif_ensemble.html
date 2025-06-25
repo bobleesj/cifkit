@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cifkit.models.cif_ensemble &mdash; cifkit 0.0.1 documentation</title>
+  <title>cifkit.models.cif_ensemble &mdash; cifkit 1.0.9rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/documentation_options.js?v=36add64d"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -123,24 +123,23 @@
 <span class="sd">            format requiring manual modifications. It also relocates any ill-formatted</span>
 <span class="sd">            files, such as those with duplicate labels in atom_site_label, missing</span>
 <span class="sd">            fractional coordinates, or files requiring supercell generation.</span>
-<span class="sd">        compute_CN : bool, default False</span>
+<span class="sd">        compute_CN : bool, optional</span>
 <span class="sd">            Option to compute coordination numbers for each Cif object.</span>
-
 <span class="sd">        logging_enabled : bool, optional</span>
 <span class="sd">            Option to log while pre-processing Cif objects, by default False</span>
 
 <span class="sd">        Attributes</span>
 <span class="sd">        ----------</span>
 <span class="sd">        dir_path: str</span>
-<span class="sd">            Path to the folder containing .cif files</span>
+<span class="sd">            The path to the folder containing .cif files</span>
 <span class="sd">        file_paths: list[str]</span>
-<span class="sd">            List of file paths to .cif files</span>
+<span class="sd">            The pist of file paths to .cif files</span>
 <span class="sd">        cifs: list[Cif]</span>
-<span class="sd">            List of Cif objects</span>
+<span class="sd">            The list of Cif objects</span>
 <span class="sd">        file_count: int</span>
-<span class="sd">            Number of .cif files in the folder</span>
+<span class="sd">            The number of .cif files in the folder</span>
 <span class="sd">        logging_enabled: bool</span>
-<span class="sd">            Option to log while pre-processing Cif objects</span>
+<span class="sd">            The option to log while pre-processing Cif objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Process each file, handling exceptions that may occur</span>

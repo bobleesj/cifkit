@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cifkit.data.radius_optimization &mdash; cifkit 0.0.1 documentation</title>
+  <title>cifkit.data.radius_optimization &mdash; cifkit 1.0.9rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../../../_static/documentation_options.js?v=36add64d"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -164,10 +164,10 @@
     <span class="c1"># For quaternary, it would be A-B, B-C, C-D pairs, etc.</span>
     <span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">element_pairs</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting constraint for&quot;</span><span class="p">,</span> <span class="n">pair</span><span class="p">)</span>
+        <span class="c1"># print(&quot;Setting constraint for&quot;, pair)</span>
         <span class="c1"># Get the shortest distance for the pair, considering both orders</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">shortest_distances</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="ow">or</span> <span class="n">shortest_distances</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setting constraint for </span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> with distance </span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># print(f&quot;Setting constraint for {pair[0]}-{pair[1]} with distance {dist}&quot;)</span>
         <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">elements</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span>

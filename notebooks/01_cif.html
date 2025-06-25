@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CIF &mdash; cifkit 0.0.1 documentation</title>
+  <title>CIF &mdash; cifkit 1.0.9rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=36add64d"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -60,7 +60,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Get-computed-properties---nearest-connections-per-site">Get computed properties - nearest connections per site</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Get-computed-properties---distances">Get computed properties - distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Get-computed-properties---coordination-numbers">Get computed properties - coordination numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Draw-polyhedrons">Draw polyhedrons</a></li>
 </ul>
 </li>
@@ -118,7 +117,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span>
 
 <span class="c1"># Initialize with the example file provided</span>
-<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">Er10Co9In20_file_path</span><span class="p">)</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span><span class="p">)</span>
 
 <span class="c1"># Print attributes</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File name:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
@@ -142,7 +141,7 @@
   <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">dict_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="c1"># Initialize</span>
-<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span><span class="p">)</span>
 
 <span class="c1"># Print instantly available properties</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formula:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">formula</span><span class="p">)</span>
@@ -158,7 +157,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Composition type:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">composition_type</span><span class="p">)</span> <span class="c1"># 3 -&gt; Ternary</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tag:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atom_site_info:&quot;</span><span class="p">,</span> <span class="n">prettify_dict</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">atom_site_info</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Wyckoff_symbol of Er1:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">atom_site_info</span><span class="p">[</span><span class="s2">&quot;Er&quot;</span><span class="p">][</span><span class="s2">&quot;wyckoff_symbol&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Wyckoff_symbol of Gd:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">atom_site_info</span><span class="p">[</span><span class="s2">&quot;Gd&quot;</span><span class="p">][</span><span class="s2">&quot;wyckoff_symbol&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -180,7 +179,7 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
 
 <span class="c1"># Initialize</span>
-<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span><span class="p">)</span>
 
 <span class="c1"># Utility function for printing a set of tuples</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">print_tuples</span><span class="p">(</span><span class="n">tuples</span><span class="p">):</span>
@@ -230,9 +229,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">print_connected_points</span><span class="p">(</span><span class="n">all_labels_connections</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_connected_points</span><span class="p">(</span><span class="n">all_labels_connections</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Utility function for printing connections per site label</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -245,10 +242,15 @@
             <span class="n">coords_2</span><span class="p">,</span>
         <span class="p">)</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">connected_label</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">coords_1</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">coords_2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-
-<span class="c1"># Initialize</span>
-<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute CN connections</span>
+<span class="n">cif</span><span class="o">.</span><span class="n">compute_CN</span><span class="p">()</span>
 
 <span class="c1"># Print CN Connections</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Find CN_connections_by_min_dist_method:&quot;</span><span class="p">)</span>
@@ -267,31 +269,17 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
-
-<span class="c1"># Initialize</span>
-<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest distance:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_distance</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest distance:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_distance</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest bond pair distances:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest site pair distances:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_site_pair_distance</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</section>
-<section id="Get-computed-properties---coordination-numbers">
-<h2>Get computed properties - coordination numbers<a class="headerlink" href="#Get-computed-properties---coordination-numbers" title="Link to this heading"></a></h2>
-<p>Compute <code class="docutils literal notranslate"><span class="pre">avg</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">unique</span></code> of coordination numbers determined by one of the best methods or min distance method.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
-
-<span class="c1"># Initialize</span>
-<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
-
-<span class="c1"># Bond counts</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bond counts</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CN_bond_count_by_min_dist_method:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_count_by_min_dist_method</span><span class="p">)</span>
 
@@ -359,14 +347,12 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># For Jupyter Notebook only</span>
 
-<span class="c1"># Initialize</span>
-<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">ErCoIn5_file_path</span><span class="p">)</span>
 
 <span class="c1"># Enter site labels. you can get site labels using cif.labels</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Site labels:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span><span class="p">)</span>
 
 <span class="c1"># Plot</span>
-<span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="s2">&quot;In1&quot;</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="s2">&quot;Sb&quot;</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
