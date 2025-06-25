@@ -1,6 +1,14 @@
 cifkit.data package
 ===================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cifkit.data.cifs
+
 Submodules
 ----------
 

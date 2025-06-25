@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cifkit.utils.distance module &mdash; cifkit 1.0.9 documentation</title>
+  <title>cifkit.data.cifs package &mdash; cifkit 1.0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cifkit.utils.error_messages module" href="cifkit.utils.error_messages.html" />
-    <link rel="prev" title="cifkit.utils.cif_sourcer module" href="cifkit.utils.cif_sourcer.html" /> 
+    <link rel="next" title="cifkit.data.example module" href="cifkit.data.example.html" />
+    <link rel="prev" title="cifkit.data package" href="cifkit.data.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -56,16 +56,17 @@
 <li class="toctree-l1 current"><a class="reference internal" href="cifkit.html">Package API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="cifkit.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cifkit.coordination.html">cifkit.coordination package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cifkit.data.html">cifkit.data package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="cifkit.data.html">cifkit.data package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="cifkit.data.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cifkit.data.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cifkit.data.html#module-cifkit.data">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="cifkit.figures.html">cifkit.figures package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cifkit.models.html">cifkit.models package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cifkit.occupancy.html">cifkit.occupancy package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cifkit.preprocessors.html">cifkit.preprocessors package</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="cifkit.utils.html">cifkit.utils package</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="cifkit.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cifkit.utils.html#module-cifkit.utils">Module contents</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="cifkit.utils.html">cifkit.utils package</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cifkit.html#submodules">Submodules</a></li>
@@ -91,10 +92,10 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="cifkit.html">cifkit package</a></li>
-          <li class="breadcrumb-item"><a href="cifkit.utils.html">cifkit.utils package</a></li>
-      <li class="breadcrumb-item active">cifkit.utils.distance module</li>
+          <li class="breadcrumb-item"><a href="cifkit.data.html">cifkit.data package</a></li>
+      <li class="breadcrumb-item active">cifkit.data.cifs package</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/api/cifkit.utils.distance.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/api/cifkit.data.cifs.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -102,23 +103,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-cifkit.utils.distance">
-<span id="cifkit-utils-distance-module"></span><h1>cifkit.utils.distance module<a class="headerlink" href="#module-cifkit.utils.distance" title="Link to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="cifkit.utils.distance.calc_dist_two_cart_points">
-<span class="sig-prename descclassname"><span class="pre">cifkit.utils.distance.</span></span><span class="sig-name descname"><span class="pre">calc_dist_two_cart_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/cifkit/utils/distance.html#calc_dist_two_cart_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cifkit.utils.distance.calc_dist_two_cart_points" title="Link to this definition"></a></dt>
-<dd><p>Calculate the Euclidean distance between two points in Cartesian
-coordinates.</p>
-</dd></dl>
-
+  <section id="cifkit-data-cifs-package">
+<h1>cifkit.data.cifs package<a class="headerlink" href="#cifkit-data-cifs-package" title="Link to this heading"></a></h1>
+<section id="module-cifkit.data.cifs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cifkit.data.cifs" title="Link to this heading"></a></h2>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cifkit.utils.cif_sourcer.html" class="btn btn-neutral float-left" title="cifkit.utils.cif_sourcer module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cifkit.utils.error_messages.html" class="btn btn-neutral float-right" title="cifkit.utils.error_messages module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cifkit.data.html" class="btn btn-neutral float-left" title="cifkit.data package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cifkit.data.example.html" class="btn btn-neutral float-right" title="cifkit.data.example module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
