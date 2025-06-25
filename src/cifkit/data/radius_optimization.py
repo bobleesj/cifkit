@@ -80,10 +80,10 @@ def get_refined_CIF_radius(
     # For quaternary, it would be A-B, B-C, C-D pairs, etc.
     constraints = []
     for pair in element_pairs:
-        print("Setting constraint for", pair)
+        # print("Setting constraint for", pair)
         # Get the shortest distance for the pair, considering both orders
         dist = shortest_distances.get(pair) or shortest_distances.get((pair[1], pair[0]))
-        print(f"Setting constraint for {pair[0]}-{pair[1]} with distance {dist}")
+        # print(f"Setting constraint for {pair[0]}-{pair[1]} with distance {dist}")
         i, j = elements.index(pair[0]), elements.index(pair[1])
         constraints.append(
             {
