@@ -4,6 +4,39 @@ Release Notes
 
 .. current developments
 
+1.0.9
+=====
+
+**Added:**
+
+* Add unit tests for refined CIF radius for binary and ternary.
+* Add ``bobleesj.utils`` to the ``pip.txt`` and ``conda.txt`` requirement files.
+* Add ``deepdiff`` to ``test.txt``.
+* Use bobleesj.utils to source CIF radius for all elements.
+* Relocate PCD .cif files that have no atomic site/label while preprocessing each .cif file.
+* Standarlize `cifkit` using `scikit-package` v0.1.0 including `docformatter`, `prettier`, and `codespell` for code formatting and linting.
+* Include an option to compute coordination metrics when CIF and CifEnsemble are initialized.
+* Implement compute_CN to separate computing CN related metrics, separated from computing connections.
+* Return objective function value after finding refined CIF radius.
+
+**Changed:**
+
+* Source Mendeleeve values from bobleesj.utils.
+
+**Fixed:**
+
+* Catch error for the polyhedron when the volume cannot be calculated due to flat surface.
+* Fix all local unit tests to pass with compute_CN() method.
+* Generate 5 by 5 by 5 supercell by default in instead of 3 by 3 by 3 to handle the case where a bigger supercell is required to accurate to determine the correct shortest distances from each site.
+* Fix Jupyter CIF doc rendering problem with PCD demo file.
+* Set line-length max to 90 instead of 79.
+* Fix error in polyhedron volume calculation for CN=5 and other polyhedrons with central atom on the same plane with equatorial atoms.
+
+**Removed:**
+
+* Remove hard coded data for CIF and Pauling CN12 radius values. Retrieve them from bobleesj.utils.
+
+
 1.0.6
 =====
 
