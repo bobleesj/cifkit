@@ -26,8 +26,7 @@ def test_get_CIF_pauling_radii():
 def test_compute_radius_sum(radius_data_URhIn, radius_sum_data_URhIn):
     combined_radii = compute_radius_sum(radius_data_URhIn, True)
     expected = radius_sum_data_URhIn
-
-    # Assert each element and sub-element individually
+    print(combined_radii)
     for element, radii in expected.items():
         for key, value in radii.items():
             assert combined_radii[element][key] == pytest.approx(value, abs=0.001)

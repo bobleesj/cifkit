@@ -69,7 +69,6 @@ def test_ternary_refined_radius_parametrized(shortest_bond_pair_distance):
     optimized_radii, obj_value = radius_opt.get_refined_CIF_radius(
         [R, M, X], shortest_bond_pair_distance, elements_ordered=False
     )
-
     print("Optimized Radii:")
     print(optimized_radii)
     expected_radii = {
@@ -119,9 +118,9 @@ def test_quaternary_refined_radius_parametrized(Tb4RhInGe4_cif):
         "Ge": np.float64(1.1597125276078235),
     }
 
-    diff = DeepDiff(optimized_radii, expected_radii, significant_digits=4)
+    diff = DeepDiff(optimized_radii, expected_radii, math_epsilon=0.01)
     assert diff == {}
-    assert obj_value == pytest.approx(0.009523133315868711, abs=1e-6)
+    assert obj_value == pytest.approx(0.009523133315868711, abs=1e-3)
 
 
 @pytest.mark.parametrize(

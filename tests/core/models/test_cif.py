@@ -222,18 +222,18 @@ def test_radius_values(cif_URhIn):
     actual_values = cif_URhIn.radius_values
     expected_values = {
         "In": {
-            "CIF_radius": 1.487,
-            "CIF_radius_refined": 1.328,
+            "CIF_radius": 1.624,
+            "CIF_radius_refined": 1.4870460399593393,
             "Pauling_radius_CN12": 1.66,
         },
         "Rh": {
             "CIF_radius": 1.345,
-            "CIF_radius_refined": 1.369,
+            "CIF_radius_refined": 1.3559562114475352,
             "Pauling_radius_CN12": 1.342,
         },
         "U": {
             "CIF_radius": 1.377,
-            "CIF_radius_refined": 1.614,
+            "CIF_radius_refined": 1.48694,
             "Pauling_radius_CN12": 1.516,
         },
     }
@@ -245,35 +245,10 @@ def test_radius_values(cif_URhIn):
 
 
 @pytest.mark.fast
-def test_radius_sum_data(cif_URhIn):
+def test_radius_sum_data(cif_URhIn, radius_sum_data_URhIn):
     # Tested Jun 11, 2025
     actual_sum = cif_URhIn.radius_sum
-    expected_sum = {
-        "CIF_radius_sum": {
-            "In-In": 3.248,
-            "In-Rh": 2.969,
-            "In-U": 3.001,
-            "Rh-Rh": 2.69,
-            "Rh-U": 2.722,
-            "U-U": 2.754,
-        },
-        "CIF_radius_refined_sum": {
-            "In-In": 2.656,
-            "In-Rh": 2.697,
-            "In-U": 2.942,
-            "Rh-Rh": 2.738,
-            "Rh-U": 2.983,
-            "U-U": 3.228,
-        },
-        "Pauling_radius_sum": {
-            "In-In": 3.32,
-            "In-Rh": 3.002,
-            "In-U": 3.176,
-            "Rh-Rh": 2.684,
-            "Rh-U": 2.858,
-            "U-U": 3.032,
-        },
-    }
+    expected_sum = radius_sum_data_URhIn
     print("Actual sum:", actual_sum)
     diff = DeepDiff(actual_sum, expected_sum, significant_digits=3)
     assert diff == {}

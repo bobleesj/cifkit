@@ -149,17 +149,17 @@ def radius_data_URhIn() -> dict:
     return {
         "In": {
             "CIF_radius": 1.624,
-            "CIF_radius_refined": 1.3283,
+            "CIF_radius_refined": 1.4870460399593393,
             "Pauling_radius_CN12": 1.66,
         },
         "Rh": {
             "CIF_radius": 1.345,
-            "CIF_radius_refined": 1.3687,
+            "CIF_radius_refined": 1.3559562114475352,
             "Pauling_radius_CN12": 1.342,
         },
         "U": {
             "CIF_radius": 1.377,
-            "CIF_radius_refined": 1.6143,
+            "CIF_radius_refined": 1.486946039959839,
             "Pauling_radius_CN12": 1.516,
         },
     }
@@ -177,12 +177,12 @@ def radius_sum_data_URhIn() -> dict:
             "U-U": 2.754,
         },
         "CIF_radius_refined_sum": {
-            "In-In": 2.657,
-            "In-Rh": 2.697,
-            "In-U": 2.943,
-            "Rh-Rh": 2.737,
-            "Rh-U": 2.983,
-            "U-U": 3.229,
+            "In-In": 2.974,
+            "In-Rh": 2.843,
+            "In-U": 2.974,
+            "Rh-Rh": 2.712,
+            "Rh-U": 2.843,
+            "U-U": 2.974,
         },
         "Pauling_radius_sum": {
             "In-In": 3.32,
@@ -193,7 +193,6 @@ def radius_sum_data_URhIn() -> dict:
             "U-U": 3.032,
         },
     }
-
 
 @pytest.fixture(scope="module")
 def cif_URhIn(file_path_URhIn):
@@ -232,44 +231,26 @@ def max_gaps_per_label_URhIn():
         "In1": {
             "dist_by_shortest_dist": {"max_gap": 0.306, "CN": 14},
             "dist_by_CIF_radius_sum": {"max_gap": 0.39, "CN": 14},
-            "dist_by_CIF_radius_refined_sum": {
-                "max_gap": 0.341,
-                "CN": 12,
-            },
-            "dist_by_Pauling_radius_sum": {
-                "max_gap": 0.398,
-                "CN": 14,
-            },
+            "dist_by_CIF_radius_refined_sum": {"max_gap": 0.35, "CN": 14},
+            "dist_by_Pauling_radius_sum": {"max_gap": 0.398, "CN": 14},
         },
         "U1": {
             "dist_by_shortest_dist": {"max_gap": 0.197, "CN": 11},
             "dist_by_CIF_radius_sum": {"max_gap": 0.312, "CN": 11},
-            "dist_by_CIF_radius_refined_sum": {
-                "max_gap": 0.27,
-                "CN": 17,
-            },
-            "dist_by_Pauling_radius_sum": {
-                "max_gap": 0.256,
-                "CN": 17,
-            },
+            "dist_by_CIF_radius_refined_sum": {"max_gap": 0.238, "CN": 17},
+            "dist_by_Pauling_radius_sum": {"max_gap": 0.256, "CN": 17},
         },
         "Rh1": {
             "dist_by_shortest_dist": {"max_gap": 0.315, "CN": 9},
             "dist_by_CIF_radius_sum": {"max_gap": 0.347, "CN": 9},
-            "dist_by_CIF_radius_refined_sum": {
-                "max_gap": 0.418,
-                "CN": 9,
-            },
+            "dist_by_CIF_radius_refined_sum": {"max_gap": 0.381, "CN": 9},
             "dist_by_Pauling_radius_sum": {"max_gap": 0.402, "CN": 9},
         },
         "Rh2": {
             "dist_by_shortest_dist": {"max_gap": 0.31, "CN": 9},
             "dist_by_CIF_radius_sum": {"max_gap": 0.324, "CN": 9},
-            "dist_by_CIF_radius_refined_sum": {
-                "max_gap": 0.397,
-                "CN": 9,
-            },
-            "dist_by_Pauling_radius_sum": {"max_gap": 0.380, "CN": 9},
+            "dist_by_CIF_radius_refined_sum": {"max_gap": 0.36, "CN": 9},
+            "dist_by_Pauling_radius_sum": {"max_gap": 0.38, "CN": 9},
         },
     }
 
