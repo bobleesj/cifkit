@@ -65,7 +65,7 @@ coverage.xml
 
 # Sphinx documentation
 docs/build/
-doc/_build/
+docs/_build/
 tests/data
 AXUGAE.cif
 FIXVUH.cif

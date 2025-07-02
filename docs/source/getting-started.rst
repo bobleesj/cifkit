@@ -65,7 +65,7 @@ Here is how you can write a block of code in the documentation. You can use the 
 Attach an image to the documentation
 ------------------------------------
 
-Here is how you attach an image to the documentation. The ``/doc/source/img/scikit-package-logo-text.png`` example image is provided in the template.
+Here is how you attach an image to the documentation. The ``/docs/source/img/scikit-package-logo-text.png`` example image is provided in the template.
 
 .. image:: ./img/scikit-package-logo-text.png
     :alt: codecov-in-pr-comment

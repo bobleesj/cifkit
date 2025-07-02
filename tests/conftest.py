@@ -194,6 +194,7 @@ def radius_sum_data_URhIn() -> dict:
         },
     }
 
+
 @pytest.fixture(scope="module")
 def cif_URhIn(file_path_URhIn):
     return Cif(file_path_URhIn, supercell_size=2)
