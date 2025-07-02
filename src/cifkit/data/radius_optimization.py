@@ -119,7 +119,8 @@ def get_refined_CIF_radius(
         args=(original_radii,),
         constraints=constraints,
         options={
-            "disp": True,
+            # "disp": True,
+            "disp": False,
         },
     )
     # if result.success:
