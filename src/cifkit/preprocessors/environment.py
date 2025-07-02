@@ -1,6 +1,6 @@
 import numpy as np
 
-from cifkit.utils import distance, unit
+from cifkit.utils import unit
 
 
 def get_site_connections(
@@ -48,29 +48,27 @@ def get_nearest_dists_per_site(
     dist_dict = {}
     dist_set = set()
 
-    # vectorized distace calculation
+    # vectorized distance calculation
+
+    # convert to cartesian
     filtered_unitcell_points_cart = []
     for x, y, z, label in filtered_unitcell_points:
         cx, cy, cz = unit.fractional_to_cartesian(
-                [x, y, z],
-                lengths,
-                angles_rad,
-            )
-        filtered_unitcell_points_cart.append(
-            (cx, cy, cz, label)
+            [x, y, z],
+            lengths,
+            angles_rad,
         )
+        filtered_unitcell_points_cart.append((cx, cy, cz, label))
 
     supercell_points_cart = []
     supercell_points_cart_labels = []
     for x, y, z, label in supercell_points:
         cx, cy, cz = unit.fractional_to_cartesian(
-                [x, y, z],
-                lengths,
-                angles_rad,
-            )
-        supercell_points_cart.append(
-            (cx, cy, cz)
+            [x, y, z],
+            lengths,
+            angles_rad,
         )
+        supercell_points_cart.append((cx, cy, cz))
         supercell_points_cart_labels.append(label)
 
     supercell_points_cart = np.array(supercell_points_cart, dtype=np.float64)
@@ -78,11 +76,11 @@ def get_nearest_dists_per_site(
 
     # Loop through each point in the filtered list
     for i, point_1 in enumerate(filtered_unitcell_points_cart):
-        
+
         dist = np.linalg.norm(supercell_points_cart - np.array(point_1[:3]), axis=1)
         dist = np.round(dist, 3)
         selected_indices = np.where(np.logical_and(dist < cutoff_radius, dist > 0.1))[0]
-        
+
         point_2_info = [
             (
                 str(supercell_points_cart_labels[index]),
@@ -96,13 +94,13 @@ def get_nearest_dists_per_site(
                     float(np.round(supercell_points_cart[index][0], 3)),
                     float(np.round(supercell_points_cart[index][1], 3)),
                     float(np.round(supercell_points_cart[index][2], 3)),
-                ]
+                ],
             )
             for index in selected_indices
         ]
-        
+
         dist_set.update(dist[selected_indices].tolist())
-        
+
         if point_2_info:
             dist_dict[i] = point_2_info
 
