@@ -4,6 +4,19 @@ Release Notes
 
 .. current developments
 
+1.1.0
+=====
+
+**Added:**
+
+* Use tests.txt, modify folder name from doc to docs.
+* Add Bala to contributor's list in index.rst.
+
+**Fixed:**
+
+* Use vectorization for computing connections.
+
+
 1.0.9
 =====
 
