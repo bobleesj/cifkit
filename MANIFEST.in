@@ -7,7 +7,7 @@ graft tests
 prune tests/data/cif  # Or use recursive-exclude tests *.cif
 
 # Include important top-level files
-include AUTHORS.rst LICENSE*.rst README.rst
+include AUTHORS.rst LICENSE*.rst README.md
 
 # Global excludes
 global-exclude *.py[cod]
