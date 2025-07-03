@@ -4,7 +4,31 @@
 
 .. |title| replace:: cifkit documentation
 
-|Python - Version| |PyPi version|
+|PyPI| |Forge| |PythonVersion| |PR|
+
+|CI| |Codecov| |Tracking|
+
+.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml/badge.svg
+        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
+
+.. |Codecov| image:: https://codecov.io/gh/bobleesj/cifkit/branch/main/graph/badge.svg
+        :target: https://codecov.io/gh/bobleesj/cifkit
+
+.. |Forge| image:: https://img.shields.io/conda/vn/conda-forge/cifkit
+        :target: https://anaconda.org/conda-forge/cifkit
+
+.. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
+         :target: https://github.com/bobleesj/cifkit/pulls
+
+.. |PyPI| image:: https://img.shields.io/pypi/v/cifkit
+        :target: https://pypi.org/project/cifkit/
+
+.. |Tracking| image:: https://img.shields.io/badge/issue_tracking-github-blue
+        :target: https://github.com/bobleesj/cifkit/issues
+
+.. |PythonVersion| image:: https://img.shields.io/pypi/pyversions/cifkit
+        :target: https://pypi.org/project/cifkit/
+
 
 | Last updated |today|.
 
