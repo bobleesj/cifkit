@@ -7,7 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   cifkit.data.demo
+   cifkit.data.cifs
 
 Submodules
 ----------
