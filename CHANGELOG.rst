@@ -4,6 +4,14 @@ Release Notes
 
 .. current developments
 
+1.1.1
+=====
+
+**Fixed:**
+
+* Bump verison 1.1.0 to 1.1.1 sincedone.1.1.0 was already uploaded before to PyPI.
+
+
 1.1.0
 =====
 
