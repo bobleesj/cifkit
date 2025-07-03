@@ -164,11 +164,11 @@ Here is how you can contribute to the ``cifkit`` project if you found it
 helpful:
 
 -  Star the repository on GitHub and recommend it to your colleagues who
-   might find ``cifkit`` helpful as well. |Star GitHub repository|
+   might find ``cifkit`` helpful as well.
 -  Create a new issue for any bugs or feature requests
    `here <https://github.com/bobleesj/cifkit/issues>`_
 -  Fork the repository and consider contributing changes via a pull
-   request. |Fork GitHub repository|.
+   request.
 -  If you have any suggestions or need further clarification on how to
    use ``cifkit``, please reach out to Bob Lee
    (`@bobleesj <https://github.com/bobleesj>`_).
