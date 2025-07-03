@@ -97,7 +97,6 @@ mentioned above.
 ## Documentation
 
 - [Official documentation](https://bobleesj.github.io/cifkit)
-- [Contribution guide](https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md)
 - [MIT license](https://github.com/bobleesj/cifkit/blob/main/LICENSE)
 
 ## Citation
@@ -130,9 +129,6 @@ Here is how you can contribute to the `cifkit` project if you found it helpful:
   [here](https://github.com/bobleesj/cifkit/issues)
 - Fork the repository and consider contributing changes via a pull request.
   [![Fork GitHub repository](https://img.shields.io/github/forks/bobleesj/cifkit?style=social)](https://github.com/bobleesj/cifkit/fork).
-  Check out
-  [CONTRIBUTING.md](https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md)
-  for instructions.
 - If you have any suggestions or need further clarification on how to use
   `cifkit`, please reach out to Bob Lee
   ([@bobleesj](https://github.com/bobleesj)).

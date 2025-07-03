@@ -4,11 +4,9 @@
 
 .. |title| replace:: cifkit documentation
 
-
-|Python - Version| |PyPi version| |Conda version|
+|Python - Version| |PyPi version|
 
 | Last updated |today|.
-
 
 Installation
 ------------
@@ -16,7 +14,6 @@ Installation
 .. code:: bash
 
    pip install cifkit
-
 
 Citation
 --------
@@ -46,23 +43,23 @@ TL;DR
 
 ``cifkit`` provides higher-level functions in just a few lines of code.
 
--  **Coordination geometry** - ``cifkit`` provides functions for
-   visualing coordination geometry from each site and extracts
-   physics-based features like volume and packing efficiency in each
-   polyhedron.
--  **Atomic mixing** - ``cifkit`` extracts atomic mixing information at
-   the bond pair level—tasks that would otherwise require extensive
-   manual effort using GUI-based tools like VESTA, Diamond, and
-   CrystalMaker.
--  **Filter** - ``cifkit`` offers features for preprocessing. It
-   systematically addresses common issues in CIF files from databases,
-   such as incorrect loop values and missing fractional coordinates, by
-   standardizing and filtering out ill-formatted files. It also
-   preprocesses atomic site labels, transforming labels such as ‘M1’ to
-   ‘Fe1’ in files with atomic mixing.
--  **Sort** - ``cifkit`` allows you to copy, move, and sort ``.cif``
-   files based on attributes such as coordination numbers, space groups,
-   unit cells, shortest distances, elements, and more.
+  -  **Coordination geometry** - ``cifkit`` provides functions for
+     visualing coordination geometry from each site and extracts
+     physics-based features like volume and packing efficiency in each
+     polyhedron.
+  -  **Atomic mixing** - ``cifkit`` extracts atomic mixing information at
+     the bond pair level—tasks that would otherwise require extensive
+     manual effort using GUI-based tools like VESTA, Diamond, and
+     CrystalMaker.
+  -  **Filter** - ``cifkit`` offers features for preprocessing. It
+     systematically addresses common issues in CIF files from databases,
+     such as incorrect loop values and missing fractional coordinates, by
+     standardizing and filtering out ill-formatted files. It also
+     preprocesses atomic site labels, transforming labels such as ‘M1’ to
+     ‘Fe1’ in files with atomic mixing.
+  -  **Sort** - ``cifkit`` allows you to copy, move, and sort ``.cif``
+     files based on attributes such as coordination numbers, space groups,
+     unit cells, shortest distances, elements, and more.
 
 Processing speed expectation
 ----------------------------
@@ -151,47 +148,35 @@ How to ask for help
 chemists.
 
 -  If you have any issues or questions, please feel free to reach out to
-   Bob Lee `@bobleesj <https://github.com/bobleesj>`__ or `leave an
-   issue <https://github.com/bobleesj/cifkit/issues>`__.
+   Bob Lee `@bobleesj <https://github.com/bobleesj>`_ or `leave an
+   issue <https://github.com/bobleesj/cifkit/issues>`_.
 
 How to contribute to ``cifkit``
 -------------------------------
 
-Here is how you can contribute to the ``cifkit`` project if you found it
-helpful:
+Here is how you can contribute to the ``cifkit`` project if you found it helpful:
 
--  Star the repository on GitHub and recommend it to your colleagues who
-   might find ``cifkit`` helpful as well. |Star GitHub repository|
--  Create a new issue for any bugs or feature requests
-   `here <https://github.com/bobleesj/cifkit/issues>`__
--  Fork the repository and consider contributing changes via a pull
-   request. |Fork GitHub repository|. Check out
-   `CONTRIBUTING.md <https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md>`__
-   for instructions.
--  If you have any suggestions or need further clarification on how to
-   use ``cifkit``, please reach out to Bob Lee
-   (`@bobleesj <https://github.com/bobleesj>`__).
+-  Star the repository on GitHub and recommend it to your colleagues who might find ``cifkit`` helpful as well. |Star GitHub repository|
+-  Create a new issue for any bugs or feature requests `here <https://github.com/bobleesj/cifkit/issues>`_
+-  Fork the repository and consider contributing changes via a pull request. |Fork GitHub repository|.
+-  If you have any suggestions or need further clarification on how to use ``cifkit``, please reach out to Bob Lee (`@bobleesj <https://github.com/bobleesj>`_).
 
 Contributors
 ------------
 
-``cifkit`` has been greatly enhanced thanks to the contributions from a
-diverse group of researchers:
+``cifkit`` has been greatly enhanced thanks to the contributions from a diverse group of researchers:
 
--  Anton Oliynyk: original ideation with ``.cif`` files
--  Alex Vtorov: tool recommendation for polyhedron visualization
--  Danila Shiryaev: testing as beta user
--  Fabian Zills (`@PythonFZ <https://github.com/PythonFZ>`__): suggested
-   tooling improvements
--  Emil Jaffal (`@EmilJaffal <https://github.com/EmilJaffal>`__):
-   initial testing and bug report
--  Nikhil Kumar Barua: initial testing and bug report
--  Nishant Yadav
-   (`@sethisiddha1998 <https://github.com/sethisiddha1998>`__): initial
-   testing and bug report
--  Siddha Sankalpa Sethi (`@runzsh <https://github.com/runzsh>`__):
-   initial testing and bug report in initial testing and initial testing
-   and bug report
+   -  **Anton Oliynyk**: co-author, original ideation with ``.cif`` files
+   -  **Balaranjan Selvaratnam**: (`@balaranjan <https://github.com/balaranjan>`_): vectorization of distance calculation to improve performance
+   -  **Danila Shiryaev**: (`@dshirya <https://github.com/dshirya>`_): fix flat coordination number calculation and suggest separating computing connections and the coordination number to improve adoption
+
+We also thank the following contributors for using ``cifkit`` and providing feedback:
+
+   -  **Emil Jaffal**: (`@EmilJaffal <https://github.com/EmilJaffal>`_): initial testing and bug report
+   -  **Nikhil Kumar Barua**: initial testing and bug report
+   -  **Nishant Yadav**: (`@sethisiddha1998 <https://github.com/sethisiddha1998>`_): initial testing and bug report
+   -  **Siddha Sankalpa Sethi**: (`@runzsh <https://github.com/runzsh>`_): initial testing and bug report
+   -  **Fabian Zills**: (`@PythonFZ <https://github.com/PythonFZ>`_): suggested tooling improvements such as ``pre-commit``
 
 We welcome all forms of contributions from the community. Your ideas and
 improvements are valued and appreciated.
@@ -199,16 +184,12 @@ improvements are valued and appreciated.
 Other links
 -----------
 
--  `Contribution
-   guide <https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md>`__
 -  `MIT
-   license <https://github.com/bobleesj/cifkit/blob/main/LICENSE>`__
+   license <https://github.com/bobleesj/cifkit/blob/main/LICENSE>`_
 
 .. |Python - Version| image:: https://img.shields.io/pypi/pyversions/cifkit
-.. |PyPi version| image:: https://img.shields.io/pypi/v/cifkit.svg
+.. |PyPI version| image:: https://img.shields.io/pypi/v/cifkit.svg
    :target: https://pypi.python.org/pypi/cifkit
-.. |Conda version| image:: https://img.shields.io/conda/vn/conda-forge/cifkit
-   :target: https://anaconda.org/conda-forge/cifkit
 .. |Star GitHub repository| image:: https://img.shields.io/github/stars/bobleesj/cifkit.svg?style=social
    :target: https://github.com/bobleesj/cifkit/stargazers
 .. |Fork GitHub repository| image:: https://img.shields.io/github/forks/bobleesj/cifkit?style=social

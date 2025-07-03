@@ -47,9 +47,6 @@ def get_nearest_dists_per_site(
     # Initialize a dictionary to store the relationships
     dist_dict = {}
     dist_set = set()
-
-    # vectorized distance calculation
-
     # convert to cartesian
     filtered_unitcell_points_cart = []
     for x, y, z, label in filtered_unitcell_points:
@@ -70,17 +67,14 @@ def get_nearest_dists_per_site(
         )
         supercell_points_cart.append((cx, cy, cz))
         supercell_points_cart_labels.append(label)
-
     supercell_points_cart = np.array(supercell_points_cart, dtype=np.float64)
     supercell_points_cart_labels = np.array(supercell_points_cart_labels)
 
     # Loop through each point in the filtered list
     for i, point_1 in enumerate(filtered_unitcell_points_cart):
-
         dist = np.linalg.norm(supercell_points_cart - np.array(point_1[:3]), axis=1)
         dist = np.round(dist, 3)
         selected_indices = np.where(np.logical_and(dist < cutoff_radius, dist > 0.1))[0]
-
         point_2_info = [
             (
                 str(supercell_points_cart_labels[index]),
@@ -98,55 +92,9 @@ def get_nearest_dists_per_site(
             )
             for index in selected_indices
         ]
-
         dist_set.update(dist[selected_indices].tolist())
-
         if point_2_info:
             dist_dict[i] = point_2_info
-
-    # Loop through each point in the filtered list
-    # for i, point_1 in enumerate(filtered_unitcell_points):
-    #     point_2_info = []
-    #     for j, point_2 in enumerate(supercell_points):
-    #         if point_1 == point_2:
-    #             continue  # Skip comparison with itself
-    #         # Convert fractional to Cartesian coordinates
-    #         cart_1 = unit.fractional_to_cartesian(
-    #             [point_1[0], point_1[1], point_1[2]],
-    #             lengths,
-    #             angles_rad,
-    #         )
-    #         cart_2 = unit.fractional_to_cartesian(
-    #             [point_2[0], point_2[1], point_2[2]],
-    #             lengths,
-    #             angles_rad,
-    #         )
-    #         # Calculate the dist between two points
-    #         dist = distance.calc_dist_two_cart_points(cart_1, cart_2)
-    #         dist = float(np.round(dist, 3))
-    #         # Check the dist
-    #         if dist < cutoff_radius and dist > 0.1:
-    #             point_2_info.append(
-    #                 (
-    #                     point_2[3],  # site label
-    #                     dist,
-    #                     [
-    #                         float(np.round(cart_1[0], 3)),  # x
-    #                         float(np.round(cart_1[1], 3)),  # y
-    #                         float(np.round(cart_1[2], 3)),  # z
-    #                     ],
-    #                     [
-    #                         float(np.round(cart_2[0], 3)),  # x
-    #                         float(np.round(cart_2[1], 3)),  # y
-    #                         float(np.round(cart_2[2], 3)),  # z
-    #                     ],
-    #                 )
-    #             )
-    #         dist_set.add(dist)
-    #     # Store the list in the dictionary with `i` as the key
-    #     if point_2_info:
-    #         dist_dict[i] = point_2_info
-
     return dist_dict, dist_set
 
 
@@ -164,21 +112,17 @@ def get_most_connected_point_per_site(label: str, dist_dict: dict, dist_set: set
     for ref_idx, connections in dist_dict.items():
         # Initialize a dictionary to count occurrences of each shortest
         dist_counts = {dist: 0 for dist in shortest_dists}
-
         # Count the occurrences of the shortest distances
         for _, dist, _, _ in connections:
             if dist in dist_counts:
                 dist_counts[dist] += 1
-
         # Calculate the total count of occurrences for this reference point
         total_count = sum(dist_counts.values())
-
         # Check if this is the maximum we've encountered so far
         if total_count > max_count:
             max_count = total_count
             max_ref_point = ref_idx
             max_connections = sorted(connections, key=lambda x: x[1])
-
     # Return the max point
     if max_ref_point is not None:
         return label, [
