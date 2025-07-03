@@ -1,12 +1,18 @@
+# Include your source code and essentials
 graft src
-graft tests
 graft requirements
+graft tests
 
+# Optional: exclude specific files
+prune tests/data/cif  # Or use recursive-exclude tests *.cif
+
+# Include important top-level files
 include AUTHORS.rst LICENSE*.rst README.rst
 
-# Exclude all bytecode files and __pycache__ directories
-global-exclude *.py[cod]  # Exclude all .pyc, .pyo, and .pyd files.
-global-exclude .DS_Store  # Exclude Mac filesystem artifacts.
-global-exclude __pycache__  # Exclude Python cache directories.
-global-exclude .git*  # Exclude git files and directories.
-global-exclude .idea  # Exclude PyCharm project settings.
+# Global excludes
+global-exclude *.py[cod]
+global-exclude __pycache__/
+global-exclude .DS_Store
+global-exclude .git*
+global-exclude .idea
+prune **/.mypy_cache
