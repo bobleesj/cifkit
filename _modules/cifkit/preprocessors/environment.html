@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cifkit.preprocessors.environment &mdash; cifkit 1.0.9 documentation</title>
+  <title>cifkit.preprocessors.environment &mdash; cifkit 1.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=adab45b7"></script>
+      <script src="../../../_static/documentation_options.js?v=8240fd18"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -82,7 +82,7 @@
   <h1>Source code for cifkit.preprocessors.environment</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance</span><span class="p">,</span> <span class="n">unit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">unit</span>
 
 
 <div class="viewcode-block" id="get_site_connections">
@@ -134,50 +134,54 @@
     <span class="c1"># Initialize a dictionary to store the relationships</span>
     <span class="n">dist_dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">dist_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="c1"># convert to cartesian</span>
+    <span class="n">filtered_unitcell_points_cart</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">filtered_unitcell_points</span><span class="p">:</span>
+        <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">cz</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">fractional_to_cartesian</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span>
+            <span class="n">lengths</span><span class="p">,</span>
+            <span class="n">angles_rad</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">filtered_unitcell_points_cart</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">cz</span><span class="p">,</span> <span class="n">label</span><span class="p">))</span>
+
+    <span class="n">supercell_points_cart</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">supercell_points_cart_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">supercell_points</span><span class="p">:</span>
+        <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">cz</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">fractional_to_cartesian</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span>
+            <span class="n">lengths</span><span class="p">,</span>
+            <span class="n">angles_rad</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">supercell_points_cart</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">cz</span><span class="p">))</span>
+        <span class="n">supercell_points_cart_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">supercell_points_cart</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">supercell_points_cart</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">supercell_points_cart_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">supercell_points_cart_labels</span><span class="p">)</span>
 
     <span class="c1"># Loop through each point in the filtered list</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point_1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filtered_unitcell_points</span><span class="p">):</span>
-        <span class="n">point_2_info</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">point_2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">supercell_points</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">point_1</span> <span class="o">==</span> <span class="n">point_2</span><span class="p">:</span>
-                <span class="k">continue</span>  <span class="c1"># Skip comparison with itself</span>
-            <span class="c1"># Convert fractional to Cartesian coordinates</span>
-            <span class="n">cart_1</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">fractional_to_cartesian</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">point_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">point_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">point_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
-                <span class="n">lengths</span><span class="p">,</span>
-                <span class="n">angles_rad</span><span class="p">,</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point_1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filtered_unitcell_points_cart</span><span class="p">):</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">supercell_points_cart</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point_1</span><span class="p">[:</span><span class="mi">3</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">selected_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">dist</span> <span class="o">&lt;</span> <span class="n">cutoff_radius</span><span class="p">,</span> <span class="n">dist</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">point_2_info</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">supercell_points_cart_labels</span><span class="p">[</span><span class="n">index</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">index</span><span class="p">]),</span>
+                <span class="p">[</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">point_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">point_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">point_1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>
+                <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">supercell_points_cart</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">supercell_points_cart</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">supercell_points_cart</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>
+                <span class="p">],</span>
             <span class="p">)</span>
-            <span class="n">cart_2</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">fractional_to_cartesian</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">point_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">point_2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">point_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
-                <span class="n">lengths</span><span class="p">,</span>
-                <span class="n">angles_rad</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="c1"># Calculate the dist between two points</span>
-            <span class="n">dist</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">calc_dist_two_cart_points</span><span class="p">(</span><span class="n">cart_1</span><span class="p">,</span> <span class="n">cart_2</span><span class="p">)</span>
-            <span class="n">dist</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-            <span class="c1"># Check the dist</span>
-            <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">cutoff_radius</span> <span class="ow">and</span> <span class="n">dist</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
-                <span class="n">point_2_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="p">(</span>
-                        <span class="n">point_2</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>  <span class="c1"># site label</span>
-                        <span class="n">dist</span><span class="p">,</span>
-                        <span class="p">[</span>
-                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># x</span>
-                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># y</span>
-                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># z</span>
-                        <span class="p">],</span>
-                        <span class="p">[</span>
-                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># x</span>
-                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># y</span>
-                            <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cart_2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)),</span>  <span class="c1"># z</span>
-                        <span class="p">],</span>
-                    <span class="p">)</span>
-                <span class="p">)</span>
-            <span class="n">dist_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
-        <span class="c1"># Store the list in the dictionary with `i` as the key</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">selected_indices</span>
+        <span class="p">]</span>
+        <span class="n">dist_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">selected_indices</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">point_2_info</span><span class="p">:</span>
             <span class="n">dist_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">point_2_info</span>
-
     <span class="k">return</span> <span class="n">dist_dict</span><span class="p">,</span> <span class="n">dist_set</span></div>
 
 
@@ -198,21 +202,17 @@
     <span class="k">for</span> <span class="n">ref_idx</span><span class="p">,</span> <span class="n">connections</span> <span class="ow">in</span> <span class="n">dist_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="c1"># Initialize a dictionary to count occurrences of each shortest</span>
         <span class="n">dist_counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">dist</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">shortest_dists</span><span class="p">}</span>
-
         <span class="c1"># Count the occurrences of the shortest distances</span>
         <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">dist_counts</span><span class="p">:</span>
                 <span class="n">dist_counts</span><span class="p">[</span><span class="n">dist</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-
         <span class="c1"># Calculate the total count of occurrences for this reference point</span>
         <span class="n">total_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dist_counts</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-
         <span class="c1"># Check if this is the maximum we&#39;ve encountered so far</span>
         <span class="k">if</span> <span class="n">total_count</span> <span class="o">&gt;</span> <span class="n">max_count</span><span class="p">:</span>
             <span class="n">max_count</span> <span class="o">=</span> <span class="n">total_count</span>
             <span class="n">max_ref_point</span> <span class="o">=</span> <span class="n">ref_idx</span>
             <span class="n">max_connections</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
     <span class="c1"># Return the max point</span>
     <span class="k">if</span> <span class="n">max_ref_point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">label</span><span class="p">,</span> <span class="p">[</span>

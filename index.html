@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cifkit documentation &mdash; cifkit 1.0.9 documentation</title>
+  <title>cifkit documentation &mdash; cifkit 1.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=adab45b7"></script>
+      <script src="_static/documentation_options.js?v=8240fd18"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">cifkit documentation</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/bobleesj/cifkit/blob/main/doc/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/bobleesj/cifkit/blob/main/docs/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -83,9 +83,9 @@
              
   <section id="title">
 <h1>cifkit documentation<a class="headerlink" href="#title" title="Link to this heading"></a></h1>
-<p><img alt="Python - Version" src="https://img.shields.io/pypi/pyversions/cifkit" /> <a class="reference external" href="https://pypi.python.org/pypi/cifkit"><img alt="PyPi version" src="https://img.shields.io/pypi/v/cifkit.svg" /></a> <a class="reference external" href="https://anaconda.org/conda-forge/cifkit"><img alt="Conda version" src="https://img.shields.io/conda/vn/conda-forge/cifkit" /></a></p>
+<p><img alt="Python - Version" src="https://img.shields.io/pypi/pyversions/cifkit" /> <a class="reference external" href="https://pypi.python.org/pypi/cifkit"><img alt="PyPI version" src="https://img.shields.io/pypi/v/cifkit.svg" /></a></p>
 <div class="line-block">
-<div class="line">Last updated June 25, 2025.</div>
+<div class="line">Last updated July 03, 2025.</div>
 </div>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
@@ -118,7 +118,8 @@ GUI-based tools like VESTA, Diamond, and CrystalMaker.</p>
 <section id="tl-dr">
 <h2>TL;DR<a class="headerlink" href="#tl-dr" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> provides higher-level functions in just a few lines of code.</p>
-<ul class="simple">
+<blockquote>
+<div><ul class="simple">
 <li><p><strong>Coordination geometry</strong> - <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> provides functions for
 visualing coordination geometry from each site and extracts
 physics-based features like volume and packing efficiency in each
@@ -137,6 +138,7 @@ preprocesses atomic site labels, transforming labels such as ‘M1’ to
 files based on attributes such as coordination numbers, space groups,
 unit cells, shortest distances, elements, and more.</p></li>
 </ul>
+</div></blockquote>
 </section>
 <section id="processing-speed-expectation">
 <h2>Processing speed expectation<a class="headerlink" href="#processing-speed-expectation" title="Link to this heading"></a></h2>
@@ -166,10 +168,10 @@ from each atomic site based on the coordination number geometry.</p>
     <span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="id2">
 <img alt="Polyhedron generation" src="_images/ErCoIn-polyhedron.png" />
 <figcaption>
-<p><span class="caption-text">Polyhedron generation</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-text">Polyhedron generation</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -186,10 +188,10 @@ these attributes. It generates histograms for all attributes.</p>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">generate_structure_histogram</span><span class="p">()</span>
 </pre></div>
 </div>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id3">
 <img alt="structure distribution" src="_images/histogram-structure.png" />
 <figcaption>
-<p><span class="caption-text">structure distribution</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-text">structure distribution</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Basde on your visual histogram above, you can copy and move .cif files
@@ -223,50 +225,40 @@ issue</a>.</p></li>
 </section>
 <section id="how-to-contribute-to-cifkit">
 <h2>How to contribute to <code class="docutils literal notranslate"><span class="pre">cifkit</span></code><a class="headerlink" href="#how-to-contribute-to-cifkit" title="Link to this heading"></a></h2>
-<p>Here is how you can contribute to the <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> project if you found it
-helpful:</p>
+<p>Here is how you can contribute to the <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> project if you found it helpful:</p>
 <ul class="simple">
-<li><p>Star the repository on GitHub and recommend it to your colleagues who
-might find <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> helpful as well. <a class="reference external" href="https://github.com/bobleesj/cifkit/stargazers"><img alt="Star GitHub repository" src="https://img.shields.io/github/stars/bobleesj/cifkit.svg?style=social" /></a></p></li>
-<li><p>Create a new issue for any bugs or feature requests
-<a class="reference external" href="https://github.com/bobleesj/cifkit/issues">here</a></p></li>
-<li><p>Fork the repository and consider contributing changes via a pull
-request. <a class="reference external" href="https://github.com/bobleesj/cifkit/fork"><img alt="Fork GitHub repository" src="https://img.shields.io/github/forks/bobleesj/cifkit?style=social" /></a>. Check out
-<a class="reference external" href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
-for instructions.</p></li>
-<li><p>If you have any suggestions or need further clarification on how to
-use <code class="docutils literal notranslate"><span class="pre">cifkit</span></code>, please reach out to Bob Lee
-(<a class="reference external" href="https://github.com/bobleesj">&#64;bobleesj</a>).</p></li>
+<li><p>Star the repository on GitHub and recommend it to your colleagues who might find <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> helpful as well. <a class="reference external" href="https://github.com/bobleesj/cifkit/stargazers"><img alt="Star GitHub repository" src="https://img.shields.io/github/stars/bobleesj/cifkit.svg?style=social" /></a></p></li>
+<li><p>Create a new issue for any bugs or feature requests <a class="reference external" href="https://github.com/bobleesj/cifkit/issues">here</a></p></li>
+<li><p>Fork the repository and consider contributing changes via a pull request. <a class="reference external" href="https://github.com/bobleesj/cifkit/fork"><img alt="Fork GitHub repository" src="https://img.shields.io/github/forks/bobleesj/cifkit?style=social" /></a>.</p></li>
+<li><p>If you have any suggestions or need further clarification on how to use <code class="docutils literal notranslate"><span class="pre">cifkit</span></code>, please reach out to Bob Lee (<a class="reference external" href="https://github.com/bobleesj">&#64;bobleesj</a>).</p></li>
 </ul>
 </section>
 <section id="contributors">
 <h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> has been greatly enhanced thanks to the contributions from a
-diverse group of researchers:</p>
-<ul class="simple">
-<li><p>Anton Oliynyk: original ideation with <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files</p></li>
-<li><p>Alex Vtorov: tool recommendation for polyhedron visualization</p></li>
-<li><p>Danila Shiryaev: testing as beta user</p></li>
-<li><p>Fabian Zills (<a class="reference external" href="https://github.com/PythonFZ">&#64;PythonFZ</a>): suggested
-tooling improvements</p></li>
-<li><p>Emil Jaffal (<a class="reference external" href="https://github.com/EmilJaffal">&#64;EmilJaffal</a>):
-initial testing and bug report</p></li>
-<li><p>Nikhil Kumar Barua: initial testing and bug report</p></li>
-<li><p>Nishant Yadav
-(<a class="reference external" href="https://github.com/sethisiddha1998">&#64;sethisiddha1998</a>): initial
-testing and bug report</p></li>
-<li><p>Siddha Sankalpa Sethi (<a class="reference external" href="https://github.com/runzsh">&#64;runzsh</a>):
-initial testing and bug report in initial testing and initial testing
-and bug report</p></li>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> has been greatly enhanced thanks to the contributions from a diverse group of researchers:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Anton Oliynyk</strong>: co-author, original ideation with <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files</p></li>
+<li><p><strong>Balaranjan Selvaratnam</strong>: (<a class="reference external" href="https://github.com/balaranjan">&#64;balaranjan</a>): vectorization of distance calculation to improve performance</p></li>
+<li><p><strong>Danila Shiryaev</strong>: (<a class="reference external" href="https://github.com/dshirya">&#64;dshirya</a>): fix flat coordination number calculation and suggest separating computing connections and the coordination number to improve adoption</p></li>
 </ul>
+</div></blockquote>
+<p>We also thank the following contributors for using <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> and providing feedback:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Emil Jaffal</strong>: (<a class="reference external" href="https://github.com/EmilJaffal">&#64;EmilJaffal</a>): initial testing and bug report</p></li>
+<li><p><strong>Nikhil Kumar Barua</strong>: initial testing and bug report</p></li>
+<li><p><strong>Nishant Yadav</strong>: (<a class="reference external" href="https://github.com/sethisiddha1998">&#64;sethisiddha1998</a>): initial testing and bug report</p></li>
+<li><p><strong>Siddha Sankalpa Sethi</strong>: (<a class="reference external" href="https://github.com/runzsh">&#64;runzsh</a>): initial testing and bug report</p></li>
+<li><p><strong>Fabian Zills</strong>: (<a class="reference external" href="https://github.com/PythonFZ">&#64;PythonFZ</a>): suggested tooling improvements such as <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code></p></li>
+</ul>
+</div></blockquote>
 <p>We welcome all forms of contributions from the community. Your ideas and
 improvements are valued and appreciated.</p>
 </section>
 <section id="other-links">
 <h2>Other links<a class="headerlink" href="#other-links" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/bobleesj/cifkit/blob/main/CONTRIBUTING.md">Contribution
-guide</a></p></li>
 <li><p><a class="reference external" href="https://github.com/bobleesj/cifkit/blob/main/LICENSE">MIT
 license</a></p></li>
 </ul>
