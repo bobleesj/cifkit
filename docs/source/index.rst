@@ -167,7 +167,7 @@ Contributors
 ``cifkit`` has been greatly enhanced thanks to the contributions from a diverse group of researchers:
 
    -  **Anton Oliynyk**: co-author, original ideation with ``.cif`` files
-   -  **Balaranjan Selvaratnam**: (`@balaranjan <https://github.com/balaranjan>`_): vectorization of distance calcuation to improve performance
+   -  **Balaranjan Selvaratnam**: (`@balaranjan <https://github.com/balaranjan>`_): vectorization of distance calculation to improve performance
    -  **Danila Shiryaev**: (`@dshirya <https://github.com/dshirya>`_): fix flat coordination number calculation and suggest separating computing connections and the coordination number to improve adoption
 
 We also thank the following contributors for using ``cifkit`` and providing feedback:
