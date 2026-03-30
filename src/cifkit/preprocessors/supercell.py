@@ -93,6 +93,10 @@ def get_unitcell_coords_after_sym_operations_per_label(
                     ]
                 )
 
+                new_x = new_x % 1
+                new_y = new_y % 1
+                new_z = new_z % 1
+
                 all_coords.add(
                     (
                         round(new_x, 5),

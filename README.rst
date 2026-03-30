@@ -178,4 +178,3 @@ Acknowledgements
 
 ``cifkit`` is maintained and developed with the help of
 ``scikit-package`` (https://scikit-package.github.io/scikit-package/).
-
