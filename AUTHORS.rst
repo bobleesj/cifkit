@@ -1,7 +1,7 @@
 Authors
 =======
 
-Sangjoon Lee (bobleesj@gmail.com)
+Sangjoon Lee (bobleesj@stanford.edu)
 Anton Oliynyk (anton.oliynyk@hunter.cuny.edu)
 
 Contributors
