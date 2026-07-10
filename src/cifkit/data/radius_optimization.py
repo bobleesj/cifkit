@@ -1,8 +1,9 @@
 from functools import partial
 
 import numpy as np
-from bobleesj.utils.sources import radius
 from scipy.optimize import minimize
+
+from cifkit.sources import radius
 
 
 def _generate_adjacent_pairs(

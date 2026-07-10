@@ -10,3 +10,10 @@ fro
 ;; Compounds and elements
 Nd
 Te
+
+;; Compounds used in migrated elemental-data docstrings and tests
+ThOs
+HGe
+
+;; Software (composition-analyzer-featurizer)
+CAF

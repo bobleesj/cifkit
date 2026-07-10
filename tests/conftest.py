@@ -3,6 +3,8 @@ import pytest
 from cifkit import Cif, CifEnsemble
 from cifkit.coordination import composition, filter
 from cifkit.preprocessors import environment, environment_util, supercell
+from cifkit.sorters.element_sorter import ElementSorter
+from cifkit.sources.oliynyk import Oliynyk
 from cifkit.utils import cif_parser, folder
 
 
@@ -285,3 +287,45 @@ def CN_bond_count_by_best_methods():
             ("U", "U"): 6,
         },
     }
+
+
+# --- fixtures for elemental data modules migrated from bobleesj.utils ---
+
+
+@pytest.fixture
+def oliynyk() -> Oliynyk:
+    # 20250516 - deleted Tc, Pm and Hg since some properties are not available
+    return Oliynyk()
+
+
+@pytest.fixture
+def custom_label_excel_path():
+    return "tests/data/sort/test-custom-labels.xlsx"
+
+
+@pytest.fixture
+def custom_labels_from_excel():
+    return {
+        2: {"A": ["Fe", "Co", "Ni"], "B": ["Si", "Ga", "Ge"]},
+        3: {
+            "R": ["Sc", "Y", "La"],
+            "M": ["Fe", "Co", "Ni"],
+            "X": ["Si", "Ga", "Ge"],
+        },
+        4: {
+            "A": ["Sc", "Y", "La"],
+            "B": ["Fe", "Co", "Ni"],
+            "C": ["Si", "Ga", "Ge"],
+            "D": ["Gd", "Tb", "Dy"],
+        },
+    }
+
+
+@pytest.fixture
+def element_sorter_from_excel(custom_label_excel_path):
+    return ElementSorter(excel_path=custom_label_excel_path)
+
+
+@pytest.fixture
+def element_sorter_from_dict(custom_labels_from_excel):
+    return ElementSorter(label_mapping=custom_labels_from_excel)

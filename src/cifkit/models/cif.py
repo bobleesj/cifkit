@@ -1,8 +1,6 @@
 import logging
 import os
 
-from bobleesj.utils.sources import radius
-
 # Bond pair
 from cifkit.coordination.bond_distance import get_shortest_distance_per_bond_pair
 from cifkit.coordination.composition import (
@@ -37,6 +35,7 @@ from cifkit.preprocessors.environment_util import flat_site_connections
 # Supercell generation
 from cifkit.preprocessors.supercell import get_supercell_points
 from cifkit.preprocessors.supercell_util import get_cell_atom_count
+from cifkit.sources import radius
 from cifkit.utils.bond_pair import get_bond_pairs, get_pairs_sorted_by_mendeleev
 
 # Edit .cif file

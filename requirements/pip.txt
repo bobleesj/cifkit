@@ -1,6 +1,7 @@
 gemmi
 matplotlib
 numpy
+openpyxl
+pandas
 pyvista
 scipy
-bobleesj.utils

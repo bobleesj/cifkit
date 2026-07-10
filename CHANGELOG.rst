@@ -9,7 +9,7 @@ Release Notes
 
 **Fixed:**
 
-* Bump verison 1.1.0 to 1.1.1 sincedone.1.1.0 was already uploaded before to PyPI.
+* Bump version 1.1.0 to 1.1.1 since v1.1.0 was already uploaded before to PyPI.
 
 
 1.1.0
