@@ -1,0 +1,52 @@
+# Build the cifkit Jupyter Book and publish it to GitHub Pages. The tutorial
+# pages are plain MyST markdown with verified pasted outputs, so the runner
+# only needs the package importable for autodoc; nothing executes at build.
+name: cifkit docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "CHANGELOG.rst"
+      - ".github/workflows/cifkit-docs.yml"
+  workflow_dispatch:
+
+# Deploys to GitHub Pages via the Actions deploy path (Settings -> Pages ->
+# Source: GitHub Actions). Published at https://bobleesj.github.io/cifkit/.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: cifkit-docs-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.repository == 'bobleesj/cifkit'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/configure-pages@v6
+      - run: pip install -r docs/requirements.txt
+      - run: pip install -e .
+      - run: jupyter-book build docs
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs/_build/html
+
+  deploy:
+    if: github.repository == 'bobleesj/cifkit' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

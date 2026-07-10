@@ -755,26 +755,26 @@ class Cif:
             value is a dictionary containing:
 
             - `volume_of_polyhedron` (float): The volume of the polyhedron surrounding
-            the atomic site.
+              the atomic site.
             - `distance_from_avg_point_to_center` (float): The average distance from
-            the polyhedron's vertices  to its geometric center, used as a measure of
-            symmetry.
+              the polyhedron's vertices  to its geometric center, used as a measure of
+              symmetry.
             - `number_of_vertices` (int): The number of vertices in the coordination
-            polyhedron.
+              polyhedron.
             - `number_of_edges` (int): The number of edges connecting vertices in the
-            polyhedron.
+              polyhedron.
             - `number_of_faces` (int): The number of faces in the coordination polyhedron.
             - `shortest_distance_to_face` (float): The shortest distance between the
-            atomic site and the nearest face.
+              atomic site and the nearest face.
             - `shortest_distance_to_edge` (float): The shortest distance between the
-            atomic site and the nearest edge.
+              atomic site and the nearest edge.
             - `volume_of_inscribed_sphere` (float): Volume of the largest sphere that can
-            it inside the polyhedron.
+              it inside the polyhedron.
             - `packing_efficiency` (float): A measure of how efficiently the polyhedron
-            is packed around the atomic site.
+              is packed around the atomic site.
             - `method_used` (str): The name of the chosen method
-            (e.g., `dist_by_shortest_dist`) providing the  highest symmetry based on
-            `distance_from_avg_point_to_center`.
+              (e.g., `dist_by_shortest_dist`) providing the  highest symmetry based on
+              `distance_from_avg_point_to_center`.
 
         Examples
         --------
