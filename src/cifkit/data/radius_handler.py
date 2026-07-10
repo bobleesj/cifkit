@@ -1,7 +1,7 @@
 import numpy as np
-from bobleesj.utils.sources import radius
 
 from cifkit.data.radius_optimization import get_refined_CIF_radius
+from cifkit.sources import radius
 from cifkit.utils.unit import round_dict_values
 
 

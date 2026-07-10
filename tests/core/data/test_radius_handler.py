@@ -1,7 +1,7 @@
 import pytest
-from bobleesj.utils.sources import radius
 
 from cifkit.data.radius_handler import compute_radius_sum, get_CIF_pauling_radius
+from cifkit.sources import radius
 
 
 @pytest.mark.fast

@@ -1,5 +1,4 @@
-from bobleesj.utils.sources import mendeleev
-
+from cifkit.sources import mendeleev
 from cifkit.utils import string_parser
 
 

@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
-from bobleesj.utils.sources import radius
 from deepdiff import DeepDiff
 
 from cifkit.data import radius_optimization as radius_opt
+from cifkit.sources import radius
 
 
 def test_binary_refined_radius():
