@@ -6,10 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "cifkit"
 dynamic=['version', 'dependencies']
 authors = [
-  { name="Sangjoon Lee", email="bobleesj@gmail.com" },
+  { name="Sangjoon Lee", email="bobleesj@stanford.edu" },
 ]
 maintainers = [
-  { name="Sangjoon Lee", email="bobleesj@gmail.com" },
+  { name="Sangjoon Lee", email="bobleesj@stanford.edu" },
 ]
 description = "A Python package for coordination geometry and atomic site analysis."
 keywords = ['cif', 'solid-state', 'high-throughput', 'inorganics', 'crystallography']
