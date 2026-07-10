@@ -4,6 +4,19 @@ Release Notes
 
 .. current developments
 
+1.2.1
+=====
+
+**Added:**
+
+* Add elemental data modules migrated from ``bobleesj.utils``: the Oliynyk elemental property database (``cifkit.sources.oliynyk``), Mendeleev numbers, periodic table data, CIF and Pauling CN12 radius data, the ``Formula`` parser, ``ElementSorter``, and basic statistics helpers, with parity tests asserting exact equality against the legacy package.
+
+**Changed:**
+
+* Remove the ``bobleesj.utils`` dependency by sourcing elemental data from the new built-in modules; add ``pandas`` and ``openpyxl`` as dependencies for the Oliynyk Excel database.
+* Update the maintainer contact email to the Stanford address in package metadata, AUTHORS, and the code of conduct.
+
+
 1.1.1
 =====
 
