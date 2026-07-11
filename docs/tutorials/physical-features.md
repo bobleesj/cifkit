@@ -100,6 +100,12 @@ By default the constructor preprocesses for gemmi compatibility, builds
 a 3×3×3 supercell, and defers coordination work until you ask
 (`compute_CN=False`).
 
+`db_source` is detected from the file (here **PCD**). `cifkit` is tested
+against common crystallographic exports - **ICSD**, **COD**, **PCD**,
+Materials Project-style (**MP**), **CCDC**/CSD, and Materials Studio
+(**MS**) - with source-specific fixes (for example ICSD copyright lines,
+PCD author loops). Mixed folders can share one pipeline.
+
 ## 2. Interatomic distances
 
 Distances come from the supercell neighbor search - **before**

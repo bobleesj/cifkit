@@ -50,6 +50,9 @@ boilerplate geometry code.
 *  Support **high-throughput** work over folders of CIFs - from a few
    structures to **tens of thousands** - with ``Cif`` / ``CifEnsemble``
    rather than a one-file GUI workflow.
+*  Work with **multi-source database CIFs** (ICSD, COD, PCD, MP, CCDC,
+   Materials Studio, and more): detect ``db_source`` and apply tested
+   preprocess fixes so mixed folders parse consistently.
 *  Provide the geometry engine used by structure featurizers such as
    SAF (with CAF for composition); elemental tables via OLED when
    needed.

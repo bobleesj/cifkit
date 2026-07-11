@@ -33,6 +33,32 @@ Here are the main goals of `cifkit` for the scientific community:
 3. Support **high-throughput work** over folders of CIFs - from a few
    structures to **tens of thousands** - with a small, scriptable API
    rather than a one-file GUI workflow.
+4. Work with **real database CIFs from many sources**, not only one
+   vendor format. Exports differ in headers, author loops, and labels;
+   `cifkit` detects the source and applies tested preprocessing so the
+   same pipeline can mix ICSD, COD, PCD, and related formats.
+
+### Multi-source CIFs (ICSD, COD, PCD, and more)
+
+Database dumps are messy in different ways. `cifkit` sets `db_source`
+from content fingerprints and, when preprocessing is on, fixes known
+quirks before gemmi/parsing (for example ICSD copyright first lines, PCD
+author loops and site labels). Sources recognized in code and covered by
+tests include:
+
+| `db_source` | Database |
+|---|---|
+| **ICSD** | Inorganic Crystal Structure Database |
+| **COD** | Crystallography Open Database |
+| **PCD** | Pearson's Crystal Data |
+| **MP** | Materials Project-style CIFs (pymatgen export) |
+| **CCDC** / CSD | Cambridge Structural Database exports |
+| **MS** | Materials Studio |
+| Unknown | Still loadable when the CIF is otherwise valid |
+
+So a folder from **ICSD** plus **COD** plus **PCD** can go through one
+`CifEnsemble` path - something many generic CIF readers leave to you to
+debug per source.
 
 In published structure-featurization workflows that use `cifkit` as the
 geometry engine ([SAF](https://github.com/bobleesj/structure-analyzer-featurizer)
@@ -42,13 +68,15 @@ scientists have processed **tens of thousands of CIFs** and built training
 tables on the order of **a million feature rows** for explainable
 machine-learning models of solid-state structures
 ([Digital Discovery](https://doi.org/10.1039/D4DD00332B)). That scale is
-what the supercell, neighbor, and coordination APIs are designed for.
+what the supercell, neighbor, coordination, and multi-source preprocess
+APIs are designed for.
 
 | Capability | What `cifkit` provides |
 |---|---|
 | Interatomic geometry | Shortest distances, site-pair and bond-pair tables, ordered neighbor lists |
 | Coordination | Four gap-based methods (*d/d<sub>min</sub>*, CIF-radius sums, Pauling radius sum, …), best-method polyhedra, bond fractions, packing efficiency |
 | Supercells | Default **3×3×3** supercell (configurable) for consistent neighbor search |
+| Multi-source CIFs | Detects **ICSD**, **COD**, **PCD**, **MP**, **CCDC**, **MS**; source-specific preprocess (tested) |
 | Many CIFs | `CifEnsemble`: preprocess, unique formulas/structures, filters, histograms, sort/copy |
 | Structural features for ML | Geometry backend for [SAF](https://github.com/bobleesj/structure-analyzer-featurizer) (with [CAF](https://github.com/bobleesj/composition-analyzer-featurizer) for composition); elemental tables via **OLED** when needed |
 | Small API | `Cif("file.cif")` / `CifEnsemble("folder/")` - attributes and a few methods |
