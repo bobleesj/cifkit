@@ -199,8 +199,10 @@ work (BibTeX: [CITATION.txt](_static/CITATION.txt) · repo
 | You used… | Consider citing |
 |---|---|
 | CIF geometry / CN / polyhedra / `CifEnsemble` | **cifkit** - Lee & Oliynyk, JOSS **9**, 7205 (2024). [10.21105/joss.07205](https://doi.org/10.21105/joss.07205) |
+| Structural / composition feature generation for ML ([SAF](https://github.com/bobleesj/structure-analyzer-featurizer), [CAF](https://github.com/bobleesj/composition-analyzer-featurizer)) | **SAF + CAF** - Jaffal et al., *Digital Discovery* **4**, 548-560 (2025). [10.1039/d4dd00332b](https://doi.org/10.1039/d4dd00332b) (also cite **cifkit** for the geometry engine) |
 | OLED elemental table / `Oliynyk` / `oled.csv` | **Dataset** - Lee et al., Data in Brief **53**, 110178 (2024). [10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178) |
 | Packaging / scikit-package stack (cifkit is built with it) | **scikit-package** - Lee et al., *Digital Discovery*, 2026. [10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a) |
+| Geometry + feature generation | cifkit + SAF/CAF paper |
 | Geometry + OLED | Both cifkit + OLED dataset papers |
 
 ## Notes (demos, tables, how to reproduce)

@@ -69,6 +69,31 @@ Software, 9(103), 7205. https://doi.org/10.21105/joss.07205
   url     = {https://doi.org/10.21105/joss.07205}
 }
 
+## SAF + CAF - structural / composition features for ML
+
+(cifkit is the geometry engine used by SAF for coordination environment
+analysis from CIF files.)
+
+Jaffal, E. I., Lee, S., Shiryaev, D., Vtorov, A., Barua, N. K., Kleinke,
+H., & Oliynyk, A. O. (2025). Composition and structure
+analyzer/featurizer for explainable machine-learning models to predict
+solid state structures. Digital Discovery, 4, 548-560.
+https://doi.org/10.1039/d4dd00332b
+
+@article{Jaffal2025SAFCAF,
+  author  = {Jaffal, Emil I. and Lee, Sangjoon and Shiryaev, Danila and
+             Vtorov, Alex and Barua, Nikhil Kumar and Kleinke, Holger and
+             Oliynyk, Anton O.},
+  title   = {Composition and structure analyzer/featurizer for explainable
+             machine-learning models to predict solid state structures},
+  journal = {Digital Discovery},
+  year    = {2025},
+  volume  = {4},
+  pages   = {548-560},
+  doi     = {10.1039/d4dd00332b},
+  url     = {https://doi.org/10.1039/d4dd00332b}
+}
+
 ## scikit-package - packaging standards (cifkit is built with it)
 
 Lee, S., Myers, C., Yang, A., Zhang, T., Xiao, Y., & Billinge, S. J. L.

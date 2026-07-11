@@ -171,12 +171,12 @@ Consider citing if useful:
 
 -  **cifkit** - Lee & Oliynyk, JOSS (2024).
    https://doi.org/10.21105/joss.07205
+-  **SAF + CAF** (structural / composition feature generation for ML;
+   cifkit is the geometry engine for SAF) - Jaffal et al., *Digital
+   Discovery* **4**, 548-560 (2025).
+   https://doi.org/10.1039/d4dd00332b
 -  **OLED / Oliynyk elemental data** - Lee et al., Data in Brief (2024).
    https://doi.org/10.1016/j.dib.2024.110178
--  **AB-stacking prototype structures (related)** - Selvaratnam et al.,
-   Data in Brief (2025). https://doi.org/10.1016/j.dib.2025.112138
-   ScienceDirect:
-   https://www.sciencedirect.com/science/article/pii/S2352340925008595
 -  **scikit-package** (cifkit is built with it) - Lee et al., *Digital
    Discovery* (2026). https://doi.org/10.1039/d6dd00121a
 
