@@ -1,39 +1,52 @@
 # Parse physical features from a .cif
 
 This is the main use of `cifkit`: turn one crystallographic `.cif` file
-into **physical numbers** you can plot, compare, or feed into a
-featurizer / machine-learning model (geometry and site environment).
+into **geometry and site-environment numbers** you can plot, compare, or
+feed into a featurizer / machine-learning model.
 
 What you get, in order:
 
 1. Useful structure facts (parse)
 2. **Interatomic distances**
-3. **Coordination numbers** (four methods)
+3. **Coordination numbers** — how each method decides CN (this page)
 4. **Polyhedron metrics** (volume, packing efficiency, …)
 5. Bond fractions and site mixing
-6. Optional polyhedron plot
+6. Optional polyhedron plot (static PNG or interactive 3D)
 
-For **composition / elemental** descriptors (atomic weight,
-electronegativity, Mendeleev number, …) use **[OLED](oled)** — that is a
-separate table, not read from the `.cif` (dataset paper:
-[Data in Brief](https://doi.org/10.1016/j.dib.2024.110178)).
-
-All numbers below are real outputs on the packaged **GdSb** demo
-(`Example.GdSb_file_path`). Tables use **pandas → Markdown** so you can
-copy the same pattern into a notebook.
-
-If these geometry features were useful, consider citing **cifkit**
-([JOSS 10.21105/joss.07205](https://doi.org/10.21105/joss.07205);
-BibTeX in [CITATION.txt](../_static/CITATION.txt)).
+**Not from the `.cif`:** composition / elemental descriptors (atomic
+weight, electronegativity, Mendeleev number, …) come from the separate
+**OLED** table in [OLED tutorial](oled) — curated Oliynyk elemental data
+from the dataset paper (*Data in Brief*), **not** values read out of the
+CIF file.
 
 ```{figure} ../img/GdSb_Sb.png
 :alt: GdSb Sb-centered coordination polyhedron, CN=6
 :align: center
 :width: 55%
 
-**Example feature visualization.** Sb-centered polyhedron in GdSb
-(CN=6) from `plot_polyhedron` — same demo file used throughout this
-page.
+**Static export.** Sb-centered polyhedron in GdSb (CN=6) from
+`plot_polyhedron` on the packaged demo file.
+```
+
+### Interactive polyhedron (drag to rotate)
+
+Same shell as above — real neighbor coordinates from
+`Example.GdSb_file_path`, method `dist_by_shortest_dist`, **CN = 6**.
+Use this when a static PNG is not enough to see the octahedron.
+
+```{raw} html
+<iframe
+  src="../_static/gdsb_polyhedron.html"
+  title="Interactive GdSb Sb-centered polyhedron CN=6"
+  style="width:100%;height:420px;border:1px solid #d0d7de;border-radius:8px;background:#0f1419;"
+  loading="lazy"
+></iframe>
+```
+
+In your own notebook or script you get a live PyVista window with:
+
+```python
+cif.plot_polyhedron("Sb", is_displayed=True)  # interactive desktop window
 ```
 
 ## 1. Load a CIF and see what was parsed
@@ -148,19 +161,54 @@ print(dist_table.head(8).to_string(index=False))
 | Gd | 8.782 |
 | Sb | 9.315 |
 
-These shells are the raw material for coordination-number methods.
+These ordered shells are the raw input for every CN method.
 
-## 3. Coordination numbers (four methods)
+## 3. Coordination numbers — what they are and how each is determined
 
-Each method sorts neighbor distances and finds the largest gap on a
-normalized curve:
+### What is CN here?
 
-| Method key | Distance normalized by |
-|---|---|
-| `dist_by_shortest_dist` | shortest distance from the site |
-| `dist_by_CIF_radius_sum` | sum of CIF radii of the pair |
-| `dist_by_CIF_radius_refined_sum` | sum of refined CIF radii |
-| `dist_by_Pauling_radius_sum` | sum of Pauling CN12 radii |
+For each crystallographic **site label**, cifkit decides how many
+neighbors belong in the first coordination shell. That integer is the
+**coordination number (CN)**. The shell defines the vertices of the
+coordination **polyhedron** (edges, faces, volume, packing efficiency).
+
+CN is **not** a single universal number in messy intermetallics: different
+reasonable normalizations of distance can put the “largest gap” in
+different places. cifkit therefore runs **up to four methods** and then
+picks a **best method per site** using polyhedron geometry.
+
+### Algorithm (same skeleton for every method)
+
+For each site label:
+
+1. **Order neighbors** by increasing interatomic distance (from the
+   supercell search; first ~20 neighbors are considered).
+2. **Normalize** each neighbor distance by a method-specific scale
+   (see table below). Sorted normalized values form a step-like curve.
+3. **Find the largest gap** between consecutive normalized distances.
+   The index of that gap is the CN: keep the first *N* neighbors, drop
+   everything beyond the gap.
+4. Those *N* neighbors are the shell used for bond fractions and
+   polyhedron metrics for that method.
+
+If radius data are missing or the site is not full occupancy, only
+`dist_by_shortest_dist` runs; otherwise all four methods run.
+
+### The four methods (what the scale is)
+
+| Method key | Normalize each neighbor distance by… | Intuition |
+|---|---|---|
+| `dist_by_shortest_dist` | the site’s **shortest** neighbor distance | Pure geometry: “how many times longer than the nearest bond?” |
+| `dist_by_CIF_radius_sum` | sum of **CIF radii** of the central + neighbor elements | Bonds scaled by tabulated elemental sizes |
+| `dist_by_CIF_radius_refined_sum` | sum of **refined CIF radii** for the pair | Same idea after a structure-aware radius tweak |
+| `dist_by_Pauling_radius_sum` | sum of **Pauling CN12** metallic radii | Metallic-radius scale (CN = 12 reference) |
+
+Radii for the last three methods come from cifkit’s elemental radius
+tables (not from OLED’s full property set, though CIF/Pauling radii also
+appear there as elemental columns). The **geometry CN** is always
+computed from the **CIF structure** + these scales.
+
+### Run it and read the per-method table
 
 ```python
 cif.compute_CN()  # or Cif(path, compute_CN=True)
@@ -185,13 +233,24 @@ print(pd.DataFrame(rows).to_string(index=False))
 | Gd | dist_by_CIF_radius_refined_sum | 18 | 0.453 |
 | Gd | dist_by_Pauling_radius_sum | 18 | 0.366 |
 
-Methods disagree for Gd (6 vs 18) — that is why cifkit computes all four
-and then picks a **best method per site**.
+**How to read this:** for Sb every method agrees (CN = 6). For Gd the
+shortest-distance method finds a gap after 6 neighbors, while
+radius-based methods find a larger gap after 18 — classic rock-salt
+behavior where the second shell is still close on some scales. That is
+why cifkit keeps all four results and then chooses a **best method**.
+
+### How the “best” method is chosen
+
+For each method that produced a CN ≥ 4, cifkit builds the convex hull of
+the shell neighbors and measures how far the **central atom** sits from
+the **average of the vertex positions**. The method with the **smallest**
+that distance is `method_used` in `CN_best_methods` (most “centered”
+polyhedron). Metrics (volume, packing efficiency, faces, …) are reported
+for that winning method only.
+
+Low-level helpers: [Coordination API](../api/coordination).
 
 ## 4. Polyhedron metrics (best method)
-
-The best method minimizes the distance from the polyhedron center to the
-average of its vertices. Metrics are ready-made features:
 
 ```python
 best = pd.DataFrame(
@@ -217,6 +276,7 @@ print(best.to_string(index=False))
 | Gd | dist_by_shortest_dist | 6 | 12 | 8 | 39.914 | 0.605 |
 
 Octahedra (6 / 12 / 8) with packing efficiency 0.605 — rock salt.
+`method_used` is the winner of the center-to-average test above.
 
 Neighbors in the CN shell for **Gd** (min-dist method):
 
@@ -273,8 +333,13 @@ for label in cif.site_labels:
 # → GdSb_Sb.png, GdSb_Gd.png
 ```
 
-Pass `is_displayed=True` for an interactive 3D window. A richer
-polyhedron example from the
+| Mode | How |
+|---|---|
+| Static PNG (docs, papers) | `is_displayed=False`, write `output_dir` |
+| Interactive desktop (PyVista) | `is_displayed=True` |
+| Interactive in these docs | iframe widget above (same GdSb / Sb shell) |
+
+A richer polyhedron from the
 [JOSS paper](https://doi.org/10.21105/joss.07205) (ErCoIn₅, In1, CN=12):
 
 ```{figure} ../img/ErCoIn-polyhedron.png
@@ -292,17 +357,30 @@ polyhedron example from the
 
 ## What else?
 
-Worth knowing, but not expanded on this page:
-
 | Topic | Where |
 |---|---|
 | Radii used in CN methods (`radius_values`, `radius_sum`) | [`Cif` API](../api/cif) |
-| Site mixing types beyond full occupancy | `site_mixing_type`, `mixing_info_per_label_pair` above; [API](../api/cif) |
+| Site mixing types beyond full occupancy | `site_mixing_type`, `mixing_info_per_label_pair`; [API](../api/cif) |
 | Folder-level CN / structure histograms before ML | [Statistics over many CIFs](statistics-many-cifs) |
-| **Elemental properties for ML (OLED)** | **[OLED tutorial](oled)** · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
+| **Elemental properties for ML (OLED table — not from the CIF)** | **[OLED tutorial](oled)** · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
 | Downstream geometry featurizer built on cifkit | [SAF](https://github.com/bobleesj/structure-analyzer-featurizer) |
 
 ## Next
 
 - **[Statistics over many CIFs](statistics-many-cifs)** — filter, histograms, sort a folder  
-- **[OLED](oled)** — elemental / composition features for ML (Data in Brief dataset)
+- **[OLED](oled)** — elemental / composition features (separate curated table)
+
+---
+
+## Notes (demo data, tables, citation)
+
+- **Numbers on this page** are real outputs on the packaged **GdSb** demo
+  (`Example.GdSb_file_path`).
+- **Tables** in the walkthroughs are built with **pandas → Markdown** so
+  you can copy the same pattern into a notebook. They show **geometry
+  features from the CIF**, not elemental property rows (those live in
+  OLED / *Data in Brief*).
+- If these geometry features were useful, consider citing **cifkit**
+  ([JOSS 10.21105/joss.07205](https://doi.org/10.21105/joss.07205);
+  BibTeX in [CITATION.txt](../_static/CITATION.txt)). Full publication
+  list: [home page](../intro).

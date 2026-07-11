@@ -9,6 +9,13 @@ Higher-level tools for **coordination geometry and atomic site analysis**
 from Crystallographic Information Files (`.cif`), plus **OLED (Oliynyk
 elemental data)** for composition featurization in ML.
 
+Two different data sources (do not mix them up):
+
+| Source | What it is | Tutorial |
+|---|---|---|
+| **`.cif` geometry** | Distances, coordination numbers (four gap methods), polyhedra from crystal structure | [Physical features](tutorials/physical-features) |
+| **OLED table** | Curated **elemental** property rows (22 × 76) for composition / ML — **not** read from the CIF | [OLED](tutorials/oled) · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
+
 **Built with [scikit-package](https://scikit-package.github.io/scikit-package/)**
 — packaging standards and a practical roadmap so scientists can maintain
 and distribute reproducible research software (including agent-friendly
@@ -18,7 +25,7 @@ Billinge, *Digital Discovery*, 2026.
 
 ```python
 from cifkit import Cif, CifEnsemble, Example
-from cifkit.sources.oliynyk import Oliynyk, Property  # OLED
+from cifkit.sources.oliynyk import Oliynyk, Property  # OLED table (not from .cif)
 ```
 
 **Docs:** this site · **Agents:** [llms.txt](llms.txt) · [API quick reference](api/quick-reference)
@@ -64,7 +71,8 @@ print(cif.CN_best_methods)  # volume, packing_efficiency, CN per site
 print(cif.CN_bond_fractions_by_min_dist_method)
 ```
 
-Full walkthrough: [Parse physical features from a .cif](tutorials/physical-features)
+Full walkthrough (how each CN method works + interactive polyhedron):
+[Parse physical features from a .cif](tutorials/physical-features)
 
 ### 2) Statistics over many `.cif` files
 
@@ -80,9 +88,10 @@ Full walkthrough: [Statistics over many CIFs](tutorials/statistics-many-cifs)
 
 ### 3) OLED — Oliynyk elemental data (composition / ML)
 
-**OLED** is the Oliynyk elemental property table (22 properties × 76
-elements). Load with `cifkit.sources.oliynyk.Oliynyk` — not a separate
-package.
+**OLED** is a curated **elemental property table** (22 properties × 76
+elements) from the *Data in Brief* dataset paper — **not** values parsed
+from a `.cif`. Load with `cifkit.sources.oliynyk.Oliynyk` (not a separate
+package; not related to OLED displays).
 
 ```python
 from cifkit.sources.oliynyk import Oliynyk, Property
@@ -137,6 +146,17 @@ work (BibTeX: [CITATION.txt](_static/CITATION.txt) · repo
 | AB-stacking intermetallic prototype structures (related dataset) | Selvaratnam et al., Data in Brief **63**, 112138 (2025). [10.1016/j.dib.2025.112138](https://doi.org/10.1016/j.dib.2025.112138) · [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340925008595) |
 | Packaging / scikit-package stack (cifkit is built with it) | **scikit-package** — Lee et al., *Digital Discovery*, 2026. [10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a) |
 | Geometry + OLED | Both cifkit + OLED dataset papers |
+
+## Notes (demos, tables, how to reproduce)
+
+- Tutorial numbers are real outputs on the packaged demos
+  (`Example.GdSb_file_path`, `Example.demo_cif_folder_path`).
+- Geometry tables are built with **pandas → Markdown** so you can copy
+  the same pattern into a notebook.
+- OLED’s searchable table / CSV is the **dataset table**, not structure
+  factors from a CIF file.
+- Soft cites live in the **Publications** table above and in
+  [CITATION.txt](_static/CITATION.txt).
 
 ## Getting help
 

@@ -3,10 +3,15 @@
 **OLED** = **O**liynyk **E**lemental **D**ata (22 properties × **76
 elements**) for composition featurization and ML.
 
+This is a **curated elemental property table** from the dataset paper
+(*Data in Brief*). It is **not** read from a `.cif` file. CIF geometry
+(distances, coordination, polyhedra) is a separate path —
+[Parse physical features from a .cif](physical-features).
+
 **Load with** `from cifkit.sources.oliynyk import Oliynyk, Property` —
 not a separate package; not related to OLED displays.
 
-## Get the data (+ how to credit it)
+## Get the data
 
 | Asset | Link |
 |---|---|
@@ -14,36 +19,10 @@ not a separate package; not related to OLED displays.
 | **Citation file (BibTeX + text)** | [CITATION.txt](../_static/CITATION.txt) |
 | **Agent recipes** | [llms.txt](../llms.txt) |
 
-If the OLED table was useful in a paper or product, consider citing the
-**dataset** paper (and cifkit if you also used CIF geometry):
-
-- **OLED dataset** — Lee, Chen, Garcia & Oliynyk, *Data in Brief* **53**,
-  110178 (2024).
-  DOI: [10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178)
-- **cifkit software** — Lee & Oliynyk, *JOSS* **9**, 7205 (2024).
-  DOI: [10.21105/joss.07205](https://doi.org/10.21105/joss.07205)
-- **Related — AB-stacking prototype structures** — Selvaratnam, Jaffal,
-  Shiryaev & Oliynyk, *Data in Brief* **63**, 112138 (2025).
-  DOI: [10.1016/j.dib.2025.112138](https://doi.org/10.1016/j.dib.2025.112138)
-  · [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340925008595)
-
-```bibtex
-@article{Lee2024OLED,
-  author  = {Lee, Sangjoon and Chen, C. and Garcia, G. and Oliynyk, Anton},
-  title   = {Machine learning descriptors in materials chemistry used in
-             multiple experimentally validated studies: Oliynyk elemental
-             property dataset},
-  journal = {Data in Brief},
-  year    = {2024},
-  volume  = {53},
-  pages   = {110178},
-  doi     = {10.1016/j.dib.2024.110178}
-}
-```
-
 ## Full table
 
-All 76 elements × 22 properties (+ symbol). Scroll sideways for every
+All 76 elements × 22 properties (+ symbol) from the **OLED dataset
+table** (not from structure factors in a CIF). Scroll sideways for every
 column; search only filters this list (clear the box to show all rows).
 
 ```{raw} html
@@ -225,11 +204,6 @@ True
 
 API: [Oliynyk / Property](../api/oliynyk) · [llms.txt](../llms.txt)
 
-## Publications
-
-Same references as at the top of this page (dataset + software). Full
-BibTeX for both: [CITATION.txt](../_static/CITATION.txt).
-
 ## Research that used OLED
 
 - Copper Gallium Aluminum mixed metal oxides as alternative catalyst
@@ -265,3 +239,32 @@ BibTeX for both: [CITATION.txt](../_static/CITATION.txt).
   time-temperature-transformation curves in alloys: application to
   uranium-based alloys
   ([Research Square](https://doi.org/10.21203/rs.3.rs-9272503/v1))
+
+---
+
+## Notes (table source, citation)
+
+- The full HTML/CSV table on this page is the **OLED elemental dataset**
+  (Oliynyk property columns), **not** values parsed from a `.cif`.
+  Dataset paper: Lee et al., *Data in Brief* **53**, 110178 (2024)
+  ([10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178)).
+- If the table was useful, consider citing that paper (and **cifkit** if
+  you also used CIF geometry). Related AB-stacking prototypes:
+  Selvaratnam et al., *Data in Brief* **63**, 112138 (2025)
+  ([ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340925008595)).
+- BibTeX: [CITATION.txt](../_static/CITATION.txt) · full list on the
+  [home page](../intro).
+
+```bibtex
+@article{Lee2024OLED,
+  author  = {Lee, Sangjoon and Chen, C. and Garcia, G. and Oliynyk, Anton},
+  title   = {Machine learning descriptors in materials chemistry used in
+             multiple experimentally validated studies: Oliynyk elemental
+             property dataset},
+  journal = {Data in Brief},
+  year    = {2024},
+  volume  = {53},
+  pages   = {110178},
+  doi     = {10.1016/j.dib.2024.110178}
+}
+```

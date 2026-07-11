@@ -4,9 +4,10 @@ When you have a **folder** of `.cif` files, use `CifEnsemble` to get
 overview statistics, filter by attributes, generate histograms, and
 copy/move files. This is separate from extracting physical features from
 one file — see [Parse physical features from a .cif](physical-features) for
-that.
+that (including **how each CN method is determined**).
 
-All outputs below use the packaged demo CIFs (**GdSb** and **HoSb**).
+Elemental composition features are **not** from these CIFs — use
+[OLED](oled) (*Data in Brief* table).
 
 ## Set up a scratch folder
 
@@ -161,4 +162,15 @@ Full method list: [CifEnsemble](../api/cif-ensemble).
 ## Next
 
 - **[Parse physical features from a .cif](physical-features)** — distances, CN, polyhedra  
-- **[OLED](oled)** — elemental / composition features
+- **[OLED](oled)** — elemental / composition features (dataset table, not from CIF)
+
+---
+
+## Notes (demo data, citation)
+
+- Outputs on this page use the packaged demo CIFs (**GdSb**, **HoSb**).
+- Tables use **pandas → Markdown** where shown; they summarize
+  **geometry / ensemble stats from CIFs**, not OLED elemental rows.
+- Soft cite for geometry / ensemble work: **cifkit**
+  ([JOSS](https://doi.org/10.21105/joss.07205)) ·
+  [CITATION.txt](../_static/CITATION.txt) · [home page](../intro).
