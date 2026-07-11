@@ -37,8 +37,8 @@ at one structure, and not a full DFT stack.
 **Used in practice** for high-throughput site/CN mining (e.g. AB-stacking
 prototype datasets over tens of thousands of cleaned PCD CIFs), as the
 geometry backend under bond tools (CBA) and structure featurizers (SAF),
-and in structure-type ML with experimental validation. Soft cites:
-[Publications](#publications).
+and in structure-type ML with experimental validation. Soft cites under
+**Publications** below.
 
 Two different data sources (do not mix them up):
 
