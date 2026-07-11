@@ -27,7 +27,5 @@ parts:
       - file: api/sources
   - caption: Maintainers
     chapters:
-      - file: changelog
-        title: Changelog
       - file: maintainer/release
-        title: Release
+        title: Changelog and release
