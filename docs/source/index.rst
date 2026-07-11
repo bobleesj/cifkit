@@ -234,4 +234,8 @@ Other links
 Acknowledgements
 ----------------
 
-``cifkit`` is built and maintained with `scikit-package <https://scikit-package.github.io/scikit-package/>`_.
+``cifkit`` is built and maintained with `scikit-package <https://scikit-package.github.io/scikit-package/>`_
+— packaging standards and a roadmap for sharing reproducible scientific
+software (including agent-friendly packaging). S. Lee, C. Myers, A. Yang,
+T. Zhang, Y. Xiao and S. J. L. Billinge, *Digital Discovery*, 2026.
+https://doi.org/10.1039/d6dd00121a

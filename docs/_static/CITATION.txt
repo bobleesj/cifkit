@@ -44,3 +44,21 @@ Software, 9(103), 7205. https://doi.org/10.21105/joss.07205
   doi     = {10.21105/joss.07205},
   url     = {https://doi.org/10.21105/joss.07205}
 }
+
+## scikit-package — packaging standards (cifkit is built with it)
+
+Lee, S., Myers, C., Yang, A., Zhang, T., Xiao, Y., & Billinge, S. J. L.
+(2026). scikit-package: software packaging standards and roadmap for
+sharing reproducible scientific software. Digital Discovery.
+https://doi.org/10.1039/d6dd00121a
+
+@article{Lee2026scikitpackage,
+  author  = {Lee, Sangjoon and Myers, C. and Yang, A. and Zhang, T. and
+             Xiao, Y. and Billinge, S. J. L.},
+  title   = {scikit-package: software packaging standards and roadmap for
+             sharing reproducible scientific software},
+  journal = {Digital Discovery},
+  year    = {2026},
+  doi     = {10.1039/d6dd00121a},
+  url     = {https://doi.org/10.1039/d6dd00121a}
+}

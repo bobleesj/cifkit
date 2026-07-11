@@ -55,3 +55,27 @@ references:
     volume: "53"
     doi: 10.1016/j.dib.2024.110178
     notes: OLED (Oliynyk elemental data) — cite when using the elemental property table
+  - type: article
+    authors:
+      - family-names: Lee
+        given-names: Sangjoon
+      - family-names: Myers
+        given-names: C.
+      - family-names: Yang
+        given-names: A.
+      - family-names: Zhang
+        given-names: T.
+      - family-names: Xiao
+        given-names: Y.
+      - family-names: Billinge
+        given-names: S. J. L.
+    title: >-
+      scikit-package: software packaging standards and roadmap for
+      sharing reproducible scientific software
+    journal: Digital Discovery
+    year: 2026
+    doi: 10.1039/d6dd00121a
+    notes: >-
+      Packaging standards and roadmap; cifkit is built and maintained
+      with scikit-package
+

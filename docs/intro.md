@@ -9,6 +9,13 @@ Higher-level tools for **coordination geometry and atomic site analysis**
 from Crystallographic Information Files (`.cif`), plus **OLED (Oliynyk
 elemental data)** for composition featurization in ML.
 
+**Built with [scikit-package](https://scikit-package.github.io/scikit-package/)**
+— packaging standards and a practical roadmap so scientists can maintain
+and distribute reproducible research software (including agent-friendly
+surfaces). S. Lee, C. Myers, A. Yang, T. Zhang, Y. Xiao and S. J. L.
+Billinge, *Digital Discovery*, 2026.
+[https://doi.org/10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a)
+
 ```python
 from cifkit import Cif, CifEnsemble, Example
 from cifkit.sources.oliynyk import Oliynyk, Property  # OLED
@@ -127,7 +134,8 @@ work (BibTeX: [CITATION.txt](_static/CITATION.txt) · repo
 |---|---|
 | CIF geometry / CN / polyhedra / `CifEnsemble` | **cifkit** — Lee & Oliynyk, JOSS **9**, 7205 (2024). [10.21105/joss.07205](https://doi.org/10.21105/joss.07205) |
 | OLED elemental table / `Oliynyk` / `oled.csv` | **Dataset** — Lee et al., Data in Brief **53**, 110178 (2024). [10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178) |
-| Both | Both papers |
+| Packaging / scikit-package stack (cifkit is built with it) | **scikit-package** — Lee et al., *Digital Discovery*, 2026. [10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a) |
+| Geometry + OLED | Both cifkit + dataset papers |
 
 ## Getting help
 

@@ -160,6 +160,11 @@ How to contribute
 Acknowledgements
 ----------------
 
-Developed with ``scikit-package``
-(https://scikit-package.github.io/scikit-package/). Maintained by
-Sangjoon Bob Lee.
+``cifkit`` is built and maintained with ``scikit-package``
+(https://scikit-package.github.io/scikit-package/) — packaging standards
+and a roadmap for sharing reproducible scientific software (including
+agent-friendly packaging). Lee, S., Myers, C., Yang, A., Zhang, T.,
+Xiao, Y. & Billinge, S. J. L. (2026). *Digital Discovery*.
+https://doi.org/10.1039/d6dd00121a
+
+Maintained by Sangjoon Bob Lee.

@@ -5,6 +5,11 @@
 # PyPI: https://pypi.org/project/cifkit/   Source: https://github.com/bobleesj/cifkit
 # Install: pip install cifkit
 #
+# Built with scikit-package (https://scikit-package.github.io/scikit-package/)
+# — packaging standards and roadmap for sharing reproducible scientific
+# software, including agent-friendly packaging. Digital Discovery 2026:
+# https://doi.org/10.1039/d6dd00121a
+#
 # Naming
 #   CIF = Crystallographic Information File (.cif)
 #   OLED = Oliynyk Elemental Data (composition features for ML)
@@ -42,6 +47,18 @@ cifkit software (CIF parse, distances, CN, polyhedra, CifEnsemble):
     journal = {Journal of Open Source Software}, year = {2024},
     volume  = {9}, number = {103}, pages = {7205},
     doi     = {10.21105/joss.07205}}
+
+scikit-package (cifkit is built with it — packaging standards / agent surface):
+  Lee, Myers, Yang, Zhang, Xiao & Billinge, Digital Discovery (2026)
+  https://doi.org/10.1039/d6dd00121a
+  BibTeX:
+  @article{Lee2026scikitpackage,
+    author  = {Lee, Sangjoon and Myers, C. and Yang, A. and Zhang, T. and
+               Xiao, Y. and Billinge, S. J. L.},
+    title   = {scikit-package: software packaging standards and roadmap for
+               sharing reproducible scientific software},
+    journal = {Digital Discovery}, year = {2026},
+    doi     = {10.1039/d6dd00121a}}
 
 If a workflow uses BOTH geometry from a .cif AND OLED composition features,
 cite BOTH papers. Human citation file: https://bobleesj.github.io/cifkit/_static/CITATION.txt
