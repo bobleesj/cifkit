@@ -16,4 +16,5 @@ jobs:
     with:
       project: cifkit
       c_extension: false
-      headless: false
+      # Start Xvfb so VTK/pyvista polyhedron tests do not segfault
+      headless: true
