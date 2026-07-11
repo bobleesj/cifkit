@@ -31,8 +31,18 @@ Here are the main goals of `cifkit` for the scientific community:
 2. Make **supercell construction and neighbor search reliable in Python**,
    so site environments near cell boundaries are not wrong or missing.
 3. Support **high-throughput work** over folders of CIFs - from a few
-   structures to **thousands or tens of thousands** - with a small,
-   scriptable API rather than a one-file GUI workflow.
+   structures to **tens of thousands** - with a small, scriptable API
+   rather than a one-file GUI workflow.
+
+In published structure-featurization workflows that use `cifkit` as the
+geometry engine ([SAF](https://github.com/bobleesj/structure-analyzer-featurizer)
+together with
+[CAF](https://github.com/bobleesj/composition-analyzer-featurizer)),
+scientists have processed **tens of thousands of CIFs** and built training
+tables on the order of **a million feature rows** for explainable
+machine-learning models of solid-state structures
+([Digital Discovery](https://doi.org/10.1039/D4DD00332B)). That scale is
+what the supercell, neighbor, and coordination APIs are designed for.
 
 | Capability | What `cifkit` provides |
 |---|---|
@@ -40,20 +50,14 @@ Here are the main goals of `cifkit` for the scientific community:
 | Coordination | Four gap-based methods (*d/d<sub>min</sub>*, CIF-radius sums, Pauling radius sum, …), best-method polyhedra, bond fractions, packing efficiency |
 | Supercells | Default **3×3×3** supercell (configurable) for consistent neighbor search |
 | Many CIFs | `CifEnsemble`: preprocess, unique formulas/structures, filters, histograms, sort/copy |
-| Structural features for ML | Geometry vectors for tools such as [SAF](https://github.com/bobleesj/structure-analyzer-featurizer); composition via **OLED** when elemental tables are needed |
+| Structural features for ML | Geometry backend for [SAF](https://github.com/bobleesj/structure-analyzer-featurizer) (with [CAF](https://github.com/bobleesj/composition-analyzer-featurizer) for composition); elemental tables via **OLED** when needed |
 | Small API | `Cif("file.cif")` / `CifEnsemble("folder/")` - attributes and a few methods |
 
 `cifkit` is not a replacement for interactive viewers such as VESTA for
 browsing a single structure, and it is not a DFT package. It is aimed at
 **batch geometry and structural featurization** that experimental and
-data-driven groups actually run.
-
-These capabilities have been used for high-throughput site and
-coordination analysis over large crystallographic collections, as a
-geometry backend for bond tools (CBA) and structure featurizers (SAF),
-and in structure-type machine learning with experimental validation. If
-that work is useful in your research, consider citing the matching papers
-under **Publications** below.
+data-driven groups actually run. If that work is useful in your research,
+consider citing the matching papers under **Publications** below.
 
 ### Two data sources (keep them separate)
 

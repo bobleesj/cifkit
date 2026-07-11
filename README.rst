@@ -48,10 +48,17 @@ boilerplate geometry code.
 *  Make **supercell construction and neighbor search reliable in
    Python** (default 3×3×3, configurable).
 *  Support **high-throughput** work over folders of CIFs - from a few
-   structures to **thousands or tens of thousands** - with
-   ``Cif`` / ``CifEnsemble`` rather than a one-file GUI workflow.
-*  Provide geometry vectors that feed structure featurizers such as
-   SAF; composition features via OLED when elemental tables are needed.
+   structures to **tens of thousands** - with ``Cif`` / ``CifEnsemble``
+   rather than a one-file GUI workflow.
+*  Provide the geometry engine used by structure featurizers such as
+   SAF (with CAF for composition); elemental tables via OLED when
+   needed.
+
+In published SAF + CAF workflows (Digital Discovery,
+https://doi.org/10.1039/D4DD00332B), scientists have processed **tens of
+thousands of CIFs** and built training tables on the order of **a
+million feature rows** for explainable ML models of solid-state
+structures. That scale is what these APIs are designed for.
 
 ``cifkit`` is not a replacement for interactive viewers such as VESTA,
 and it is not a DFT package. It is aimed at batch geometry and
