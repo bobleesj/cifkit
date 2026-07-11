@@ -2,7 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/cifkit)](https://pypi.org/project/cifkit/)
 [![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue)](https://pypi.org/project/cifkit/)
-[![CI](https://github.com/bobleesj/cifkit/workflows/CI/badge.svg)](https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml)
+[![CI](https://github.com/bobleesj/cifkit/workflows/CI/badge.svg)](https://github.com/bobleesj/cifkit/actions)
 [![DOI](https://img.shields.io/badge/DOI-10.21105%2Fjoss.07205-blue)](https://doi.org/10.21105/joss.07205)
 
 `cifkit` offers higher-level tools for **coordination geometry and atomic
