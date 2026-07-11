@@ -29,6 +29,32 @@ cifkit
 coordination geometry and atomic-site features, and ships **OLED
 (Oliynyk elemental data)** for composition featurization (ML).
 
+Why cifkit?
+-----------
+
+Materials workflows repeatedly need: **reliable supercells in Python** →
+**interatomic distances and neighbor shells** → **coordination numbers**
+→ **structural numbers for plots or ML** — over **thousands to tens of
+thousands** of CIFs, not one structure at a time in a GUI.
+
+*  **Interatomic geometry** — shortest distances, site/bond pair tables,
+   ordered neighbors from a supercell search.
+*  **Coordination (scriptable)** — four gap-based CN methods
+   (including *d*/*d*\ :sub:`min`), best-method polyhedra, bond fractions,
+   packing efficiency.
+*  **Supercells you can trust** — 3×3×3 (configurable) so boundary
+   neighbors are not wrong or missing.
+*  **Folder-scale** — ``CifEnsemble`` for preprocess, filter, histogram,
+   and sort over large CIF collections.
+*  **Structural featurization for ML** — geometry features feed tools
+   such as SAF; composition features via OLED when you need elemental
+   tables.
+*  **Small API** — ``Cif("file.cif")`` / ``CifEnsemble("folder/")``.
+
+Not a VESTA replacement for browsing one file; not a DFT suite. Built for
+batch geometry and featurization that experimental and ML groups actually
+run.
+
 Install::
 
    pip install cifkit

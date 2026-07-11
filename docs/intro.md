@@ -9,6 +9,37 @@ Higher-level tools for **coordination geometry and atomic site analysis**
 from Crystallographic Information Files (`.cif`), plus **OLED (Oliynyk
 elemental data)** for composition featurization in ML.
 
+## Why cifkit?
+
+Solid-state and materials-informatics work often needs the same pipeline
+over and over: take messy database CIFs → build a **reliable supercell**
+→ list **neighbors and interatomic distances** → decide **coordination
+shells** → turn that into **numbers** for plots, motif searches, or
+**machine learning**. Doing that by hand (or reimplementing it per paper)
+does not scale past a handful of structures.
+
+**cifkit is the simple Python layer for that job.**
+
+| You need… | What cifkit gives you |
+|---|---|
+| **Interatomic geometry at scale** | Shortest distances, site-pair and bond-pair distances, ordered neighbor lists from a supercell search |
+| **Coordination that is scriptable** | Four gap-based CN methods (*d/d<sub>min</sub>*, CIF-radius sums, Pauling radius sum, …), best-method polyhedra, bond fractions, packing efficiency |
+| **Supercells you can trust in Python** | Constructor builds a **3×3×3 supercell** (configurable) so neighbors near the cell boundary are not wrong or missing |
+| **Thousands → tens of thousands of CIFs** | `CifEnsemble` over a folder: preprocess, unique formulas/structures, filters, histograms, sort/copy — not one file at a time in a GUI |
+| **Structural features for ML** | Geometry vectors (CN, distances, polyhedron metrics, bond fractions) that feed featurizers such as [SAF](https://github.com/bobleesj/structure-analyzer-featurizer); composition side via **OLED** when you need elemental tables |
+| **API that stays small** | `Cif("file.cif")` / `CifEnsemble("folder/")` — attributes and a few methods, not a general crystallography framework |
+
+**Who this is for:** experimental solid-state groups, structure-type
+datasets, and ML workflows that need **physics-based structural
+descriptors** from real CIFs — not a replacement for VESTA for looking
+at one structure, and not a full DFT stack.
+
+**Used in practice** for high-throughput site/CN mining (e.g. AB-stacking
+prototype datasets over tens of thousands of cleaned PCD CIFs), as the
+geometry backend under bond tools (CBA) and structure featurizers (SAF),
+and in structure-type ML with experimental validation. Soft cites:
+[Publications](#publications).
+
 Two different data sources (do not mix them up):
 
 | Source | What it is | Tutorial |
