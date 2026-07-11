@@ -57,6 +57,30 @@ references:
     notes: OLED (Oliynyk elemental data) — cite when using the elemental property table
   - type: article
     authors:
+      - family-names: Selvaratnam
+        given-names: Balaranjan
+        orcid: "https://orcid.org/0000-0003-3012-746X"
+      - family-names: Jaffal
+        given-names: Emil I.
+        orcid: "https://orcid.org/0009-0003-1022-4243"
+      - family-names: Shiryaev
+        given-names: Danila
+      - family-names: Oliynyk
+        given-names: Anton O.
+        orcid: "https://orcid.org/0000-0003-0732-7340"
+    title: >-
+      Dataset of prototype structures adopted by intermetallic compounds
+      with AB stacking
+    journal: Data in Brief
+    year: 2025
+    volume: "63"
+    doi: 10.1016/j.dib.2025.112138
+    url: "https://www.sciencedirect.com/science/article/pii/S2352340925008595"
+    notes: >-
+      Related AB-stacking prototype-structure dataset (ScienceDirect
+      PII S2352340925008595); complementary to OLED / intermetallic work
+  - type: article
+    authors:
       - family-names: Lee
         given-names: Sangjoon
       - family-names: Myers

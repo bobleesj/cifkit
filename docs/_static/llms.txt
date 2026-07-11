@@ -48,6 +48,20 @@ cifkit software (CIF parse, distances, CN, polyhedra, CifEnsemble):
     volume  = {9}, number = {103}, pages = {7205},
     doi     = {10.21105/joss.07205}}
 
+Related dataset — AB-stacking intermetallic prototype structures:
+  Selvaratnam, Jaffal, Shiryaev & Oliynyk, Data in Brief 63, 112138 (2025)
+  DOI: https://doi.org/10.1016/j.dib.2025.112138
+  ScienceDirect: https://www.sciencedirect.com/science/article/pii/S2352340925008595
+  BibTeX:
+  @article{Selvaratnam2025ABstacking,
+    author  = {Selvaratnam, Balaranjan and Jaffal, Emil I. and Shiryaev,
+               Danila and Oliynyk, Anton O.},
+    title   = {Dataset of prototype structures adopted by intermetallic
+               compounds with AB stacking},
+    journal = {Data in Brief}, year = {2025}, volume = {63}, pages = {112138},
+    doi     = {10.1016/j.dib.2025.112138},
+    url     = {https://www.sciencedirect.com/science/article/pii/S2352340925008595}}
+
 scikit-package (cifkit is built with it — packaging standards / agent surface):
   Lee, Myers, Yang, Zhang, Xiao & Billinge, Digital Discovery (2026)
   https://doi.org/10.1039/d6dd00121a

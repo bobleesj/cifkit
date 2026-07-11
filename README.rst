@@ -137,6 +137,12 @@ Consider citing if useful:
    https://doi.org/10.21105/joss.07205
 -  **OLED / Oliynyk elemental data** — Lee et al., Data in Brief (2024).
    https://doi.org/10.1016/j.dib.2024.110178
+-  **AB-stacking prototype structures (related)** — Selvaratnam et al.,
+   Data in Brief (2025). https://doi.org/10.1016/j.dib.2025.112138
+   ScienceDirect:
+   https://www.sciencedirect.com/science/article/pii/S2352340925008595
+-  **scikit-package** (cifkit is built with it) — Lee et al., *Digital
+   Discovery* (2026). https://doi.org/10.1039/d6dd00121a
 
 .. code:: text
 

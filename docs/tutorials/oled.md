@@ -22,6 +22,10 @@ If the OLED table was useful in a paper or product, consider citing the
   DOI: [10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178)
 - **cifkit software** — Lee & Oliynyk, *JOSS* **9**, 7205 (2024).
   DOI: [10.21105/joss.07205](https://doi.org/10.21105/joss.07205)
+- **Related — AB-stacking prototype structures** — Selvaratnam, Jaffal,
+  Shiryaev & Oliynyk, *Data in Brief* **63**, 112138 (2025).
+  DOI: [10.1016/j.dib.2025.112138](https://doi.org/10.1016/j.dib.2025.112138)
+  · [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340925008595)
 
 ```bibtex
 @article{Lee2024OLED,
