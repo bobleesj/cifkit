@@ -1,18 +1,30 @@
 # Statistics over many CIFs
 
-When you have a **folder** of `.cif` files, use `CifEnsemble` to get
-overview statistics, filter by attributes, generate histograms, and
-copy/move files. This is separate from extracting physical features from
-one file - see [Parse physical features from a .cif](physical-features) for
-that (including **how each CN method is determined**).
+A single `.cif` gives you geometry for **one** structure
+([physical features](physical-features)). When you have a **folder**,
+`CifEnsemble` is the hands-on tool: clean the set, see what is in it,
+filter, plot histograms, and copy matching files into new folders.
 
 Elemental composition features are **not** from these CIFs - use
 [OLED](oled) (*Data in Brief* table).
 
-## Set up a scratch folder
+## What data is on this page?
+
+| Content | Source |
+|---|---|
+| Runnable demo (2 files) | Packaged **GdSb** + **HoSb** (`Example.demo_cif_folder_path`) - always available offline |
+| Large structure / CN histograms | Figures from published / JOSS-scale ensembles - illustrative, not re-run here |
+
+If you no longer have a large private CIF collection on disk, you can still
+**learn the API** on the two-file demo and **see what large runs look like**
+from the figures. The same calls scale: tens of thousands of CIFs in SAF/CAF
+workflows, with `cifkit` as the geometry engine
+([Digital Discovery](https://doi.org/10.1039/d4dd00332b)).
+
+## 1. Work on a copy (hands-on setup)
 
 Preprocessing can rewrite ill-formatted files in place, and
-`move_cif_files` relocates them, so work on a copy:
+`move_cif_files` relocates them. Always work on a **scratch copy**:
 
 ```python
 import os
@@ -29,6 +41,10 @@ for name in os.listdir(Example.demo_cif_folder_path):
 ensemble = CifEnsemble(scratch)
 ```
 
+What just happened: cifkit walked the folder, **preprocessed** each CIF for
+gemmi compatibility, reported how many landed in `error_*` folders, then
+built a `Cif` object per file.
+
 ```text
 CIF Preprocessing in demo_cifs begun...
 
@@ -42,10 +58,10 @@ Initializing 2 Cif objects...
 Finished initialization!
 ```
 
-Ill-formatted database files are sorted into `error_*` folders during
-this pass.
+With two clean rocksalt pnictides, you are ready to ask questions of the
+set - not of one file at a time.
 
-## Unique attributes and counts
+## 2. "What is in this folder?"
 
 ```python
 import pandas as pd
@@ -57,7 +73,8 @@ print("unique_space_group_names:", ensemble.unique_space_group_names)
 print("unique_elements:", ensemble.unique_elements)
 ```
 
-As a small overview table:
+Turn the same facts into a small table you can paste into a notebook or
+report:
 
 ```python
 overview = pd.DataFrame(
@@ -81,11 +98,19 @@ print(overview.to_string(index=False))
 | unique_space_group_names | ['Fm-3m'] |
 | unique_elements | ['Gd', 'Ho', 'Sb'] |
 
-Per-file values and formula counts are also available (e.g.
-`formula_stats`, `minimum_distances`, `supercell_atom_counts` - see the
-[CifEnsemble API](../api/cif-ensemble)).
+**Reading the result (demo story):** two formulas, one structure type
+(NaCl), one space group, three elements. On a real database dump you would
+see dozens of structure types and space groups here - same API, bigger
+folder.
 
-## Filter file paths
+Per-file series also exist (`formula_stats`, `minimum_distances`,
+`supercell_atom_counts`, …) - see the
+[CifEnsemble API](../api/cif-ensemble).
+
+## 3. "Give me only the files that match …"
+
+Filters return **paths** (sets), so you can chain logic or hand them to
+copy/move:
 
 ```python
 print(ensemble.filter_by_formulas(["GdSb"]))
@@ -99,10 +124,12 @@ print(ensemble.filter_by_space_group_names(["Fm-3m"]))
 {'demo_cifs/GdSb.cif', 'demo_cifs/HoSb.cif'}
 ```
 
-Other filters include structure, space-group number, composition type,
-site-mixing type, CN ranges, min distance, and supercell size.
+**Hands-on read:** GdSb-only is one path; Ho-containing is the other;
+space group Fm-3m is both. Other filters include structure, space-group
+number, composition type, site-mixing type, CN ranges, min distance, and
+supercell size.
 
-## Move and copy by filter
+## 4. "Park the matches in a new folder"
 
 ```python
 ensemble.copy_cif_files(ensemble.filter_by_formulas(["GdSb"]), "sorted_GdSb")
@@ -113,7 +140,13 @@ print(os.listdir("sorted_GdSb"))
 ['GdSb.cif']
 ```
 
-## Histograms
+This is the usual lab pattern: filter a large dump, copy the hits into
+`sorted_*` for the next notebook or for SAF/CAF featurization.
+
+## 5. "Show me the distribution" (histograms)
+
+On the demo (2 files) a structure histogram is almost trivial - both are
+NaCl - but the **call** is what you reuse on large sets:
 
 ```python
 ensemble.generate_structure_histogram(output_dir="histograms")
@@ -128,32 +161,39 @@ Available histograms: structure, formula, tag, space group number and
 name, supercell size, elements, CN by both method families, composition
 type, and site mixing type.
 
-Example structure-type histogram from a larger ensemble:
+### What a larger ensemble looks like
+
+These figures are **not** recomputed from the two-file demo. They show the
+kind of output you get when the folder is big enough for histograms to
+matter.
 
 ```{figure} ../img/histogram-structure.png
 :alt: Structures distribution histogram from CifEnsemble
 :align: center
 
-**Structure histogram.** Counts of structure types via
-`generate_structure_histogram`.
+**Structure histogram** from a larger ensemble via
+`generate_structure_histogram`. Same method as above; different folder size.
 ```
-
-JOSS Figure 1 pairs a single-file polyhedron with an ensemble CN
-histogram:
 
 ```{figure} ../img/ErCoIn-histogram-combined.png
 :alt: JOSS Figure 1 polyhedron and CN histogram
 :align: center
 
-**Figure 1 (JOSS).** One CIF’s polyhedron (left) and ensemble CN
-distribution (right).
+**JOSS Figure 1.** One CIF polyhedron (left) and ensemble CN distribution
+(right) - the single-file vs many-file story on one page.
 ```
 
-## Scale
+## Scale (when you do have thousands of files)
 
-On the order of 10,000 `.cif` files is roughly 30-60 minutes on a
-standard laptop (supercell + neighbors per file). Plan long runs
-accordingly.
+| Scale | What to expect |
+|---|---|
+| Demo (2 CIFs) | Seconds - this tutorial |
+| ~10,000 CIFs | Roughly 30-60 minutes on a laptop (supercell + neighbors per file) |
+| SAF + CAF training tables | Tens of thousands of CIFs; feature tables on the order of a million rows ([Digital Discovery](https://doi.org/10.1039/d4dd00332b)); `cifkit` supplies the geometry |
+
+You do **not** need the large dataset to learn the API. You need it only
+when you want to regenerate large histograms or feature matrices
+yourself.
 
 ## API
 
@@ -168,9 +208,10 @@ Full method list: [CifEnsemble](../api/cif-ensemble).
 
 ## Notes (demo data, citation)
 
-- Outputs on this page use the packaged demo CIFs (**GdSb**, **HoSb**).
-- Tables use **pandas → Markdown** where shown; they summarize
-  **geometry / ensemble stats from CIFs**, not OLED elemental rows.
+- Runnable numbers on this page use packaged **GdSb** and **HoSb** only.
+- Large histograms are published / JOSS figures for orientation.
 - Soft cite for geometry / ensemble work: **cifkit**
-  ([JOSS](https://doi.org/10.21105/joss.07205)) ·
+  ([JOSS](https://doi.org/10.21105/joss.07205)); for feature-generation
+  workflows also **SAF + CAF**
+  ([Digital Discovery](https://doi.org/10.1039/d4dd00332b)).
   [CITATION.txt](../_static/CITATION.txt) · [home page](../intro).
