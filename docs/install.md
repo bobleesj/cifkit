@@ -1,7 +1,7 @@
 # Installation
 
 `cifkit` is published on [PyPI](https://pypi.org/project/cifkit/). It is
-pure Python and supports Python 3.11 through 3.13 on macOS, Linux, and
+pure Python and supports Python 3.12 through 3.14 on macOS, Linux, and
 Windows.
 
 ## pip
