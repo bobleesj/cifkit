@@ -52,6 +52,6 @@ jupyter-book build docs
 # docs/_build/html/llms.txt  (and _static/llms.txt)
 ```
 
-Tutorial pages are plain MyST with pasted, verified outputs — nothing
+Tutorial pages are plain MyST with pasted, verified outputs - nothing
 executes at build time. When behavior changes, re-run snippets against
 the package and update the shown outputs in the same commit.

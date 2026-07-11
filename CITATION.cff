@@ -9,25 +9,25 @@ abstract: >
   Information Files (CIF), plus OLED (Oliynyk elemental data) for
   composition featurization.
 authors:
-  - family-names: Lee
+ - family-names: Lee
     given-names: Sangjoon
     orcid: "https://orcid.org/0000-0002-2367-3932"
-  - family-names: Oliynyk
+ - family-names: Oliynyk
     given-names: Anton O.
     orcid: "https://orcid.org/0000-0003-0732-7340"
 repository-code: "https://github.com/bobleesj/cifkit"
 url: "https://bobleesj.github.io/cifkit/"
 license: BSD-3-Clause
 identifiers:
-  - type: doi
+ - type: doi
     value: 10.21105/joss.07205
     description: cifkit JOSS paper
 preferred-citation:
   type: article
   authors:
-    - family-names: Lee
+ - family-names: Lee
       given-names: Sangjoon
-    - family-names: Oliynyk
+ - family-names: Oliynyk
       given-names: Anton O.
   title: "cifkit: A Python package for coordination geometry and atomic site analysis"
   journal: Journal of Open Source Software
@@ -37,15 +37,15 @@ preferred-citation:
   start: 7205
   doi: 10.21105/joss.07205
 references:
-  - type: article
+ - type: article
     authors:
-      - family-names: Lee
+ - family-names: Lee
         given-names: Sangjoon
-      - family-names: Chen
+ - family-names: Chen
         given-names: C.
-      - family-names: Garcia
+ - family-names: Garcia
         given-names: G.
-      - family-names: Oliynyk
+ - family-names: Oliynyk
         given-names: Anton
     title: >-
       Machine learning descriptors in materials chemistry used in multiple
@@ -54,18 +54,18 @@ references:
     year: 2024
     volume: "53"
     doi: 10.1016/j.dib.2024.110178
-    notes: OLED (Oliynyk elemental data) — cite when using the elemental property table
-  - type: article
+    notes: OLED (Oliynyk elemental data) - cite when using the elemental property table
+ - type: article
     authors:
-      - family-names: Selvaratnam
+ - family-names: Selvaratnam
         given-names: Balaranjan
         orcid: "https://orcid.org/0000-0003-3012-746X"
-      - family-names: Jaffal
+ - family-names: Jaffal
         given-names: Emil I.
         orcid: "https://orcid.org/0009-0003-1022-4243"
-      - family-names: Shiryaev
+ - family-names: Shiryaev
         given-names: Danila
-      - family-names: Oliynyk
+ - family-names: Oliynyk
         given-names: Anton O.
         orcid: "https://orcid.org/0000-0003-0732-7340"
     title: >-
@@ -79,19 +79,19 @@ references:
     notes: >-
       Related AB-stacking prototype-structure dataset (ScienceDirect
       PII S2352340925008595); complementary to OLED / intermetallic work
-  - type: article
+ - type: article
     authors:
-      - family-names: Lee
+ - family-names: Lee
         given-names: Sangjoon
-      - family-names: Myers
+ - family-names: Myers
         given-names: C.
-      - family-names: Yang
+ - family-names: Yang
         given-names: A.
-      - family-names: Zhang
+ - family-names: Zhang
         given-names: T.
-      - family-names: Xiao
+ - family-names: Xiao
         given-names: Y.
-      - family-names: Billinge
+ - family-names: Billinge
         given-names: S. J. L.
     title: >-
       scikit-package: software packaging standards and roadmap for

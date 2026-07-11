@@ -25,7 +25,7 @@ package. Demo paths: `Example.GdSb_file_path`,
 
 | Page | Import | Use it for |
 |---|---|---|
-| [Quick reference](quick-reference) | — | Full attribute/method tables for agents |
+| [Quick reference](quick-reference) | - | Full attribute/method tables for agents |
 | [Cif](cif) | `from cifkit import Cif` | One `.cif`: parse, distances, CN, polyhedra |
 | [CifEnsemble](cif-ensemble) | `from cifkit import CifEnsemble` | Folder: stats, filters, histograms |
 | [Coordination](coordination) | `cifkit.coordination.*` | Low-level CN / geometry helpers |

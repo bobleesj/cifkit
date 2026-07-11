@@ -8,14 +8,14 @@ What you get, in order:
 
 1. Useful structure facts (parse)
 2. **Interatomic distances**
-3. **Coordination numbers** — how each method decides CN (this page)
+3. **Coordination numbers** - how each method decides CN (this page)
 4. **Polyhedron metrics** (volume, packing efficiency, …)
 5. Bond fractions and site mixing
 6. Optional polyhedron plot (static PNG or interactive 3D)
 
 **Not from the `.cif`:** composition / elemental descriptors (atomic
 weight, electronegativity, Mendeleev number, …) come from the separate
-**OLED** table in [OLED tutorial](oled) — curated Oliynyk elemental data
+**OLED** table in [OLED tutorial](oled) - curated Oliynyk elemental data
 from the dataset paper (*Data in Brief*), **not** values read out of the
 CIF file.
 
@@ -30,7 +30,7 @@ CIF file.
 
 ### Interactive polyhedron (drag to rotate)
 
-Same shell as above — real neighbor coordinates from
+Same shell as above - real neighbor coordinates from
 `Example.GdSb_file_path`, method `dist_by_shortest_dist`, **CN = 6**.
 Use this when a static PNG is not enough to see the octahedron.
 
@@ -102,7 +102,7 @@ a 3×3×3 supercell, and defers coordination work until you ask
 
 ## 2. Interatomic distances
 
-Distances come from the supercell neighbor search — **before**
+Distances come from the supercell neighbor search - **before**
 coordination methods run.
 
 ```python
@@ -117,7 +117,7 @@ shortest_site_pair_distance: {'Sb': ('Gd', 3.105), 'Gd': ('Sb', 3.105)}
 shortest_bond_pair_distance: {('Gd', 'Sb'): 3.105, ('Gd', 'Gd'): 4.391, ('Sb', 'Sb'): 4.391}
 ```
 
-As a table — shortest distance between each element-pair type:
+As a table - shortest distance between each element-pair type:
 
 ```python
 bond_d = pd.DataFrame(
@@ -163,7 +163,7 @@ print(dist_table.head(8).to_string(index=False))
 
 These ordered shells are the raw input for every CN method.
 
-## 3. Coordination numbers — what they are and how each is determined
+## 3. Coordination numbers - what they are and how each is determined
 
 ### What is CN here?
 
@@ -235,7 +235,7 @@ print(pd.DataFrame(rows).to_string(index=False))
 
 **How to read this:** for Sb every method agrees (CN = 6). For Gd the
 shortest-distance method finds a gap after 6 neighbors, while
-radius-based methods find a larger gap after 18 — classic rock-salt
+radius-based methods find a larger gap after 18 - classic rock-salt
 behavior where the second shell is still close on some scales. That is
 why cifkit keeps all four results and then chooses a **best method**.
 
@@ -275,7 +275,7 @@ print(best.to_string(index=False))
 | Sb | dist_by_shortest_dist | 6 | 12 | 8 | 39.914 | 0.605 |
 | Gd | dist_by_shortest_dist | 6 | 12 | 8 | 39.914 | 0.605 |
 
-Octahedra (6 / 12 / 8) with packing efficiency 0.605 — rock salt.
+Octahedra (6 / 12 / 8) with packing efficiency 0.605 - rock salt.
 `method_used` is the winner of the center-to-average test above.
 
 Neighbors in the CN shell for **Gd** (min-dist method):
@@ -352,8 +352,8 @@ A richer polyhedron from the
 
 ## API reference
 
-- [`Cif`](../api/cif) — parse, distances, mixing  
-- [Coordination helpers](../api/coordination) — CN methods, geometry  
+- [`Cif`](../api/cif) - parse, distances, mixing  
+- [Coordination helpers](../api/coordination) - CN methods, geometry  
 
 ## What else?
 
@@ -362,13 +362,13 @@ A richer polyhedron from the
 | Radii used in CN methods (`radius_values`, `radius_sum`) | [`Cif` API](../api/cif) |
 | Site mixing types beyond full occupancy | `site_mixing_type`, `mixing_info_per_label_pair`; [API](../api/cif) |
 | Folder-level CN / structure histograms before ML | [Statistics over many CIFs](statistics-many-cifs) |
-| **Elemental properties for ML (OLED table — not from the CIF)** | **[OLED tutorial](oled)** · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
+| **Elemental properties for ML (OLED table - not from the CIF)** | **[OLED tutorial](oled)** · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
 | Downstream geometry featurizer built on cifkit | [SAF](https://github.com/bobleesj/structure-analyzer-featurizer) |
 
 ## Next
 
-- **[Statistics over many CIFs](statistics-many-cifs)** — filter, histograms, sort a folder  
-- **[OLED](oled)** — elemental / composition features (separate curated table)
+- **[Statistics over many CIFs](statistics-many-cifs)** - filter, histograms, sort a folder  
+- **[OLED](oled)** - elemental / composition features (separate curated table)
 
 ---
 

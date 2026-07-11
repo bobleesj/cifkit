@@ -1,14 +1,14 @@
-# OLED — Oliynyk elemental data
+# OLED - Oliynyk elemental data
 
 **OLED** = **O**liynyk **E**lemental **D**ata (22 properties × **76
 elements**) for composition featurization and ML.
 
 This is a **curated elemental property table** from the dataset paper
 (*Data in Brief*). It is **not** read from a `.cif` file. CIF geometry
-(distances, coordination, polyhedra) is a separate path —
+(distances, coordination, polyhedra) is a separate path - 
 [Parse physical features from a .cif](physical-features).
 
-**Load with** `from cifkit.sources.oliynyk import Oliynyk, Property` —
+**Load with** `from cifkit.sources.oliynyk import Oliynyk, Property` - 
 not a separate package; not related to OLED displays.
 
 ## Get the data
@@ -72,8 +72,8 @@ features (weighted averages, min/max over elements in a formula, etc.).
 | `POLYHEDRON_DISTORT` | `polyhedron_distortion` | Local packing distortion metric in the curated set | Distortion-sensitive structure features |
 | `CIF_RADIUS` | `CIF_radius` | Element radius used with CIF-radius distance normalization (Å) | Size scale aligned with CIF geometry analysis in cifkit |
 | `PAULING_RADIUS_CN12` | `Pauling_radius_CN12` | Pauling metallic radius for CN = 12 | Metallic size scale for structure / packing models |
-| `PAULING_EN` | `Pauling_EN` | Pauling electronegativity | EN differences place bonds on the covalent–ionic spectrum |
-| `MARTYNOV_BATSANOV_EN` | `Martynov_Batsanov_EN` | Martynov–Batsanov electronegativity | Alternate EN scale for composition features |
+| `PAULING_EN` | `Pauling_EN` | Pauling electronegativity | EN differences place bonds on the covalent-ionic spectrum |
+| `MARTYNOV_BATSANOV_EN` | `Martynov_Batsanov_EN` | Martynov-Batsanov electronegativity | Alternate EN scale for composition features |
 | `MELTING_POINT_K` | `melting_point_K` | Elemental melting point (K) | Thermodynamic / cohesion-related bulk trend |
 | `DENSITY` | `density` | Elemental bulk density | Mass/volume bulk property |
 | `SPECIFIC_HEAT` | `specific_heat` | Specific heat capacity | Thermal bulk property |

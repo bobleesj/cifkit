@@ -20,7 +20,7 @@ structure-type work, or **machine learning**. Doing that by hand, or
 reimplementing it for every project, does not scale when you have
 thousands of files.
 
-`cifkit` is written so scientists can focus on the science—not on
+`cifkit` is written so scientists can focus on the science - not on
 boilerplate geometry code.
 
 Here are the main goals of `cifkit` for the scientific community:
@@ -30,8 +30,8 @@ Here are the main goals of `cifkit` for the scientific community:
    that can be plotted, compared, or fed into ML models.
 2. Make **supercell construction and neighbor search reliable in Python**,
    so site environments near cell boundaries are not wrong or missing.
-3. Support **high-throughput work** over folders of CIFs—from a few
-   structures to **thousands or tens of thousands**—with a small,
+3. Support **high-throughput work** over folders of CIFs - from a few
+   structures to **thousands or tens of thousands** - with a small,
    scriptable API rather than a one-file GUI workflow.
 
 | Capability | What `cifkit` provides |
@@ -41,7 +41,7 @@ Here are the main goals of `cifkit` for the scientific community:
 | Supercells | Default **3×3×3** supercell (configurable) for consistent neighbor search |
 | Many CIFs | `CifEnsemble`: preprocess, unique formulas/structures, filters, histograms, sort/copy |
 | Structural features for ML | Geometry vectors for tools such as [SAF](https://github.com/bobleesj/structure-analyzer-featurizer); composition via **OLED** when elemental tables are needed |
-| Small API | `Cif("file.cif")` / `CifEnsemble("folder/")` — attributes and a few methods |
+| Small API | `Cif("file.cif")` / `CifEnsemble("folder/")` - attributes and a few methods |
 
 `cifkit` is not a replacement for interactive viewers such as VESTA for
 browsing a single structure, and it is not a DFT package. It is aimed at
@@ -60,14 +60,14 @@ under **Publications** below.
 | Source | What it is | Tutorial |
 |---|---|---|
 | **`.cif` geometry** | Distances, coordination numbers (four gap methods), polyhedra from the crystal structure | [Physical features](tutorials/physical-features) |
-| **OLED table** | Curated **elemental** property rows (22 × 76) for composition / ML — **not** values read from the CIF | [OLED](tutorials/oled) · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
+| **OLED table** | Curated **elemental** property rows (22 × 76) for composition / ML - **not** values read from the CIF | [OLED](tutorials/oled) · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
 
 ### Built with `scikit-package`
 
 `cifkit` is developed and maintained with
 [scikit-package](https://scikit-package.github.io/scikit-package/), which
 offers tools and practices so scientists can turn research code into
-reusable, reproducible packages—including documentation and
+reusable, reproducible packages - including documentation and
 agent-friendly surfaces. If you use `scikit-package` for your own
 software, please cite:
 
@@ -139,10 +139,10 @@ paths = ensemble.filter_by_formulas(["GdSb"])
 
 Full walkthrough: [Statistics over many CIFs](tutorials/statistics-many-cifs)
 
-### 3) OLED — Oliynyk elemental data (composition / ML)
+### 3) OLED - Oliynyk elemental data (composition / ML)
 
 **OLED** is a curated **elemental property table** (22 properties × 76
-elements) from the *Data in Brief* dataset paper — **not** values parsed
+elements) from the *Data in Brief* dataset paper - **not** values parsed
 from a `.cif`. Load with `cifkit.sources.oliynyk.Oliynyk` (not a separate
 package; not related to OLED displays).
 
@@ -152,7 +152,7 @@ from cifkit.parsers.formula import Formula
 
 oled = Oliynyk()
 print(len(oled.elements), "elements")
-for prop in Property:  # exact names — use as written
+for prop in Property:  # exact names - use as written
     print(prop.name, prop.value)
 print(oled.db["Si"][Property.AW])
 oled.to_csv("oled.csv")
@@ -194,9 +194,9 @@ work (BibTeX: [CITATION.txt](_static/CITATION.txt) · repo
 
 | You used… | Consider citing |
 |---|---|
-| CIF geometry / CN / polyhedra / `CifEnsemble` | **cifkit** — Lee & Oliynyk, JOSS **9**, 7205 (2024). [10.21105/joss.07205](https://doi.org/10.21105/joss.07205) |
-| OLED elemental table / `Oliynyk` / `oled.csv` | **Dataset** — Lee et al., Data in Brief **53**, 110178 (2024). [10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178) |
-| Packaging / scikit-package stack (cifkit is built with it) | **scikit-package** — Lee et al., *Digital Discovery*, 2026. [10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a) |
+| CIF geometry / CN / polyhedra / `CifEnsemble` | **cifkit** - Lee & Oliynyk, JOSS **9**, 7205 (2024). [10.21105/joss.07205](https://doi.org/10.21105/joss.07205) |
+| OLED elemental table / `Oliynyk` / `oled.csv` | **Dataset** - Lee et al., Data in Brief **53**, 110178 (2024). [10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178) |
+| Packaging / scikit-package stack (cifkit is built with it) | **scikit-package** - Lee et al., *Digital Discovery*, 2026. [10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a) |
 | Geometry + OLED | Both cifkit + OLED dataset papers |
 
 ## Notes (demos, tables, how to reproduce)

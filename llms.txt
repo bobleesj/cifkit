@@ -1,4 +1,4 @@
-# cifkit — LLM / agent reference (canonical)
+# cifkit - LLM / agent reference (canonical)
 # Human docs: https://bobleesj.github.io/cifkit/
 # API quick reference: https://bobleesj.github.io/cifkit/api/quick-reference.html
 # This file: https://bobleesj.github.io/cifkit/llms.txt
@@ -6,7 +6,7 @@
 # Install: pip install cifkit
 #
 # Built with scikit-package (https://scikit-package.github.io/scikit-package/)
-# — packaging standards and roadmap for sharing reproducible scientific
+# - packaging standards and roadmap for sharing reproducible scientific
 # software, including agent-friendly packaging. Digital Discovery 2026:
 # https://doi.org/10.1039/d6dd00121a
 #
@@ -48,7 +48,7 @@ cifkit software (CIF parse, distances, CN, polyhedra, CifEnsemble):
     volume  = {9}, number = {103}, pages = {7205},
     doi     = {10.21105/joss.07205}}
 
-Related dataset — AB-stacking intermetallic prototype structures:
+Related dataset - AB-stacking intermetallic prototype structures:
   Selvaratnam, Jaffal, Shiryaev & Oliynyk, Data in Brief 63, 112138 (2025)
   DOI: https://doi.org/10.1016/j.dib.2025.112138
   ScienceDirect: https://www.sciencedirect.com/science/article/pii/S2352340925008595
@@ -62,7 +62,7 @@ Related dataset — AB-stacking intermetallic prototype structures:
     doi     = {10.1016/j.dib.2025.112138},
     url     = {https://www.sciencedirect.com/science/article/pii/S2352340925008595}}
 
-scikit-package (cifkit is built with it — packaging standards / agent surface):
+scikit-package (cifkit is built with it - packaging standards / agent surface):
   Lee, Myers, Yang, Zhang, Xiao & Billinge, Digital Discovery (2026)
   https://doi.org/10.1039/d6dd00121a
   BibTeX:
@@ -91,7 +91,7 @@ Demo paths:
   Example.GdSb_file_path
   Example.demo_cif_folder_path  # GdSb.cif + HoSb.cif
 
-## Task 1 — physical features from one .cif
+## Task 1 - physical features from one .cif
 
 ```python
 from cifkit import Cif, Example
@@ -132,7 +132,7 @@ Credit: cifkit JOSS https://doi.org/10.21105/joss.07205
 Tutorial: https://bobleesj.github.io/cifkit/tutorials/physical-features.html
 Autodoc: https://bobleesj.github.io/cifkit/api/cif.html
 
-## Task 2 — statistics over many .cif files
+## Task 2 - statistics over many .cif files
 
 ```python
 from cifkit import CifEnsemble, Example
@@ -165,7 +165,7 @@ Credit: cifkit JOSS https://doi.org/10.21105/joss.07205
 Tutorial: https://bobleesj.github.io/cifkit/tutorials/statistics-many-cifs.html
 Autodoc: https://bobleesj.github.io/cifkit/api/cif-ensemble.html
 
-## Task 3 — OLED (Oliynyk elemental data) for composition / ML
+## Task 3 - OLED (Oliynyk elemental data) for composition / ML
 
 ```python
 from cifkit.sources.oliynyk import Oliynyk, Property
@@ -248,28 +248,28 @@ Source: Data in Brief Table 1 / data description
 https://doi.org/10.1016/j.dib.2024.110178
 (cifkit ships a 22-feature subset of the larger ~98-feature Excel).
 
-AW / atomic_weight — isotopic-mean atomic mass
-ATOMIC_NUMBER / atomic_number — proton count Z
-PERIOD / period — periodic table period (row)
-GROUP / group — periodic table group (column)
-MEND_NUM / Mendeleev_number — similarity-based element ordering
-VAL_TOTAL / valencee_total — total valence electrons (column spelling as shipped)
-UNPARIED_E / unpaired_electrons — unpaired valence electrons
-GILMAN / Gilman — Gilman valence-electron count (group-based, d-block exceptions)
-Z_EFF / Z_eff — effective nuclear charge with shielding
-ION_ENERGY / ionization_energy — first ionization energy
-COORD_NUM / coordination_number — characteristic coordination number in this table
-RATIO_CLOSEST / ratio_closest — size/packing ratio descriptor
-POLYHEDRON_DISTORT / polyhedron_distortion — local packing distortion metric
-CIF_RADIUS / CIF_radius — radius used with CIF-radius normalization (angstrom)
-PAULING_RADIUS_CN12 / Pauling_radius_CN12 — Pauling metallic radius for CN=12
-PAULING_EN / Pauling_EN — Pauling electronegativity (covalent-ionic scale)
-MARTYNOV_BATSANOV_EN / Martynov_Batsanov_EN — Martynov-Batsanov electronegativity
-MELTING_POINT_K / melting_point_K — melting point in kelvin
-DENSITY / density — bulk density
-SPECIFIC_HEAT / specific_heat — specific heat capacity
-COHESIVE_ENERGY / cohesive_energy — energy to separate solid into free atoms
-BULK_MODULUS / bulk_modulus — resistance to uniform compression
+AW / atomic_weight - isotopic-mean atomic mass
+ATOMIC_NUMBER / atomic_number - proton count Z
+PERIOD / period - periodic table period (row)
+GROUP / group - periodic table group (column)
+MEND_NUM / Mendeleev_number - similarity-based element ordering
+VAL_TOTAL / valencee_total - total valence electrons (column spelling as shipped)
+UNPARIED_E / unpaired_electrons - unpaired valence electrons
+GILMAN / Gilman - Gilman valence-electron count (group-based, d-block exceptions)
+Z_EFF / Z_eff - effective nuclear charge with shielding
+ION_ENERGY / ionization_energy - first ionization energy
+COORD_NUM / coordination_number - characteristic coordination number in this table
+RATIO_CLOSEST / ratio_closest - size/packing ratio descriptor
+POLYHEDRON_DISTORT / polyhedron_distortion - local packing distortion metric
+CIF_RADIUS / CIF_radius - radius used with CIF-radius normalization (angstrom)
+PAULING_RADIUS_CN12 / Pauling_radius_CN12 - Pauling metallic radius for CN=12
+PAULING_EN / Pauling_EN - Pauling electronegativity (covalent-ionic scale)
+MARTYNOV_BATSANOV_EN / Martynov_Batsanov_EN - Martynov-Batsanov electronegativity
+MELTING_POINT_K / melting_point_K - melting point in kelvin
+DENSITY / density - bulk density
+SPECIFIC_HEAT / specific_heat - specific heat capacity
+COHESIVE_ENERGY / cohesive_energy - energy to separate solid into free atoms
+BULK_MODULUS / bulk_modulus - resistance to uniform compression
 
 Full parent table (~98 features, more EN/radius/DFT/nuclear/HHI columns):
 https://data.mendeley.com/datasets/bt6gv5z6yv

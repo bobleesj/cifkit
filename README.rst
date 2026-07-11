@@ -39,7 +39,7 @@ distances** and neighbor shells, determine **coordination**, and turn
 the result into **numbers** for plots or machine learning. Doing that by
 hand does not scale to thousands of files.
 
-``cifkit`` is written so scientists can focus on the science—not on
+``cifkit`` is written so scientists can focus on the science - not on
 boilerplate geometry code.
 
 *  Help scientists extract **physics-based structural features** from
@@ -47,8 +47,8 @@ boilerplate geometry code.
    fractions) for visualization or ML.
 *  Make **supercell construction and neighbor search reliable in
    Python** (default 3×3×3, configurable).
-*  Support **high-throughput** work over folders of CIFs—from a few
-   structures to **thousands or tens of thousands**—with
+*  Support **high-throughput** work over folders of CIFs - from a few
+   structures to **thousands or tens of thousands** - with
    ``Cif`` / ``CifEnsemble`` rather than a one-file GUI workflow.
 *  Provide geometry vectors that feed structure featurizers such as
    SAF; composition features via OLED when elemental tables are needed.
@@ -95,11 +95,11 @@ Tutorial: https://bobleesj.github.io/cifkit/tutorials/physical-features.html
 
 Tutorial: https://bobleesj.github.io/cifkit/tutorials/statistics-many-cifs.html
 
-3) OLED — Oliynyk elemental data (composition / ML)
+3) OLED - Oliynyk elemental data (composition / ML)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **OLED** is the Oliynyk elemental property table (22 properties × 76
-elements). Load it with ``cifkit.sources.oliynyk.Oliynyk`` — not a
+elements). Load it with ``cifkit.sources.oliynyk.Oliynyk`` - not a
 separate package.
 
 .. code:: python
@@ -109,7 +109,7 @@ separate package.
 
    oled = Oliynyk()
    print(len(oled.elements), "elements")
-   for prop in Property:  # exact enum names — do not rename
+   for prop in Property:  # exact enum names - do not rename
        print(prop.name, prop.value)
    print(oled.db["Si"][Property.AW], oled.db["Si"][Property.PAULING_EN])
    oled.to_csv("oled.csv")
@@ -135,11 +135,11 @@ Tutorial: https://bobleesj.github.io/cifkit/tutorials/oled.html
 Features
 --------
 
--  **Physical features from a ``.cif``** — distances, four coordination
+-  **Physical features from a ``.cif``** - distances, four coordination
    methods, polyhedron metrics (volume, packing efficiency), bond
    fractions, site mixing.
--  **Statistics over many CIFs** — filter, histogram, copy/move folders.
--  **OLED (Oliynyk elemental data)** — composition descriptors for ML;
+-  **Statistics over many CIFs** - filter, histogram, copy/move folders.
+-  **OLED (Oliynyk elemental data)** - composition descriptors for ML;
    CSV export via ``Oliynyk().to_csv()``.
 
 |Logo light mode| |Logo dark mode|
@@ -162,15 +162,15 @@ https://bobleesj.github.io/cifkit/_static/CITATION.txt
 
 Consider citing if useful:
 
--  **cifkit** — Lee & Oliynyk, JOSS (2024).
+-  **cifkit** - Lee & Oliynyk, JOSS (2024).
    https://doi.org/10.21105/joss.07205
--  **OLED / Oliynyk elemental data** — Lee et al., Data in Brief (2024).
+-  **OLED / Oliynyk elemental data** - Lee et al., Data in Brief (2024).
    https://doi.org/10.1016/j.dib.2024.110178
--  **AB-stacking prototype structures (related)** — Selvaratnam et al.,
+-  **AB-stacking prototype structures (related)** - Selvaratnam et al.,
    Data in Brief (2025). https://doi.org/10.1016/j.dib.2025.112138
    ScienceDirect:
    https://www.sciencedirect.com/science/article/pii/S2352340925008595
--  **scikit-package** (cifkit is built with it) — Lee et al., *Digital
+-  **scikit-package** (cifkit is built with it) - Lee et al., *Digital
    Discovery* (2026). https://doi.org/10.1039/d6dd00121a
 
 .. code:: text

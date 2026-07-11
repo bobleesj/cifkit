@@ -43,8 +43,8 @@ cif = Cif(path, supercell_size=3, compute_CN=False, is_formatted=False)
 
 ## Methods
 
-- `compute_connections()` — neighbor search (also lazy)
-- `compute_CN()` — four CN methods + best method + polyhedron metrics
+- `compute_connections()` - neighbor search (also lazy)
+- `compute_CN()` - four CN methods + best method + polyhedron metrics
 - `plot_polyhedron(label, show_labels=True, is_displayed=False, output_dir=None)`
 - `get_polyhedron_labels_by_CN_min_dist_method` / `…_by_CN_best_methods`
 

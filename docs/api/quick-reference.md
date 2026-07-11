@@ -20,7 +20,7 @@ from cifkit.sorters.element_sorter import ElementSorter
 **OLED** = **O**liynyk **E**lemental **D**ata. Load only via
 `cifkit.sources.oliynyk.Oliynyk`. Not a separate package.
 
-## `Example` — demo data paths
+## `Example` - demo data paths
 
 ```python
 from cifkit import Example
@@ -29,7 +29,7 @@ Example.GdSb_file_path       # str path to packaged GdSb.cif
 Example.demo_cif_folder_path # str path to folder with GdSb.cif + HoSb.cif
 ```
 
-## `Cif` — one `.cif` file
+## `Cif` - one `.cif` file
 
 ```python
 cif = Cif(
@@ -124,7 +124,7 @@ CN method keys (exact strings):
 
 Full autodoc: [Cif](cif). Tutorial: [physical features](../tutorials/physical-features).
 
-## `CifEnsemble` — folder of `.cif` files
+## `CifEnsemble` - folder of `.cif` files
 
 ```python
 ensemble = CifEnsemble(
@@ -175,7 +175,7 @@ Exact method names:
 
 Full autodoc: [CifEnsemble](cif-ensemble). Tutorial: [statistics](../tutorials/statistics-many-cifs).
 
-## OLED — `Oliynyk` + `Property`
+## OLED - `Oliynyk` + `Property`
 
 ```python
 from cifkit.sources.oliynyk import Oliynyk, Property
@@ -234,7 +234,7 @@ Spelling as shipped: `UNPARIED_E` (not `UNPAIRED_E`), column
 Subset of the Oliynyk table (22 of ~98 features in the dataset paper).
 Short definitions follow Data in Brief Table 1
 (https://doi.org/10.1016/j.dib.2024.110178). Full narrative:
-[OLED tutorial — What each property means](../tutorials/oled).
+[OLED tutorial - What each property means](../tutorials/oled).
 
 | Enum | Column | Meaning (short) |
 |---|---|---|
@@ -254,7 +254,7 @@ Short definitions follow Data in Brief Table 1
 | `CIF_RADIUS` | `CIF_radius` | Radius for CIF-radius normalization (Å) |
 | `PAULING_RADIUS_CN12` | `Pauling_radius_CN12` | Pauling metallic radius (CN12) |
 | `PAULING_EN` | `Pauling_EN` | Pauling electronegativity |
-| `MARTYNOV_BATSANOV_EN` | `Martynov_Batsanov_EN` | Martynov–Batsanov electronegativity |
+| `MARTYNOV_BATSANOV_EN` | `Martynov_Batsanov_EN` | Martynov-Batsanov electronegativity |
 | `MELTING_POINT_K` | `melting_point_K` | Melting point (K) |
 | `DENSITY` | `density` | Bulk density |
 | `SPECIFIC_HEAT` | `specific_heat` | Specific heat capacity |

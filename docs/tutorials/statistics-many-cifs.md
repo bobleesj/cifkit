@@ -3,10 +3,10 @@
 When you have a **folder** of `.cif` files, use `CifEnsemble` to get
 overview statistics, filter by attributes, generate histograms, and
 copy/move files. This is separate from extracting physical features from
-one file — see [Parse physical features from a .cif](physical-features) for
+one file - see [Parse physical features from a .cif](physical-features) for
 that (including **how each CN method is determined**).
 
-Elemental composition features are **not** from these CIFs — use
+Elemental composition features are **not** from these CIFs - use
 [OLED](oled) (*Data in Brief* table).
 
 ## Set up a scratch folder
@@ -82,7 +82,7 @@ print(overview.to_string(index=False))
 | unique_elements | ['Gd', 'Ho', 'Sb'] |
 
 Per-file values and formula counts are also available (e.g.
-`formula_stats`, `minimum_distances`, `supercell_atom_counts` — see the
+`formula_stats`, `minimum_distances`, `supercell_atom_counts` - see the
 [CifEnsemble API](../api/cif-ensemble)).
 
 ## Filter file paths
@@ -151,7 +151,7 @@ distribution (right).
 
 ## Scale
 
-On the order of 10,000 `.cif` files is roughly 30–60 minutes on a
+On the order of 10,000 `.cif` files is roughly 30-60 minutes on a
 standard laptop (supercell + neighbors per file). Plan long runs
 accordingly.
 
@@ -161,8 +161,8 @@ Full method list: [CifEnsemble](../api/cif-ensemble).
 
 ## Next
 
-- **[Parse physical features from a .cif](physical-features)** — distances, CN, polyhedra  
-- **[OLED](oled)** — elemental / composition features (dataset table, not from CIF)
+- **[Parse physical features from a .cif](physical-features)** - distances, CN, polyhedra  
+- **[OLED](oled)** - elemental / composition features (dataset table, not from CIF)
 
 ---
 

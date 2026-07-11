@@ -15,7 +15,7 @@ f.element_count           # 2
 f.get_normalized_formula()
 ```
 
-With OLED: [quick reference — Formula → feature vector](quick-reference) ·
+With OLED: [quick reference - Formula → feature vector](quick-reference) ·
 [OLED tutorial](../tutorials/oled) · [llms.txt](../llms.txt)
 
 ## Reference
