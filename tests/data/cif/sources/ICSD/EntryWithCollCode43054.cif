@@ -1,0 +1,27 @@
+# (C) 2024 FIZ Karlsruhe
+data_EntryWithCollCode43054
+_database_code_ICSD 43054
+_chemical_formula_structural FeGe
+_chemical_formula_sum 'Fe Ge'
+_chemical_name_structure_type FeSi
+_chemical_formula_weight 128.5
+_cell_length_a 4.7
+_cell_length_b 4.7
+_cell_length_c 4.7
+_cell_angle_alpha 90
+_cell_angle_beta 90
+_cell_angle_gamma 90
+_space_group_IT_number 198
+_space_group_name_H-M_alt 'P 21 3'
+loop_
+_space_group_symop_operation_xyz
+'x, y, z'
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+Fe1 Fe 0.135 0.135 0.135 1.0
+Ge1 Ge 0.842 0.842 0.842 1.0

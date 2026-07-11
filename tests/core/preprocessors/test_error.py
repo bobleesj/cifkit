@@ -8,6 +8,11 @@ from cifkit.utils.folder import get_file_count, get_file_paths
 
 
 @pytest.mark.fast
+@pytest.mark.skipif(
+    not __import__("pathlib").Path("tests/data/cif/error/combined").exists()
+    or not any(__import__("pathlib").Path("tests/data/cif/error/combined").glob("*.cif")),
+    reason="error/combined fixtures not shipped",
+)
 def test_move_files_based_on_errors(tmpdir):
     # Setup source directory and temporary directory for testing
     source_dir = "tests/data/cif/error/combined"

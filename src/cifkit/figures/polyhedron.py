@@ -44,7 +44,12 @@ def plot(
 ):
     """Generate and save a 3D plot of a molecular structure."""
 
-    plotter = pv.Plotter(off_screen=not is_displayed, window_size=(1600, 1200))
+    # Always off-screen unless an interactive window is requested. CI/headless
+    # runners (no GPU / no DISPLAY) segfault if VTK tries an on-screen show().
+    off_screen = not is_displayed
+    if off_screen:
+        pv.OFF_SCREEN = True
+    plotter = pv.Plotter(off_screen=off_screen, window_size=(1600, 1200))
     label_colors = generate_color_mapping(vertex_labels)
 
     points = np.array(points)
@@ -125,9 +130,6 @@ def plot(
 
     plotter.add_mesh(poly_data, color="aqua", opacity=0.5, show_edges=True)
 
-    plotter.show()
-    """Output."""
-
     # Determine the output directory based on provided path
     if not output_dir:
         output_dir = os.path.join(os.path.dirname(file_path), "polyhedrons")
@@ -144,6 +146,8 @@ def plot(
         + ".png"
     )
     save_path = os.path.join(output_dir, plot_filename)
-    """Save."""
-    # Save the screenshot
+    # Screenshot before show/close (safe on off-screen CI runners)
     plotter.screenshot(save_path)
+    if is_displayed:
+        plotter.show()
+    plotter.close()

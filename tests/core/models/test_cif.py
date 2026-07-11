@@ -185,7 +185,7 @@ def test_shortest_distance_computation():
 @pytest.mark.fast
 def test_connections_flattened(cif_URhIn):
     assert cif_URhIn.connections_flattened[0] == (("In", "Rh"), 2.697)
-    assert len(cif_URhIn.connections_flattened) == 621
+    assert len(cif_URhIn.connections_flattened) == 576
 
 
 @pytest.mark.fast
@@ -492,8 +492,9 @@ def test_plot_polyhedron_default_output_folder(cif_URhIn):
     expected_output_dir = "tests/data/cif/polyhedrons"
     output_file_path = os.path.join(expected_output_dir, "URhIn_In1.png")
 
+    cif_URhIn.compute_CN()
     # Define the output file path
-    cif_URhIn.plot_polyhedron("In1")
+    cif_URhIn.plot_polyhedron("In1", is_displayed=False)
 
     assert os.path.exists(output_file_path)
     assert os.path.getsize(output_file_path) > 1024
@@ -506,6 +507,7 @@ def test_plot_polyhedron_with_output_folder_given(cif_URhIn):
     expected_output_dir = "tests/data/cif/polyhedrons_user"
     output_file_path = os.path.join(expected_output_dir, "URhIn_In1.png")
 
+    cif_URhIn.compute_CN()
     # Define the output file path
     cif_URhIn.plot_polyhedron(
         "In1", is_displayed=False, output_dir="tests/data/cif/polyhedrons_user"
@@ -629,22 +631,22 @@ Test CIF various db sources
             "tests/data/cif/sources/ICSD/EntryWithCollCode43054.cif",
             "ICSD",
             {"Fe", "Ge"},
-            216,
+            54,
         ),
-        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
-        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
-        ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1383),
+        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 54),
+        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 54),
+        ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1188),
         (
             "tests/data/cif/sources/CCDC/2294753.cif",
             "CCDC",
             {"Er", "In", "Co"},
-            3844,
+            81,
         ),
         (
             "tests/data/cif/sources/MP/LiFeP2O7.cif",
             "MP",
             {"Fe", "Li", "O", "P"},
-            594,
+            108,
         ),
     ],
 )

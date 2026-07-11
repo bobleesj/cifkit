@@ -66,7 +66,8 @@ coverage.xml
 # Sphinx documentation
 docs/build/
 docs/_build/
-tests/data
+# Allow committed open test fixtures under tests/data/; ignore local dumps only
+tests/data/local/
 AXUGAE.cif
 FIXVUH.cif
 NUMSIB.cif

@@ -11,9 +11,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  matrix-coverage:
+  matrix-tests:
     uses: scikit-package/release-scripts/.github/workflows/_matrix-no-codecov-on-merge-to-main.yml@v0
     with:
       project: cifkit
       c_extension: false
-      headless: false
+      # Start Xvfb so VTK/pyvista polyhedron tests do not segfault
+      headless: true

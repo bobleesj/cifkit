@@ -1,0 +1,96 @@
+# Build the cifkit Jupyter Book and publish it to GitHub Pages.
+# Pages source is the gh-pages branch (Settings → Pages → Deploy from branch).
+# This workflow builds HTML then pushes it to gh-pages (same path as the
+# historical Sphinx deploy). Published at https://bobleesj.github.io/cifkit/
+#
+# Tutorial pages are plain MyST with pasted outputs; the runner installs the
+# package for autodoc only — nothing executes notebooks at build time.
+name: cifkit docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "src/cifkit/**"
+      - "pyproject.toml"
+      - "llms.txt"
+      - "CITATION.cff"
+      - "CHANGELOG.rst"
+      - "scripts/docs_e2e_check.py"
+      - ".github/workflows/cifkit-docs.yml"
+  pull_request:
+    paths:
+      - "docs/**"
+      - "src/cifkit/**"
+      - "pyproject.toml"
+      - "llms.txt"
+      - "CITATION.cff"
+      - "scripts/docs_e2e_check.py"
+      - ".github/workflows/cifkit-docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cifkit-docs-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.repository == 'bobleesj/cifkit'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install docs dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs/requirements.txt
+          pip install -e .
+
+      - name: Build Jupyter Book
+        run: jupyter-book build docs
+
+      - name: End-to-end HTML checks
+        run: python scripts/docs_e2e_check.py
+
+      - name: Upload HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cifkit-docs-html
+          path: docs/_build/html
+          retention-days: 7
+
+  deploy:
+    # Only publish from main after a green build (not on PRs).
+    if: >-
+      github.repository == 'bobleesj/cifkit'
+      && github.event_name != 'pull_request'
+      && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: cifkit-docs-html
+          path: docs/_build/html
+
+      - name: Re-run e2e on downloaded artifact
+        run: python scripts/docs_e2e_check.py
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com

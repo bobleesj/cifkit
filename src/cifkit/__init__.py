@@ -12,19 +12,29 @@
 # See LICENSE.rst for license information.
 #
 ##############################################################################
-"""Python package for doing science."""
+"""cifkit: coordination geometry and site features from CIF files.
 
-# package version
+Public exports
+--------------
+- ``Cif`` — parse one ``.cif``, distances, coordination, polyhedra, mixing
+- ``CifEnsemble`` — statistics, filters, histograms over a folder of CIFs
+- ``Example`` — packaged demo paths (``GdSb_file_path``, ``demo_cif_folder_path``)
+
+OLED (Oliynyk elemental data) is loaded separately::
+
+    from cifkit.sources.oliynyk import Oliynyk, Property
+
+Docs: https://bobleesj.github.io/cifkit/
+LLM recipes: https://bobleesj.github.io/cifkit/llms.txt
+"""
+
 from cifkit.version import __version__
 
 from .data.example import Example
 from .models.cif import Cif
 from .models.cif_ensemble import CifEnsemble
 
-# silence the pyflakes syntax checker
 assert __version__ or True
 assert Example or True
 assert Cif or True
 assert CifEnsemble or True
-
-# End of file

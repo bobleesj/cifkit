@@ -1,0 +1,10 @@
+# https://bobleesj.github.io/cifkit/
+User-agent: *
+Allow: /
+
+# Prefer these entry points for agents
+# https://bobleesj.github.io/cifkit/llms.txt
+# https://bobleesj.github.io/cifkit/api/quick-reference.html
+# https://bobleesj.github.io/cifkit/tutorials/physical-features.html
+# https://bobleesj.github.io/cifkit/tutorials/statistics-many-cifs.html
+# https://bobleesj.github.io/cifkit/tutorials/oled.html

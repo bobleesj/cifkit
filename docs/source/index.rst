@@ -4,18 +4,12 @@
 
 .. |title| replace:: cifkit documentation
 
-|PyPI| |Forge| |PythonVersion| |PR|
+|PyPI| |PythonVersion| |PR|
 
-|CI| |Codecov| |Tracking|
+|CI| |Tracking|
 
-.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml/badge.svg
-        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
-
-.. |Codecov| image:: https://codecov.io/gh/bobleesj/cifkit/branch/main/graph/badge.svg
-        :target: https://codecov.io/gh/bobleesj/cifkit
-
-.. |Forge| image:: https://img.shields.io/conda/vn/conda-forge/cifkit
-        :target: https://anaconda.org/conda-forge/cifkit
+.. |CI| image:: https://github.com/bobleesj/cifkit/workflows/CI/badge.svg
+        :target: https://github.com/bobleesj/cifkit/actions
 
 .. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
          :target: https://github.com/bobleesj/cifkit/pulls
@@ -39,10 +33,10 @@ Installation
 
    pip install cifkit
 
-Citation
---------
+Publications
+------------
 
-If you use ``cifkit`` in your scientific publication, please cite the following:
+Related paper (consider citing if useful):
 
 - *cifkit: A Python package for coordination geometry and atomic site analysis*. `https://doi.org/10.21105/joss.07205 <https://doi.org/10.21105/joss.07205>`_
 
@@ -57,7 +51,7 @@ solid-state synthesists to obtain intuitive and measurable properties
 impactful properties. It facilitates the visualization of coordination
 geometry from each site using four coordination determination methods
 and extracts physics-based features like volume and packing
-efficiency—crucial for structural analysis in machine learning tasks.
+efficiency - crucial for structural analysis in machine learning tasks.
 Moreover, ``cifkit`` extracts atomic mixing information at the bond pair
 level, tasks that would otherwise require extensive manual effort using
 GUI-based tools like VESTA, Diamond, and CrystalMaker.
@@ -67,21 +61,21 @@ TL;DR
 
 ``cifkit`` provides higher-level functions in just a few lines of code.
 
-  -  **Coordination geometry** - ``cifkit`` provides functions for
+ - **Coordination geometry** - ``cifkit`` provides functions for
      visualing coordination geometry from each site and extracts
      physics-based features like volume and packing efficiency in each
      polyhedron.
-  -  **Atomic mixing** - ``cifkit`` extracts atomic mixing information at
-     the bond pair level—tasks that would otherwise require extensive
+ - **Atomic mixing** - ``cifkit`` extracts atomic mixing information at
+     the bond pair level - tasks that would otherwise require extensive
      manual effort using GUI-based tools like VESTA, Diamond, and
      CrystalMaker.
-  -  **Filter** - ``cifkit`` offers features for preprocessing. It
+ - **Filter** - ``cifkit`` offers features for preprocessing. It
      systematically addresses common issues in CIF files from databases,
      such as incorrect loop values and missing fractional coordinates, by
      standardizing and filtering out ill-formatted files. It also
      preprocesses atomic site labels, transforming labels such as ‘M1’ to
      ‘Fe1’ in files with atomic mixing.
-  -  **Sort** - ``cifkit`` allows you to copy, move, and sort ``.cif``
+ - **Sort** - ``cifkit`` allows you to copy, move, and sort ``.cif``
      files based on attributes such as coordination numbers, space groups,
      unit cells, shortest distances, elements, and more.
 
@@ -90,7 +84,7 @@ Processing speed expectation
 
 Processing approximately 10,000 .cif files on a standard laptop (iMac
 with M1 chip) may take about 30 to 60 minutes. At this rate, we can
-process nearly all .cif files within 1–2 days.
+process nearly all .cif files within 1-2 days.
 
 Overview
 --------
@@ -190,17 +184,17 @@ Contributors
 
 ``cifkit`` has been greatly enhanced thanks to the contributions from a diverse group of researchers:
 
-   -  **Anton Oliynyk**: co-author, original ideation with ``.cif`` files
-   -  **Balaranjan Selvaratnam**: (`@balaranjan <https://github.com/balaranjan>`_): vectorization of distance calculation to improve performance
-   -  **Danila Shiryaev**: (`@dshirya <https://github.com/dshirya>`_): fix flat coordination number calculation and suggest separating computing connections and the coordination number to improve adoption
+ - **Anton Oliynyk**: co-author, original ideation with ``.cif`` files
+ - **Balaranjan Selvaratnam**: (`@balaranjan <https://github.com/balaranjan>`_): vectorization of distance calculation to improve performance
+ - **Danila Shiryaev**: (`@dshirya <https://github.com/dshirya>`_): fix flat coordination number calculation and suggest separating computing connections and the coordination number to improve adoption
 
 We also thank the following contributors for using ``cifkit`` and providing feedback:
 
-   -  **Emil Jaffal**: (`@EmilJaffal <https://github.com/EmilJaffal>`_): initial testing and bug report
-   -  **Nikhil Kumar Barua**: initial testing and bug report
-   -  **Nishant Yadav**: (`@sethisiddha1998 <https://github.com/sethisiddha1998>`_): initial testing and bug report
-   -  **Siddha Sankalpa Sethi**: (`@runzsh <https://github.com/runzsh>`_): initial testing and bug report
-   -  **Fabian Zills**: (`@PythonFZ <https://github.com/PythonFZ>`_): suggested tooling improvements such as ``pre-commit``
+ - **Emil Jaffal**: (`@EmilJaffal <https://github.com/EmilJaffal>`_): initial testing and bug report
+ - **Nikhil Kumar Barua**: initial testing and bug report
+ - **Nishant Yadav**: (`@sethisiddha1998 <https://github.com/sethisiddha1998>`_): initial testing and bug report
+ - **Siddha Sankalpa Sethi**: (`@runzsh <https://github.com/runzsh>`_): initial testing and bug report
+ - **Fabian Zills**: (`@PythonFZ <https://github.com/PythonFZ>`_): suggested tooling improvements such as ``pre-commit``
 
 We welcome all forms of contributions from the community. Your ideas and
 improvements are valued and appreciated.
@@ -240,4 +234,11 @@ Other links
 Acknowledgements
 ----------------
 
-``cifkit`` is built and maintained with `scikit-package <https://scikit-package.github.io/scikit-package/>`_.
+``cifkit`` is developed and maintained with
+`scikit-package <https://scikit-package.github.io/scikit-package/>`_,
+which offers tools and practices so scientists can turn research code
+into reusable, reproducible packages. If you use ``scikit-package``,
+please cite: S. Lee, C. Myers, A. Yang, T. Zhang, Y. Xiao and
+S. J. L. Billinge, scikit-package: software packaging standards and
+roadmap for sharing reproducible scientific software, *Digital
+Discovery*, 2026. https://doi.org/10.1039/d6dd00121a

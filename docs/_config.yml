@@ -1,0 +1,53 @@
+# Jupyter Book 1.x config for the cifkit docs site.
+# The tutorial pages are plain MyST markdown with verified, pasted outputs; nothing
+# is executed at build time, so the CI runner just assembles HTML.
+title: cifkit
+author: Sangjoon Lee
+logo: ""
+only_build_toc_files: true
+exclude_patterns:
+  - "**/._*"
+  - "_build/**"
+  - "source/**"
+
+execute:
+  execute_notebooks: "off"
+
+sphinx:
+  extra_extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.napoleon
+  config:
+    # napoleon parses the NumPy-style docstrings into proper Parameters / Returns
+    # field lists instead of a wall of text.
+    napoleon_numpy_docstring: true
+    napoleon_google_docstring: false
+    napoleon_use_param: true
+    napoleon_use_rtype: true
+    autodoc_member_order: "bysource"
+    autoclass_content: "both"
+    suppress_warnings:
+      - "etoc.toctree"
+    # Drop the right-hand in-page "Contents" sidebar (match quantem.widget).
+    html_theme_options:
+      secondary_sidebar_items: []
+    html_static_path:
+      - "_static"
+    # Ship agent entry points at site root (and copies under _static/)
+    html_extra_path:
+      - "llms.txt"
+      - "robots.txt"
+      - "sitemap.txt"
+    html_css_files:
+      - custom.css
+    copyright: "2026, Sangjoon Lee"
+
+html:
+  use_issues_button: false
+  use_repository_button: true
+  home_page_in_navbar: false
+
+repository:
+  url: https://github.com/bobleesj/cifkit
+  path_to_book: docs
+  branch: main

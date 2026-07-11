@@ -1,0 +1,120 @@
+#------------------------------------------------------------------------------
+#$Date: 2015-01-27 21:58:39 +0200 (Tue, 27 Jan 2015) $
+#$Revision: 130149 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/1/01/05/1010581.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/
+#
+# All data on this site have been placed in the public domain by the
+# contributors.
+#
+data_1010581
+loop_
+_publ_author_name
+'Rahlfs, P'
+_publ_section_title
+;
+Ueber die kubischen Hochtemperaturmodifikationen der Sulfide und
+Telluride des Silbers und des einwertigen Kupfers
+;
+_journal_coden_ASTM              ZPCBAL
+_journal_name_full
+;
+Zeitschrift fuer Physikalische Chemie, Abteilung B: Chemie der
+Elementarprozesse, Aufbau der Materie
+;
+_journal_page_first              157
+_journal_page_last               194
+_journal_volume                  31
+_journal_year                    1936
+_chemical_formula_structural     'Cu2 Se'
+_chemical_formula_sum            'Cu2 Se'
+_chemical_name_systematic        'Copper(I) selenide - $-alpha'
+_space_group_IT_number           196
+_symmetry_cell_setting           cubic
+_symmetry_Int_Tables_number      196
+_symmetry_space_group_name_Hall  'F 2 2 3'
+_symmetry_space_group_name_H-M   'F 2 3'
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                90
+_cell_formula_units_Z            4
+_cell_length_a                   5.840(6)
+_cell_length_b                   5.840(6)
+_cell_length_c                   5.840(6)
+_cell_volume                     199.2
+_exptl_crystal_density_meas      6.84
+_cod_database_code               1010581
+loop_
+_symmetry_equiv_pos_as_xyz
+x,y,z
+y,z,x
+z,x,y
+x,-y,-z
+y,-z,-x
+z,-x,-y
+-x,y,-z
+-y,z,-x
+-z,x,-y
+-x,-y,z
+-y,-z,x
+-z,-x,y
+x,1/2+y,1/2+z
+1/2+x,y,1/2+z
+1/2+x,1/2+y,z
+y,1/2+z,1/2+x
+1/2+y,z,1/2+x
+1/2+y,1/2+z,x
+z,1/2+x,1/2+y
+1/2+z,x,1/2+y
+1/2+z,1/2+x,y
+x,1/2-y,1/2-z
+1/2+x,-y,1/2-z
+1/2+x,1/2-y,-z
+y,1/2-z,1/2-x
+1/2+y,-z,1/2-x
+1/2+y,1/2-z,-x
+z,1/2-x,1/2-y
+1/2+z,-x,1/2-y
+1/2+z,1/2-x,-y
+-x,1/2+y,1/2-z
+1/2-x,y,1/2-z
+1/2-x,1/2+y,-z
+-y,1/2+z,1/2-x
+1/2-y,z,1/2-x
+1/2-y,1/2+z,-x
+-z,1/2+x,1/2-y
+1/2-z,x,1/2-y
+1/2-z,1/2+x,-y
+-x,1/2-y,1/2+z
+1/2-x,-y,1/2+z
+1/2-x,1/2-y,z
+-y,1/2-z,1/2+x
+1/2-y,-z,1/2+x
+1/2-y,1/2-z,x
+-z,1/2-x,1/2+y
+1/2-z,-x,1/2+y
+1/2-z,1/2-x,y
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_symmetry_multiplicity
+_atom_site_Wyckoff_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_attached_hydrogens
+_atom_site_calc_flag
+Se1 Se2- 4 a 0. 0. 0. 1. 0 d
+Cu1 Cu1+ 4 c 0.25 0.25 0.25 1. 0 d
+Cu2 Cu1+ 4 b 0.5 0.5 0.5 0.25 0 d
+Cu3 Cu1+ 16 e 0.3333 0.3333 0.3333 0.0938 0 d
+Cu4 Cu1+ 16 e 0.6667 0.6667 0.6667 0.0938 0 d
+loop_
+_atom_type_symbol
+_atom_type_oxidation_number
+Se2- -2.000
+Cu1+ 1.000
