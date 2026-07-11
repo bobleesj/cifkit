@@ -2,7 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/cifkit)](https://pypi.org/project/cifkit/)
 [![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue)](https://pypi.org/project/cifkit/)
-[![CI](https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml/badge.svg)](https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml)
+[![CI](https://github.com/bobleesj/cifkit/workflows/CI/badge.svg)](https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.21105%2Fjoss.07205-blue)](https://doi.org/10.21105/joss.07205)
 
 `cifkit` offers higher-level tools for **coordination geometry and atomic
@@ -196,7 +196,6 @@ work (BibTeX: [CITATION.txt](_static/CITATION.txt) · repo
 |---|---|
 | CIF geometry / CN / polyhedra / `CifEnsemble` | **cifkit** — Lee & Oliynyk, JOSS **9**, 7205 (2024). [10.21105/joss.07205](https://doi.org/10.21105/joss.07205) |
 | OLED elemental table / `Oliynyk` / `oled.csv` | **Dataset** — Lee et al., Data in Brief **53**, 110178 (2024). [10.1016/j.dib.2024.110178](https://doi.org/10.1016/j.dib.2024.110178) |
-| AB-stacking intermetallic prototype structures (related dataset) | Selvaratnam et al., Data in Brief **63**, 112138 (2025). [10.1016/j.dib.2025.112138](https://doi.org/10.1016/j.dib.2025.112138) · [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340925008595) |
 | Packaging / scikit-package stack (cifkit is built with it) | **scikit-package** — Lee et al., *Digital Discovery*, 2026. [10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a) |
 | Geometry + OLED | Both cifkit + OLED dataset papers |
 

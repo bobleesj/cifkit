@@ -5,8 +5,8 @@ cifkit
 
 |CI| |Tracking|
 
-.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml/badge.svg
-        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml
+.. |CI| image:: https://github.com/bobleesj/cifkit/workflows/CI/badge.svg
+        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
 
 .. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
         :target: https://github.com/bobleesj/cifkit/pulls
@@ -195,11 +195,13 @@ How to contribute
 Acknowledgements
 ----------------
 
-``cifkit`` is built and maintained with ``scikit-package``
-(https://scikit-package.github.io/scikit-package/) — packaging standards
-and a roadmap for sharing reproducible scientific software (including
-agent-friendly packaging). Lee, S., Myers, C., Yang, A., Zhang, T.,
-Xiao, Y. & Billinge, S. J. L. (2026). *Digital Discovery*.
+``cifkit`` is developed and maintained with ``scikit-package``
+(https://scikit-package.github.io/scikit-package/), which offers tools
+and practices so scientists can turn research code into reusable,
+reproducible packages. If you use ``scikit-package``, please cite:
+Lee, S., Myers, C., Yang, A., Zhang, T., Xiao, Y. & Billinge, S. J. L.
+(2026). scikit-package: software packaging standards and roadmap for
+sharing reproducible scientific software. *Digital Discovery*.
 https://doi.org/10.1039/d6dd00121a
 
 Maintained by Sangjoon Bob Lee.

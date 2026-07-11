@@ -8,8 +8,8 @@
 
 |CI| |Tracking|
 
-.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml/badge.svg
-        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml
+.. |CI| image:: https://github.com/bobleesj/cifkit/workflows/CI/badge.svg
+        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
 
 .. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
          :target: https://github.com/bobleesj/cifkit/pulls
