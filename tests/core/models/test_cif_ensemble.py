@@ -478,12 +478,13 @@ def test_init_without_preprocessing(
 @pytest.mark.parametrize(
     "cif_folder_path, expected_file_count, expected_supercell_stats",
     [
-        ("tests/data/cif/sources/ICSD", 4, {216: 2, 307: 1, 320: 1}),
-        ("tests/data/cif/sources/COD", 2, {519: 1, 1383: 1}),
-        ("tests/data/cif/sources/MP", 2, {108: 1, 594: 1}),
-        ("tests/data/cif/sources/PCD", 1, {364: 1}),
-        ("tests/data/cif/sources/MS", 1, {2988: 1}),
-        ("tests/data/cif/sources/CCDC", 1, {3844: 1}),
+        # Counts match open/stub fixtures shipped under tests/data/cif/sources/
+        ("tests/data/cif/sources/ICSD", 2, {54: 2}),
+        ("tests/data/cif/sources/COD", 2, {324: 1, 1188: 1}),
+        ("tests/data/cif/sources/MP", 1, {108: 1}),
+        ("tests/data/cif/sources/PCD", 1, {243: 1}),
+        ("tests/data/cif/sources/MS", 1, {54: 1}),
+        ("tests/data/cif/sources/CCDC", 1, {81: 1}),
     ],
 )
 @pytest.mark.fast

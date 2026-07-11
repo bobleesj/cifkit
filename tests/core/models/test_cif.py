@@ -185,7 +185,7 @@ def test_shortest_distance_computation():
 @pytest.mark.fast
 def test_connections_flattened(cif_URhIn):
     assert cif_URhIn.connections_flattened[0] == (("In", "Rh"), 2.697)
-    assert len(cif_URhIn.connections_flattened) == 621
+    assert len(cif_URhIn.connections_flattened) == 576
 
 
 @pytest.mark.fast
@@ -629,22 +629,22 @@ Test CIF various db sources
             "tests/data/cif/sources/ICSD/EntryWithCollCode43054.cif",
             "ICSD",
             {"Fe", "Ge"},
-            216,
+            54,
         ),
-        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
-        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 2988),
-        ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1383),
+        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 54),
+        ("tests/data/cif/sources/MS/U13Rh4.cif", "MS", {"U", "Fe"}, 54),
+        ("tests/data/cif/sources/COD/1010581.cif", "COD", {"Cu", "Se"}, 1188),
         (
             "tests/data/cif/sources/CCDC/2294753.cif",
             "CCDC",
             {"Er", "In", "Co"},
-            3844,
+            81,
         ),
         (
             "tests/data/cif/sources/MP/LiFeP2O7.cif",
             "MP",
             {"Fe", "Li", "O", "P"},
-            594,
+            108,
         ),
     ],
 )

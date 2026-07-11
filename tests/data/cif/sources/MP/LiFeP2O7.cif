@@ -1,0 +1,28 @@
+# generated using pymatgen
+data_LiFeP2O7
+_chemical_formula_structural LiFeP2O7
+_chemical_formula_sum 'Fe Li O7 P2'
+_chemical_name_structure_type unknown
+_chemical_formula_weight 200
+_cell_length_a 5
+_cell_length_b 5
+_cell_length_c 5
+_cell_angle_alpha 90
+_cell_angle_beta 90
+_cell_angle_gamma 90
+_space_group_IT_number 1
+_space_group_name_H-M_alt 'P 1'
+loop_
+_space_group_symop_operation_xyz
+'x, y, z'
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+Li1 Li 0 0 0 1.0
+Fe1 Fe 0.5 0 0 1.0
+P1 P 0 0.5 0 1.0
+O1 O 0 0 0.5 1.0

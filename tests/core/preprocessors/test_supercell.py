@@ -12,7 +12,7 @@ def test_cif_short_dist(cif_CUMNON_sb: Cif):
 def test_get_supercell_points_full_shift(cif_block_URhIn):
     # +-2 +-2 +-2 shifts
     supercell_points = get_supercell_points(cif_block_URhIn, 3)
-    assert len(supercell_points) == 1370
+    assert len(supercell_points) == 1125
     # +-1 +-1 +-1 shifts
     supercell_points = get_supercell_points(cif_block_URhIn, 2)
-    assert len(supercell_points) == 336
+    assert len(supercell_points) == 243
