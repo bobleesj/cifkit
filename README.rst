@@ -14,7 +14,7 @@ cifkit
 .. |PyPI| image:: https://img.shields.io/pypi/v/cifkit
         :target: https://pypi.org/project/cifkit/
 
-.. |PythonVersion| image:: https://img.shields.io/pypi/pyversions/cifkit
+.. |PythonVersion| image:: https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue
         :target: https://pypi.org/project/cifkit/
 
 .. |Tracking| image:: https://img.shields.io/badge/issue_tracking-github-blue
