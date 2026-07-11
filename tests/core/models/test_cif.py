@@ -492,8 +492,9 @@ def test_plot_polyhedron_default_output_folder(cif_URhIn):
     expected_output_dir = "tests/data/cif/polyhedrons"
     output_file_path = os.path.join(expected_output_dir, "URhIn_In1.png")
 
+    cif_URhIn.compute_CN()
     # Define the output file path
-    cif_URhIn.plot_polyhedron("In1")
+    cif_URhIn.plot_polyhedron("In1", is_displayed=False)
 
     assert os.path.exists(output_file_path)
     assert os.path.getsize(output_file_path) > 1024
@@ -506,6 +507,7 @@ def test_plot_polyhedron_with_output_folder_given(cif_URhIn):
     expected_output_dir = "tests/data/cif/polyhedrons_user"
     output_file_path = os.path.join(expected_output_dir, "URhIn_In1.png")
 
+    cif_URhIn.compute_CN()
     # Define the output file path
     cif_URhIn.plot_polyhedron(
         "In1", is_displayed=False, output_dir="tests/data/cif/polyhedrons_user"
