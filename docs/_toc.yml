@@ -1,4 +1,6 @@
 # Three tutorials: physical features (primary), multi-CIF statistics, OLED.
+# API reference and Maintainers are expandable parents (chevron), same pattern
+# as quantem.widget: no caption on those parts so the parent link is the label.
 format: jb-book
 root: intro
 parts:
@@ -13,19 +15,22 @@ parts:
         title: Statistics over many CIFs
       - file: tutorials/oled
         title: OLED (elemental data)
-  - caption: API reference
-    chapters:
+  - chapters:
       - file: api/index
-      - file: api/cif
-      - file: api/cif-ensemble
-      - file: api/coordination
-      - file: api/oliynyk
-      - file: api/formula
-      - file: api/element-sorter
-      - file: api/sources
-      - file: api/quick-reference
-        title: Quick reference (LLM)
-  - caption: Maintainers
-    chapters:
-      - file: maintainer/release
-        title: Changelog and release
+        title: API reference
+        sections:
+          - file: api/cif
+          - file: api/cif-ensemble
+          - file: api/coordination
+          - file: api/oliynyk
+          - file: api/formula
+          - file: api/element-sorter
+          - file: api/sources
+          - file: api/quick-reference
+            title: Quick reference (LLM)
+  - chapters:
+      - file: maintainer/index
+        title: Maintainers
+        sections:
+          - file: maintainer/release
+            title: Changelog and release
