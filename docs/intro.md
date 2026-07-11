@@ -49,12 +49,11 @@ browsing a single structure, and it is not a DFT package. It is aimed at
 data-driven groups actually run.
 
 These capabilities have been used for high-throughput site and
-coordination analysis (for example AB-stacking prototype datasets over
-large cleaned crystallographic collections), as a geometry backend for
-bond tools (CBA) and structure featurizers (SAF), and in structure-type
-machine learning with experimental validation. If that work is useful in
-your research, consider citing the matching papers under **Publications**
-below.
+coordination analysis over large crystallographic collections, as a
+geometry backend for bond tools (CBA) and structure featurizers (SAF),
+and in structure-type machine learning with experimental validation. If
+that work is useful in your research, consider citing the matching papers
+under **Publications** below.
 
 ### Two data sources (keep them separate)
 
