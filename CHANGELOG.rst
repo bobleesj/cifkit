@@ -4,6 +4,14 @@ Release Notes
 
 .. current developments
 
+1.2.2
+=====
+
+**Changed:**
+
+* Drop Python 3.11 support; require Python 3.12--3.14 (classifiers and ``requires-python``).
+
+
 1.2.1
 =====
 
