@@ -25,35 +25,38 @@ cifkit
 **LLM / agent recipes (plain text):** https://bobleesj.github.io/cifkit/llms.txt
 (also ``llms.txt`` in this repository)
 
-``cifkit`` parses Crystallographic Information Files (``.cif``) for
-coordination geometry and atomic-site features, and ships **OLED
-(Oliynyk elemental data)** for composition featurization (ML).
+``cifkit`` offers higher-level tools for coordination geometry and atomic
+site analysis from Crystallographic Information Files (``.cif``), plus
+**OLED (Oliynyk elemental data)** for composition featurization in
+machine learning.
 
-Why cifkit?
------------
+How does ``cifkit`` benefit scientists?
+---------------------------------------
 
-Materials workflows repeatedly need: **reliable supercells in Python** →
-**interatomic distances and neighbor shells** → **coordination numbers**
-→ **structural numbers for plots or ML** — over **thousands to tens of
-thousands** of CIFs, not one structure at a time in a GUI.
+Solid-state and materials-informatics work repeatedly needs the same
+steps: read CIFs, build a **reliable supercell**, compute **interatomic
+distances** and neighbor shells, determine **coordination**, and turn
+the result into **numbers** for plots or machine learning. Doing that by
+hand does not scale to thousands of files.
 
-*  **Interatomic geometry** — shortest distances, site/bond pair tables,
-   ordered neighbors from a supercell search.
-*  **Coordination (scriptable)** — four gap-based CN methods
-   (including *d*/*d*\ :sub:`min`), best-method polyhedra, bond fractions,
-   packing efficiency.
-*  **Supercells you can trust** — 3×3×3 (configurable) so boundary
-   neighbors are not wrong or missing.
-*  **Folder-scale** — ``CifEnsemble`` for preprocess, filter, histogram,
-   and sort over large CIF collections.
-*  **Structural featurization for ML** — geometry features feed tools
-   such as SAF; composition features via OLED when you need elemental
-   tables.
-*  **Small API** — ``Cif("file.cif")`` / ``CifEnsemble("folder/")``.
+``cifkit`` is written so scientists can focus on the science—not on
+boilerplate geometry code.
 
-Not a VESTA replacement for browsing one file; not a DFT suite. Built for
-batch geometry and featurization that experimental and ML groups actually
-run.
+*  Help scientists extract **physics-based structural features** from
+   real CIFs (distances, coordination, polyhedron metrics, bond
+   fractions) for visualization or ML.
+*  Make **supercell construction and neighbor search reliable in
+   Python** (default 3×3×3, configurable).
+*  Support **high-throughput** work over folders of CIFs—from a few
+   structures to **thousands or tens of thousands**—with
+   ``Cif`` / ``CifEnsemble`` rather than a one-file GUI workflow.
+*  Provide geometry vectors that feed structure featurizers such as
+   SAF; composition features via OLED when elemental tables are needed.
+
+``cifkit`` is not a replacement for interactive viewers such as VESTA,
+and it is not a DFT package. It is aimed at batch geometry and
+structural featurization that experimental and data-driven groups
+actually run.
 
 Install::
 

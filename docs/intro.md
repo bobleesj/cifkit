@@ -5,53 +5,76 @@
 [![CI](https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml/badge.svg)](https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.21105%2Fjoss.07205-blue)](https://doi.org/10.21105/joss.07205)
 
-Higher-level tools for **coordination geometry and atomic site analysis**
-from Crystallographic Information Files (`.cif`), plus **OLED (Oliynyk
-elemental data)** for composition featurization in ML.
+`cifkit` offers higher-level tools for **coordination geometry and atomic
+site analysis** from Crystallographic Information Files (`.cif`), plus
+**OLED (Oliynyk elemental data)** for composition featurization in machine
+learning.
 
-## Why cifkit?
+## How does `cifkit` benefit scientists?
 
-Solid-state and materials-informatics work often needs the same pipeline
-over and over: take messy database CIFs → build a **reliable supercell**
-→ list **neighbors and interatomic distances** → decide **coordination
-shells** → turn that into **numbers** for plots, motif searches, or
-**machine learning**. Doing that by hand (or reimplementing it per paper)
-does not scale past a handful of structures.
+Solid-state chemistry and materials informatics repeatedly need the same
+steps: read crystallographic CIFs, build a **reliable supercell**, compute
+**interatomic distances** and **neighbor shells**, determine
+**coordination**, and turn the result into **numbers** for visualization,
+structure-type work, or **machine learning**. Doing that by hand, or
+reimplementing it for every project, does not scale when you have
+thousands of files.
 
-**cifkit is the simple Python layer for that job.**
+`cifkit` is written so scientists can focus on the science—not on
+boilerplate geometry code.
 
-| You need… | What cifkit gives you |
+Here are the main goals of `cifkit` for the scientific community:
+
+1. Help scientists extract **physics-based structural features** from
+   real CIFs (distances, coordination, polyhedron metrics, bond fractions)
+   that can be plotted, compared, or fed into ML models.
+2. Make **supercell construction and neighbor search reliable in Python**,
+   so site environments near cell boundaries are not wrong or missing.
+3. Support **high-throughput work** over folders of CIFs—from a few
+   structures to **thousands or tens of thousands**—with a small,
+   scriptable API rather than a one-file GUI workflow.
+
+| Capability | What `cifkit` provides |
 |---|---|
-| **Interatomic geometry at scale** | Shortest distances, site-pair and bond-pair distances, ordered neighbor lists from a supercell search |
-| **Coordination that is scriptable** | Four gap-based CN methods (*d/d<sub>min</sub>*, CIF-radius sums, Pauling radius sum, …), best-method polyhedra, bond fractions, packing efficiency |
-| **Supercells you can trust in Python** | Constructor builds a **3×3×3 supercell** (configurable) so neighbors near the cell boundary are not wrong or missing |
-| **Thousands → tens of thousands of CIFs** | `CifEnsemble` over a folder: preprocess, unique formulas/structures, filters, histograms, sort/copy — not one file at a time in a GUI |
-| **Structural features for ML** | Geometry vectors (CN, distances, polyhedron metrics, bond fractions) that feed featurizers such as [SAF](https://github.com/bobleesj/structure-analyzer-featurizer); composition side via **OLED** when you need elemental tables |
-| **API that stays small** | `Cif("file.cif")` / `CifEnsemble("folder/")` — attributes and a few methods, not a general crystallography framework |
+| Interatomic geometry | Shortest distances, site-pair and bond-pair tables, ordered neighbor lists |
+| Coordination | Four gap-based methods (*d/d<sub>min</sub>*, CIF-radius sums, Pauling radius sum, …), best-method polyhedra, bond fractions, packing efficiency |
+| Supercells | Default **3×3×3** supercell (configurable) for consistent neighbor search |
+| Many CIFs | `CifEnsemble`: preprocess, unique formulas/structures, filters, histograms, sort/copy |
+| Structural features for ML | Geometry vectors for tools such as [SAF](https://github.com/bobleesj/structure-analyzer-featurizer); composition via **OLED** when elemental tables are needed |
+| Small API | `Cif("file.cif")` / `CifEnsemble("folder/")` — attributes and a few methods |
 
-**Who this is for:** experimental solid-state groups, structure-type
-datasets, and ML workflows that need **physics-based structural
-descriptors** from real CIFs — not a replacement for VESTA for looking
-at one structure, and not a full DFT stack.
+`cifkit` is not a replacement for interactive viewers such as VESTA for
+browsing a single structure, and it is not a DFT package. It is aimed at
+**batch geometry and structural featurization** that experimental and
+data-driven groups actually run.
 
-**Used in practice** for high-throughput site/CN mining (e.g. AB-stacking
-prototype datasets over tens of thousands of cleaned PCD CIFs), as the
-geometry backend under bond tools (CBA) and structure featurizers (SAF),
-and in structure-type ML with experimental validation. Soft cites under
-**Publications** below.
+These capabilities have been used for high-throughput site and
+coordination analysis (for example AB-stacking prototype datasets over
+large cleaned crystallographic collections), as a geometry backend for
+bond tools (CBA) and structure featurizers (SAF), and in structure-type
+machine learning with experimental validation. If that work is useful in
+your research, consider citing the matching papers under **Publications**
+below.
 
-Two different data sources (do not mix them up):
+### Two data sources (keep them separate)
 
 | Source | What it is | Tutorial |
 |---|---|---|
-| **`.cif` geometry** | Distances, coordination numbers (four gap methods), polyhedra from crystal structure | [Physical features](tutorials/physical-features) |
-| **OLED table** | Curated **elemental** property rows (22 × 76) for composition / ML — **not** read from the CIF | [OLED](tutorials/oled) · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
+| **`.cif` geometry** | Distances, coordination numbers (four gap methods), polyhedra from the crystal structure | [Physical features](tutorials/physical-features) |
+| **OLED table** | Curated **elemental** property rows (22 × 76) for composition / ML — **not** values read from the CIF | [OLED](tutorials/oled) · [Data in Brief](https://doi.org/10.1016/j.dib.2024.110178) |
 
-**Built with [scikit-package](https://scikit-package.github.io/scikit-package/)**
-— packaging standards and a practical roadmap so scientists can maintain
-and distribute reproducible research software (including agent-friendly
-surfaces). S. Lee, C. Myers, A. Yang, T. Zhang, Y. Xiao and S. J. L.
-Billinge, *Digital Discovery*, 2026.
+### Built with `scikit-package`
+
+`cifkit` is developed and maintained with
+[scikit-package](https://scikit-package.github.io/scikit-package/), which
+offers tools and practices so scientists can turn research code into
+reusable, reproducible packages—including documentation and
+agent-friendly surfaces. If you use `scikit-package` for your own
+software, please cite:
+
+S. Lee, C. Myers, A. Yang, T. Zhang, Y. Xiao and S. J. L. Billinge,
+scikit-package: software packaging standards and roadmap for sharing
+reproducible scientific software, *Digital Discovery*, 2026.
 [https://doi.org/10.1039/d6dd00121a](https://doi.org/10.1039/d6dd00121a)
 
 ```python
