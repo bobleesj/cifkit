@@ -1,18 +1,12 @@
 cifkit
 ======
 
-|PyPI| |Forge| |PythonVersion| |PR|
+|PyPI| |PythonVersion| |PR|
 
-|CI| |Codecov| |Tracking|
+|CI| |Tracking|
 
-.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml/badge.svg
-        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
-
-.. |Codecov| image:: https://codecov.io/gh/bobleesj/cifkit/branch/main/graph/badge.svg
-        :target: https://codecov.io/gh/bobleesj/cifkit
-
-.. |Forge| image:: https://img.shields.io/conda/vn/conda-forge/cifkit
-        :target: https://anaconda.org/conda-forge/cifkit
+.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml/badge.svg
+        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml
 
 .. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
         :target: https://github.com/bobleesj/cifkit/pulls
@@ -26,121 +20,123 @@ cifkit
 .. |Tracking| image:: https://img.shields.io/badge/issue_tracking-github-blue
         :target: https://github.com/bobleesj/cifkit/issues
 
+**Docs:** https://bobleesj.github.io/cifkit/
+
+**LLM / agent recipes (plain text):** https://bobleesj.github.io/cifkit/llms.txt
+(also ``llms.txt`` in this repository)
+
+``cifkit`` parses Crystallographic Information Files (``.cif``) for
+coordination geometry and atomic-site features, and ships **OLED
+(Oliynyk elemental data)** for composition featurization (ML).
+
+Install::
+
+   pip install cifkit
+
+Common tasks
+------------
+
+1) Parse physical features from one ``.cif``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+   from cifkit import Cif, Example
+
+   cif = Cif(Example.GdSb_file_path)  # or Cif("file.cif")
+   print(cif.formula, cif.structure, cif.space_group_name, cif.site_labels)
+   print(cif.shortest_distance, cif.shortest_bond_pair_distance)
+
+   cif.compute_CN()
+   print(cif.CN_best_methods)  # volume, packing_efficiency, CN, …
+   print(cif.CN_bond_fractions_by_min_dist_method)
+
+Tutorial: https://bobleesj.github.io/cifkit/tutorials/physical-features.html
+
+2) Statistics over many ``.cif`` files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+   from cifkit import CifEnsemble, Example
+
+   ensemble = CifEnsemble(Example.demo_cif_folder_path)  # or a folder path
+   print(ensemble.file_count, ensemble.unique_formulas)
+   paths = ensemble.filter_by_formulas(["GdSb"])
+
+Tutorial: https://bobleesj.github.io/cifkit/tutorials/statistics-many-cifs.html
+
+3) OLED — Oliynyk elemental data (composition / ML)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**OLED** is the Oliynyk elemental property table (22 properties × 76
+elements). Load it with ``cifkit.sources.oliynyk.Oliynyk`` — not a
+separate package.
+
+.. code:: python
+
+   from cifkit.sources.oliynyk import Oliynyk, Property
+   from cifkit.parsers.formula import Formula
+
+   oled = Oliynyk()
+   print(len(oled.elements), "elements")
+   for prop in Property:  # exact enum names — do not rename
+       print(prop.name, prop.value)
+   print(oled.db["Si"][Property.AW], oled.db["Si"][Property.PAULING_EN])
+   oled.to_csv("oled.csv")
+
+   # Formula → stoichiometry-weighted mean feature vector
+   parsed = Formula("NdSi2").parsed_formula  # [('Nd', 1.0), ('Si', 2.0)]
+   total = sum(c for _, c in parsed)
+   features = {
+       prop.value: sum(oled.db[el][prop] * c for el, c in parsed) / total
+       for prop in Property
+   }
+   print(features["atomic_weight"], features["Pauling_EN"])
+
+**Exact** ``Property`` members (use these names as written)::
+
+   AW, ATOMIC_NUMBER, PERIOD, GROUP, MEND_NUM, VAL_TOTAL, UNPARIED_E,
+   GILMAN, Z_EFF, ION_ENERGY, COORD_NUM, RATIO_CLOSEST, POLYHEDRON_DISTORT,
+   CIF_RADIUS, PAULING_RADIUS_CN12, PAULING_EN, MARTYNOV_BATSANOV_EN,
+   MELTING_POINT_K, DENSITY, SPECIFIC_HEAT, COHESIVE_ENERGY, BULK_MODULUS
+
+Tutorial: https://bobleesj.github.io/cifkit/tutorials/oled.html
+
+Features
+--------
+
+-  **Physical features from a ``.cif``** — distances, four coordination
+   methods, polyhedron metrics (volume, packing efficiency), bond
+   fractions, site mixing.
+-  **Statistics over many CIFs** — filter, histogram, copy/move folders.
+-  **OLED (Oliynyk elemental data)** — composition descriptors for ML;
+   CSV export via ``Oliynyk().to_csv()``.
+
 |Logo light mode| |Logo dark mode|
 
 .. |Logo light mode| image:: docs/source/img/logo-black.png#gh-light-mode-only
 .. |Logo dark mode| image:: docs/source/img/logo-color.png#gh-dark-mode-only
 
-``cifkit`` is designed to provide a set of fully-tested utility
-functions and variables for handling large datasets, on the order of
-tens of thousands, of ``.cif`` files.
-
-Features:
----------
-
-``cifkit`` provides higher-level functions in just a few lines of code.
-
--  **Coordination geometry** - ``cifkit`` provides functions for
-   visualing coordination geometry from each site and extracts
-   physics-based features like volume and packing efficiency in each
-   polyhedron.
--  **Atomic mixing** - ``cifkit`` extracts atomic mixing information at
-   the bond pair level—tasks that would otherwise require extensive
-   manual effort using GUI-based tools like VESTA, Diamond, and
-   CrystalMaker.
--  **Filter** - ``cifkit`` offers features for preprocessing. It
-   systematically addresses common issues in CIF files from databases,
-   such as incorrect loop values and missing fractional coordinates, by
-   standardizing and filtering out ill-formatted files. It also
-   preprocesses atomic site labels, transforming labels such as ‘M1’ to
-   ‘Fe1’ in files with atomic mixing.
--  **Sort** - ``cifkit`` allows you to copy, move, and sort ``.cif``
-   files based on attributes such as coordination numbers, space groups,
-   unit cells, shortest distances, elements, and more.
-
-Example usage 1 - coordination geometry
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The example below uses ``cifkit`` to visualize the polyhedron generated
-from each atomic site based on the coordination number geometry.
-
-.. code:: python
-
-   from cifkit import Cif
-
-   cif = Cif("your_cif_file_path")
-   site_labels = cif.site_labels
-
-   # Loop through each site label
-   for label in site_labels:
-       # Dipslay each polyhedron, .png saved for each label
-       cif.plot_polyhedron(label, is_displayed=True)
-
-.. figure:: docs/source/img/ErCoIn-polyhedron.png
-   :alt: Polyhedron generation
-
-   Polyhedron generation
-
-Example Usage 2 - sort
-~~~~~~~~~~~~~~~~~~~~~~
-
-The following example generates a distribution of structure.
-
-.. code:: python
-
-   from cifkit import CifEnsemble
-
-   ensemble = CifEnsemble("your_folder_path_containing_cif_files")
-   ensemble.generate_structure_histogram()
-
-.. figure:: docs/source/img/histogram-structure.png
-   :alt: structure distribution
-
-   structure distribution
-
-Basde on your visual histogram above, you can copy and move .cif files
-based on specific attributes:
-
-.. code:: python
-
-   # Return file paths matching structures either Co1.75Ge or CoIn2
-   ensemble.filter_by_structures(["Co1.75Ge", "CoIn2"])
-
-   # Return file path matching CeAl2Ga2
-   ensemble.filter_by_structures("CeAl2Ga2")
-
-To learn more, please read the official documentation here:
-https://bobleesj.github.io/cifkit.
-
-Quotes
-------
-
-Here is a quote illustrating how ``cifkit`` addresses one of the
-challenges mentioned above.
-
-   “I am building an X-Ray diffraction analysis (XRD) pattern
-   visualization script for my lab using ``pymatgen``. I feel like
-   ``cifkit`` integrated really well into my existing stable of
-   libraries, while surpassing some alternatives in preprocessing and
-   parsing. For example, it was often unclear at what stage an error
-   occurred—whether during pre-processing with ``CifParser``, or XRD
-   plot generation with ``diffraction.core`` in ``pymatgen``. The
-   pre-processing logic in ``cifkit`` was communicated clearly, both in
-   documentation and in actual outputs, allowing me to catch errors in
-   my data before it was used in my visualizations. I now use ``cifkit``
-   by default for processing CIFs before they pass through the rest of
-   my pipeline.” - Alex Vtorov \`
-
 Documentation
 -------------
 
--  `Official documentation <https://bobleesj.github.io/cifkit>`_
--  `MIT license <https://github.com/bobleesj/cifkit/blob/main/LICENSE>`_
+-  `Official documentation (Jupyter Book) <https://bobleesj.github.io/cifkit>`_
+-  `LLM recipes (llms.txt) <https://bobleesj.github.io/cifkit/llms.txt>`_
+-  `Source <https://github.com/bobleesj/cifkit>`_
 
-Citation
---------
+Publications
+------------
 
-If you use ``cifkit`` in your publication, please cite the following:
+Citation files: ``CITATION.cff`` (repo root) and
+https://bobleesj.github.io/cifkit/_static/CITATION.txt
+
+Consider citing if useful:
+
+-  **cifkit** — Lee & Oliynyk, JOSS (2024).
+   https://doi.org/10.21105/joss.07205
+-  **OLED / Oliynyk elemental data** — Lee et al., Data in Brief (2024).
+   https://doi.org/10.1016/j.dib.2024.110178
 
 .. code:: text
 
@@ -152,29 +148,18 @@ If you use ``cifkit`` in your publication, please cite the following:
      volume    = {9},
      number    = {103},
      pages     = {7205},
-     publisher = {The Open Journal},
-     doi       = {10.21105/joss.07205},
-     url       = {https://doi.org/10.21105/joss.07205}
+     doi       = {10.21105/joss.07205}
    }
 
 How to contribute
 -----------------
 
-Here is how you can contribute to the ``cifkit`` project if you found it
-helpful:
-
--  Star the repository on GitHub and recommend it to your colleagues who
-   might find ``cifkit`` helpful as well.
--  Create a new issue for any bugs or feature requests
-   `here <https://github.com/bobleesj/cifkit/issues>`_
--  Fork the repository and consider contributing changes via a pull
-   request.
--  If you have any suggestions or need further clarification on how to
-   use ``cifkit``, please reach out to Bob Lee
-   (`@bobleesj <https://github.com/bobleesj>`_).
+-  Issues: https://github.com/bobleesj/cifkit/issues
+-  PRs welcome; run ``pytest`` and keep one theme per branch.
 
 Acknowledgements
 ----------------
 
-``cifkit`` is maintained and developed with the help of
-``scikit-package`` (https://scikit-package.github.io/scikit-package/).
+Developed with ``scikit-package``
+(https://scikit-package.github.io/scikit-package/). Maintained by
+Sangjoon Bob Lee.

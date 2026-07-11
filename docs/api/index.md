@@ -1,28 +1,42 @@
 # API reference
 
-Complete reference for the two primary classes, the coordination
-machinery, and the elemental-data modules. The class pages are
-generated directly from the source docstrings by autodoc, so they never
-drift from the code.
+Agent-oriented entry points (no interactive UI required):
 
-## At a glance
+| Resource | URL path |
+|---|---|
+| **LLM recipes (plain text)** | [llms.txt](../llms.txt) |
+| **Calibrated API tables** | [API quick reference](quick-reference) |
+| Human tutorials | [physical features](../tutorials/physical-features) · [statistics](../tutorials/statistics-many-cifs) · [OLED](../tutorials/oled) |
 
-| Page | Import | Use it for |
-|---|---|---|
-| [Cif](cif) | `from cifkit import Cif` | One `.cif` file: parsed properties, supercell, distances, mixing, CN |
-| [CifEnsemble](cif-ensemble) | `from cifkit import CifEnsemble` | A folder of `.cif` files: unique attributes, filters, move/copy, histograms |
-| [Coordination](coordination) | `cifkit.coordination.*` | CN determination methods and polyhedron geometry math |
-| [Oliynyk](oliynyk) | `from cifkit.sources.oliynyk import Oliynyk, Property` | Elemental property database (22 properties, 76 elements) |
-| [Formula](formula) | `from cifkit.parsers.formula import Formula` | Parse, normalize, sort, and filter chemical formulas |
-| [ElementSorter](element-sorter) | `from cifkit.sorters.element_sorter import ElementSorter` | Sort elements by custom labels, Mendeleev number, or alphabetically |
-| [Sources](sources) | `cifkit.sources.*`, `cifkit.data.element` | Raw Mendeleev numbers, periodic table data, radii, `Element` enum |
-
-The package root re-exports the everyday names:
+## Imports
 
 ```python
 from cifkit import Cif, CifEnsemble, Example
+from cifkit.sources.oliynyk import Oliynyk, Property  # OLED
+from cifkit.parsers.formula import Formula
+from cifkit.sorters.element_sorter import ElementSorter
 ```
 
-`Example` provides the packaged demo data paths used throughout the
-tutorials: `Example.GdSb_file_path` (one rock-salt CIF) and
-`Example.demo_cif_folder_path` (a folder with GdSb.cif and HoSb.cif).
+**OLED** = Oliynyk elemental data (composition / ML). Not a separate
+package. Demo paths: `Example.GdSb_file_path`,
+`Example.demo_cif_folder_path`.
+
+## Pages
+
+| Page | Import | Use it for |
+|---|---|---|
+| [Quick reference](quick-reference) | — | Full attribute/method tables for agents |
+| [Cif](cif) | `from cifkit import Cif` | One `.cif`: parse, distances, CN, polyhedra |
+| [CifEnsemble](cif-ensemble) | `from cifkit import CifEnsemble` | Folder: stats, filters, histograms |
+| [Coordination](coordination) | `cifkit.coordination.*` | Low-level CN / geometry helpers |
+| [Oliynyk / OLED](oliynyk) | `from cifkit.sources.oliynyk import Oliynyk, Property` | Elemental property database |
+| [Formula](formula) | `from cifkit.parsers.formula import Formula` | Parse / normalize formulas |
+| [ElementSorter](element-sorter) | `from cifkit.sorters.element_sorter import ElementSorter` | Sort elements by role / Mendeleev |
+| [Sources](sources) | `cifkit.sources.*` | Mendeleev numbers, ptable, radii |
+
+## Naming rules for generated code
+
+1. Use exact `Property` enum names (`UNPARIED_E`, not `UNPAIRED_E`).
+2. `unitcell_angles` are **radians**.
+3. Call `compute_CN()` before `CN_*` attributes unless `compute_CN=True`.
+4. Do not invent top-level `import oled` / `import oliynyk`.

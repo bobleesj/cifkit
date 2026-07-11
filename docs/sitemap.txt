@@ -1,0 +1,16 @@
+https://bobleesj.github.io/cifkit/
+https://bobleesj.github.io/cifkit/intro.html
+https://bobleesj.github.io/cifkit/llms.txt
+https://bobleesj.github.io/cifkit/robots.txt
+https://bobleesj.github.io/cifkit/api/quick-reference.html
+https://bobleesj.github.io/cifkit/api/index.html
+https://bobleesj.github.io/cifkit/api/cif.html
+https://bobleesj.github.io/cifkit/api/cif-ensemble.html
+https://bobleesj.github.io/cifkit/api/oliynyk.html
+https://bobleesj.github.io/cifkit/api/formula.html
+https://bobleesj.github.io/cifkit/tutorials/physical-features.html
+https://bobleesj.github.io/cifkit/tutorials/statistics-many-cifs.html
+https://bobleesj.github.io/cifkit/tutorials/oled.html
+https://bobleesj.github.io/cifkit/install.html
+https://bobleesj.github.io/cifkit/_static/CITATION.txt
+https://bobleesj.github.io/cifkit/_static/oled.csv

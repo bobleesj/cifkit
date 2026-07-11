@@ -1,6 +1,4 @@
-# Table of contents. Tutorials walk through the packaged example CIFs and the
-# elemental-data modules new in 1.2.1; the API reference documents every public
-# class and module with autodoc.
+# Three tutorials: physical features (primary), multi-CIF statistics, OLED.
 format: jb-book
 root: intro
 parts:
@@ -9,13 +7,17 @@ parts:
       - file: install
   - caption: Tutorials
     chapters:
-      - file: tutorials/cif
-      - file: tutorials/cif_ensemble
-      - file: tutorials/coordination
-      - file: tutorials/elemental_data
+      - file: tutorials/physical-features
+        title: Parse physical features from a .cif
+      - file: tutorials/statistics-many-cifs
+        title: Statistics over many CIFs
+      - file: tutorials/oled
+        title: OLED (elemental data)
   - caption: API reference
     chapters:
       - file: api/index
+      - file: api/quick-reference
+        title: Quick reference (LLM)
       - file: api/cif
       - file: api/cif-ensemble
       - file: api/coordination

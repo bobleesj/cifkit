@@ -1,20 +1,13 @@
 # Installation
 
-`cifkit` is published on [PyPI](https://pypi.org/project/cifkit/) and
-[conda-forge](https://anaconda.org/conda-forge/cifkit). It is pure
-Python and supports Python 3.11 through 3.13 on macOS, Linux, and
+`cifkit` is published on [PyPI](https://pypi.org/project/cifkit/). It is
+pure Python and supports Python 3.11 through 3.13 on macOS, Linux, and
 Windows.
 
 ## pip
 
 ```bash
 pip install cifkit
-```
-
-## conda
-
-```bash
-conda install -c conda-forge cifkit
 ```
 
 ## From source

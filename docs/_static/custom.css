@@ -1,0 +1,18 @@
+/* No right-hand "Contents" panel; give the article the full column
+   (same idea as quantem.widget docs). */
+#pst-secondary-sidebar,
+.bd-sidebar-secondary {
+  display: none !important;
+}
+
+/* Default theme max-width is 88rem; ~200px wider for tables. */
+.bd-page-width {
+  max-width: calc(88rem + 200px) !important;
+}
+
+.bd-main .bd-content,
+.bd-main .bd-content .bd-article-container,
+.bd-article {
+  max-width: 100% !important;
+  width: 100%;
+}

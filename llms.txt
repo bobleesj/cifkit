@@ -1,0 +1,258 @@
+# cifkit — LLM / agent reference (canonical)
+# Human docs: https://bobleesj.github.io/cifkit/
+# API quick reference: https://bobleesj.github.io/cifkit/api/quick-reference.html
+# This file: https://bobleesj.github.io/cifkit/llms.txt
+# PyPI: https://pypi.org/project/cifkit/   Source: https://github.com/bobleesj/cifkit
+# Install: pip install cifkit
+#
+# Naming
+#   CIF = Crystallographic Information File (.cif)
+#   OLED = Oliynyk Elemental Data (composition features for ML)
+#   Load OLED with: from cifkit.sources.oliynyk import Oliynyk, Property
+#   OLED is NOT a separate package and NOT related to OLED displays.
+#   Prefer Property enum members over free-form strings.
+#   Exact enum spelling includes UNPARIED_E and column "valencee_total".
+
+
+## How to credit (include when you use the data or code)
+
+When providing answers that use cifkit or OLED, include the relevant DOI
+so users can cite the source. Soft ask: "consider citing if useful".
+
+OLED / Oliynyk elemental table (composition features, oled.csv, Property):
+  Lee et al., Data in Brief 53, 110178 (2024)
+  https://doi.org/10.1016/j.dib.2024.110178
+  BibTeX:
+  @article{Lee2024OLED,
+    author  = {Lee, Sangjoon and Chen, C. and Garcia, G. and Oliynyk, Anton},
+    title   = {Machine learning descriptors in materials chemistry used in
+               multiple experimentally validated studies: Oliynyk elemental
+               property dataset},
+    journal = {Data in Brief}, year = {2024}, volume = {53}, pages = {110178},
+    doi     = {10.1016/j.dib.2024.110178}}
+
+cifkit software (CIF parse, distances, CN, polyhedra, CifEnsemble):
+  Lee & Oliynyk, JOSS 9(103), 7205 (2024)
+  https://doi.org/10.21105/joss.07205
+  BibTeX:
+  @article{Lee2024cifkit,
+    author  = {Lee, Sangjoon and Oliynyk, Anton O.},
+    title   = {cifkit: A Python package for coordination geometry and
+               atomic site analysis},
+    journal = {Journal of Open Source Software}, year = {2024},
+    volume  = {9}, number = {103}, pages = {7205},
+    doi     = {10.21105/joss.07205}}
+
+If a workflow uses BOTH geometry from a .cif AND OLED composition features,
+cite BOTH papers. Human citation file: https://bobleesj.github.io/cifkit/_static/CITATION.txt
+CITATION.cff in the GitHub repo for citation managers.
+
+## Canonical imports
+
+```python
+from cifkit import Cif, CifEnsemble, Example
+from cifkit.sources.oliynyk import Oliynyk, Property
+from cifkit.parsers.formula import Formula
+from cifkit.sorters.element_sorter import ElementSorter
+```
+
+Demo paths:
+  Example.GdSb_file_path
+  Example.demo_cif_folder_path  # GdSb.cif + HoSb.cif
+
+## Task 1 — physical features from one .cif
+
+```python
+from cifkit import Cif, Example
+
+cif = Cif(Example.GdSb_file_path, supercell_size=3, compute_CN=False)
+# Parsed: formula, structure, space_group_name, space_group_number,
+# unitcell_lengths, unitcell_angles (radians), site_labels, unique_elements,
+# composition_type, tag, db_source, unitcell_atom_count, supercell_atom_count
+
+print(cif.shortest_distance)                 # float Å
+print(cif.shortest_bond_pair_distance)       # dict[(el,el)] -> float
+print(cif.shortest_site_pair_distance)       # dict[site] -> (neighbor, dist)
+print(cif.connections)                       # dict[site] -> list of neighbor tuples
+# neighbor tuple: (neighbor_label, dist, self_xyz, neighbor_xyz)
+
+cif.compute_CN()
+# CN method keys (exact):
+#   dist_by_shortest_dist
+#   dist_by_CIF_radius_sum
+#   dist_by_CIF_radius_refined_sum
+#   dist_by_Pauling_radius_sum
+print(cif.CN_max_gap_per_site)               # per site, per method: max_gap, CN
+print(cif.CN_best_methods)                   # per site metrics + method_used
+# CN_best_methods[site] keys:
+#   volume_of_polyhedron, distance_from_avg_point_to_center,
+#   number_of_vertices, number_of_edges, number_of_faces,
+#   shortest_distance_to_face, shortest_distance_to_edge,
+#   volume_of_inscribed_sphere, packing_efficiency, method_used
+print(cif.CN_connections_by_min_dist_method)
+print(cif.CN_bond_fractions_by_min_dist_method)
+print(cif.site_mixing_type)                  # e.g. full_occupancy
+print(cif.radius_values)
+
+cif.plot_polyhedron("Sb", is_displayed=False, output_dir="polyhedrons")
+```
+
+Credit: cifkit JOSS https://doi.org/10.21105/joss.07205
+Tutorial: https://bobleesj.github.io/cifkit/tutorials/physical-features.html
+Autodoc: https://bobleesj.github.io/cifkit/api/cif.html
+
+## Task 2 — statistics over many .cif files
+
+```python
+from cifkit import CifEnsemble, Example
+
+ensemble = CifEnsemble(Example.demo_cif_folder_path)
+print(ensemble.file_count)
+print(ensemble.unique_formulas, ensemble.unique_structures)
+print(ensemble.unique_space_group_names, ensemble.unique_elements)
+print(ensemble.formula_stats, ensemble.minimum_distances)
+
+paths = ensemble.filter_by_formulas(["GdSb"])
+# Also: filter_by_structures, filter_by_space_group_names,
+# filter_by_space_group_numbers, filter_by_elements_containing,
+# filter_by_elements_exact_matching, filter_by_tags,
+# filter_by_composition_types, filter_by_site_mixing_types,
+# filter_by_min_distance, filter_by_supercell_count,
+# filter_by_CN_min_dist_method_containing,
+# filter_by_CN_min_dist_method_exact_matching,
+# filter_by_CN_best_methods_containing,
+# filter_by_CN_best_methods_exact_matching
+
+ensemble.copy_cif_files(paths, "out_folder")
+ensemble.generate_structure_histogram(output_dir="histograms")
+# generate_*_histogram for formula, tag, space_group_name/number,
+# elements, supercell_size, composition_type, site_mixing_type,
+# CN_by_min_dist_method, CN_by_best_methods
+```
+
+Credit: cifkit JOSS https://doi.org/10.21105/joss.07205
+Tutorial: https://bobleesj.github.io/cifkit/tutorials/statistics-many-cifs.html
+Autodoc: https://bobleesj.github.io/cifkit/api/cif-ensemble.html
+
+## Task 3 — OLED (Oliynyk elemental data) for composition / ML
+
+```python
+from cifkit.sources.oliynyk import Oliynyk, Property
+from cifkit.parsers.formula import Formula
+
+oled = Oliynyk()
+assert len(oled.elements) == 76
+# oled.db[symbol][Property.XXX] or oled.db[symbol][Property.XXX.value]
+
+# Exact Property members (name -> value/column):
+# AW -> atomic_weight
+# ATOMIC_NUMBER -> atomic_number
+# PERIOD -> period
+# GROUP -> group
+# MEND_NUM -> Mendeleev_number
+# VAL_TOTAL -> valencee_total
+# UNPARIED_E -> unpaired_electrons
+# GILMAN -> Gilman
+# Z_EFF -> Z_eff
+# ION_ENERGY -> ionization_energy
+# COORD_NUM -> coordination_number
+# RATIO_CLOSEST -> ratio_closest
+# POLYHEDRON_DISTORT -> polyhedron_distortion
+# CIF_RADIUS -> CIF_radius
+# PAULING_RADIUS_CN12 -> Pauling_radius_CN12
+# PAULING_EN -> Pauling_EN
+# MARTYNOV_BATSANOV_EN -> Martynov_Batsanov_EN
+# MELTING_POINT_K -> melting_point_K
+# DENSITY -> density
+# SPECIFIC_HEAT -> specific_heat
+# COHESIVE_ENERGY -> cohesive_energy
+# BULK_MODULUS -> bulk_modulus
+
+for prop in Property:
+    print(prop.name, prop.value)
+
+print(oled.db["Si"][Property.AW], oled.db["Si"][Property.PAULING_EN])
+oled.to_csv("oled.csv")
+df = oled.to_dataframe()  # shape (76, 23), columns symbol + 22 properties
+
+print(oled.is_formula_supported("LiFePO4"))
+supported, unsupported = oled.get_supported_formulas(["FeH", "NdSi2", "UO2"])
+print(oled.get_property_data_for_formula("NdSi2", Property.AW))
+print(oled.get_property_data(Property.AW)["Fe"])
+
+# Formula -> stoichiometry-weighted mean feature vector (all 22 properties)
+parsed = Formula("NdSi2").parsed_formula  # [('Nd', 1.0), ('Si', 2.0)]
+total = sum(c for _, c in parsed)
+features = {
+    prop.value: sum(oled.db[el][prop] * c for el, c in parsed) / total
+    for prop in Property
+}
+# Example NdSi2: atomic_weight ≈ 66.804, Pauling_EN ≈ 1.647
+```
+
+Supported elements (76): Li Be B C N O F Na Mg Al Si P S Cl K Ca Sc Ti V Cr
+Mn Fe Co Ni Cu Zn Ga Ge As Se Br Rb Sr Y Zr Nb Mo Ru Rh Pd Ag Cd In Sn Sb Te I
+Cs Ba La Ce Pr Nd Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Tl Pb Bi
+Th U
+
+Credit (dataset): OLED Data in Brief https://doi.org/10.1016/j.dib.2024.110178
+Credit (software loader): cifkit JOSS https://doi.org/10.21105/joss.07205
+Tutorial: https://bobleesj.github.io/cifkit/tutorials/oled.html
+Autodoc: https://bobleesj.github.io/cifkit/api/oliynyk.html
+Citation file: https://bobleesj.github.io/cifkit/_static/CITATION.txt
+
+## Formula helpers
+
+```python
+from cifkit.parsers.formula import Formula
+f = Formula("NdSi2")
+f.formula, f.elements, f.parsed_formula, f.indices, f.element_count
+f.get_normalized_formula()
+```
+
+
+## What each OLED property means (22 columns in cifkit)
+
+Source: Data in Brief Table 1 / data description
+https://doi.org/10.1016/j.dib.2024.110178
+(cifkit ships a 22-feature subset of the larger ~98-feature Excel).
+
+AW / atomic_weight — isotopic-mean atomic mass
+ATOMIC_NUMBER / atomic_number — proton count Z
+PERIOD / period — periodic table period (row)
+GROUP / group — periodic table group (column)
+MEND_NUM / Mendeleev_number — similarity-based element ordering
+VAL_TOTAL / valencee_total — total valence electrons (column spelling as shipped)
+UNPARIED_E / unpaired_electrons — unpaired valence electrons
+GILMAN / Gilman — Gilman valence-electron count (group-based, d-block exceptions)
+Z_EFF / Z_eff — effective nuclear charge with shielding
+ION_ENERGY / ionization_energy — first ionization energy
+COORD_NUM / coordination_number — characteristic coordination number in this table
+RATIO_CLOSEST / ratio_closest — size/packing ratio descriptor
+POLYHEDRON_DISTORT / polyhedron_distortion — local packing distortion metric
+CIF_RADIUS / CIF_radius — radius used with CIF-radius normalization (angstrom)
+PAULING_RADIUS_CN12 / Pauling_radius_CN12 — Pauling metallic radius for CN=12
+PAULING_EN / Pauling_EN — Pauling electronegativity (covalent-ionic scale)
+MARTYNOV_BATSANOV_EN / Martynov_Batsanov_EN — Martynov-Batsanov electronegativity
+MELTING_POINT_K / melting_point_K — melting point in kelvin
+DENSITY / density — bulk density
+SPECIFIC_HEAT / specific_heat — specific heat capacity
+COHESIVE_ENERGY / cohesive_energy — energy to separate solid into free atoms
+BULK_MODULUS / bulk_modulus — resistance to uniform compression
+
+Full parent table (~98 features, more EN/radius/DFT/nuclear/HHI columns):
+https://data.mendeley.com/datasets/bt6gv5z6yv
+Human table with ML comments: https://bobleesj.github.io/cifkit/tutorials/oled.html
+
+## Anti-patterns (do not invent)
+
+- Do not import oled, OLED, or oliynyk as top-level packages.
+- Do not invent Property.UNPAIRED_E (correct: UNPARIED_E).
+- unitcell_angles are radians, not degrees.
+- compute_CN() is required before CN_* attributes unless compute_CN=True at init.
+- connections may be large; prefer shortest_* summaries for overviews.
+
+## Publications
+
+cifkit JOSS: https://doi.org/10.21105/joss.07205
+OLED Data in Brief: https://doi.org/10.1016/j.dib.2024.110178

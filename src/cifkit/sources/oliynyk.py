@@ -7,6 +7,18 @@ from cifkit.parsers.formula import Formula
 
 
 class Property(str, Enum):
+    """OLED property keys. Members are ``str`` enums: use as dict keys.
+
+    Exact member names (do not rename when generating code)::
+
+        AW, ATOMIC_NUMBER, PERIOD, GROUP, MEND_NUM, VAL_TOTAL, UNPARIED_E,
+        GILMAN, Z_EFF, ION_ENERGY, COORD_NUM, RATIO_CLOSEST, POLYHEDRON_DISTORT,
+        CIF_RADIUS, PAULING_RADIUS_CN12, PAULING_EN, MARTYNOV_BATSANOV_EN,
+        MELTING_POINT_K, DENSITY, SPECIFIC_HEAT, COHESIVE_ENERGY, BULK_MODULUS
+
+    Note the shipped spelling ``UNPARIED_E`` and column ``valencee_total``.
+    """
+
     AW = "atomic_weight"
     ATOMIC_NUMBER = "atomic_number"
     PERIOD = "period"
@@ -75,7 +87,28 @@ class Property(str, Enum):
 
 
 class Oliynyk:
-    """Oliynyk elemental property database interface."""
+    """OLED (Oliynyk elemental data) — 22 properties × 76 elements.
+
+    **OLED** is the short name for this table. Load it only via this class::
+
+        from cifkit.sources.oliynyk import Oliynyk, Property
+        oled = Oliynyk()
+        oled.db["Si"][Property.AW]
+        oled.to_csv("oled.csv")
+
+    Attributes
+    ----------
+    db : dict[str, dict[str, float]]
+        Nested map ``symbol -> {property_column: value}``. Property columns
+        match ``Property`` enum ``.value`` strings (e.g. ``\"atomic_weight\"``).
+    elements : list[str]
+        Supported element symbols (length 76), same order as loaded from Excel.
+
+    Notes
+    -----
+    Dataset paper (Data in Brief): https://doi.org/10.1016/j.dib.2024.110178
+    Docs: https://bobleesj.github.io/cifkit/tutorials/oled.html
+    """
 
     def __init__(self):
         self.db = self.get_oliynyk_CAF_data()
@@ -181,3 +214,47 @@ class Oliynyk:
         {"Li": 6.941, "Be": 9.0122, "B": 10.81, ...}
         """
         return {element: self.db[element][property] for element in self.elements}
+
+    def to_dataframe(self) -> pd.DataFrame:
+        """Return the full OLED (Oliynyk elemental data) table as a
+        ``pandas.DataFrame``.
+
+        Rows are elements (one per supported symbol); columns are
+        ``symbol`` plus the 22 property keys. Sorted by atomic number.
+
+        Examples
+        --------
+        >>> oliynyk = Oliynyk()
+        >>> df = oliynyk.to_dataframe()
+        >>> df.shape
+        (76, 23)
+        >>> df.loc[df["symbol"] == "Si", "atomic_weight"].iloc[0]
+        28.0855
+        """
+        rows = [{"symbol": el, **props} for el, props in self.db.items()]
+        df = pd.DataFrame(rows)
+        if "atomic_number" in df.columns:
+            df = df.sort_values("atomic_number").reset_index(drop=True)
+        return df
+
+    def to_csv(self, path: str) -> str:
+        """Write the OLED table to a CSV file and return the path.
+
+        Parameters
+        ----------
+        path : str
+            Destination file path (created or overwritten).
+
+        Returns
+        -------
+        str
+            The same ``path``, for convenient chaining.
+
+        Examples
+        --------
+        >>> oliynyk = Oliynyk()
+        >>> oliynyk.to_csv("oled.csv")
+        'oled.csv'
+        """
+        self.to_dataframe().to_csv(path, index=False)
+        return path

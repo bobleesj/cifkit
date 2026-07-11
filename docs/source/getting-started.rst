@@ -37,23 +37,13 @@ Here is how you can write a block of code in the documentation. You can use the 
 
 .. code-block:: bash
 
-    # Create a new environment, without build dependencies (pure Python package)
-    conda create -n <package_name>-env python=3.13 \
-        --file requirements/test.txt \
-        --file requirements/conda.txt
+    # Create a virtual environment (example with venv)
+    python -m venv .venv
+    source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-    # Create a new environment, with build dependencies (non-pure Python package)
-    conda create -n <package_name>-env python=3.13 \
-        --file requirements/test.txt \
-        --file requirements/conda.txt \
-        --file requirements/build.txt
-
-    # Activate the environment
-    conda activate <package_name>_env
-
-    # Install your package locally
-    # `--no-deps` to NOT install packages again from `requirements.pip.txt`
-    pip install -e . --no-deps
+    # Install the package and test dependencies
+    pip install -e .
+    pip install -r requirements/tests.txt
 
     # Run pytest locally
     pytest
@@ -68,7 +58,7 @@ Attach an image to the documentation
 Here is how you attach an image to the documentation. The ``/docs/source/img/scikit-package-logo-text.png`` example image is provided in the template.
 
 .. image:: ./img/scikit-package-logo-text.png
-    :alt: codecov-in-pr-comment
+    :alt: example documentation image
     :width: 400px
     :align: center
 

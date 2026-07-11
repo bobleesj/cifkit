@@ -3,8 +3,7 @@
 Raw elemental data sources behind the higher-level classes, plus the
 `Element` enum and quick stats helper. New in cifkit 1.2.1 (migrated
 from `bobleesj.utils`). See the
-[Elemental data tutorial](../tutorials/elemental_data) for worked
-examples.
+[OLED tutorial](../tutorials/oled) for elemental-data context.
 
 ## Mendeleev numbers
 

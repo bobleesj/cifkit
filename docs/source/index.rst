@@ -4,18 +4,12 @@
 
 .. |title| replace:: cifkit documentation
 
-|PyPI| |Forge| |PythonVersion| |PR|
+|PyPI| |PythonVersion| |PR|
 
-|CI| |Codecov| |Tracking|
+|CI| |Tracking|
 
-.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml/badge.svg
-        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
-
-.. |Codecov| image:: https://codecov.io/gh/bobleesj/cifkit/branch/main/graph/badge.svg
-        :target: https://codecov.io/gh/bobleesj/cifkit
-
-.. |Forge| image:: https://img.shields.io/conda/vn/conda-forge/cifkit
-        :target: https://anaconda.org/conda-forge/cifkit
+.. |CI| image:: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml/badge.svg
+        :target: https://github.com/bobleesj/cifkit/actions/workflows/matrix-on-merge-to-main.yml
 
 .. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
          :target: https://github.com/bobleesj/cifkit/pulls
@@ -39,10 +33,10 @@ Installation
 
    pip install cifkit
 
-Citation
---------
+Publications
+------------
 
-If you use ``cifkit`` in your scientific publication, please cite the following:
+Related paper (consider citing if useful):
 
 - *cifkit: A Python package for coordination geometry and atomic site analysis*. `https://doi.org/10.21105/joss.07205 <https://doi.org/10.21105/joss.07205>`_
 

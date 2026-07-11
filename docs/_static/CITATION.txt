@@ -1,0 +1,46 @@
+# References for data and software obtained via cifkit
+# https://bobleesj.github.io/cifkit/
+#
+# When you use the OLED table (CSV / Oliynyk API), consider citing the
+# dataset paper. When you use CIF geometry / coordination features,
+# consider citing the cifkit JOSS paper. Citing both is appropriate if
+# you used both.
+
+## OLED (Oliynyk elemental data) — composition features
+
+Lee, S., Chen, C., Garcia, G., & Oliynyk, A. (2024). Machine learning
+descriptors in materials chemistry used in multiple experimentally
+validated studies: Oliynyk elemental property dataset. Data in Brief,
+53, 110178. https://doi.org/10.1016/j.dib.2024.110178
+
+@article{Lee2024OLED,
+  author  = {Lee, Sangjoon and Chen, C. and Garcia, G. and Oliynyk, Anton},
+  title   = {Machine learning descriptors in materials chemistry used in
+             multiple experimentally validated studies: Oliynyk elemental
+             property dataset},
+  journal = {Data in Brief},
+  year    = {2024},
+  volume  = {53},
+  pages   = {110178},
+  doi     = {10.1016/j.dib.2024.110178},
+  url     = {https://doi.org/10.1016/j.dib.2024.110178}
+}
+
+## cifkit — CIF geometry, coordination, sites
+
+Lee, S., & Oliynyk, A. O. (2024). cifkit: A Python package for
+coordination geometry and atomic site analysis. Journal of Open Source
+Software, 9(103), 7205. https://doi.org/10.21105/joss.07205
+
+@article{Lee2024cifkit,
+  author  = {Lee, Sangjoon and Oliynyk, Anton O.},
+  title   = {cifkit: A Python package for coordination geometry and
+             atomic site analysis},
+  journal = {Journal of Open Source Software},
+  year    = {2024},
+  volume  = {9},
+  number  = {103},
+  pages   = {7205},
+  doi     = {10.21105/joss.07205},
+  url     = {https://doi.org/10.21105/joss.07205}
+}

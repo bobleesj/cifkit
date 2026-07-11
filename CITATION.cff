@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+message: >
+  If cifkit or the OLED (Oliynyk elemental data) table was useful,
+  consider citing the relevant work below.
+type: software
+title: cifkit
+abstract: >
+  Coordination geometry and atomic-site features from Crystallographic
+  Information Files (CIF), plus OLED (Oliynyk elemental data) for
+  composition featurization.
+authors:
+  - family-names: Lee
+    given-names: Sangjoon
+    orcid: "https://orcid.org/0000-0002-2367-3932"
+  - family-names: Oliynyk
+    given-names: Anton O.
+    orcid: "https://orcid.org/0000-0003-0732-7340"
+repository-code: "https://github.com/bobleesj/cifkit"
+url: "https://bobleesj.github.io/cifkit/"
+license: BSD-3-Clause
+identifiers:
+  - type: doi
+    value: 10.21105/joss.07205
+    description: cifkit JOSS paper
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Lee
+      given-names: Sangjoon
+    - family-names: Oliynyk
+      given-names: Anton O.
+  title: "cifkit: A Python package for coordination geometry and atomic site analysis"
+  journal: Journal of Open Source Software
+  year: 2024
+  volume: "9"
+  issue: "103"
+  start: 7205
+  doi: 10.21105/joss.07205
+references:
+  - type: article
+    authors:
+      - family-names: Lee
+        given-names: Sangjoon
+      - family-names: Chen
+        given-names: C.
+      - family-names: Garcia
+        given-names: G.
+      - family-names: Oliynyk
+        given-names: Anton
+    title: >-
+      Machine learning descriptors in materials chemistry used in multiple
+      experimentally validated studies: Oliynyk elemental property dataset
+    journal: Data in Brief
+    year: 2024
+    volume: "53"
+    doi: 10.1016/j.dib.2024.110178
+    notes: OLED (Oliynyk elemental data) — cite when using the elemental property table

@@ -1,9 +1,16 @@
 # Coordination
 
-The coordination-number machinery behind `Cif.compute_CN()`: the four
-CN determination methods, best-method selection, polyhedron geometry
-metrics, and the site/composition helpers. See the
-[Coordination tutorial](../tutorials/coordination) for worked examples.
+Low-level coordination helpers behind `Cif.compute_CN()`. Prefer the
+`Cif` attributes (`CN_max_gap_per_site`, `CN_best_methods`, …) unless you
+need these functions directly.
+
+**CN method keys (exact):** `dist_by_shortest_dist`,
+`dist_by_CIF_radius_sum`, `dist_by_CIF_radius_refined_sum`,
+`dist_by_Pauling_radius_sum`.
+
+[Quick reference](quick-reference) ·
+[Physical features tutorial](../tutorials/physical-features) ·
+[llms.txt](../llms.txt)
 
 ## CN determination methods
 

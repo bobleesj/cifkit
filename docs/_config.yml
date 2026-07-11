@@ -28,6 +28,18 @@ sphinx:
     autoclass_content: "both"
     suppress_warnings:
       - "etoc.toctree"
+    # Drop the right-hand in-page "Contents" sidebar (match quantem.widget).
+    html_theme_options:
+      secondary_sidebar_items: []
+    html_static_path:
+      - "_static"
+    # Ship agent entry points at site root (and copies under _static/)
+    html_extra_path:
+      - "llms.txt"
+      - "robots.txt"
+      - "sitemap.txt"
+    html_css_files:
+      - custom.css
     copyright: "2026, Sangjoon Lee"
 
 html:
