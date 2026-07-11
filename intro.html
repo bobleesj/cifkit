@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cifkit &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorials/physical-features.html">Parse physical features from a .cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/statistics-many-cifs.html">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/cif.html">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/coordination.html">Coordination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/oliynyk.html">OLED / Oliynyk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/formula.html">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/quick-reference.html">Quick reference (LLM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maintainer/release.html">Changelog and release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>cifkit</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-cifkit-benefit-scientists">How does <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> benefit scientists?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-source-cifs-icsd-cod-pcd-and-more">Multi-source CIFs (ICSD, COD, PCD, and more)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-data-sources-keep-them-separate">Two data sources (keep them separate)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-with-scikit-package">Built with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tasks-copy-paste">Common tasks (copy-paste)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parse-physical-features-from-a-cif">1) Parse physical features from a <code class="docutils literal notranslate"><span class="pre">.cif</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-over-many-cif-files">2) Statistics over many <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oled-oliynyk-elemental-data-composition-ml">3) OLED - Oliynyk elemental data (composition / ML)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publications">Publications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-demos-tables-how-to-reproduce">Notes (demos, tables, how to reproduce)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting help</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cifkit">
+<h1>cifkit<a class="headerlink" href="#cifkit" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://pypi.org/project/cifkit/"><img alt="PyPI" src="https://img.shields.io/pypi/v/cifkit" /></a>
+<a class="reference external" href="https://pypi.org/project/cifkit/"><img alt="Python" src="https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue" /></a>
+<a class="reference external" href="https://github.com/bobleesj/cifkit/actions"><img alt="CI" src="https://github.com/bobleesj/cifkit/workflows/CI/badge.svg" /></a>
+<a class="reference external" href="https://doi.org/10.21105/joss.07205"><img alt="DOI" src="https://img.shields.io/badge/DOI-10.21105%2Fjoss.07205-blue" /></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> offers higher-level tools for <strong>coordination geometry and atomic
+site analysis</strong> from Crystallographic Information Files (<code class="docutils literal notranslate"><span class="pre">.cif</span></code>), plus
+<strong>OLED (Oliynyk elemental data)</strong> for composition featurization in machine
+learning.</p>
+<section id="how-does-cifkit-benefit-scientists">
+<h2>How does <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> benefit scientists?<a class="headerlink" href="#how-does-cifkit-benefit-scientists" title="Link to this heading">#</a></h2>
+<p>Solid-state chemistry and materials informatics repeatedly need the same
+steps: read crystallographic CIFs, build a <strong>reliable supercell</strong>, compute
+<strong>interatomic distances</strong> and <strong>neighbor shells</strong>, determine
+<strong>coordination</strong>, and turn the result into <strong>numbers</strong> for visualization,
+structure-type work, or <strong>machine learning</strong>. Doing that by hand, or
+reimplementing it for every project, does not scale when you have
+thousands of files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> is written so scientists can focus on the science - not on
+boilerplate geometry code.</p>
+<p>Here are the main goals of <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> for the scientific community:</p>
+<ol class="arabic simple">
+<li><p>Help scientists extract <strong>physics-based structural features</strong> from
+real CIFs (distances, coordination, polyhedron metrics, bond fractions)
+that can be plotted, compared, or fed into ML models.</p></li>
+<li><p>Make <strong>supercell construction and neighbor search reliable in Python</strong>,
+so site environments near cell boundaries are not wrong or missing.</p></li>
+<li><p>Support <strong>high-throughput work</strong> over folders of CIFs - from a few
+structures to <strong>tens of thousands</strong> - with a small, scriptable API
+rather than a one-file GUI workflow.</p></li>
+<li><p>Work with <strong>real database CIFs from many sources</strong>, not only one
+vendor format. Exports differ in headers, author loops, and labels;
+<code class="docutils literal notranslate"><span class="pre">cifkit</span></code> detects the source and applies tested preprocessing so the
+same pipeline can mix ICSD, COD, PCD, and related formats.</p></li>
+</ol>
+<section id="multi-source-cifs-icsd-cod-pcd-and-more">
+<h3>Multi-source CIFs (ICSD, COD, PCD, and more)<a class="headerlink" href="#multi-source-cifs-icsd-cod-pcd-and-more" title="Link to this heading">#</a></h3>
+<p>Database dumps are messy in different ways. <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> sets <code class="docutils literal notranslate"><span class="pre">db_source</span></code>
+from content fingerprints and, when preprocessing is on, fixes known
+quirks before gemmi/parsing (for example ICSD copyright first lines, PCD
+author loops and site labels). Sources recognized in code and covered by
+tests include:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">db_source</span></code></p></th>
+<th class="head"><p>Database</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>ICSD</strong></p></td>
+<td><p>Inorganic Crystal Structure Database</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>COD</strong></p></td>
+<td><p>Crystallography Open Database</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PCD</strong></p></td>
+<td><p>Pearson’s Crystal Data</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MP</strong></p></td>
+<td><p>Materials Project-style CIFs (pymatgen export)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CCDC</strong> / CSD</p></td>
+<td><p>Cambridge Structural Database exports</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MS</strong></p></td>
+<td><p>Materials Studio</p></td>
+</tr>
+<tr class="row-even"><td><p>Unknown</p></td>
+<td><p>Still loadable when the CIF is otherwise valid</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>So a folder from <strong>ICSD</strong> plus <strong>COD</strong> plus <strong>PCD</strong> can go through one
+<code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code> path - something many generic CIF readers leave to you to
+debug per source.</p>
+<p>In published structure-featurization workflows that use <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> as the
+geometry engine (<a class="reference external" href="https://github.com/bobleesj/structure-analyzer-featurizer">SAF</a>
+together with
+<a class="reference external" href="https://github.com/bobleesj/composition-analyzer-featurizer">CAF</a>),
+scientists have processed <strong>tens of thousands of CIFs</strong> and built training
+tables on the order of <strong>a million feature rows</strong> for explainable
+machine-learning models of solid-state structures
+(<a class="reference external" href="https://doi.org/10.1039/D4DD00332B">Digital Discovery</a>). That scale is
+what the supercell, neighbor, coordination, and multi-source preprocess
+APIs are designed for.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Capability</p></th>
+<th class="head"><p>What <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> provides</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Interatomic geometry</p></td>
+<td><p>Shortest distances, site-pair and bond-pair tables, ordered neighbor lists</p></td>
+</tr>
+<tr class="row-odd"><td><p>Coordination</p></td>
+<td><p>Four gap-based methods (<em>d/d<sub>min</sub></em>, CIF-radius sums, Pauling radius sum, …), best-method polyhedra, bond fractions, packing efficiency</p></td>
+</tr>
+<tr class="row-even"><td><p>Supercells</p></td>
+<td><p>Default <strong>3×3×3</strong> supercell (configurable) for consistent neighbor search</p></td>
+</tr>
+<tr class="row-odd"><td><p>Multi-source CIFs</p></td>
+<td><p>Detects <strong>ICSD</strong>, <strong>COD</strong>, <strong>PCD</strong>, <strong>MP</strong>, <strong>CCDC</strong>, <strong>MS</strong>; source-specific preprocess (tested)</p></td>
+</tr>
+<tr class="row-even"><td><p>Many CIFs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code>: preprocess, unique formulas/structures, filters, histograms, sort/copy</p></td>
+</tr>
+<tr class="row-odd"><td><p>Structural features for ML</p></td>
+<td><p>Geometry backend for <a class="reference external" href="https://github.com/bobleesj/structure-analyzer-featurizer">SAF</a> (with <a class="reference external" href="https://github.com/bobleesj/composition-analyzer-featurizer">CAF</a> for composition); elemental tables via <strong>OLED</strong> when needed</p></td>
+</tr>
+<tr class="row-even"><td><p>Small API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Cif(&quot;file.cif&quot;)</span></code> / <code class="docutils literal notranslate"><span class="pre">CifEnsemble(&quot;folder/&quot;)</span></code> - attributes and a few methods</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> is not a replacement for interactive viewers such as VESTA for
+browsing a single structure, and it is not a DFT package. It is aimed at
+<strong>batch geometry and structural featurization</strong> that experimental and
+data-driven groups actually run. If that work is useful in your research,
+consider citing the matching papers under <strong>Publications</strong> below.</p>
+</section>
+<section id="two-data-sources-keep-them-separate">
+<h3>Two data sources (keep them separate)<a class="headerlink" href="#two-data-sources-keep-them-separate" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source</p></th>
+<th class="head"><p>What it is</p></th>
+<th class="head"><p>Tutorial</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">.cif</span></code> geometry</strong></p></td>
+<td><p>Distances, coordination numbers (four gap methods), polyhedra from the crystal structure</p></td>
+<td><p><a class="reference internal" href="tutorials/physical-features.html"><span class="doc std std-doc">Physical features</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>OLED table</strong></p></td>
+<td><p>Curated <strong>elemental</strong> property rows (22 × 76) for composition / ML - <strong>not</strong> values read from the CIF</p></td>
+<td><p><a class="reference internal" href="tutorials/oled.html"><span class="doc std std-doc">OLED</span></a> · <a class="reference external" href="https://doi.org/10.1016/j.dib.2024.110178">Data in Brief</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="built-with-scikit-package">
+<h3>Built with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code><a class="headerlink" href="#built-with-scikit-package" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cifkit</span></code> is developed and maintained with
+<a class="reference external" href="https://scikit-package.github.io/scikit-package/">scikit-package</a>, which
+offers tools and practices so scientists can turn research code into
+reusable, reproducible packages - including documentation and
+agent-friendly surfaces. If you use <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> for your own
+software, please cite:</p>
+<p>S. Lee, C. Myers, A. Yang, T. Zhang, Y. Xiao and S. J. L. Billinge,
+scikit-package: software packaging standards and roadmap for sharing
+reproducible scientific software, <em>Digital Discovery</em>, 2026.
+<a class="reference external" href="https://doi.org/10.1039/d6dd00121a">https://doi.org/10.1039/d6dd00121a</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>  <span class="c1"># OLED table (not from .cif)</span>
+</pre></div>
+</div>
+<p><strong>Docs:</strong> this site · <strong>Agents:</strong> <a class="reference download internal" download="" href="_downloads/c24a7d34349eaa54e19e6b860828b573/llms.txt"><span class="xref download myst">llms.txt</span></a> · <a class="reference internal" href="api/quick-reference.html"><span class="doc std std-doc">API quick reference</span></a></p>
+<figure class="align-center" id="id1">
+<img alt="Coordination polyhedron and ensemble CN histogram" src="_images/ErCoIn-histogram-combined.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Polyhedron from one <code class="docutils literal notranslate"><span class="pre">.cif</span></code> (left) and CN distribution over many files
+(right). Tutorials use the packaged <strong>GdSb</strong> demo offline.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cifkit
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">space_group_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GdSb NaCl Fm-3m
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="install.html"><span class="doc std std-doc">Installation</span></a>.</p>
+</section>
+<section id="common-tasks-copy-paste">
+<h2>Common tasks (copy-paste)<a class="headerlink" href="#common-tasks-copy-paste" title="Link to this heading">#</a></h2>
+<section id="parse-physical-features-from-a-cif">
+<h3>1) Parse physical features from a <code class="docutils literal notranslate"><span class="pre">.cif</span></code><a class="headerlink" href="#parse-physical-features-from-a-cif" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span><span class="p">)</span>  <span class="c1"># or Cif(&quot;file.cif&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_distance</span><span class="p">)</span>
+<span class="n">cif</span><span class="o">.</span><span class="n">compute_CN</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_best_methods</span><span class="p">)</span>  <span class="c1"># volume, packing_efficiency, CN per site</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_fractions_by_min_dist_method</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Full walkthrough (how each CN method works + interactive polyhedron):
+<a class="reference internal" href="tutorials/physical-features.html"><span class="doc std std-doc">Parse physical features from a .cif</span></a></p>
+</section>
+<section id="statistics-over-many-cif-files">
+<h3>2) Statistics over many <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files<a class="headerlink" href="#statistics-over-many-cif-files" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">demo_cif_folder_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">file_count</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_formulas</span><span class="p">)</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_formulas</span><span class="p">([</span><span class="s2">&quot;GdSb&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Full walkthrough: <a class="reference internal" href="tutorials/statistics-many-cifs.html"><span class="doc std std-doc">Statistics over many CIFs</span></a></p>
+</section>
+<section id="oled-oliynyk-elemental-data-composition-ml">
+<h3>3) OLED - Oliynyk elemental data (composition / ML)<a class="headerlink" href="#oled-oliynyk-elemental-data-composition-ml" title="Link to this heading">#</a></h3>
+<p><strong>OLED</strong> is a curated <strong>elemental property table</strong> (22 properties × 76
+elements) from the <em>Data in Brief</em> dataset paper - <strong>not</strong> values parsed
+from a <code class="docutils literal notranslate"><span class="pre">.cif</span></code>. Load with <code class="docutils literal notranslate"><span class="pre">cifkit.sources.oliynyk.Oliynyk</span></code> (not a separate
+package; not related to OLED displays).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.parsers.formula</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formula</span>
+
+<span class="n">oled</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">oled</span><span class="o">.</span><span class="n">elements</span><span class="p">),</span> <span class="s2">&quot;elements&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">Property</span><span class="p">:</span>  <span class="c1"># exact names - use as written</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">prop</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oled</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;Si&quot;</span><span class="p">][</span><span class="n">Property</span><span class="o">.</span><span class="n">AW</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;oled.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Formula → stoichiometry-weighted mean feature vector</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parsed_formula</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">parsed</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">prop</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">oled</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">el</span><span class="p">][</span><span class="n">prop</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span> <span class="k">for</span> <span class="n">el</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">parsed</span><span class="p">)</span> <span class="o">/</span> <span class="n">total</span>
+    <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">Property</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="s2">&quot;atomic_weight&quot;</span><span class="p">],</span> <span class="n">features</span><span class="p">[</span><span class="s2">&quot;Pauling_EN&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Exact <code class="docutils literal notranslate"><span class="pre">Property</span></code> members</strong> (do not rename): <code class="docutils literal notranslate"><span class="pre">AW</span></code>, <code class="docutils literal notranslate"><span class="pre">ATOMIC_NUMBER</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PERIOD</span></code>, <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>, <code class="docutils literal notranslate"><span class="pre">MEND_NUM</span></code>, <code class="docutils literal notranslate"><span class="pre">VAL_TOTAL</span></code>, <code class="docutils literal notranslate"><span class="pre">UNPARIED_E</span></code>, <code class="docutils literal notranslate"><span class="pre">GILMAN</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Z_EFF</span></code>, <code class="docutils literal notranslate"><span class="pre">ION_ENERGY</span></code>, <code class="docutils literal notranslate"><span class="pre">COORD_NUM</span></code>, <code class="docutils literal notranslate"><span class="pre">RATIO_CLOSEST</span></code>,
+<code class="docutils literal notranslate"><span class="pre">POLYHEDRON_DISTORT</span></code>, <code class="docutils literal notranslate"><span class="pre">CIF_RADIUS</span></code>, <code class="docutils literal notranslate"><span class="pre">PAULING_RADIUS_CN12</span></code>, <code class="docutils literal notranslate"><span class="pre">PAULING_EN</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MARTYNOV_BATSANOV_EN</span></code>, <code class="docutils literal notranslate"><span class="pre">MELTING_POINT_K</span></code>, <code class="docutils literal notranslate"><span class="pre">DENSITY</span></code>, <code class="docutils literal notranslate"><span class="pre">SPECIFIC_HEAT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">COHESIVE_ENERGY</span></code>, <code class="docutils literal notranslate"><span class="pre">BULK_MODULUS</span></code>.</p>
+<p>Full walkthrough + searchable table: <a class="reference internal" href="tutorials/oled.html"><span class="doc std std-doc">OLED</span></a></p>
+</section>
+</section>
+<section id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Page</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Parse physical features from a .cif</p></td>
+<td><p><a class="reference internal" href="tutorials/physical-features.html"><span class="doc std std-doc">tutorial</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Statistics over many CIFs</p></td>
+<td><p><a class="reference internal" href="tutorials/statistics-many-cifs.html"><span class="doc std std-doc">tutorial</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>OLED (Oliynyk elemental data)</p></td>
+<td><p><a class="reference internal" href="tutorials/oled.html"><span class="doc std std-doc">tutorial</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference internal" href="api/index.html"><span class="doc std std-doc">API reference</span></a> · <a class="reference download internal" download="" href="_downloads/c24a7d34349eaa54e19e6b860828b573/llms.txt"><span class="xref download myst">llms.txt</span></a></p>
+</section>
+<section id="publications">
+<h2>Publications<a class="headerlink" href="#publications" title="Link to this heading">#</a></h2>
+<p>When you use the package or the OLED table, consider citing the matching
+work (BibTeX: <a class="reference download internal" download="" href="_downloads/5f7457689aef7256aa43ad26414dfe7b/CITATION.txt"><span class="xref download myst">CITATION.txt</span></a> · repo
+<a class="reference external" href="https://github.com/bobleesj/cifkit/blob/main/CITATION.cff">CITATION.cff</a>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>You used…</p></th>
+<th class="head"><p>Consider citing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CIF geometry / CN / polyhedra / <code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code></p></td>
+<td><p><strong>cifkit</strong> - Lee &amp; Oliynyk, JOSS <strong>9</strong>, 7205 (2024). <a class="reference external" href="https://doi.org/10.21105/joss.07205">10.21105/joss.07205</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Structural / composition feature generation for ML (<a class="reference external" href="https://github.com/bobleesj/structure-analyzer-featurizer">SAF</a>, <a class="reference external" href="https://github.com/bobleesj/composition-analyzer-featurizer">CAF</a>)</p></td>
+<td><p><strong>SAF + CAF</strong> - Jaffal et al., <em>Digital Discovery</em> <strong>4</strong>, 548-560 (2025). <a class="reference external" href="https://doi.org/10.1039/d4dd00332b">10.1039/d4dd00332b</a> (also cite <strong>cifkit</strong> for the geometry engine)</p></td>
+</tr>
+<tr class="row-even"><td><p>OLED elemental table / <code class="docutils literal notranslate"><span class="pre">Oliynyk</span></code> / <code class="docutils literal notranslate"><span class="pre">oled.csv</span></code></p></td>
+<td><p><strong>Dataset</strong> - Lee et al., Data in Brief <strong>53</strong>, 110178 (2024). <a class="reference external" href="https://doi.org/10.1016/j.dib.2024.110178">10.1016/j.dib.2024.110178</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Packaging / scikit-package stack (cifkit is built with it)</p></td>
+<td><p><strong>scikit-package</strong> - Lee et al., <em>Digital Discovery</em>, 2026. <a class="reference external" href="https://doi.org/10.1039/d6dd00121a">10.1039/d6dd00121a</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Geometry + feature generation</p></td>
+<td><p>cifkit + SAF/CAF paper</p></td>
+</tr>
+<tr class="row-odd"><td><p>Geometry + OLED</p></td>
+<td><p>Both cifkit + OLED dataset papers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="notes-demos-tables-how-to-reproduce">
+<h2>Notes (demos, tables, how to reproduce)<a class="headerlink" href="#notes-demos-tables-how-to-reproduce" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Tutorial numbers are real outputs on the packaged demos
+(<code class="docutils literal notranslate"><span class="pre">Example.GdSb_file_path</span></code>, <code class="docutils literal notranslate"><span class="pre">Example.demo_cif_folder_path</span></code>).</p></li>
+<li><p>Geometry tables are built with <strong>pandas → Markdown</strong> so you can copy
+the same pattern into a notebook.</p></li>
+<li><p>OLED’s searchable table / CSV is the <strong>dataset table</strong>, not structure
+factors from a CIF file.</p></li>
+<li><p>Soft cites live in the <strong>Publications</strong> table above and in
+<a class="reference download internal" download="" href="_downloads/5f7457689aef7256aa43ad26414dfe7b/CITATION.txt"><span class="xref download myst">CITATION.txt</span></a>.</p></li>
+</ul>
+</section>
+<section id="getting-help">
+<h2>Getting help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Issues: <a class="reference external" href="https://github.com/bobleesj/cifkit/issues">github.com/bobleesj/cifkit/issues</a></p></li>
+<li><p>Maintained by Sangjoon Bob Lee (<a class="reference external" href="https://github.com/bobleesj">&#64;bobleesj</a>)</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="install.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

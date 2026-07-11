@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GdSb · Sb-centered polyhedron (CN=6) · interactive</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0f1419; color: #e7ecf1;
+      font-family: system-ui, -apple-system, Segoe UI, sans-serif; }
+    #wrap { position: relative; width: 100%; height: 100%; }
+    canvas { display: block; width: 100%; height: 100%; }
+    #hud {
+      position: absolute; left: 12px; top: 10px; z-index: 2;
+      background: rgba(15,20,25,0.72); border: 1px solid #2a3540;
+      border-radius: 8px; padding: 10px 12px; max-width: 26rem;
+      font-size: 13px; line-height: 1.4; pointer-events: none;
+    }
+    #hud strong { color: #7dd3fc; }
+    #hud code { color: #fde68a; font-size: 12px; }
+    #hint {
+      position: absolute; right: 12px; bottom: 10px; z-index: 2;
+      font-size: 12px; color: #94a3b8; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="hud">
+      <strong>GdSb · Sb-centered shell</strong><br />
+      Real neighbors from <code>Example.GdSb_file_path</code><br />
+      Method: <code>dist_by_shortest_dist</code> · <strong>CN = 6</strong>
+      (octahedron) · packing efficiency 0.605
+    </div>
+    <div id="hint">drag to rotate · scroll to zoom · right-drag to pan</div>
+    <canvas id="c"></canvas>
+  </div>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+    // Coordinates from cifkit on packaged GdSb demo (Sb site, min-dist CN shell).
+    // Central Sb + 6 Gd neighbors at 3.105 Å.
+    const central = { label: "Sb", xyz: [0.0, 3.105, 0.0] };
+    const neighbors = [
+      { label: "Gd", xyz: [3.105, 3.105, 0.0] },
+      { label: "Gd", xyz: [0.0, 0.0, 0.0] },
+      { label: "Gd", xyz: [0.0, 6.21, 0.0] },
+      { label: "Gd", xyz: [0.0, 3.105, -3.105] },
+      { label: "Gd", xyz: [-3.105, 3.105, 0.0] },
+      { label: "Gd", xyz: [0.0, 3.105, 3.105] },
+    ];
+
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0x0f1419, 1);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.set(8, 6, 10);
+
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.target.set(central.xyz[0], central.xyz[1], central.xyz[2]);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const key = new THREE.DirectionalLight(0xffffff, 0.85);
+    key.position.set(6, 10, 4);
+    scene.add(key);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    function sphere(pos, color, r) {
+      const m = new THREE.Mesh(
+        new THREE.SphereGeometry(r, 32, 24),
+        new THREE.MeshStandardMaterial({ color, roughness: 0.35, metalness: 0.15 })
+      );
+      m.position.set(pos[0], pos[1], pos[2]);
+      group.add(m);
+      return m;
+    }
+
+    sphere(central.xyz, 0xef4444, 0.32);
+    neighbors.forEach((n) => sphere(n.xyz, 0x38bdf8, 0.28));
+
+    // Bonds center → neighbors
+    const bondMat = new THREE.LineBasicMaterial({ color: 0xcbd5e1 });
+    neighbors.forEach((n) => {
+      const geo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(...central.xyz),
+        new THREE.Vector3(...n.xyz),
+      ]);
+      group.add(new THREE.Line(geo, bondMat));
+    });
+
+    // Octahedron wireframe among neighbors (convex hull edges for CN=6)
+    // Connect each neighbor to the four non-opposite neighbors only.
+    const pts = neighbors.map((n) => new THREE.Vector3(...n.xyz));
+    const c = new THREE.Vector3(...central.xyz);
+    // Pair edges if angle at center is not ~180° (opposite) and not identity
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.85 });
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const vi = pts[i].clone().sub(c).normalize();
+        const vj = pts[j].clone().sub(c).normalize();
+        const dot = vi.dot(vj);
+        // Adjacent octahedron edges ~90°, skip opposites ~-1
+        if (dot > -0.5 && dot < 0.5) {
+          const geo = new THREE.BufferGeometry().setFromPoints([pts[i], pts[j]]);
+          group.add(new THREE.Line(geo, edgeMat));
+        }
+      }
+    }
+
+    // Axes helper (small)
+    const axes = new THREE.AxesHelper(1.2);
+    axes.position.set(...central.xyz);
+    group.add(axes);
+
+    function resize() {
+      const w = canvas.clientWidth || window.innerWidth;
+      const h = canvas.clientHeight || window.innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / Math.max(h, 1);
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function frame() {
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    frame();
+  </script>
+</body>
+</html>

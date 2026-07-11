@@ -1,0 +1,1247 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cif &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/cif';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CifEnsemble" href="cif-ensemble.html" />
+    <link rel="prev" title="API reference" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/physical-features.html">Parse physical features from a .cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/statistics-many-cifs.html">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordination.html">Coordination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oliynyk.html">OLED / Oliynyk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formula.html">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick-reference.html">Quick reference (LLM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/release.html">Changelog and release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/cif.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cif</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-attributes-gdsb-demo-types">Common attributes (GdSb demo types)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-autodoc">Full autodoc</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif"><code class="docutils literal notranslate"><span class="pre">Cif</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.file_path"><code class="docutils literal notranslate"><span class="pre">Cif.file_path</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.logging_enabled"><code class="docutils literal notranslate"><span class="pre">Cif.logging_enabled</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.file_name"><code class="docutils literal notranslate"><span class="pre">Cif.file_name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.file_name_without_ext"><code class="docutils literal notranslate"><span class="pre">Cif.file_name_without_ext</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.db_source"><code class="docutils literal notranslate"><span class="pre">Cif.db_source</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.unitcell_lengths"><code class="docutils literal notranslate"><span class="pre">Cif.unitcell_lengths</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.unitcell_angles"><code class="docutils literal notranslate"><span class="pre">Cif.unitcell_angles</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.site_labels"><code class="docutils literal notranslate"><span class="pre">Cif.site_labels</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.unique_elements"><code class="docutils literal notranslate"><span class="pre">Cif.unique_elements</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.atom_site_info"><code class="docutils literal notranslate"><span class="pre">Cif.atom_site_info</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.composition_type"><code class="docutils literal notranslate"><span class="pre">Cif.composition_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.tag"><code class="docutils literal notranslate"><span class="pre">Cif.tag</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.bond_pairs"><code class="docutils literal notranslate"><span class="pre">Cif.bond_pairs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.site_label_pairs"><code class="docutils literal notranslate"><span class="pre">Cif.site_label_pairs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.bond_pairs_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">Cif.bond_pairs_sorted_by_mendeleev</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.site_label_pairs_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">Cif.site_label_pairs_sorted_by_mendeleev</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.site_mixing_type"><code class="docutils literal notranslate"><span class="pre">Cif.site_mixing_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.is_radius_data_available"><code class="docutils literal notranslate"><span class="pre">Cif.is_radius_data_available</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.mixing_info_per_label_pair"><code class="docutils literal notranslate"><span class="pre">Cif.mixing_info_per_label_pair</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.mixing_info_per_label_pair_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">Cif.mixing_info_per_label_pair_sorted_by_mendeleev</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.unitcell_points"><code class="docutils literal notranslate"><span class="pre">Cif.unitcell_points</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.supercell_points"><code class="docutils literal notranslate"><span class="pre">Cif.supercell_points</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.unitcell_atom_count"><code class="docutils literal notranslate"><span class="pre">Cif.unitcell_atom_count</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.supercell_atom_count"><code class="docutils literal notranslate"><span class="pre">Cif.supercell_atom_count</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.connections"><code class="docutils literal notranslate"><span class="pre">Cif.connections</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.compute_connections"><code class="docutils literal notranslate"><span class="pre">Cif.compute_connections()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.compute_CN"><code class="docutils literal notranslate"><span class="pre">Cif.compute_CN()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.shortest_distance"><code class="docutils literal notranslate"><span class="pre">Cif.shortest_distance</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.connections_flattened"><code class="docutils literal notranslate"><span class="pre">Cif.connections_flattened</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.shortest_bond_pair_distance"><code class="docutils literal notranslate"><span class="pre">Cif.shortest_bond_pair_distance</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.shortest_site_pair_distance"><code class="docutils literal notranslate"><span class="pre">Cif.shortest_site_pair_distance</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.radius_values"><code class="docutils literal notranslate"><span class="pre">Cif.radius_values</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.radius_sum"><code class="docutils literal notranslate"><span class="pre">Cif.radius_sum</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_max_gap_per_site"><code class="docutils literal notranslate"><span class="pre">Cif.CN_max_gap_per_site</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_connections_by_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_connections_by_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_connections_by_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.CN_connections_by_min_dist_method</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_count_by_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_count_by_min_dist_method</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_count_by_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_count_by_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_count_by_min_dist_method_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_count_by_best_methods_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_count_by_best_methods_sorted_by_mendeleev</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_fractions_by_min_dist_method</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_fractions_by_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_best_methods_sorted_by_mendeleev"><code class="docutils literal notranslate"><span class="pre">Cif.CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_unique_values_by_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.CN_unique_values_by_min_dist_method</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_unique_values_by_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_unique_values_by_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_avg_by_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.CN_avg_by_min_dist_method</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_avg_by_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_avg_by_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_max_by_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.CN_max_by_min_dist_method</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_max_by_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_max_by_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_min_by_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.CN_min_by_min_dist_method</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.CN_min_by_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.CN_min_by_best_methods</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method"><code class="docutils literal notranslate"><span class="pre">Cif.get_polyhedron_labels_by_CN_min_dist_method()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods"><code class="docutils literal notranslate"><span class="pre">Cif.get_polyhedron_labels_by_CN_best_methods()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.models.cif.Cif.plot_polyhedron"><code class="docutils literal notranslate"><span class="pre">Cif.plot_polyhedron()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cif">
+<h1>Cif<a class="headerlink" href="#cif" title="Link to this heading">#</a></h1>
+<p>One <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file: parse structure metadata, interatomic distances,
+coordination numbers (four methods), polyhedron metrics, bond fractions,
+site mixing, and polyhedron plots.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span><span class="p">)</span>           <span class="c1"># or Cif(&quot;/path/to/file.cif&quot;)</span>
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">supercell_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">compute_CN</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">is_formatted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">file_path</span></code></p></td>
+<td><p>required</p></td>
+<td><p>Path to the <code class="docutils literal notranslate"><span class="pre">.cif</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">is_formatted</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>, preprocess for gemmi compatibility</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">logging_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Verbose logging</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">supercell_size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code> → ±1 shifts (3×3×3 supercell)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compute_CN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, run coordination at init</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Calibrated attribute / method tables:</strong> <a class="reference internal" href="quick-reference.html"><span class="doc std std-doc">API quick reference</span></a>.<br />
+<strong>Tutorial:</strong> <a class="reference internal" href="../tutorials/physical-features.html"><span class="doc std std-doc">Parse physical features from a .cif</span></a>.<br />
+<strong>LLM recipes:</strong> <a class="reference download internal" download="" href="../_downloads/c24a7d34349eaa54e19e6b860828b573/llms.txt"><span class="xref download myst">llms.txt</span></a>.</p>
+<section id="common-attributes-gdsb-demo-types">
+<h2>Common attributes (GdSb demo types)<a class="headerlink" href="#common-attributes-gdsb-demo-types" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Example / notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">formula</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'GdSb'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">structure</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'NaCl'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">space_group_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'Fm-3m'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">space_group_number</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">225</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unitcell_lengths</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[float]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[6.21,</span> <span class="pre">6.21,</span> <span class="pre">6.21]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unitcell_angles</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[float]</span></code></p></td>
+<td><p>radians, not degrees</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">site_labels</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[str]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['Sb',</span> <span class="pre">'Gd']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">shortest_distance</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>Å</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shortest_bond_pair_distance</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{('Gd','Sb'):</span> <span class="pre">3.105,</span> <span class="pre">…}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">connections</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>per-site neighbor lists</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CN_best_methods</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>after <code class="docutils literal notranslate"><span class="pre">compute_CN()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CN_bond_fractions_by_min_dist_method</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>after <code class="docutils literal notranslate"><span class="pre">compute_CN()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">site_mixing_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>e.g. <code class="docutils literal notranslate"><span class="pre">'full_occupancy'</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">compute_connections()</span></code> - neighbor search (also lazy)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compute_CN()</span></code> - four CN methods + best method + polyhedron metrics</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_polyhedron(label,</span> <span class="pre">show_labels=True,</span> <span class="pre">is_displayed=False,</span> <span class="pre">output_dir=None)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_polyhedron_labels_by_CN_min_dist_method</span></code> / <code class="docutils literal notranslate"><span class="pre">…_by_CN_best_methods</span></code></p></li>
+</ul>
+</section>
+<section id="full-autodoc">
+<h2>Full autodoc<a class="headerlink" href="#full-autodoc" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.models.cif.</span></span><span class="sig-name descname"><span class="pre">Cif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_formatted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_CN</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cifkit.models.cif.Cif" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize an object from a .cif file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – Path to the .cif file.</p></li>
+<li><p><strong>is_formatted</strong> (<em>bool</em><em>, </em><em>default</em>) – If False, preprocess the .cif file to ensure compatibility with the
+gemmi library.</p></li>
+<li><p><strong>logging_enabled</strong> (<em>bool</em><em>, </em><em>default False</em>) – Enables detailed logging during initialization and for distance
+calculations.</p></li>
+<li><p><strong>supercell_size</strong> (<em>int</em><em>, </em><em>default 3</em>) – Size of the supercell to be generated. Default is 3.
+Method 1 - No shifts
+Method 2 - ±1 shifts  (3x3x3 of the unit cell)
+Method 3 - ±2 shifts (5×5×5 of the unit cell)</p></li>
+<li><p><strong>compute_CN</strong> (<em>bool</em><em>, </em><em>default False</em>) – Option to compute CN related metrics for each Cif object.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.file_path">
+<span class="sig-name descname"><span class="pre">file_path</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.file_path" title="Link to this definition">#</a></dt>
+<dd><p>Path to the CIF file from which data is loaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.logging_enabled">
+<span class="sig-name descname"><span class="pre">logging_enabled</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.logging_enabled" title="Link to this definition">#</a></dt>
+<dd><p>Enables detailed logging for initialization and distance
+alculations if set to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.file_name">
+<span class="sig-name descname"><span class="pre">file_name</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.file_name" title="Link to this definition">#</a></dt>
+<dd><p>Base name of the CIF file, extracted from <cite>file_path</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.file_name_without_ext">
+<span class="sig-name descname"><span class="pre">file_name_without_ext</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.file_name_without_ext" title="Link to this definition">#</a></dt>
+<dd><p>File name without its extension, useful for referencing or
+generating derivative files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.db_source">
+<span class="sig-name descname"><span class="pre">db_source</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.db_source" title="Link to this definition">#</a></dt>
+<dd><p>Source database (e.g., ICSD, MP, CCDC, PCD) from which the CIF file
+originates, determined at runtime.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.unitcell_lengths">
+<span class="sig-name descname"><span class="pre">unitcell_lengths</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.unitcell_lengths" title="Link to this definition">#</a></dt>
+<dd><p>List of unit cell lengths for the crystal structure, typically in
+Angstroms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.unitcell_angles">
+<span class="sig-name descname"><span class="pre">unitcell_angles</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.unitcell_angles" title="Link to this definition">#</a></dt>
+<dd><p>List of unit cell angles in radians, ordered by alpha, beta, gamma.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.site_labels">
+<span class="sig-name descname"><span class="pre">site_labels</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.site_labels" title="Link to this definition">#</a></dt>
+<dd><p>Lists all unique atomic site labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.unique_elements">
+<span class="sig-name descname"><span class="pre">unique_elements</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.unique_elements" title="Link to this definition">#</a></dt>
+<dd><p>Set of unique chemical elements present in the CIF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.atom_site_info">
+<span class="sig-name descname"><span class="pre">atom_site_info</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.atom_site_info" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary containing detailed information about each atomic site
+including element, site occupancy,
+fractional coordinates, symmetry, and multiplicity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.composition_type">
+<span class="sig-name descname"><span class="pre">composition_type</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.composition_type" title="Link to this definition">#</a></dt>
+<dd><p>Number of unique elements present in the .cif file, e.g., 1 for
+unary, 2 for binary, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.tag" title="Link to this definition">#</a></dt>
+<dd><p>Additional tag associated with the CIF data, parsed from the third
+line of PCD .cif files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.bond_pairs">
+<span class="sig-name descname"><span class="pre">bond_pairs</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.bond_pairs" title="Link to this definition">#</a></dt>
+<dd><p>Set of tuples representing bonded pairs of elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set[tuple[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.site_label_pairs">
+<span class="sig-name descname"><span class="pre">site_label_pairs</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.site_label_pairs" title="Link to this definition">#</a></dt>
+<dd><p>Set of tuples representing pairs of atomic site labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set[tuple[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.bond_pairs_sorted_by_mendeleev">
+<span class="sig-name descname"><span class="pre">bond_pairs_sorted_by_mendeleev</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.bond_pairs_sorted_by_mendeleev" title="Link to this definition">#</a></dt>
+<dd><p>Set of bonded pairs sorted according to Mendeleev Numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set[tuple[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.site_label_pairs_sorted_by_mendeleev">
+<span class="sig-name descname"><span class="pre">site_label_pairs_sorted_by_mendeleev</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.site_label_pairs_sorted_by_mendeleev" title="Link to this definition">#</a></dt>
+<dd><p>Set of site label pairs sorted by Mendeleev Numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set[tuple[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.site_mixing_type">
+<span class="sig-name descname"><span class="pre">site_mixing_type</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.site_mixing_type" title="Link to this definition">#</a></dt>
+<dd><p>Descriptor of the mixing type, categorized into four types:
+Full occupancy is assigned when a single atomic site occupies
+the fractional coordinate with an occupancy value of 1.
+Full occupancy with mixing is assigned when multiple atomic sites
+collectively occupy the fractional coordinate to a sum of 1.
+Deficiency without mixing is assigned when a single atomic site occupying
+the fractional coordinate with a sum less than 1.
+Deficiency with atomic mixing is assigned when multiple atomic sites occupy
+the fractional coordinate with a sum less than 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.is_radius_data_available">
+<span class="sig-name descname"><span class="pre">is_radius_data_available</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.is_radius_data_available" title="Link to this definition">#</a></dt>
+<dd><p>Indicates whether Pauling and CIF atomic radii are available for
+all elements in the .cif file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.mixing_info_per_label_pair">
+<span class="sig-name descname"><span class="pre">mixing_info_per_label_pair</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.mixing_info_per_label_pair" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary mapping pairs of labels to their mixing information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.mixing_info_per_label_pair_sorted_by_mendeleev">
+<span class="sig-name descname"><span class="pre">mixing_info_per_label_pair_sorted_by_mendeleev</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.mixing_info_per_label_pair_sorted_by_mendeleev" title="Link to this definition">#</a></dt>
+<dd><p>Same as <cite>mixing_info_per_label_pair</cite>, but sorted according to
+Mendeleev numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.unitcell_points">
+<span class="sig-name descname"><span class="pre">unitcell_points</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.unitcell_points" title="Link to this definition">#</a></dt>
+<dd><p>List of points defining the unit cell; each point contains
+fractional coordinates and a site label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[list[tuple[float, float, float, str]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.supercell_points">
+<span class="sig-name descname"><span class="pre">supercell_points</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.supercell_points" title="Link to this definition">#</a></dt>
+<dd><p>List of points defining the supercell of the cell For each .cif file,
+a unit cell is generated by applying the symmetry operations.
+A supercell is generated by applying ±1 shifts from the unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[list[tuple[float, float, float, str]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.unitcell_atom_count">
+<span class="sig-name descname"><span class="pre">unitcell_atom_count</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.unitcell_atom_count" title="Link to this definition">#</a></dt>
+<dd><p>Total count of atoms within the unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.supercell_atom_count">
+<span class="sig-name descname"><span class="pre">supercell_atom_count</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.supercell_atom_count" title="Link to this definition">#</a></dt>
+<dd><p>Total count of atoms within the generated supercell
+incorporating ±1, ±1, ±1 translations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.connections">
+<span class="sig-name descname"><span class="pre">connections</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.connections" title="Link to this definition">#</a></dt>
+<dd><p>Initially None, intended to store connection data related to
+the crystal structure. Connections are computed lazily and are
+only calculated when first needed by a method or property requiring them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.compute_connections">
+<span class="sig-name descname"><span class="pre">compute_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cifkit.models.cif.Cif.compute_connections" title="Link to this definition">#</a></dt>
+<dd><p>Compute onnection network, shortest distances, bond counts,
+and coordination numbers (CN). These prperties are lazily loaded
+to avoid unnecessary computation during the initialization and
+pre-processing step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cutoff_radius</strong> (<em>float</em><em>, </em><em>default=10.0</em>) – The distance threshold in Angstroms used to consider two atoms as connected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.compute_CN">
+<span class="sig-name descname"><span class="pre">compute_CN</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cifkit.models.cif.Cif.compute_CN" title="Link to this definition">#</a></dt>
+<dd><p>Compute onnection network, shortest distances, bond counts,
+and coordination numbers (CN). These prperties are lazily loaded
+to avoid unnecessary computation during the initialization and
+pre-processing step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cutoff_radius</strong> (<em>float</em><em>, </em><em>default=10.0</em>) – The distance threshold in Angstroms used to consider two atoms as connected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.shortest_distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shortest_distance</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.shortest_distance" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.connections_flattened">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connections_flattened</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.connections_flattened" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.shortest_bond_pair_distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shortest_bond_pair_distance</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.shortest_bond_pair_distance" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.shortest_site_pair_distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shortest_site_pair_distance</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.shortest_site_pair_distance" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.radius_values">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">radius_values</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.radius_values" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.radius_sum">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">radius_sum</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.radius_sum" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_max_gap_per_site">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_max_gap_per_site</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_max_gap_per_site" title="Link to this definition">#</a></dt>
+<dd><p>Determines the maximum gap in coordination number (CN) for
+each atomic site.</p>
+<p>For each atomic site, considers the first 20 nearest neighbors. The distances
+to these neighbors are normalized based on four methods:</p>
+<ul class="simple">
+<li><p><cite>dist_by_shortest_dist</cite>: Normalization by the shortest distance from the site.</p></li>
+<li><p><cite>dist_by_CIF_radius_sum</cite>: Normalization by the sum of CIF radii.</p></li>
+<li><p><cite>dist_by_CIF_radius_refined_sum</cite>: Normalization by the sum of refined CIF radii.</p></li>
+<li><p><cite>dist_by_Pauling_radius_sum</cite>: Normalization by the sum of Pauling radii.</p></li>
+</ul>
+<p>The radius sums are calculated for each element pair involved. For each
+normalization method, the maximum gap is determined as the largest difference
+between consecutive normalized distances (i.e., the difference between the nth
+and (n-1)th neighbors).</p>
+<p>This CN gap provides insight into the bonding relevance for each site.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>A dictionary where each key represents an atomic site, mapping to another
+dictionary with normalization methods as keys. Each normalization method
+contains a dictionary with:</p>
+<ul class="simple">
+<li><p><cite>max_gap</cite> (float): The maximum gap in the normalized distances.</p></li>
+<li><p><cite>CN</cite> (int): Coordination number based on the normalization method.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict of dict of dict</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cif</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span>
+<span class="go">{</span>
+<span class="go">    &quot;In1&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.306, &quot;CN&quot;: 14},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.39, &quot;CN&quot;: 14},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.341, &quot;CN&quot;: 12},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.398, &quot;CN&quot;: 14},</span>
+<span class="go">    },</span>
+<span class="go">    &quot;U1&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.197, &quot;CN&quot;: 11},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.312, &quot;CN&quot;: 11},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.27, &quot;CN&quot;: 17},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.256, &quot;CN&quot;: 17},</span>
+<span class="go">    },</span>
+<span class="go">    &quot;Rh1&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.315, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.347, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.418, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.402, &quot;CN&quot;: 9},</span>
+<span class="go">    },</span>
+<span class="go">    &quot;Rh2&quot;: {</span>
+<span class="go">        &quot;dist_by_shortest_dist&quot;: {&quot;max_gap&quot;: 0.31, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_sum&quot;: {&quot;max_gap&quot;: 0.324, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_CIF_radius_refined_sum&quot;: {&quot;max_gap&quot;: 0.397, &quot;CN&quot;: 9},</span>
+<span class="go">        &quot;dist_by_Pauling_radius_sum&quot;: {&quot;max_gap&quot;: 0.380, &quot;CN&quot;: 9},</span>
+<span class="go">    },</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_best_methods" title="Link to this definition">#</a></dt>
+<dd><p>Determines the optimal coordination method for each atomic
+site.</p>
+<p>For each atomic site, the coordination polyhedron is generated for each method
+in <cite>self.CN_max_gap_per_site</cite>. The method with the smallest value of
+<cite>polyhedron_metrics[“distance_from_avg_point_to_center”]</cite>, indicating the highest
+symmetry of the polyhedron, is selected as the “best method” among the four
+methods used to determine the CN gap in <cite>self.CN_max_gap_per_site</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Dictionary where each key represents an atomic site, and the corresponding
+value is a dictionary containing:</p>
+<ul class="simple">
+<li><p><cite>volume_of_polyhedron</cite> (float): The volume of the polyhedron surrounding
+the atomic site.</p></li>
+<li><p><cite>distance_from_avg_point_to_center</cite> (float): The average distance from
+the polyhedron’s vertices  to its geometric center, used as a measure of
+symmetry.</p></li>
+<li><p><cite>number_of_vertices</cite> (int): The number of vertices in the coordination
+polyhedron.</p></li>
+<li><p><cite>number_of_edges</cite> (int): The number of edges connecting vertices in the
+polyhedron.</p></li>
+<li><p><cite>number_of_faces</cite> (int): The number of faces in the coordination polyhedron.</p></li>
+<li><p><cite>shortest_distance_to_face</cite> (float): The shortest distance between the
+atomic site and the nearest face.</p></li>
+<li><p><cite>shortest_distance_to_edge</cite> (float): The shortest distance between the
+atomic site and the nearest edge.</p></li>
+<li><p><cite>volume_of_inscribed_sphere</cite> (float): Volume of the largest sphere that can
+it inside the polyhedron.</p></li>
+<li><p><cite>packing_efficiency</cite> (float): A measure of how efficiently the polyhedron
+is packed around the atomic site.</p></li>
+<li><p><cite>method_used</cite> (str): The name of the chosen method
+(e.g., <cite>dist_by_shortest_dist</cite>) providing the  highest symmetry based on
+<cite>distance_from_avg_point_to_center</cite>.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, dict[str, float | int | str]]]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span> <span class="o">=</span> <span class="n">cif_URhIn</span><span class="o">.</span><span class="n">CN_best_methods</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;In1&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_vertices&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;Rh2&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_vertices&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;In1&quot;</span><span class="p">][</span><span class="s2">&quot;method_used&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;dist_by_shortest_dist&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CN_best_methods</span><span class="p">[</span><span class="s2">&quot;Rh2&quot;</span><span class="p">][</span><span class="s2">&quot;method_used&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;dist_by_shortest_dist&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_connections_by_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_connections_by_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_connections_by_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_connections_by_min_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_connections_by_min_dist_method</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_connections_by_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_count_by_min_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_count_by_min_dist_method</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_count_by_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_count_by_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_count_by_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_count_by_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_count_by_min_dist_method_sorted_by_mendeleev">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_count_by_min_dist_method_sorted_by_mendeleev</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_count_by_min_dist_method_sorted_by_mendeleev" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_count_by_best_methods_sorted_by_mendeleev">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_count_by_best_methods_sorted_by_mendeleev</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_count_by_best_methods_sorted_by_mendeleev" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_fractions_by_min_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_fractions_by_min_dist_method</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_fractions_by_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_fractions_by_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_min_dist_method_sorted_by_mendeleev" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_bond_fractions_by_best_methods_sorted_by_mendeleev">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_bond_fractions_by_best_methods_sorted_by_mendeleev</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_bond_fractions_by_best_methods_sorted_by_mendeleev" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_unique_values_by_min_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_unique_values_by_min_dist_method</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_unique_values_by_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_unique_values_by_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_unique_values_by_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_unique_values_by_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_avg_by_min_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_avg_by_min_dist_method</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_avg_by_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_avg_by_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_avg_by_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_avg_by_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_max_by_min_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_max_by_min_dist_method</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_max_by_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_max_by_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_max_by_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_max_by_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_min_by_min_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_min_by_min_dist_method</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_min_by_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.CN_min_by_best_methods">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CN_min_by_best_methods</span></span><a class="headerlink" href="#cifkit.models.cif.Cif.CN_min_by_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method">
+<span class="sig-name descname"><span class="pre">get_polyhedron_labels_by_CN_min_dist_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_min_dist_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods">
+<span class="sig-name descname"><span class="pre">get_polyhedron_labels_by_CN_best_methods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.models.cif.Cif.get_polyhedron_labels_by_CN_best_methods" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.models.cif.Cif.plot_polyhedron">
+<span class="sig-name descname"><span class="pre">plot_polyhedron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_displayed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cifkit.models.cif.Cif.plot_polyhedron" title="Link to this definition">#</a></dt>
+<dd><p>Function to plot a polyhedron structure and optionally saves
+it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site_label</strong> (<em>str</em>) – Central site label for the polyhedron</p></li>
+<li><p><strong>show_labels</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display vertex labels, by default True</p></li>
+<li><p><strong>is_displayed</strong> (<em>bool</em><em>, </em><em>optional</em>) – Display plot interactively, by default False</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory to save the plot, by default None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./api"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cif-ensemble.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">CifEnsemble</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

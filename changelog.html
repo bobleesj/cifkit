@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Changelog &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changelog';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Release" href="maintainer/release.html" />
+    <link rel="prev" title="Sources" href="api/sources.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorials/physical-features.html">Parse physical features from a .cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/statistics-many-cifs.html">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/quick-reference.html">Quick reference (LLM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/cif.html">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/coordination.html">Coordination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/oliynyk.html">OLED / Oliynyk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/formula.html">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/sources.html">Sources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintainer/release.html">Release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/changelog.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Changelog</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.2.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.2.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.1.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.1.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.0.9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.0.6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.0.5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1.0.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">1.0.2</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>1.2.2<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p><strong>Changed:</strong></p>
+<ul class="simple">
+<li><p>Drop Python 3.11 support; require Python 3.12–3.14 (classifiers and <code class="docutils literal notranslate"><span class="pre">requires-python</span></code>).</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>1.2.1<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Add elemental data modules migrated from <code class="docutils literal notranslate"><span class="pre">bobleesj.utils</span></code>: the Oliynyk elemental property database (<code class="docutils literal notranslate"><span class="pre">cifkit.sources.oliynyk</span></code>), Mendeleev numbers, periodic table data, CIF and Pauling CN12 radius data, the <code class="docutils literal notranslate"><span class="pre">Formula</span></code> parser, <code class="docutils literal notranslate"><span class="pre">ElementSorter</span></code>, and basic statistics helpers, with parity tests asserting exact equality against the legacy package.</p></li>
+</ul>
+<p><strong>Changed:</strong></p>
+<ul class="simple">
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">bobleesj.utils</span></code> dependency by sourcing elemental data from the new built-in modules; add <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">openpyxl</span></code> as dependencies for the Oliynyk Excel database.</p></li>
+<li><p>Update the maintainer contact email to the Stanford address in package metadata, AUTHORS, and the code of conduct.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>1.1.1<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li><p>Bump version 1.1.0 to 1.1.1 since v1.1.0 was already uploaded before to PyPI.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>1.1.0<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Use tests.txt, modify folder name from doc to docs.</p></li>
+<li><p>Add Bala to contributor’s list in index.rst.</p></li>
+</ul>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li><p>Use vectorization for computing connections.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>1.0.9<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Add unit tests for refined CIF radius for binary and ternary.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">bobleesj.utils</span></code> to the <code class="docutils literal notranslate"><span class="pre">pip.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">conda.txt</span></code> requirement files.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">deepdiff</span></code> to <code class="docutils literal notranslate"><span class="pre">test.txt</span></code>.</p></li>
+<li><p>Use bobleesj.utils to source CIF radius for all elements.</p></li>
+<li><p>Relocate PCD .cif files that have no atomic site/label while preprocessing each .cif file.</p></li>
+<li><p>Standarlize <cite>cifkit</cite> using <cite>scikit-package</cite> v0.1.0 including <cite>docformatter</cite>, <cite>prettier</cite>, and <cite>codespell</cite> for code formatting and linting.</p></li>
+<li><p>Include an option to compute coordination metrics when CIF and CifEnsemble are initialized.</p></li>
+<li><p>Implement compute_CN to separate computing CN related metrics, separated from computing connections.</p></li>
+<li><p>Return objective function value after finding refined CIF radius.</p></li>
+</ul>
+<p><strong>Changed:</strong></p>
+<ul class="simple">
+<li><p>Source Mendeleeve values from bobleesj.utils.</p></li>
+</ul>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li><p>Catch error for the polyhedron when the volume cannot be calculated due to flat surface.</p></li>
+<li><p>Fix all local unit tests to pass with compute_CN() method.</p></li>
+<li><p>Generate 5 by 5 by 5 supercell by default in instead of 3 by 3 by 3 to handle the case where a bigger supercell is required to accurate to determine the correct shortest distances from each site.</p></li>
+<li><p>Fix Jupyter CIF doc rendering problem with PCD demo file.</p></li>
+<li><p>Set line-length max to 90 instead of 79.</p></li>
+<li><p>Fix error in polyhedron volume calculation for CN=5 and other polyhedrons with central atom on the same plane with equatorial atoms.</p></li>
+</ul>
+<p><strong>Removed:</strong></p>
+<ul class="simple">
+<li><p>Remove hard coded data for CIF and Pauling CN12 radius values. Retrieve them from bobleesj.utils.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>1.0.6<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Publish <code class="docutils literal notranslate"><span class="pre">cikift</span></code> to Journal of Open Source Software (JOSS) with DOI: <a class="reference external" href="https://doi.org/10.21105/joss.07205">10.21105/joss.05923</a>.</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>1.0.5<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Add docstrings to <code class="docutils literal notranslate"><span class="pre">Cif</span></code> and <code class="docutils literal notranslate"><span class="pre">CifEnsembleo</span></code> classes.</p></li>
+<li><p>Add support for ICSD, COD, MP, CCDC files.</p></li>
+<li><p>Use GitHub Actions to deploy to PyPI and update <code class="docutils literal notranslate"><span class="pre">CHANGELOG.rst</span></code>.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>1.0.3<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Support .cif file formats of PCD, COD, Materials Studio, ICSD.</p></li>
+</ul>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li><p>Update <cite>U</cite> Pauling CN12 value from 1.51 to 1.516.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>1.0.2<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Initializing progress statement for <cite>CifEnsemble</cite> to enhance user experience.</p></li>
+<li><p>Print option for <cite>compute_connections</cite> in CifEnsemble.</p></li>
+<li><p>Preprocessing option for <cite>CifEnsemble</cite> to handle input data more flexibly.</p></li>
+</ul>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li><p>Error computing polyhedron metrics: index 4 is out of bounds for axis 0 with size 4.</p></li>
+<li><p>Warning for using categorical units to plot a list of strings for histogram generation.</p></li>
+<li><p>Misclassification issue during preprocessing: do not move to ‘others’ folder if elements do not belong to Mendeleev table.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api/sources.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sources</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="maintainer/release.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Release</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

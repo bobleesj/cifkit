@@ -1,0 +1,1058 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Parse physical features from a .cif &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/physical-features';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Statistics over many CIFs" href="statistics-many-cifs.html" />
+    <link rel="prev" title="Installation" href="../install.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parse physical features from a .cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics-many-cifs.html">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/cif.html">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/coordination.html">Coordination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/oliynyk.html">OLED / Oliynyk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/formula.html">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/quick-reference.html">Quick reference (LLM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/release.html">Changelog and release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/physical-features.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Parse physical features from a .cif</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-polyhedron-drag-to-rotate">Interactive polyhedron (drag to rotate)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-a-cif-and-see-what-was-parsed">1. Load a CIF and see what was parsed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interatomic-distances">2. Interatomic distances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordination-numbers-what-they-are-and-how-each-is-determined">3. Coordination numbers - what they are and how each is determined</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-cn-here">What is CN here?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-same-skeleton-for-every-method">Algorithm (same skeleton for every method)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-methods-what-the-scale-is">The four methods (what the scale is)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-it-and-read-the-per-method-table">Run it and read the per-method table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-best-method-is-chosen">How the “best” method is chosen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polyhedron-metrics-best-method">4. Polyhedron metrics (best method)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bond-fractions-and-site-mixing">5. Bond fractions and site mixing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render-the-polyhedron">6. Render the polyhedron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-else">What else?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next">Next</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-demo-data-tables-citation">Notes (demo data, tables, citation)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="parse-physical-features-from-a-cif">
+<h1>Parse physical features from a .cif<a class="headerlink" href="#parse-physical-features-from-a-cif" title="Link to this heading">#</a></h1>
+<p>This is the main use of <code class="docutils literal notranslate"><span class="pre">cifkit</span></code>: turn one crystallographic <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file
+into <strong>geometry and site-environment numbers</strong> you can plot, compare, or
+feed into a featurizer / machine-learning model.</p>
+<p>What you get, in order:</p>
+<ol class="arabic simple">
+<li><p>Useful structure facts (parse)</p></li>
+<li><p><strong>Interatomic distances</strong></p></li>
+<li><p><strong>Coordination numbers</strong> - how each method decides CN (this page)</p></li>
+<li><p><strong>Polyhedron metrics</strong> (volume, packing efficiency, …)</p></li>
+<li><p>Bond fractions and site mixing</p></li>
+<li><p>Optional polyhedron plot (static PNG or interactive 3D)</p></li>
+</ol>
+<p><strong>Not from the <code class="docutils literal notranslate"><span class="pre">.cif</span></code>:</strong> composition / elemental descriptors (atomic
+weight, electronegativity, Mendeleev number, …) come from the separate
+<strong>OLED</strong> table in <a class="reference internal" href="oled.html"><span class="doc std std-doc">OLED tutorial</span></a> - curated Oliynyk elemental data
+from the dataset paper (<em>Data in Brief</em>), <strong>not</strong> values read out of the
+CIF file.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/GdSb_Sb.png"><img alt="GdSb Sb-centered coordination polyhedron, CN=6" src="../_images/GdSb_Sb.png" style="width: 55%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text"><strong>Static export.</strong> Sb-centered polyhedron in GdSb (CN=6) from
+<code class="docutils literal notranslate"><span class="pre">plot_polyhedron</span></code> on the packaged demo file.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="interactive-polyhedron-drag-to-rotate">
+<h2>Interactive polyhedron (drag to rotate)<a class="headerlink" href="#interactive-polyhedron-drag-to-rotate" title="Link to this heading">#</a></h2>
+<p>Same shell as above - real neighbor coordinates from
+<code class="docutils literal notranslate"><span class="pre">Example.GdSb_file_path</span></code>, method <code class="docutils literal notranslate"><span class="pre">dist_by_shortest_dist</span></code>, <strong>CN = 6</strong>.
+Use this when a static PNG is not enough to see the octahedron.</p>
+<iframe
+  src="../_static/gdsb_polyhedron.html"
+  title="Interactive GdSb Sb-centered polyhedron CN=6"
+  style="width:100%;height:420px;border:1px solid #d0d7de;border-radius:8px;background:#0f1419;"
+  loading="lazy"
+></iframe><p>In your own notebook or script you get a live PyVista window with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="s2">&quot;Sb&quot;</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># interactive desktop window</span>
+</pre></div>
+</div>
+</section>
+<section id="load-a-cif-and-see-what-was-parsed">
+<h2>1. Load a CIF and see what was parsed<a class="headerlink" href="#load-a-cif-and-see-what-was-parsed" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span><span class="p">)</span>
+
+<span class="n">props</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;file_name&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">file_name</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;formula&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">formula</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">structure</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;space_group_name&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">space_group_name</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;space_group_number&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">space_group_number</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;unitcell_lengths&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">unitcell_lengths</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;unitcell_angles (rad)&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">unitcell_angles</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;site_labels&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;unique_elements&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cif</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;composition_type&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">composition_type</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">tag</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;db_source&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">db_source</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;unitcell_atom_count&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">unitcell_atom_count</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;supercell_atom_count&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">supercell_atom_count</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;attribute&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>attribute</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>file_name</p></td>
+<td><p>GdSb.cif</p></td>
+</tr>
+<tr class="row-odd"><td><p>formula</p></td>
+<td><p>GdSb</p></td>
+</tr>
+<tr class="row-even"><td><p>structure</p></td>
+<td><p>NaCl</p></td>
+</tr>
+<tr class="row-odd"><td><p>space_group_name</p></td>
+<td><p>Fm-3m</p></td>
+</tr>
+<tr class="row-even"><td><p>space_group_number</p></td>
+<td><p>225</p></td>
+</tr>
+<tr class="row-odd"><td><p>unitcell_lengths</p></td>
+<td><p>[6.21, 6.21, 6.21]</p></td>
+</tr>
+<tr class="row-even"><td><p>unitcell_angles (rad)</p></td>
+<td><p>[1.5708, 1.5708, 1.5708]</p></td>
+</tr>
+<tr class="row-odd"><td><p>site_labels</p></td>
+<td><p>[‘Sb’, ‘Gd’]</p></td>
+</tr>
+<tr class="row-even"><td><p>unique_elements</p></td>
+<td><p>[‘Gd’, ‘Sb’]</p></td>
+</tr>
+<tr class="row-odd"><td><p>composition_type</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>tag</p></td>
+<td><p>rt</p></td>
+</tr>
+<tr class="row-odd"><td><p>db_source</p></td>
+<td><p>PCD</p></td>
+</tr>
+<tr class="row-even"><td><p>unitcell_atom_count</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-odd"><td><p>supercell_atom_count</p></td>
+<td><p>1000</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>By default the constructor preprocesses for gemmi compatibility, builds
+a 3×3×3 supercell, and defers coordination work until you ask
+(<code class="docutils literal notranslate"><span class="pre">compute_CN=False</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">db_source</span></code> is detected from the file (here <strong>PCD</strong>). <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> is tested
+against common crystallographic exports - <strong>ICSD</strong>, <strong>COD</strong>, <strong>PCD</strong>,
+Materials Project-style (<strong>MP</strong>), <strong>CCDC</strong>/CSD, and Materials Studio
+(<strong>MS</strong>) - with source-specific fixes (for example ICSD copyright lines,
+PCD author loops). Mixed folders can share one pipeline.</p>
+</section>
+<section id="interatomic-distances">
+<h2>2. Interatomic distances<a class="headerlink" href="#interatomic-distances" title="Link to this heading">#</a></h2>
+<p>Distances come from the supercell neighbor search - <strong>before</strong>
+coordination methods run.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shortest_distance:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_distance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shortest_site_pair_distance:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_site_pair_distance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shortest_bond_pair_distance:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shortest_distance: 3.105
+shortest_site_pair_distance: {&#39;Sb&#39;: (&#39;Gd&#39;, 3.105), &#39;Gd&#39;: (&#39;Sb&#39;, 3.105)}
+shortest_bond_pair_distance: {(&#39;Gd&#39;, &#39;Sb&#39;): 3.105, (&#39;Gd&#39;, &#39;Gd&#39;): 4.391, (&#39;Sb&#39;, &#39;Sb&#39;): 4.391}
+</pre></div>
+</div>
+<p>As a table - shortest distance between each element-pair type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bond_d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;pair&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="s2">&quot;shortest (Å)&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cif</span><span class="o">.</span><span class="n">shortest_bond_pair_distance</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bond_d</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>pair</p></th>
+<th class="head text-right"><p>shortest (Å)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>(‘Gd’, ‘Sb’)</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+<tr class="row-odd"><td><p>(‘Gd’, ‘Gd’)</p></td>
+<td class="text-right"><p>4.391</p></td>
+</tr>
+<tr class="row-even"><td><p>(‘Sb’, ‘Sb’)</p></td>
+<td class="text-right"><p>4.391</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Unique neighbor distances from site <strong>Gd</strong> (first shell and beyond):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="ow">in</span> <span class="n">cif</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="s2">&quot;Gd&quot;</span><span class="p">]:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;neighbor&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;distance (Å)&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
+<span class="n">dist_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dist_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>neighbor</p></th>
+<th class="head text-right"><p>distance (Å)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sb</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gd</p></td>
+<td class="text-right"><p>4.391</p></td>
+</tr>
+<tr class="row-even"><td><p>Sb</p></td>
+<td class="text-right"><p>5.378</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gd</p></td>
+<td class="text-right"><p>6.21</p></td>
+</tr>
+<tr class="row-even"><td><p>Sb</p></td>
+<td class="text-right"><p>6.943</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gd</p></td>
+<td class="text-right"><p>7.606</p></td>
+</tr>
+<tr class="row-even"><td><p>Gd</p></td>
+<td class="text-right"><p>8.782</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sb</p></td>
+<td class="text-right"><p>9.315</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These ordered shells are the raw input for every CN method.</p>
+</section>
+<section id="coordination-numbers-what-they-are-and-how-each-is-determined">
+<h2>3. Coordination numbers - what they are and how each is determined<a class="headerlink" href="#coordination-numbers-what-they-are-and-how-each-is-determined" title="Link to this heading">#</a></h2>
+<section id="what-is-cn-here">
+<h3>What is CN here?<a class="headerlink" href="#what-is-cn-here" title="Link to this heading">#</a></h3>
+<p>For each crystallographic <strong>site label</strong>, cifkit decides how many
+neighbors belong in the first coordination shell. That integer is the
+<strong>coordination number (CN)</strong>. The shell defines the vertices of the
+coordination <strong>polyhedron</strong> (edges, faces, volume, packing efficiency).</p>
+<p>CN is <strong>not</strong> a single universal number in messy intermetallics: different
+reasonable normalizations of distance can put the “largest gap” in
+different places. cifkit therefore runs <strong>up to four methods</strong> and then
+picks a <strong>best method per site</strong> using polyhedron geometry.</p>
+</section>
+<section id="algorithm-same-skeleton-for-every-method">
+<h3>Algorithm (same skeleton for every method)<a class="headerlink" href="#algorithm-same-skeleton-for-every-method" title="Link to this heading">#</a></h3>
+<p>For each site label:</p>
+<ol class="arabic simple">
+<li><p><strong>Order neighbors</strong> by increasing interatomic distance (from the
+supercell search; first ~20 neighbors are considered).</p></li>
+<li><p><strong>Normalize</strong> each neighbor distance by a method-specific scale
+(see table below). Sorted normalized values form a step-like curve.</p></li>
+<li><p><strong>Find the largest gap</strong> between consecutive normalized distances.
+The index of that gap is the CN: keep the first <em>N</em> neighbors, drop
+everything beyond the gap.</p></li>
+<li><p>Those <em>N</em> neighbors are the shell used for bond fractions and
+polyhedron metrics for that method.</p></li>
+</ol>
+<p>If radius data are missing or the site is not full occupancy, only
+<code class="docutils literal notranslate"><span class="pre">dist_by_shortest_dist</span></code> runs; otherwise all four methods run.</p>
+</section>
+<section id="the-four-methods-what-the-scale-is">
+<h3>The four methods (what the scale is)<a class="headerlink" href="#the-four-methods-what-the-scale-is" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method key</p></th>
+<th class="head"><p>Normalize each neighbor distance by…</p></th>
+<th class="head"><p>Intuition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dist_by_shortest_dist</span></code></p></td>
+<td><p>the site’s <strong>shortest</strong> neighbor distance</p></td>
+<td><p>Pure geometry: “how many times longer than the nearest bond?”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dist_by_CIF_radius_sum</span></code></p></td>
+<td><p>sum of <strong>CIF radii</strong> of the central + neighbor elements</p></td>
+<td><p>Bonds scaled by tabulated elemental sizes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dist_by_CIF_radius_refined_sum</span></code></p></td>
+<td><p>sum of <strong>refined CIF radii</strong> for the pair</p></td>
+<td><p>Same idea after a structure-aware radius tweak</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dist_by_Pauling_radius_sum</span></code></p></td>
+<td><p>sum of <strong>Pauling CN12</strong> metallic radii</p></td>
+<td><p>Metallic-radius scale (CN = 12 reference)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Radii for the last three methods come from cifkit’s elemental radius
+tables (not from OLED’s full property set, though CIF/Pauling radii also
+appear there as elemental columns). The <strong>geometry CN</strong> is always
+computed from the <strong>CIF structure</strong> + these scales.</p>
+</section>
+<section id="run-it-and-read-the-per-method-table">
+<h3>Run it and read the per-method table<a class="headerlink" href="#run-it-and-read-the-per-method-table" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cif</span><span class="o">.</span><span class="n">compute_CN</span><span class="p">()</span>  <span class="c1"># or Cif(path, compute_CN=True)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">site</span><span class="p">,</span> <span class="n">methods</span> <span class="ow">in</span> <span class="n">cif</span><span class="o">.</span><span class="n">CN_max_gap_per_site</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">methods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span> <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">method</span><span class="p">,</span> <span class="s2">&quot;CN&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;CN&quot;</span><span class="p">],</span> <span class="s2">&quot;max_gap&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;max_gap&quot;</span><span class="p">]}</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>site</p></th>
+<th class="head"><p>method</p></th>
+<th class="head text-right"><p>CN</p></th>
+<th class="head text-right"><p>max_gap</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sb</p></td>
+<td><p>dist_by_shortest_dist</p></td>
+<td class="text-right"><p>6</p></td>
+<td class="text-right"><p>0.414</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sb</p></td>
+<td><p>dist_by_CIF_radius_sum</p></td>
+<td class="text-right"><p>6</p></td>
+<td class="text-right"><p>0.567</p></td>
+</tr>
+<tr class="row-even"><td><p>Sb</p></td>
+<td><p>dist_by_CIF_radius_refined_sum</p></td>
+<td class="text-right"><p>6</p></td>
+<td class="text-right"><p>0.581</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sb</p></td>
+<td><p>dist_by_Pauling_radius_sum</p></td>
+<td class="text-right"><p>6</p></td>
+<td class="text-right"><p>0.464</p></td>
+</tr>
+<tr class="row-even"><td><p>Gd</p></td>
+<td><p>dist_by_shortest_dist</p></td>
+<td class="text-right"><p>6</p></td>
+<td class="text-right"><p>0.414</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gd</p></td>
+<td><p>dist_by_CIF_radius_sum</p></td>
+<td class="text-right"><p>18</p></td>
+<td class="text-right"><p>0.441</p></td>
+</tr>
+<tr class="row-even"><td><p>Gd</p></td>
+<td><p>dist_by_CIF_radius_refined_sum</p></td>
+<td class="text-right"><p>18</p></td>
+<td class="text-right"><p>0.453</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gd</p></td>
+<td><p>dist_by_Pauling_radius_sum</p></td>
+<td class="text-right"><p>18</p></td>
+<td class="text-right"><p>0.366</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>How to read this:</strong> for Sb every method agrees (CN = 6). For Gd the
+shortest-distance method finds a gap after 6 neighbors, while
+radius-based methods find a larger gap after 18 - classic rock-salt
+behavior where the second shell is still close on some scales. That is
+why cifkit keeps all four results and then chooses a <strong>best method</strong>.</p>
+</section>
+<section id="how-the-best-method-is-chosen">
+<h3>How the “best” method is chosen<a class="headerlink" href="#how-the-best-method-is-chosen" title="Link to this heading">#</a></h3>
+<p>For each method that produced a CN ≥ 4, cifkit builds the convex hull of
+the shell neighbors and measures how far the <strong>central atom</strong> sits from
+the <strong>average of the vertex positions</strong>. The method with the <strong>smallest</strong>
+that distance is <code class="docutils literal notranslate"><span class="pre">method_used</span></code> in <code class="docutils literal notranslate"><span class="pre">CN_best_methods</span></code> (most “centered”
+polyhedron). Metrics (volume, packing efficiency, faces, …) are reported
+for that winning method only.</p>
+<p>Low-level helpers: <a class="reference internal" href="../api/coordination.html"><span class="doc std std-doc">Coordination API</span></a>.</p>
+</section>
+</section>
+<section id="polyhedron-metrics-best-method">
+<h2>4. Polyhedron metrics (best method)<a class="headerlink" href="#polyhedron-metrics-best-method" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span>
+            <span class="s2">&quot;method_used&quot;</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;method_used&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;CN (vertices)&quot;</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;number_of_vertices&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;number_of_edges&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;faces&quot;</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;number_of_faces&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;volume&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;volume_of_polyhedron&quot;</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="s2">&quot;packing_eff&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;packing_efficiency&quot;</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">site</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">cif</span><span class="o">.</span><span class="n">CN_best_methods</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">best</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>site</p></th>
+<th class="head"><p>method_used</p></th>
+<th class="head text-right"><p>CN (vertices)</p></th>
+<th class="head text-right"><p>edges</p></th>
+<th class="head text-right"><p>faces</p></th>
+<th class="head text-right"><p>volume</p></th>
+<th class="head text-right"><p>packing_eff</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sb</p></td>
+<td><p>dist_by_shortest_dist</p></td>
+<td class="text-right"><p>6</p></td>
+<td class="text-right"><p>12</p></td>
+<td class="text-right"><p>8</p></td>
+<td class="text-right"><p>39.914</p></td>
+<td class="text-right"><p>0.605</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gd</p></td>
+<td><p>dist_by_shortest_dist</p></td>
+<td class="text-right"><p>6</p></td>
+<td class="text-right"><p>12</p></td>
+<td class="text-right"><p>8</p></td>
+<td class="text-right"><p>39.914</p></td>
+<td class="text-right"><p>0.605</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Octahedra (6 / 12 / 8) with packing efficiency 0.605 - rock salt.
+<code class="docutils literal notranslate"><span class="pre">method_used</span></code> is the winner of the center-to-average test above.</p>
+<p>Neighbors in the CN shell for <strong>Gd</strong> (min-dist method):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">conns</span> <span class="o">=</span> <span class="n">cif</span><span class="o">.</span><span class="n">CN_connections_by_min_dist_method</span><span class="p">[</span><span class="s2">&quot;Gd&quot;</span><span class="p">]</span>
+<span class="n">neighbors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;neighbor&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;distance (Å)&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">)}</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">conns</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">neighbors</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>i</p></th>
+<th class="head"><p>neighbor</p></th>
+<th class="head text-right"><p>distance (Å)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>1</p></td>
+<td><p>Sb</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>2</p></td>
+<td><p>Sb</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>3</p></td>
+<td><p>Sb</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>4</p></td>
+<td><p>Sb</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>5</p></td>
+<td><p>Sb</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>6</p></td>
+<td><p>Sb</p></td>
+<td class="text-right"><p>3.105</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="bond-fractions-and-site-mixing">
+<h2>5. Bond fractions and site mixing<a class="headerlink" href="#bond-fractions-and-site-mixing" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bonds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;pair&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="s2">&quot;fraction&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cif</span><span class="o">.</span><span class="n">CN_bond_fractions_by_min_dist_method</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bonds</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;site_mixing_type:&quot;</span><span class="p">,</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_mixing_type</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>pair</p></th>
+<th class="head text-right"><p>fraction</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>(‘Gd’, ‘Sb’)</p></td>
+<td class="text-right"><p>1.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>site_mixing_type: full_occupancy
+</pre></div>
+</div>
+<p>Mixing info at the label-pair level is also available as
+<code class="docutils literal notranslate"><span class="pre">mixing_info_per_label_pair</span></code> (useful when sites are partially occupied
+or mixed).</p>
+</section>
+<section id="render-the-polyhedron">
+<h2>6. Render the polyhedron<a class="headerlink" href="#render-the-polyhedron" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">cif</span><span class="o">.</span><span class="n">site_labels</span><span class="p">:</span>
+    <span class="n">cif</span><span class="o">.</span><span class="n">plot_polyhedron</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">is_displayed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;polyhedrons&quot;</span><span class="p">)</span>
+<span class="c1"># → GdSb_Sb.png, GdSb_Gd.png</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>How</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Static PNG (docs, papers)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">is_displayed=False</span></code>, write <code class="docutils literal notranslate"><span class="pre">output_dir</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Interactive desktop (PyVista)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">is_displayed=True</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Interactive in these docs</p></td>
+<td><p>iframe widget above (same GdSb / Sb shell)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A richer polyhedron from the
+<a class="reference external" href="https://doi.org/10.21105/joss.07205">JOSS paper</a> (ErCoIn₅, In1, CN=12):</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/ErCoIn-polyhedron.png"><img alt="ErCoIn5 In1 polyhedron CN=12" src="../_images/ErCoIn-polyhedron.png" style="width: 60%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>JOSS Figure 1 (left).</strong> ErCoIn₅ around In1 (CN=12).</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="api-reference">
+<h2>API reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/cif.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Cif</span></code></span></a> - parse, distances, mixing</p></li>
+<li><p><a class="reference internal" href="../api/coordination.html"><span class="doc std std-doc">Coordination helpers</span></a> - CN methods, geometry</p></li>
+</ul>
+</section>
+<section id="what-else">
+<h2>What else?<a class="headerlink" href="#what-else" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Where</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Radii used in CN methods (<code class="docutils literal notranslate"><span class="pre">radius_values</span></code>, <code class="docutils literal notranslate"><span class="pre">radius_sum</span></code>)</p></td>
+<td><p><a class="reference internal" href="../api/cif.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Cif</span></code> API</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Site mixing types beyond full occupancy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">site_mixing_type</span></code>, <code class="docutils literal notranslate"><span class="pre">mixing_info_per_label_pair</span></code>; <a class="reference internal" href="../api/cif.html"><span class="doc std std-doc">API</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Folder-level CN / structure histograms before ML</p></td>
+<td><p><a class="reference internal" href="statistics-many-cifs.html"><span class="doc std std-doc">Statistics over many CIFs</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Elemental properties for ML (OLED table - not from the CIF)</strong></p></td>
+<td><p><strong><a class="reference internal" href="oled.html"><span class="doc std std-doc">OLED tutorial</span></a></strong> · <a class="reference external" href="https://doi.org/10.1016/j.dib.2024.110178">Data in Brief</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Downstream geometry featurizer built on cifkit</p></td>
+<td><p><a class="reference external" href="https://github.com/bobleesj/structure-analyzer-featurizer">SAF</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="next">
+<h2>Next<a class="headerlink" href="#next" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="statistics-many-cifs.html"><span class="doc std std-doc">Statistics over many CIFs</span></a></strong> - filter, histograms, sort a folder</p></li>
+<li><p><strong><a class="reference internal" href="oled.html"><span class="doc std std-doc">OLED</span></a></strong> - elemental / composition features (separate curated table)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="notes-demo-data-tables-citation">
+<h2>Notes (demo data, tables, citation)<a class="headerlink" href="#notes-demo-data-tables-citation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Numbers on this page</strong> are real outputs on the packaged <strong>GdSb</strong> demo
+(<code class="docutils literal notranslate"><span class="pre">Example.GdSb_file_path</span></code>).</p></li>
+<li><p><strong>Tables</strong> in the walkthroughs are built with <strong>pandas → Markdown</strong> so
+you can copy the same pattern into a notebook. They show <strong>geometry
+features from the CIF</strong>, not elemental property rows (those live in
+OLED / <em>Data in Brief</em>).</p></li>
+<li><p>If these geometry features were useful, consider citing <strong>cifkit</strong>
+(<a class="reference external" href="https://doi.org/10.21105/joss.07205">JOSS 10.21105/joss.07205</a>;
+BibTeX in <a class="reference download internal" download="" href="../_downloads/5f7457689aef7256aa43ad26414dfe7b/CITATION.txt"><span class="xref download myst">CITATION.txt</span></a>). Full publication
+list: <a class="reference internal" href="../intro.html"><span class="doc std std-doc">home page</span></a>.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../install.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="statistics-many-cifs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Statistics over many CIFs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

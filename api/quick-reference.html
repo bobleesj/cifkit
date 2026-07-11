@@ -1,0 +1,1136 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API quick reference &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/quick-reference';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Changelog and release" href="../maintainer/release.html" />
+    <link rel="prev" title="Sources" href="sources.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/physical-features.html">Parse physical features from a .cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/statistics-many-cifs.html">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cif.html">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordination.html">Coordination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oliynyk.html">OLED / Oliynyk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formula.html">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Quick reference (LLM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/release.html">Changelog and release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/quick-reference.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>API quick reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-canonical">Imports (canonical)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-demo-data-paths"><code class="docutils literal notranslate"><span class="pre">Example</span></code> - demo data paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cif-one-cif-file"><code class="docutils literal notranslate"><span class="pre">Cif</span></code> - one <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parsed-structure-attributes">Parsed structure attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-attributes-lazy-may-call-compute-connections">Distance attributes (lazy: may call <code class="docutils literal notranslate"><span class="pre">compute_connections()</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mixing-and-radii">Mixing and radii</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordination-after-compute-cn-or-compute-cn-true">Coordination (after <code class="docutils literal notranslate"><span class="pre">compute_CN()</span></code> or <code class="docutils literal notranslate"><span class="pre">compute_CN=True</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cifensemble-folder-of-cif-files"><code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code> - folder of <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-attributes">Overview attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filters-return-path-sets-collections">Filters (return path sets / collections)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-ops-and-histograms">File ops and histograms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oled-oliynyk-property">OLED - <code class="docutils literal notranslate"><span class="pre">Oliynyk</span></code> + <code class="docutils literal notranslate"><span class="pre">Property</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-property-enum-do-not-rename">Exact <code class="docutils literal notranslate"><span class="pre">Property</span></code> enum (do not rename)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-each-oled-property-means">What each OLED property means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formula-feature-vector-ml">Formula → feature vector (ML)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formula"><code class="docutils literal notranslate"><span class="pre">Formula</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elementsorter"><code class="docutils literal notranslate"><span class="pre">ElementSorter</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordination-submodules">Coordination submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publications">Publications</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="api-quick-reference">
+<h1>API quick reference<a class="headerlink" href="#api-quick-reference" title="Link to this heading">#</a></h1>
+<p>Calibrated import paths, attribute types, and method names for agents and
+humans. Prefer this page + <a class="reference download internal" download="" href="../_downloads/c24a7d34349eaa54e19e6b860828b573/llms.txt"><span class="xref download myst">llms.txt</span></a> for copy-paste; use the
+class pages for full autodoc.</p>
+<p><strong>Package:</strong> <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> · <strong>pip:</strong> <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cifkit</span></code><br />
+<strong>Docs:</strong> <a class="reference external" href="https://bobleesj.github.io/cifkit/">https://bobleesj.github.io/cifkit/</a><br />
+<strong>LLM recipes:</strong> <a class="reference external" href="https://bobleesj.github.io/cifkit/llms.txt">https://bobleesj.github.io/cifkit/llms.txt</a></p>
+<section id="imports-canonical">
+<h2>Imports (canonical)<a class="headerlink" href="#imports-canonical" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cif</span><span class="p">,</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>  <span class="c1"># OLED</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.parsers.formula</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formula</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sorters.element_sorter</span><span class="w"> </span><span class="kn">import</span> <span class="n">ElementSorter</span>
+</pre></div>
+</div>
+<p><strong>OLED</strong> = <strong>O</strong>liynyk <strong>E</strong>lemental <strong>D</strong>ata. Load only via
+<code class="docutils literal notranslate"><span class="pre">cifkit.sources.oliynyk.Oliynyk</span></code>. Not a separate package.</p>
+</section>
+<section id="example-demo-data-paths">
+<h2><code class="docutils literal notranslate"><span class="pre">Example</span></code> - demo data paths<a class="headerlink" href="#example-demo-data-paths" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Example</span>
+
+<span class="n">Example</span><span class="o">.</span><span class="n">GdSb_file_path</span>       <span class="c1"># str path to packaged GdSb.cif</span>
+<span class="n">Example</span><span class="o">.</span><span class="n">demo_cif_folder_path</span> <span class="c1"># str path to folder with GdSb.cif + HoSb.cif</span>
+</pre></div>
+</div>
+</section>
+<section id="cif-one-cif-file">
+<h2><code class="docutils literal notranslate"><span class="pre">Cif</span></code> - one <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file<a class="headerlink" href="#cif-one-cif-file" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cif</span> <span class="o">=</span> <span class="n">Cif</span><span class="p">(</span>
+    <span class="n">file_path</span><span class="p">,</span>           <span class="c1"># str, required</span>
+    <span class="n">is_formatted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># if False, preprocess for gemmi</span>
+    <span class="n">logging_enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">supercell_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>    <span class="c1"># 3 → ±1 shifts (3×3×3)</span>
+    <span class="n">compute_CN</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>    <span class="c1"># True runs coordination at init</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="parsed-structure-attributes">
+<h3>Parsed structure attributes<a class="headerlink" href="#parsed-structure-attributes" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Type (typical)</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">file_path</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Path given to the constructor</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">file_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Basename, e.g. <code class="docutils literal notranslate"><span class="pre">'GdSb.cif'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">formula</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>e.g. <code class="docutils literal notranslate"><span class="pre">'GdSb'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">structure</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Structure type label, e.g. <code class="docutils literal notranslate"><span class="pre">'NaCl'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">space_group_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>e.g. <code class="docutils literal notranslate"><span class="pre">'Fm-3m'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">space_group_number</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>e.g. <code class="docutils literal notranslate"><span class="pre">225</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unitcell_lengths</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[float]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b,</span> <span class="pre">c]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unitcell_angles</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[float]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[α,</span> <span class="pre">β,</span> <span class="pre">γ]</span></code> <strong>in radians</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">site_labels</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[str]</span></code></p></td>
+<td><p>e.g. <code class="docutils literal notranslate"><span class="pre">['Sb',</span> <span class="pre">'Gd']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unique_elements</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set[str]</span></code></p></td>
+<td><p>Element symbols in the file</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">composition_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Number of unique elements (1 unary, 2 binary, …)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tag</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Tag parsed from the CIF header line</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db_source</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Origin DB if known (<code class="docutils literal notranslate"><span class="pre">PCD</span></code>, <code class="docutils literal notranslate"><span class="pre">ICSD</span></code>, <code class="docutils literal notranslate"><span class="pre">MP</span></code>, <code class="docutils literal notranslate"><span class="pre">CCDC</span></code>, …)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unitcell_atom_count</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Atoms in the unit cell</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">supercell_atom_count</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Atoms in the generated supercell</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">atom_site_info</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Occupancy / site info from the CIF loops</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="distance-attributes-lazy-may-call-compute-connections">
+<h3>Distance attributes (lazy: may call <code class="docutils literal notranslate"><span class="pre">compute_connections()</span></code>)<a class="headerlink" href="#distance-attributes-lazy-may-call-compute-connections" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shortest_distance</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>Global shortest neighbor distance (Å)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">shortest_bond_pair_distance</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[tuple[str,str],</span> <span class="pre">float]</span></code></p></td>
+<td><p>Shortest per element-pair, e.g. <code class="docutils literal notranslate"><span class="pre">{('Gd','Sb'):</span> <span class="pre">3.105}</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shortest_site_pair_distance</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">tuple[str,float]]</span></code></p></td>
+<td><p>Per site label: nearest neighbor label + distance</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">connections</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">list[tuple]]</span></code></p></td>
+<td><p>Per site: <code class="docutils literal notranslate"><span class="pre">(neighbor_label,</span> <span class="pre">dist,</span> <span class="pre">self_xyz,</span> <span class="pre">neighbor_xyz)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">connections_flattened</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>Flattened neighbor records</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bond_pairs</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set[tuple[str,str]]</span></code></p></td>
+<td><p>Element pairs present</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">site_label_pairs</span></code></p></td>
+<td><p>varies</p></td>
+<td><p>Site-label pairing helpers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">*_sorted_by_mendeleev</span></code></p></td>
+<td><p>same shape</p></td>
+<td><p>Mendeleev-ordered variants of pair structures</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mixing-and-radii">
+<h3>Mixing and radii<a class="headerlink" href="#mixing-and-radii" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">site_mixing_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>e.g. <code class="docutils literal notranslate"><span class="pre">'full_occupancy'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mixing_info_per_label_pair</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Mixing label per site-label pair</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">radius_values</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Per element: CIF / refined / Pauling radii</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">radius_sum</span></code></p></td>
+<td><p>varies</p></td>
+<td><p>Pair radius sums used in CN methods</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">is_radius_data_available</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Whether radius tables cover the elements</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="coordination-after-compute-cn-or-compute-cn-true">
+<h3>Coordination (after <code class="docutils literal notranslate"><span class="pre">compute_CN()</span></code> or <code class="docutils literal notranslate"><span class="pre">compute_CN=True</span></code>)<a class="headerlink" href="#coordination-after-compute-cn-or-compute-cn-true" title="Link to this heading">#</a></h3>
+<p>CN method keys (exact strings):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dist_by_shortest_dist</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist_by_CIF_radius_sum</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist_by_CIF_radius_refined_sum</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist_by_Pauling_radius_sum</span></code></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CN_max_gap_per_site</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Per site → per method → <code class="docutils literal notranslate"><span class="pre">{max_gap,</span> <span class="pre">CN}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CN_best_methods</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Per site: chosen method + polyhedron metrics</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CN_connections_by_min_dist_method</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Neighbor shell using min-dist CN</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CN_connections_by_best_methods</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Neighbor shell using best-method CN</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CN_bond_count_by_min_dist_method</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>Bond counts per site</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CN_bond_fractions_by_min_dist_method</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[tuple,</span> <span class="pre">float]</span></code></p></td>
+<td><p>Global bond-pair fractions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CN_unique_values_by_min_dist_method</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set[int]</span></code></p></td>
+<td><p>Unique CN values</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CN_avg_by_min_dist_method</span></code> / <code class="docutils literal notranslate"><span class="pre">CN_min_*</span></code> / <code class="docutils literal notranslate"><span class="pre">CN_max_*</span></code></p></td>
+<td><p>numeric</p></td>
+<td><p>Summary stats</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*_by_best_methods</span></code></p></td>
+<td><p>same family</p></td>
+<td><p>Parallel attributes using best-method CN</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">CN_best_methods[site]</span></code> metric keys (exact):</strong>
+<code class="docutils literal notranslate"><span class="pre">volume_of_polyhedron</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_from_avg_point_to_center</span></code>,
+<code class="docutils literal notranslate"><span class="pre">number_of_vertices</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_edges</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_faces</span></code>,
+<code class="docutils literal notranslate"><span class="pre">shortest_distance_to_face</span></code>, <code class="docutils literal notranslate"><span class="pre">shortest_distance_to_edge</span></code>,
+<code class="docutils literal notranslate"><span class="pre">volume_of_inscribed_sphere</span></code>, <code class="docutils literal notranslate"><span class="pre">packing_efficiency</span></code>, <code class="docutils literal notranslate"><span class="pre">method_used</span></code>.</p>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compute_connections()</span></code></p></td>
+<td><p>Build neighbor lists (also triggered lazily)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compute_CN()</span></code></p></td>
+<td><p>Run four CN methods + best-method selection</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">plot_polyhedron(label,</span> <span class="pre">show_labels=True,</span> <span class="pre">is_displayed=False,</span> <span class="pre">output_dir=None)</span></code></p></td>
+<td><p>PyVista polyhedron PNG / interactive window</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_polyhedron_labels_by_CN_min_dist_method(...)</span></code></p></td>
+<td><p>Coordinates/labels for min-dist shell</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_polyhedron_labels_by_CN_best_methods(...)</span></code></p></td>
+<td><p>Coordinates/labels for best-method shell</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Full autodoc: <a class="reference internal" href="cif.html"><span class="doc std std-doc">Cif</span></a>. Tutorial: <a class="reference internal" href="../tutorials/physical-features.html"><span class="doc std std-doc">physical features</span></a>.</p>
+</section>
+</section>
+<section id="cifensemble-folder-of-cif-files">
+<h2><code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code> - folder of <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files<a class="headerlink" href="#cifensemble-folder-of-cif-files" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span>
+    <span class="n">cif_dir_path</span><span class="p">,</span>          <span class="c1"># str folder</span>
+    <span class="n">add_nested_files</span><span class="o">=...</span><span class="p">,</span>  <span class="c1"># include nested dirs if supported</span>
+    <span class="c1"># preprocessing runs on init for database compatibility</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="overview-attributes">
+<h3>Overview attributes<a class="headerlink" href="#overview-attributes" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">file_paths</span></code> / <code class="docutils literal notranslate"><span class="pre">file_count</span></code></p></td>
+<td><p>Paths and count after preprocess</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unique_formulas</span></code></p></td>
+<td><p>Formulas present</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unique_structures</span></code></p></td>
+<td><p>Structure-type labels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unique_space_group_names</span></code> / <code class="docutils literal notranslate"><span class="pre">unique_space_group_numbers</span></code></p></td>
+<td><p>Space groups</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unique_elements</span></code></p></td>
+<td><p>Elements across the folder</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unique_tags</span></code> / <code class="docutils literal notranslate"><span class="pre">unique_composition_types</span></code> / <code class="docutils literal notranslate"><span class="pre">unique_site_mixing_types</span></code></p></td>
+<td><p>Other uniques</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">formula_stats</span></code> / <code class="docutils literal notranslate"><span class="pre">structure_stats</span></code> / <code class="docutils literal notranslate"><span class="pre">tag_stats</span></code> / …</p></td>
+<td><p>Count maps</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">minimum_distances</span></code></p></td>
+<td><p>Per-file shortest distances</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">supercell_atom_counts</span></code></p></td>
+<td><p>Per-file supercell sizes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CN_unique_values_by_min_dist_method</span></code> / <code class="docutils literal notranslate"><span class="pre">*_by_best_methods</span></code></p></td>
+<td><p>CN uniques</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="filters-return-path-sets-collections">
+<h3>Filters (return path sets / collections)<a class="headerlink" href="#filters-return-path-sets-collections" title="Link to this heading">#</a></h3>
+<p>Exact method names:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_formulas</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_structures</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_space_group_names</span></code> / <code class="docutils literal notranslate"><span class="pre">filter_by_space_group_numbers</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_elements_containing</span></code> / <code class="docutils literal notranslate"><span class="pre">filter_by_elements_exact_matching</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_tags</span></code> / <code class="docutils literal notranslate"><span class="pre">filter_by_composition_types</span></code> / <code class="docutils literal notranslate"><span class="pre">filter_by_site_mixing_types</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_min_distance</span></code> / <code class="docutils literal notranslate"><span class="pre">filter_by_supercell_count</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_CN_min_dist_method_containing</span></code> / <code class="docutils literal notranslate"><span class="pre">filter_by_CN_min_dist_method_exact_matching</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_by_CN_best_methods_containing</span></code> / <code class="docutils literal notranslate"><span class="pre">filter_by_CN_best_methods_exact_matching</span></code></p></li>
+</ul>
+</section>
+<section id="file-ops-and-histograms">
+<h3>File ops and histograms<a class="headerlink" href="#file-ops-and-histograms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">copy_cif_files(paths,</span> <span class="pre">dest_dir)</span></code> / <code class="docutils literal notranslate"><span class="pre">move_cif_files(paths,</span> <span class="pre">dest_dir)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">generate_structure_histogram</span></code> / <code class="docutils literal notranslate"><span class="pre">generate_formula_histogram</span></code> /
+<code class="docutils literal notranslate"><span class="pre">generate_tag_histogram</span></code> / <code class="docutils literal notranslate"><span class="pre">generate_space_group_name_histogram</span></code> /
+<code class="docutils literal notranslate"><span class="pre">generate_space_group_number_histogram</span></code> / <code class="docutils literal notranslate"><span class="pre">generate_elements_histogram</span></code> /
+<code class="docutils literal notranslate"><span class="pre">generate_supercell_size_histogram</span></code> / <code class="docutils literal notranslate"><span class="pre">generate_composition_type_histogram</span></code> /
+<code class="docutils literal notranslate"><span class="pre">generate_site_mixing_type_histogram</span></code> /
+<code class="docutils literal notranslate"><span class="pre">generate_CN_by_min_dist_method_histogram</span></code> /
+<code class="docutils literal notranslate"><span class="pre">generate_CN_by_best_methods_histogram</span></code></p></li>
+</ul>
+<p>Full autodoc: <a class="reference internal" href="cif-ensemble.html"><span class="doc std std-doc">CifEnsemble</span></a>. Tutorial: <a class="reference internal" href="../tutorials/statistics-many-cifs.html"><span class="doc std std-doc">statistics</span></a>.</p>
+</section>
+</section>
+<section id="oled-oliynyk-property">
+<h2>OLED - <code class="docutils literal notranslate"><span class="pre">Oliynyk</span></code> + <code class="docutils literal notranslate"><span class="pre">Property</span></code><a class="headerlink" href="#oled-oliynyk-property" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>
+
+<span class="n">oled</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">elements</span>          <span class="c1"># list[str], length 76</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">db</span>                <span class="c1"># dict[symbol, dict[property_key, float]]</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;Si&quot;</span><span class="p">][</span><span class="n">Property</span><span class="o">.</span><span class="n">AW</span><span class="p">]</span>
+</pre></div>
+</div>
+<section id="id1">
+<h3>Methods<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list_supported_elements()</span></code></p></td>
+<td><p>Same as <code class="docutils literal notranslate"><span class="pre">.elements</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">is_formula_supported(formula:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></p></td>
+<td><p>All elements in OLED?</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_supported_formulas(formulas)</span> <span class="pre">-&gt;</span> <span class="pre">(supported,</span> <span class="pre">unsupported)</span></code></p></td>
+<td><p>Split lists</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_property_data(property:</span> <span class="pre">Property)</span> <span class="pre">-&gt;</span> <span class="pre">dict[str,</span> <span class="pre">float]</span></code></p></td>
+<td><p>One property, all elements</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_property_data_for_formula(formula,</span> <span class="pre">property)</span> <span class="pre">-&gt;</span> <span class="pre">dict[str,</span> <span class="pre">float]</span></code></p></td>
+<td><p>One property, elements in formula</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">to_dataframe()</span> <span class="pre">-&gt;</span> <span class="pre">pandas.DataFrame</span></code></p></td>
+<td><p>Full table <code class="docutils literal notranslate"><span class="pre">(76,</span> <span class="pre">23)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">to_csv(path:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></p></td>
+<td><p>Write CSV, return path</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_oliynyk_CAF_data()</span></code></p></td>
+<td><p>Raw load of the nested dict (also used by <code class="docutils literal notranslate"><span class="pre">__init__</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="exact-property-enum-do-not-rename">
+<h3>Exact <code class="docutils literal notranslate"><span class="pre">Property</span></code> enum (do not rename)<a class="headerlink" href="#exact-property-enum-do-not-rename" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enum name</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">.value</span></code> column key</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AW</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">atomic_weight</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ATOMIC_NUMBER</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">atomic_number</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PERIOD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GROUP</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">group</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MEND_NUM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Mendeleev_number</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VAL_TOTAL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">valencee_total</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UNPARIED_E</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unpaired_electrons</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GILMAN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Gilman</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Z_EFF</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Z_eff</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ION_ENERGY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ionization_energy</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">COORD_NUM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">coordination_number</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RATIO_CLOSEST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ratio_closest</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POLYHEDRON_DISTORT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">polyhedron_distortion</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CIF_RADIUS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CIF_radius</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PAULING_RADIUS_CN12</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Pauling_radius_CN12</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PAULING_EN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Pauling_EN</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MARTYNOV_BATSANOV_EN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Martynov_Batsanov_EN</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MELTING_POINT_K</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">melting_point_K</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DENSITY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">density</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SPECIFIC_HEAT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specific_heat</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">COHESIVE_ENERGY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cohesive_energy</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BULK_MODULUS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bulk_modulus</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Spelling as shipped: <code class="docutils literal notranslate"><span class="pre">UNPARIED_E</span></code> (not <code class="docutils literal notranslate"><span class="pre">UNPAIRED_E</span></code>), column
+<code class="docutils literal notranslate"><span class="pre">valencee_total</span></code> (double “e”).</p>
+</section>
+<section id="what-each-oled-property-means">
+<h3>What each OLED property means<a class="headerlink" href="#what-each-oled-property-means" title="Link to this heading">#</a></h3>
+<p>Subset of the Oliynyk table (22 of ~98 features in the dataset paper).
+Short definitions follow Data in Brief Table 1
+(<a class="reference external" href="https://doi.org/10.1016/j.dib.2024.110178">https://doi.org/10.1016/j.dib.2024.110178</a>). Full narrative:
+<a class="reference internal" href="../tutorials/oled.html"><span class="doc std std-doc">OLED tutorial - What each property means</span></a>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enum</p></th>
+<th class="head"><p>Column</p></th>
+<th class="head"><p>Meaning (short)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AW</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">atomic_weight</span></code></p></td>
+<td><p>Isotopic-mean atomic mass</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ATOMIC_NUMBER</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">atomic_number</span></code></p></td>
+<td><p>Proton count <em>Z</em></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PERIOD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">period</span></code></p></td>
+<td><p>Periodic-table period (row)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GROUP</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">group</span></code></p></td>
+<td><p>Periodic-table group (column)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MEND_NUM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Mendeleev_number</span></code></p></td>
+<td><p>Similarity-based element order</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VAL_TOTAL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">valencee_total</span></code></p></td>
+<td><p>Total valence electrons</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UNPARIED_E</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unpaired_electrons</span></code></p></td>
+<td><p>Unpaired valence electrons</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GILMAN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Gilman</span></code></p></td>
+<td><p>Gilman valence-electron count</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Z_EFF</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Z_eff</span></code></p></td>
+<td><p>Effective nuclear charge (shielded)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ION_ENERGY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ionization_energy</span></code></p></td>
+<td><p>First ionization energy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">COORD_NUM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">coordination_number</span></code></p></td>
+<td><p>Characteristic CN in this table</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RATIO_CLOSEST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ratio_closest</span></code></p></td>
+<td><p>Size / packing ratio descriptor</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POLYHEDRON_DISTORT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">polyhedron_distortion</span></code></p></td>
+<td><p>Local packing distortion metric</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CIF_RADIUS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CIF_radius</span></code></p></td>
+<td><p>Radius for CIF-radius normalization (Å)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PAULING_RADIUS_CN12</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Pauling_radius_CN12</span></code></p></td>
+<td><p>Pauling metallic radius (CN12)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PAULING_EN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Pauling_EN</span></code></p></td>
+<td><p>Pauling electronegativity</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MARTYNOV_BATSANOV_EN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Martynov_Batsanov_EN</span></code></p></td>
+<td><p>Martynov-Batsanov electronegativity</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MELTING_POINT_K</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">melting_point_K</span></code></p></td>
+<td><p>Melting point (K)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DENSITY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">density</span></code></p></td>
+<td><p>Bulk density</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SPECIFIC_HEAT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specific_heat</span></code></p></td>
+<td><p>Specific heat capacity</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">COHESIVE_ENERGY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cohesive_energy</span></code></p></td>
+<td><p>Solid → free-atom energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BULK_MODULUS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bulk_modulus</span></code></p></td>
+<td><p>Resistance to compression</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="formula-feature-vector-ml">
+<h3>Formula → feature vector (ML)<a class="headerlink" href="#formula-feature-vector-ml" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.parsers.formula</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formula</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>
+
+<span class="n">oled</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parsed_formula</span>  <span class="c1"># [(&#39;Nd&#39;, 1.0), (&#39;Si&#39;, 2.0)]</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">parsed</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">prop</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">oled</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">el</span><span class="p">][</span><span class="n">prop</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span> <span class="k">for</span> <span class="n">el</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">parsed</span><span class="p">)</span> <span class="o">/</span> <span class="n">total</span>
+    <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">Property</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Tutorial: <a class="reference internal" href="../tutorials/oled.html"><span class="doc std std-doc">OLED</span></a>. Autodoc: <a class="reference internal" href="oliynyk.html"><span class="doc std std-doc">Oliynyk</span></a>.</p>
+</section>
+</section>
+<section id="formula">
+<h2><code class="docutils literal notranslate"><span class="pre">Formula</span></code><a class="headerlink" href="#formula" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.parsers.formula</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formula</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">formula</span>                 <span class="c1"># str</span>
+<span class="n">f</span><span class="o">.</span><span class="n">elements</span>                <span class="c1"># [&#39;Nd&#39;, &#39;Si&#39;]</span>
+<span class="n">f</span><span class="o">.</span><span class="n">parsed_formula</span>          <span class="c1"># [(&#39;Nd&#39;, 1.0), (&#39;Si&#39;, 2.0)]</span>
+<span class="n">f</span><span class="o">.</span><span class="n">indices</span>                 <span class="c1"># [1.0, 2.0]</span>
+<span class="n">f</span><span class="o">.</span><span class="n">element_count</span>           <span class="c1"># int number of element types</span>
+<span class="n">f</span><span class="o">.</span><span class="n">get_normalized_formula</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Class/static helpers include: <code class="docutils literal notranslate"><span class="pre">filter_by_elements_containing</span></code>,
+<code class="docutils literal notranslate"><span class="pre">filter_by_elements_matching</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_by_composition</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sort_by_stoichiometry</span></code>, <code class="docutils literal notranslate"><span class="pre">sort_by_elemental_property</span></code>,
+<code class="docutils literal notranslate"><span class="pre">order_by_alphabetical</span></code>, <code class="docutils literal notranslate"><span class="pre">count_by_formula</span></code>, <code class="docutils literal notranslate"><span class="pre">get_unique_formulas</span></code>, …</p>
+<p>Autodoc: <a class="reference internal" href="formula.html"><span class="doc std std-doc">Formula</span></a>.</p>
+</section>
+<section id="elementsorter">
+<h2><code class="docutils literal notranslate"><span class="pre">ElementSorter</span></code><a class="headerlink" href="#elementsorter" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sorters.element_sorter</span><span class="w"> </span><span class="kn">import</span> <span class="n">ElementSorter</span>
+
+<span class="n">sorter</span> <span class="o">=</span> <span class="n">ElementSorter</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="c1"># see autodoc for label maps / Excel sheets</span>
+<span class="n">sorter</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Autodoc: <a class="reference internal" href="element-sorter.html"><span class="doc std std-doc">ElementSorter</span></a>.</p>
+</section>
+<section id="coordination-submodules">
+<h2>Coordination submodules<a class="headerlink" href="#coordination-submodules" title="Link to this heading">#</a></h2>
+<p>Low-level helpers under <code class="docutils literal notranslate"><span class="pre">cifkit.coordination.*</span></code> (method, filter, geometry,
+composition, connection, bond_distance, site_distance). Prefer the <code class="docutils literal notranslate"><span class="pre">Cif</span></code>
+attributes above unless you need the functions directly.</p>
+<p>Autodoc: <a class="reference internal" href="coordination.html"><span class="doc std std-doc">Coordination</span></a>.</p>
+</section>
+<section id="publications">
+<h2>Publications<a class="headerlink" href="#publications" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>cifkit (JOSS): <a class="reference external" href="https://doi.org/10.21105/joss.07205">https://doi.org/10.21105/joss.07205</a></p></li>
+<li><p>OLED / Oliynyk dataset (Data in Brief): <a class="reference external" href="https://doi.org/10.1016/j.dib.2024.110178">https://doi.org/10.1016/j.dib.2024.110178</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./api"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sources.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sources</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../maintainer/release.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Changelog and release</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

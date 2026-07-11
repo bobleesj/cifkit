@@ -1,0 +1,909 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Formula &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/formula';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ElementSorter" href="element-sorter.html" />
+    <link rel="prev" title="OLED / Oliynyk" href="oliynyk.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/physical-features.html">Parse physical features from a .cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/statistics-many-cifs.html">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cif.html">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordination.html">Coordination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oliynyk.html">OLED / Oliynyk</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick-reference.html">Quick reference (LLM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/release.html">Changelog and release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/formula.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Formula</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula"><code class="docutils literal notranslate"><span class="pre">Formula</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.order_by_alphabetical"><code class="docutils literal notranslate"><span class="pre">Formula.order_by_alphabetical()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.count"><code class="docutils literal notranslate"><span class="pre">Formula.count()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.count_unique"><code class="docutils literal notranslate"><span class="pre">Formula.count_unique()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.count_individual"><code class="docutils literal notranslate"><span class="pre">Formula.count_individual()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.count_by_composition"><code class="docutils literal notranslate"><span class="pre">Formula.count_by_composition()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.get_unique_formulas"><code class="docutils literal notranslate"><span class="pre">Formula.get_unique_formulas()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.get_unique_elements"><code class="docutils literal notranslate"><span class="pre">Formula.get_unique_elements()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.get_element_count"><code class="docutils literal notranslate"><span class="pre">Formula.get_element_count()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.build_formula_from_parsed"><code class="docutils literal notranslate"><span class="pre">Formula.build_formula_from_parsed()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.filter_by_composition"><code class="docutils literal notranslate"><span class="pre">Formula.filter_by_composition()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.filter_by_single_composition"><code class="docutils literal notranslate"><span class="pre">Formula.filter_by_single_composition()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.filter_by_elements_containing"><code class="docutils literal notranslate"><span class="pre">Formula.filter_by_elements_containing()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.filter_by_elements_matching"><code class="docutils literal notranslate"><span class="pre">Formula.filter_by_elements_matching()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.count_duplicates"><code class="docutils literal notranslate"><span class="pre">Formula.count_duplicates()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.count_by_formula"><code class="docutils literal notranslate"><span class="pre">Formula.count_by_formula()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.elements"><code class="docutils literal notranslate"><span class="pre">Formula.elements</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.indices"><code class="docutils literal notranslate"><span class="pre">Formula.indices</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.element_count"><code class="docutils literal notranslate"><span class="pre">Formula.element_count</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.max_min_avg_index"><code class="docutils literal notranslate"><span class="pre">Formula.max_min_avg_index</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.get_normalized_indices"><code class="docutils literal notranslate"><span class="pre">Formula.get_normalized_indices()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.get_normalized_formula"><code class="docutils literal notranslate"><span class="pre">Formula.get_normalized_formula()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.get_normalized_parsed_formula"><code class="docutils literal notranslate"><span class="pre">Formula.get_normalized_parsed_formula()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.sort_by_custom_label"><code class="docutils literal notranslate"><span class="pre">Formula.sort_by_custom_label()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.sort_by_elemental_property"><code class="docutils literal notranslate"><span class="pre">Formula.sort_by_elemental_property()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.parsers.formula.Formula.sort_by_stoichiometry"><code class="docutils literal notranslate"><span class="pre">Formula.sort_by_stoichiometry()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="formula">
+<h1>Formula<a class="headerlink" href="#formula" title="Link to this heading">#</a></h1>
+<p>Parse a composition string into <code class="docutils literal notranslate"><span class="pre">(element,</span> <span class="pre">count)</span></code> pairs, normalize
+indices, and sort/filter formulas. Used with OLED for ML feature vectors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.parsers.formula</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formula</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">formula</span>                 <span class="c1"># &#39;NdSi2&#39;</span>
+<span class="n">f</span><span class="o">.</span><span class="n">elements</span>                <span class="c1"># [&#39;Nd&#39;, &#39;Si&#39;]</span>
+<span class="n">f</span><span class="o">.</span><span class="n">parsed_formula</span>          <span class="c1"># [(&#39;Nd&#39;, 1.0), (&#39;Si&#39;, 2.0)]  # use this for weights</span>
+<span class="n">f</span><span class="o">.</span><span class="n">indices</span>                 <span class="c1"># [1.0, 2.0]</span>
+<span class="n">f</span><span class="o">.</span><span class="n">element_count</span>           <span class="c1"># 2</span>
+<span class="n">f</span><span class="o">.</span><span class="n">get_normalized_formula</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>With OLED: <a class="reference internal" href="quick-reference.html"><span class="doc std std-doc">quick reference - Formula → feature vector</span></a> ·
+<a class="reference internal" href="../tutorials/oled.html"><span class="doc std std-doc">OLED tutorial</span></a> · <a class="reference download internal" download="" href="../_downloads/c24a7d34349eaa54e19e6b860828b573/llms.txt"><span class="xref download myst">llms.txt</span></a></p>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.parsers.formula.</span></span><span class="sig-name descname"><span class="pre">Formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cifkit.parsers.formula.Formula" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to parse and manipulate chemical formulas. This class
+provides methods to sort, filter, and analyze chemical.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">parsed_formula</span>
+<span class="go">[(&#39;Nd&#39;, 1.0), (&#39;Si&#39;, 2.0)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">element_count</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_formula</span><span class="p">()</span>
+<span class="go">&#39;Nd1.0Si2.0&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_parsed_formula</span><span class="p">()</span>
+<span class="go">[(&#39;Nd&#39;, 0.333333), (&#39;Si&#39;, 0.666667)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_indices</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.order_by_alphabetical">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">order_by_alphabetical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.order_by_alphabetical" title="Link to this definition">#</a></dt>
+<dd><p>Sort formulas alphabetically.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AB2&quot;</span><span class="p">,</span> <span class="s2">&quot;AB&quot;</span><span class="p">,</span> <span class="s2">&quot;BC2D2&quot;</span><span class="p">,</span> <span class="s2">&quot;BBC2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">order_by_alphabetical</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">[&quot;AB&quot;, &quot;AB2&quot;, &quot;BBC2&quot;, &quot;BC2D2&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.count">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.count" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of formulas in a list.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.count_unique">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count_unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.count_unique" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of unique formulas in a list.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">count_unique</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.count_individual">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count_individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.count_individual" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of occurrences of each formula in a list of
+formulas.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">count_formulas</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">{&quot;NdSi2&quot;: 1, &quot;ThOs&quot;: 1, &quot;NdSi2Th2&quot;: 1, &quot;YNdThSi2&quot;: 1}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.count_by_composition">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count_by_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.count_by_composition" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of formulas in each composition category.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt;</span>
+<span class="go">formulas = [&quot;NdSi2&quot;, &quot;ThOs&quot;, &quot;NdSi2Th2&quot;, &quot;YNdThSi2&quot;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">count_formulas_by_composition</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">{2: 2, 3: 1, 4: 1}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.get_unique_formulas">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_unique_formulas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.get_unique_formulas" title="Link to this definition">#</a></dt>
+<dd><p>Get unique formulas from a list of formulas.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">get_unique_formulas</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">{&quot;NdSi2&quot;, &quot;ThOs&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.get_unique_elements">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_unique_elements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.get_unique_elements" title="Link to this definition">#</a></dt>
+<dd><p>Get unique elements from a list of formulas.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">get_unique_elements</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">{&quot;Nd&quot;, &quot;Si&quot;, &quot;Th&quot;, &quot;Os&quot;, &quot;Y&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.get_element_count">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_element_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.get_element_count" title="Link to this definition">#</a></dt>
+<dd><p>Get the count of each element in a list of formulas. Do not
+consider the stoichiometric value.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">get_element_count</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">{&quot;Nd&quot;: 3, &quot;Si&quot;: 3, &quot;Th&quot;: 3, &quot;Os&quot;: 1, &quot;Y&quot;: 1}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.build_formula_from_parsed">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_formula_from_parsed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_formula</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.build_formula_from_parsed" title="Link to this definition">#</a></dt>
+<dd><p>Convert the parsed formula into a string. If the index can be
+converted to 1 (int), it will be removed.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parsed_formula</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Nd&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">build_formula_from_parsed</span><span class="p">(</span><span class="n">parsed_formula</span><span class="p">)</span>
+<span class="go">&quot;NdSi2&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.filter_by_composition">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_by_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.filter_by_composition" title="Link to this definition">#</a></dt>
+<dd><p>Sort formulas into categories based on their composition.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">filter_by_composition</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">{2: [&quot;NdSi2&quot;, &quot;ThOs&quot;], 3: [&quot;NdSi2Th2&quot;], 4: [&quot;YNdThSi2&quot;]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.filter_by_single_composition">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_by_single_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composition_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.filter_by_single_composition" title="Link to this definition">#</a></dt>
+<dd><p>Filter formulas by the given composition type.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">filter_by_single_composition</span><span class="p">(</span><span class="n">formulas</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[&quot;NdSi2&quot;, &quot;ThOs&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.filter_by_elements_containing">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_by_elements_containing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.filter_by_elements_containing" title="Link to this definition">#</a></dt>
+<dd><p>Filter formulas by a list of elements.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nd&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">filter_by_elements</span><span class="p">(</span><span class="n">formulas</span><span class="p">,</span> <span class="n">elements</span><span class="p">)</span>
+<span class="go">[&quot;NdSi2&quot;, &quot;NdSi2Th2&quot;, &quot;YNdThSi2&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.filter_by_elements_matching">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_by_elements_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.filter_by_elements_matching" title="Link to this definition">#</a></dt>
+<dd><p>Filter formulas by a list of elements but the specified
+elements should be only contained.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;YNdThSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nd&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filter_by_elements</span><span class="p">(</span><span class="n">formulas</span><span class="p">,</span> <span class="n">elements</span><span class="p">)</span>
+<span class="go">[&quot;NdSi2&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.count_duplicates">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.count_duplicates" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of duplicates in a list of formulas.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">count_duplicates</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="go">{&quot;NdSi2&quot;: 2, &quot;NdSi2Th2&quot;: 2}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.count_by_formula">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count_by_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formula_to_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.count_by_formula" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of occurrences of a specific formula in a
+list of formulas.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2Th2&quot;</span><span class="p">,</span> <span class="s2">&quot;ThOs&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Formula</span><span class="o">.</span><span class="n">count_by_formula</span><span class="p">(</span><span class="n">formulas</span><span class="p">,</span> <span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.elements">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elements</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.parsers.formula.Formula.elements" title="Link to this definition">#</a></dt>
+<dd><p>Get the list of elements in the formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">elements</span>
+<span class="go">[&quot;Nd&quot;, &quot;Si&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.indices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">indices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.parsers.formula.Formula.indices" title="Link to this definition">#</a></dt>
+<dd><p>Get the list of indices in the formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">indices</span>
+<span class="go">[1.0, 2.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.element_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">element_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#cifkit.parsers.formula.Formula.element_count" title="Link to this definition">#</a></dt>
+<dd><p>Get the number of unique elements in the formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">element_count</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.max_min_avg_index">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_min_avg_index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cifkit.parsers.formula.Formula.max_min_avg_index" title="Link to this definition">#</a></dt>
+<dd><p>Get the max, min, and avg index of the formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">max_min_avg_index</span>
+<span class="go">(2.0, 1.0, 1.5)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.get_normalized_indices">
+<span class="sig-name descname"><span class="pre">get_normalized_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.get_normalized_indices" title="Link to this definition">#</a></dt>
+<dd><p>Get the normalized indices of the formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_indices</span><span class="p">()</span>
+<span class="go">[0.333333, 0.666667]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_indices</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[0.33, 0.67]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.get_normalized_formula">
+<span class="sig-name descname"><span class="pre">get_normalized_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.get_normalized_formula" title="Link to this definition">#</a></dt>
+<dd><p>Get the normalized formula of the formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_formula</span><span class="p">()</span>
+<span class="go">&quot;Nd0.333333Si0.666667&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_formula</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&quot;Nd0.33Si0.67&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.get_normalized_parsed_formula">
+<span class="sig-name descname"><span class="pre">get_normalized_parsed_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.get_normalized_parsed_formula" title="Link to this definition">#</a></dt>
+<dd><p>Get the normalized parsed formula of the formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_parsed_formula</span><span class="p">()</span>
+<span class="go">[(&quot;Nd&quot;, 0.333333), (&quot;Si&quot;, 0.666667)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span><span class="o">.</span><span class="n">get_normalized_parsed_formula</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[(&quot;Nd&quot;, 0.33), (&quot;Si&quot;, 0.67)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.sort_by_custom_label">
+<span class="sig-name descname"><span class="pre">sort_by_custom_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">custom_labels:</span> <span class="pre">dict[slice(&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">dict[slice(&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">list[str],</span> <span class="pre">None)],</span> <span class="pre">None)],</span> <span class="pre">normalize=False</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.sort_by_custom_label" title="Link to this definition">#</a></dt>
+<dd><p>Sort elements in a chemical formula using a precomputed
+element order map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>formula</strong> (<em>str</em>) – The chemical formula to be sorted.</p></li>
+<li><p><strong>element_order</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em><em>]</em>) – The mapping from element symbols to their desired sort index.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to normalize the parsed formula, by default False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The sorted formula string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;BLi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">custom_labels</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Er&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;In&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="mi">3</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Er&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Co&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;In&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="mi">4</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Er&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Co&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;In&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;U&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sorted_formula</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">custom_labels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sorted_formula</span><span class="p">)</span>
+<span class="go">LiB</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.sort_by_elemental_property">
+<span class="sig-name descname"><span class="pre">sort_by_elemental_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.sort_by_elemental_property" title="Link to this definition">#</a></dt>
+<dd><p>Sort the elements in a chemical formula based on a specified
+CAF property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>formula</strong> (<em>str</em>) – The chemical formula to be sorted.</p></li>
+<li><p><strong>property_data</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>) – The dictionary that contains the single value for each element of
+the given formula.</p></li>
+<li><p><strong>ascending</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to sort in ascending order. Defaults to True.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to normalize the formula before sorting. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The formula string with elements sorted according to the specified
+property.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>#FIXME: Double check this example
+&gt;&gt;&gt; from cifkit.sources.oliynyk import Oliynyk
+&gt;&gt;&gt; from cifkit.sources.oliynyk import Property as P
+&gt;&gt;&gt; formula = “LiFe”
+&gt;&gt;&gt; oliynyk = Oliynyk()
+&gt;&gt;&gt; prop_data = oliynyk.get_property_data_for_formula(formula, P.AW)
+&gt;&gt;&gt; Formula(formula).sort(“LiFe”, prop_data)
+“LiFe”
+#FIXME: TEST THIS EXAMPLES</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.parsers.formula.Formula.sort_by_stoichiometry">
+<span class="sig-name descname"><span class="pre">sort_by_stoichiometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">property_data:</span> <span class="pre">dict[slice(&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'float'&gt;,</span> <span class="pre">None)],</span> <span class="pre">ascending=True,</span> <span class="pre">normalize=False</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cifkit.parsers.formula.Formula.sort_by_stoichiometry" title="Link to this definition">#</a></dt>
+<dd><p>Sort the elements in the chemical formula based on their
+composition.</p>
+<p>When there are more than one element with the same compsition, the
+Mendeleev number is used to break the tie. During the tie, the
+Mendeleev number is always sorted in ascending order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>property_data</strong> (<em>dict</em><em>[</em><em>str: float</em><em>]</em>) – The data to sort with when when stoichiometric raito is the same.
+The default value is optional that if no data provided, then we
+will simply sort alphabetically from a to z.</p></li>
+<li><p><strong>ascending</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to sort in ascending order. Defaults to True.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to normalize the formula before sorting. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The formula string with elements sorted according to the specified
+property.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sort</span><span class="p">(</span><span class="s2">&quot;LiNa2B&quot;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+<span class="go">&quot;LiBNa2&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./api"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="oliynyk.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">OLED / Oliynyk</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="element-sorter.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ElementSorter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

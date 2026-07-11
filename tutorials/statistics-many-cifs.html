@@ -1,0 +1,700 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Statistics over many CIFs &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/statistics-many-cifs';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OLED - Oliynyk elemental data" href="oled.html" />
+    <link rel="prev" title="Parse physical features from a .cif" href="physical-features.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="physical-features.html">Parse physical features from a .cif</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/cif.html">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/coordination.html">Coordination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/oliynyk.html">OLED / Oliynyk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/formula.html">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/quick-reference.html">Quick reference (LLM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/release.html">Changelog and release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/statistics-many-cifs.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Statistics over many CIFs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-is-on-this-page">What data is on this page?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#work-on-a-copy-hands-on-setup">1. Work on a copy (hands-on setup)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-in-this-folder">2. “What is in this folder?”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#give-me-only-the-files-that-match">3. “Give me only the files that match …”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#park-the-matches-in-a-new-folder">4. “Park the matches in a new folder”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-me-the-distribution-histograms">5. “Show me the distribution” (histograms)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-larger-ensemble-looks-like">What a larger ensemble looks like</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-when-you-do-have-thousands-of-files">Scale (when you do have thousands of files)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next">Next</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-demo-data-citation">Notes (demo data, citation)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="statistics-over-many-cifs">
+<h1>Statistics over many CIFs<a class="headerlink" href="#statistics-over-many-cifs" title="Link to this heading">#</a></h1>
+<p>A single <code class="docutils literal notranslate"><span class="pre">.cif</span></code> gives you geometry for <strong>one</strong> structure
+(<a class="reference internal" href="physical-features.html"><span class="doc std std-doc">physical features</span></a>). When you have a <strong>folder</strong>,
+<code class="docutils literal notranslate"><span class="pre">CifEnsemble</span></code> is the hands-on tool: clean the set, see what is in it,
+filter, plot histograms, and copy matching files into new folders.</p>
+<p>Elemental composition features are <strong>not</strong> from these CIFs - use
+<a class="reference internal" href="oled.html"><span class="doc std std-doc">OLED</span></a> (<em>Data in Brief</em> table).</p>
+<section id="what-data-is-on-this-page">
+<h2>What data is on this page?<a class="headerlink" href="#what-data-is-on-this-page" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Content</p></th>
+<th class="head"><p>Source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Runnable demo (2 files)</p></td>
+<td><p>Packaged <strong>GdSb</strong> + <strong>HoSb</strong> (<code class="docutils literal notranslate"><span class="pre">Example.demo_cif_folder_path</span></code>) - always available offline</p></td>
+</tr>
+<tr class="row-odd"><td><p>Large structure / CN histograms</p></td>
+<td><p>Figures from published / JOSS-scale ensembles - illustrative, not re-run here</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If you no longer have a large private CIF collection on disk, you can still
+<strong>learn the API</strong> on the two-file demo and <strong>see what large runs look like</strong>
+from the figures. The same calls scale: tens of thousands of CIFs in SAF/CAF
+workflows, with <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> as the geometry engine
+(<a class="reference external" href="https://doi.org/10.1039/d4dd00332b">Digital Discovery</a>).</p>
+</section>
+<section id="work-on-a-copy-hands-on-setup">
+<h2>1. Work on a copy (hands-on setup)<a class="headerlink" href="#work-on-a-copy-hands-on-setup" title="Link to this heading">#</a></h2>
+<p>Preprocessing can rewrite ill-formatted files in place, and
+<code class="docutils literal notranslate"><span class="pre">move_cif_files</span></code> relocates them. Always work on a <strong>scratch copy</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">CifEnsemble</span><span class="p">,</span> <span class="n">Example</span>
+
+<span class="n">scratch</span> <span class="o">=</span> <span class="s2">&quot;demo_cifs&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">scratch</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">demo_cif_folder_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.cif&quot;</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Example</span><span class="o">.</span><span class="n">demo_cif_folder_path</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">scratch</span><span class="p">)</span>
+
+<span class="n">ensemble</span> <span class="o">=</span> <span class="n">CifEnsemble</span><span class="p">(</span><span class="n">scratch</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What just happened: cifkit walked the folder, <strong>preprocessed</strong> each CIF for
+gemmi compatibility, reported how many landed in <code class="docutils literal notranslate"><span class="pre">error_*</span></code> folders, then
+built a <code class="docutils literal notranslate"><span class="pre">Cif</span></code> object per file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CIF Preprocessing in demo_cifs begun...
+
+Preprocessing demo_cifs/GdSb.cif (1/2)
+Preprocessing demo_cifs/HoSb.cif (2/2)
+
+SUMMARY
+# of files moved to &#39;error_*&#39; folders: 0 (all clean)
+
+Initializing 2 Cif objects...
+Finished initialization!
+</pre></div>
+</div>
+<p>With two clean rocksalt pnictides, you are ready to ask questions of the
+set - not of one file at a time.</p>
+</section>
+<section id="what-is-in-this-folder">
+<h2>2. “What is in this folder?”<a class="headerlink" href="#what-is-in-this-folder" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;file_count:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">file_count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unique_formulas:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_formulas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unique_structures:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_structures</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unique_space_group_names:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unique_elements:&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Turn the same facts into a small table you can paste into a notebook or
+report:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">overview</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;file_count&quot;</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">file_count</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;unique_formulas&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_formulas</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;unique_structures&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_structures</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;unique_space_group_names&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_space_group_names</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;unique_elements&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">unique_elements</span><span class="p">)),</span>
+    <span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stat&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">overview</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>stat</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>file_count</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>unique_formulas</p></td>
+<td><p>[‘GdSb’, ‘HoSb’]</p></td>
+</tr>
+<tr class="row-even"><td><p>unique_structures</p></td>
+<td><p>[‘NaCl’]</p></td>
+</tr>
+<tr class="row-odd"><td><p>unique_space_group_names</p></td>
+<td><p>[‘Fm-3m’]</p></td>
+</tr>
+<tr class="row-even"><td><p>unique_elements</p></td>
+<td><p>[‘Gd’, ‘Ho’, ‘Sb’]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Reading the result (demo story):</strong> two formulas, one structure type
+(NaCl), one space group, three elements. On a real database dump you would
+see dozens of structure types and space groups here - same API, bigger
+folder.</p>
+<p>Per-file series also exist (<code class="docutils literal notranslate"><span class="pre">formula_stats</span></code>, <code class="docutils literal notranslate"><span class="pre">minimum_distances</span></code>,
+<code class="docutils literal notranslate"><span class="pre">supercell_atom_counts</span></code>, …) - see the
+<a class="reference internal" href="../api/cif-ensemble.html"><span class="doc std std-doc">CifEnsemble API</span></a>.</p>
+</section>
+<section id="give-me-only-the-files-that-match">
+<h2>3. “Give me only the files that match …”<a class="headerlink" href="#give-me-only-the-files-that-match" title="Link to this heading">#</a></h2>
+<p>Filters return <strong>paths</strong> (sets), so you can chain logic or hand them to
+copy/move:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_formulas</span><span class="p">([</span><span class="s2">&quot;GdSb&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_elements</span><span class="p">([</span><span class="s2">&quot;Ho&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_space_group_names</span><span class="p">([</span><span class="s2">&quot;Fm-3m&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;demo_cifs/GdSb.cif&#39;}
+{&#39;demo_cifs/HoSb.cif&#39;}
+{&#39;demo_cifs/GdSb.cif&#39;, &#39;demo_cifs/HoSb.cif&#39;}
+</pre></div>
+</div>
+<p><strong>Hands-on read:</strong> GdSb-only is one path; Ho-containing is the other;
+space group Fm-3m is both. Other filters include structure, space-group
+number, composition type, site-mixing type, CN ranges, min distance, and
+supercell size.</p>
+</section>
+<section id="park-the-matches-in-a-new-folder">
+<h2>4. “Park the matches in a new folder”<a class="headerlink" href="#park-the-matches-in-a-new-folder" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ensemble</span><span class="o">.</span><span class="n">copy_cif_files</span><span class="p">(</span><span class="n">ensemble</span><span class="o">.</span><span class="n">filter_by_formulas</span><span class="p">([</span><span class="s2">&quot;GdSb&quot;</span><span class="p">]),</span> <span class="s2">&quot;sorted_GdSb&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;sorted_GdSb&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[&#39;GdSb.cif&#39;]
+</pre></div>
+</div>
+<p>This is the usual lab pattern: filter a large dump, copy the hits into
+<code class="docutils literal notranslate"><span class="pre">sorted_*</span></code> for the next notebook or for SAF/CAF featurization.</p>
+</section>
+<section id="show-me-the-distribution-histograms">
+<h2>5. “Show me the distribution” (histograms)<a class="headerlink" href="#show-me-the-distribution-histograms" title="Link to this heading">#</a></h2>
+<p>On the demo (2 files) a structure histogram is almost trivial - both are
+NaCl - but the <strong>call</strong> is what you reuse on large sets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ensemble</span><span class="o">.</span><span class="n">generate_structure_histogram</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;histograms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;histograms&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[&#39;structures.png&#39;]
+</pre></div>
+</div>
+<p>Available histograms: structure, formula, tag, space group number and
+name, supercell size, elements, CN by both method families, composition
+type, and site mixing type.</p>
+<section id="what-a-larger-ensemble-looks-like">
+<h3>What a larger ensemble looks like<a class="headerlink" href="#what-a-larger-ensemble-looks-like" title="Link to this heading">#</a></h3>
+<p>These figures are <strong>not</strong> recomputed from the two-file demo. They show the
+kind of output you get when the folder is big enough for histograms to
+matter.</p>
+<figure class="align-center" id="id1">
+<img alt="Structures distribution histogram from CifEnsemble" src="../_images/histogram-structure.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text"><strong>Structure histogram</strong> from a larger ensemble via
+<code class="docutils literal notranslate"><span class="pre">generate_structure_histogram</span></code>. Same method as above; different folder size.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<img alt="JOSS Figure 1 polyhedron and CN histogram" src="../_images/ErCoIn-histogram-combined.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>JOSS Figure 1.</strong> One CIF polyhedron (left) and ensemble CN distribution
+(right) - the single-file vs many-file story on one page.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="scale-when-you-do-have-thousands-of-files">
+<h2>Scale (when you do have thousands of files)<a class="headerlink" href="#scale-when-you-do-have-thousands-of-files" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scale</p></th>
+<th class="head"><p>What to expect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Demo (2 CIFs)</p></td>
+<td><p>Seconds - this tutorial</p></td>
+</tr>
+<tr class="row-odd"><td><p>~10,000 CIFs</p></td>
+<td><p>Roughly 30-60 minutes on a laptop (supercell + neighbors per file)</p></td>
+</tr>
+<tr class="row-even"><td><p>SAF + CAF training tables</p></td>
+<td><p>Tens of thousands of CIFs; feature tables on the order of a million rows (<a class="reference external" href="https://doi.org/10.1039/d4dd00332b">Digital Discovery</a>); <code class="docutils literal notranslate"><span class="pre">cifkit</span></code> supplies the geometry</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You do <strong>not</strong> need the large dataset to learn the API. You need it only
+when you want to regenerate large histograms or feature matrices
+yourself.</p>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h2>
+<p>Full method list: <a class="reference internal" href="../api/cif-ensemble.html"><span class="doc std std-doc">CifEnsemble</span></a>.</p>
+</section>
+<section id="next">
+<h2>Next<a class="headerlink" href="#next" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="physical-features.html"><span class="doc std std-doc">Parse physical features from a .cif</span></a></strong> - distances, CN, polyhedra</p></li>
+<li><p><strong><a class="reference internal" href="oled.html"><span class="doc std std-doc">OLED</span></a></strong> - elemental / composition features (dataset table, not from CIF)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="notes-demo-data-citation">
+<h2>Notes (demo data, citation)<a class="headerlink" href="#notes-demo-data-citation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Runnable numbers on this page use packaged <strong>GdSb</strong> and <strong>HoSb</strong> only.</p></li>
+<li><p>Large histograms are published / JOSS figures for orientation.</p></li>
+<li><p>Soft cite for geometry / ensemble work: <strong>cifkit</strong>
+(<a class="reference external" href="https://doi.org/10.21105/joss.07205">JOSS</a>); for feature-generation
+workflows also <strong>SAF + CAF</strong>
+(<a class="reference external" href="https://doi.org/10.1039/d4dd00332b">Digital Discovery</a>).
+<a class="reference download internal" download="" href="../_downloads/5f7457689aef7256aa43ad26414dfe7b/CITATION.txt"><span class="xref download myst">CITATION.txt</span></a> · <a class="reference internal" href="../intro.html"><span class="doc std std-doc">home page</span></a>.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="physical-features.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Parse physical features from a .cif</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="oled.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">OLED - Oliynyk elemental data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

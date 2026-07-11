@@ -1,0 +1,903 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>OLED / Oliynyk &#8212; cifkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c0854c7a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/oliynyk';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Formula" href="formula.html" />
+    <link rel="prev" title="Coordination" href="coordination.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">cifkit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/physical-features.html">Parse physical features from a .cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/statistics-many-cifs.html">Statistics over many CIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/oled.html">OLED (elemental data)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cif.html">Cif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cif-ensemble.html">CifEnsemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordination.html">Coordination</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">OLED / Oliynyk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formula.html">Formula</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element-sorter.html">ElementSorter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick-reference.html">Quick reference (LLM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/release.html">Changelog and release</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/oliynyk.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>OLED / Oliynyk</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-property-members">Exact <code class="docutils literal notranslate"><span class="pre">Property</span></code> members</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formula-ml-feature-vector">Formula → ML feature vector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oliynyk">Oliynyk</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk"><code class="docutils literal notranslate"><span class="pre">Oliynyk</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.db"><code class="docutils literal notranslate"><span class="pre">Oliynyk.db</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.elements"><code class="docutils literal notranslate"><span class="pre">Oliynyk.elements</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.get_oliynyk_CAF_data"><code class="docutils literal notranslate"><span class="pre">Oliynyk.get_oliynyk_CAF_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.is_formula_supported"><code class="docutils literal notranslate"><span class="pre">Oliynyk.is_formula_supported()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.get_supported_formulas"><code class="docutils literal notranslate"><span class="pre">Oliynyk.get_supported_formulas()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.list_supported_elements"><code class="docutils literal notranslate"><span class="pre">Oliynyk.list_supported_elements()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.get_property_data_for_formula"><code class="docutils literal notranslate"><span class="pre">Oliynyk.get_property_data_for_formula()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.get_property_data"><code class="docutils literal notranslate"><span class="pre">Oliynyk.get_property_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.to_dataframe"><code class="docutils literal notranslate"><span class="pre">Oliynyk.to_dataframe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Oliynyk.to_csv"><code class="docutils literal notranslate"><span class="pre">Oliynyk.to_csv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property">Property</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property"><code class="docutils literal notranslate"><span class="pre">Property</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.AW"><code class="docutils literal notranslate"><span class="pre">Property.AW</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.ATOMIC_NUMBER"><code class="docutils literal notranslate"><span class="pre">Property.ATOMIC_NUMBER</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.PERIOD"><code class="docutils literal notranslate"><span class="pre">Property.PERIOD</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.GROUP"><code class="docutils literal notranslate"><span class="pre">Property.GROUP</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.MEND_NUM"><code class="docutils literal notranslate"><span class="pre">Property.MEND_NUM</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.VAL_TOTAL"><code class="docutils literal notranslate"><span class="pre">Property.VAL_TOTAL</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.UNPARIED_E"><code class="docutils literal notranslate"><span class="pre">Property.UNPARIED_E</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.GILMAN"><code class="docutils literal notranslate"><span class="pre">Property.GILMAN</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.Z_EFF"><code class="docutils literal notranslate"><span class="pre">Property.Z_EFF</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.ION_ENERGY"><code class="docutils literal notranslate"><span class="pre">Property.ION_ENERGY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.COORD_NUM"><code class="docutils literal notranslate"><span class="pre">Property.COORD_NUM</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.RATIO_CLOSEST"><code class="docutils literal notranslate"><span class="pre">Property.RATIO_CLOSEST</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.POLYHEDRON_DISTORT"><code class="docutils literal notranslate"><span class="pre">Property.POLYHEDRON_DISTORT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.CIF_RADIUS"><code class="docutils literal notranslate"><span class="pre">Property.CIF_RADIUS</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.PAULING_RADIUS_CN12"><code class="docutils literal notranslate"><span class="pre">Property.PAULING_RADIUS_CN12</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.PAULING_EN"><code class="docutils literal notranslate"><span class="pre">Property.PAULING_EN</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.MARTYNOV_BATSANOV_EN"><code class="docutils literal notranslate"><span class="pre">Property.MARTYNOV_BATSANOV_EN</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.MELTING_POINT_K"><code class="docutils literal notranslate"><span class="pre">Property.MELTING_POINT_K</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.DENSITY"><code class="docutils literal notranslate"><span class="pre">Property.DENSITY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.SPECIFIC_HEAT"><code class="docutils literal notranslate"><span class="pre">Property.SPECIFIC_HEAT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.COHESIVE_ENERGY"><code class="docutils literal notranslate"><span class="pre">Property.COHESIVE_ENERGY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.BULK_MODULUS"><code class="docutils literal notranslate"><span class="pre">Property.BULK_MODULUS</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.display"><code class="docutils literal notranslate"><span class="pre">Property.display()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cifkit.sources.oliynyk.Property.select"><code class="docutils literal notranslate"><span class="pre">Property.select()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="oled-oliynyk">
+<h1>OLED / Oliynyk<a class="headerlink" href="#oled-oliynyk" title="Link to this heading">#</a></h1>
+<p><strong>OLED</strong> = <strong>O</strong>liynyk <strong>E</strong>lemental <strong>D</strong>ata: 22 physics/chemistry
+properties for 76 elements, for <strong>composition featurization</strong> (ML).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>
+
+<span class="n">oled</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>                    <span class="c1"># not a separate package</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;Si&quot;</span><span class="p">][</span><span class="n">Property</span><span class="o">.</span><span class="n">AW</span><span class="p">]</span>          <span class="c1"># Property is a str Enum (column key)</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;oled.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">oled</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>            <span class="c1"># shape (76, 23)</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Returns</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list_supported_elements()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[str]</span></code> (76 symbols)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">is_formula_supported(formula)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_supported_formulas(formulas)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(supported,</span> <span class="pre">unsupported)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_property_data(Property)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[symbol,</span> <span class="pre">float]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_property_data_for_formula(formula,</span> <span class="pre">Property)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[symbol,</span> <span class="pre">float]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">to_dataframe()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">to_csv(path)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code> path written</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="exact-property-members">
+<h2>Exact <code class="docutils literal notranslate"><span class="pre">Property</span></code> members<a class="headerlink" href="#exact-property-members" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">AW</span></code>, <code class="docutils literal notranslate"><span class="pre">ATOMIC_NUMBER</span></code>, <code class="docutils literal notranslate"><span class="pre">PERIOD</span></code>, <code class="docutils literal notranslate"><span class="pre">GROUP</span></code>, <code class="docutils literal notranslate"><span class="pre">MEND_NUM</span></code>, <code class="docutils literal notranslate"><span class="pre">VAL_TOTAL</span></code>,
+<code class="docutils literal notranslate"><span class="pre">UNPARIED_E</span></code>, <code class="docutils literal notranslate"><span class="pre">GILMAN</span></code>, <code class="docutils literal notranslate"><span class="pre">Z_EFF</span></code>, <code class="docutils literal notranslate"><span class="pre">ION_ENERGY</span></code>, <code class="docutils literal notranslate"><span class="pre">COORD_NUM</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RATIO_CLOSEST</span></code>, <code class="docutils literal notranslate"><span class="pre">POLYHEDRON_DISTORT</span></code>, <code class="docutils literal notranslate"><span class="pre">CIF_RADIUS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PAULING_RADIUS_CN12</span></code>, <code class="docutils literal notranslate"><span class="pre">PAULING_EN</span></code>, <code class="docutils literal notranslate"><span class="pre">MARTYNOV_BATSANOV_EN</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MELTING_POINT_K</span></code>, <code class="docutils literal notranslate"><span class="pre">DENSITY</span></code>, <code class="docutils literal notranslate"><span class="pre">SPECIFIC_HEAT</span></code>, <code class="docutils literal notranslate"><span class="pre">COHESIVE_ENERGY</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BULK_MODULUS</span></code>.</p>
+<p>Use <strong><code class="docutils literal notranslate"><span class="pre">UNPARIED_E</span></code></strong> (as shipped). Column for <code class="docutils literal notranslate"><span class="pre">VAL_TOTAL</span></code> is
+<strong><code class="docutils literal notranslate"><span class="pre">valencee_total</span></code></strong>.</p>
+<p><strong>What each property means</strong> (definitions + ML context from the dataset
+paper’s Table 1): see the full table on the
+<a class="reference internal" href="../tutorials/oled.html"><span class="doc std std-doc">OLED tutorial</span></a> and the short list in the
+<a class="reference internal" href="quick-reference.html"><span class="doc std std-doc">API quick reference</span></a>. Parent 98-feature Excel:
+<a class="reference external" href="https://data.mendeley.com/datasets/bt6gv5z6yv">Mendeley Data bt6gv5z6yv</a>.</p>
+</section>
+<section id="formula-ml-feature-vector">
+<h2>Formula → ML feature vector<a class="headerlink" href="#formula-ml-feature-vector" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.parsers.formula</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formula</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>
+
+<span class="n">oled</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">Formula</span><span class="p">(</span><span class="s2">&quot;NdSi2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parsed_formula</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">parsed</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">prop</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">oled</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">el</span><span class="p">][</span><span class="n">prop</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span> <span class="k">for</span> <span class="n">el</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">parsed</span><span class="p">)</span> <span class="o">/</span> <span class="n">total</span>
+    <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">Property</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Tutorial (full table + CSV):</strong> <a class="reference internal" href="../tutorials/oled.html"><span class="doc std std-doc">OLED</span></a><br />
+<strong>Calibrated tables:</strong> <a class="reference internal" href="quick-reference.html"><span class="doc std std-doc">API quick reference</span></a><br />
+<strong>LLM recipes:</strong> <a class="reference download internal" download="" href="../_downloads/c24a7d34349eaa54e19e6b860828b573/llms.txt"><span class="xref download myst">llms.txt</span></a><br />
+<strong>Dataset paper:</strong> <a class="reference external" href="https://doi.org/10.1016/j.dib.2024.110178">https://doi.org/10.1016/j.dib.2024.110178</a></p>
+</section>
+<section id="oliynyk">
+<h2>Oliynyk<a class="headerlink" href="#oliynyk" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.sources.oliynyk.</span></span><span class="sig-name descname"><span class="pre">Oliynyk</span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>OLED (Oliynyk elemental data) — 22 properties × 76 elements.</p>
+<p><strong>OLED</strong> is the short name for this table. Load it only via this class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cifkit.sources.oliynyk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oliynyk</span><span class="p">,</span> <span class="n">Property</span>
+<span class="n">oled</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;Si&quot;</span><span class="p">][</span><span class="n">Property</span><span class="o">.</span><span class="n">AW</span><span class="p">]</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;oled.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.db">
+<span class="sig-name descname"><span class="pre">db</span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.db" title="Link to this definition">#</a></dt>
+<dd><p>Nested map <code class="docutils literal notranslate"><span class="pre">symbol</span> <span class="pre">-&gt;</span> <span class="pre">{property_column:</span> <span class="pre">value}</span></code>. Property columns
+match <code class="docutils literal notranslate"><span class="pre">Property</span></code> enum <code class="docutils literal notranslate"><span class="pre">.value</span></code> strings (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;atomic_weight&quot;</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, dict[str, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.elements">
+<span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.elements" title="Link to this definition">#</a></dt>
+<dd><p>Supported element symbols (length 76), same order as loaded from Excel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>Dataset paper (Data in Brief): <a class="reference external" href="https://doi.org/10.1016/j.dib.2024.110178">https://doi.org/10.1016/j.dib.2024.110178</a>
+Docs: <a class="reference external" href="https://bobleesj.github.io/cifkit/tutorials/oled.html">https://bobleesj.github.io/cifkit/tutorials/oled.html</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.get_oliynyk_CAF_data">
+<span class="sig-name descname"><span class="pre">get_oliynyk_CAF_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.get_oliynyk_CAF_data" title="Link to this definition">#</a></dt>
+<dd><p>Load the Oliynyk elemental property data from an Excel file.
+The data is stored in a dictionary format with element symbols
+as keys.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">oliynyk</span><span class="o">.</span><span class="n">get_oliynyk_CAF_data</span><span class="p">()</span>
+<span class="go">{</span>
+<span class="go">    &quot;Li&quot;: {&quot;atomic_weight&quot;: 6.941, ...},</span>
+<span class="go">    &quot;Be&quot;: {&quot;atomic_weight&quot;: 9.0122, ...},</span>
+<span class="go">    ...</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Li&quot;</span><span class="p">][</span><span class="s2">&quot;atomic_weight&quot;</span><span class="p">]</span>
+<span class="go">6.941</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.is_formula_supported">
+<span class="sig-name descname"><span class="pre">is_formula_supported</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.is_formula_supported" title="Link to this definition">#</a></dt>
+<dd><p>Check if a formula is supported by the Oliynyk database.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span><span class="o">.</span><span class="n">is_formula_supported</span><span class="p">(</span><span class="s2">&quot;LiFePO4&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span><span class="o">.</span><span class="n">is_formula_supported</span><span class="p">(</span><span class="s2">&quot;FeH&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.get_supported_formulas">
+<span class="sig-name descname"><span class="pre">get_supported_formulas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formulas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.get_supported_formulas" title="Link to this definition">#</a></dt>
+<dd><p>Filter formulas to only include those with supported
+elements.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FeH&quot;</span><span class="p">,</span> <span class="s2">&quot;NdSi2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">supported</span><span class="p">,</span> <span class="n">unsupported</span> <span class="o">=</span> <span class="n">oliynyk</span><span class="o">.</span><span class="n">get_supported_formulas</span><span class="p">(</span><span class="n">formulas</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">supported</span>
+<span class="go">[&quot;NdSi2&quot;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unsupported</span>
+<span class="go">[&quot;FeH&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.list_supported_elements">
+<span class="sig-name descname"><span class="pre">list_supported_elements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.list_supported_elements" title="Link to this definition">#</a></dt>
+<dd><p>List all elements in the Oliynyk database.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="n">oliynyk</span><span class="o">.</span><span class="n">list_supported_elements</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span>
+<span class="go">[&quot;Li&quot;, &quot;Be&quot;, &quot;B&quot;, &quot;C&quot;, &quot;Na&quot;, &quot;Mg&quot;, &quot;Al&quot;, &quot;Si&quot;, &quot;P&quot;, &quot;S&quot;, ...]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.get_property_data_for_formula">
+<span class="sig-name descname"><span class="pre">get_property_data_for_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cifkit.sources.oliynyk.Property" title="cifkit.sources.oliynyk.Property"><span class="pre">Property</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.get_property_data_for_formula" title="Link to this definition">#</a></dt>
+<dd><p>Get property data for individual elements in a given formula.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span><span class="o">.</span><span class="n">get_property_data_for_formula</span><span class="p">(</span><span class="s2">&quot;LiFeP&quot;</span><span class="p">,</span> <span class="n">Property</span><span class="o">.</span><span class="n">AW</span><span class="p">)</span>
+<span class="go">{&quot;Li&quot;: 6.941, &quot;Fe&quot;: 55.845, &quot;O&quot;: 15.999}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.get_property_data">
+<span class="sig-name descname"><span class="pre">get_property_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cifkit.sources.oliynyk.Property" title="cifkit.sources.oliynyk.Property"><span class="pre">Property</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.get_property_data" title="Link to this definition">#</a></dt>
+<dd><p>Get the given property data for all elements in the database.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">property_data</span> <span class="o">=</span> <span class="n">oliynyk</span><span class="o">.</span><span class="n">get_property_data</span><span class="p">(</span><span class="n">Property</span><span class="o">.</span><span class="n">AW</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">property_data</span>
+<span class="go">{&quot;Li&quot;: 6.941, &quot;Be&quot;: 9.0122, &quot;B&quot;: 10.81, ...}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.to_dataframe" title="Link to this definition">#</a></dt>
+<dd><p>Return the full OLED (Oliynyk elemental data) table as a
+<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p>
+<p>Rows are elements (one per supported symbol); columns are
+<code class="docutils literal notranslate"><span class="pre">symbol</span></code> plus the 22 property keys. Sorted by atomic number.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">oliynyk</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(76, 23)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;symbol&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;atomic_weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">28.0855</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Oliynyk.to_csv">
+<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cifkit.sources.oliynyk.Oliynyk.to_csv" title="Link to this definition">#</a></dt>
+<dd><p>Write the OLED table to a CSV file and return the path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Destination file path (created or overwritten).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The same <code class="docutils literal notranslate"><span class="pre">path</span></code>, for convenient chaining.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span> <span class="o">=</span> <span class="n">Oliynyk</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oliynyk</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;oled.csv&quot;</span><span class="p">)</span>
+<span class="go">&#39;oled.csv&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="property">
+<h2>Property<a class="headerlink" href="#property" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cifkit.sources.oliynyk.</span></span><span class="sig-name descname"><span class="pre">Property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cifkit.sources.oliynyk.Property" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>OLED property keys. Members are <code class="docutils literal notranslate"><span class="pre">str</span></code> enums: use as dict keys.</p>
+<p>Exact member names (do not rename when generating code):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AW</span><span class="p">,</span> <span class="n">ATOMIC_NUMBER</span><span class="p">,</span> <span class="n">PERIOD</span><span class="p">,</span> <span class="n">GROUP</span><span class="p">,</span> <span class="n">MEND_NUM</span><span class="p">,</span> <span class="n">VAL_TOTAL</span><span class="p">,</span> <span class="n">UNPARIED_E</span><span class="p">,</span>
+<span class="n">GILMAN</span><span class="p">,</span> <span class="n">Z_EFF</span><span class="p">,</span> <span class="n">ION_ENERGY</span><span class="p">,</span> <span class="n">COORD_NUM</span><span class="p">,</span> <span class="n">RATIO_CLOSEST</span><span class="p">,</span> <span class="n">POLYHEDRON_DISTORT</span><span class="p">,</span>
+<span class="n">CIF_RADIUS</span><span class="p">,</span> <span class="n">PAULING_RADIUS_CN12</span><span class="p">,</span> <span class="n">PAULING_EN</span><span class="p">,</span> <span class="n">MARTYNOV_BATSANOV_EN</span><span class="p">,</span>
+<span class="n">MELTING_POINT_K</span><span class="p">,</span> <span class="n">DENSITY</span><span class="p">,</span> <span class="n">SPECIFIC_HEAT</span><span class="p">,</span> <span class="n">COHESIVE_ENERGY</span><span class="p">,</span> <span class="n">BULK_MODULUS</span>
+</pre></div>
+</div>
+<p>Note the shipped spelling <code class="docutils literal notranslate"><span class="pre">UNPARIED_E</span></code> and column <code class="docutils literal notranslate"><span class="pre">valencee_total</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.AW">
+<span class="sig-name descname"><span class="pre">AW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'atomic_weight'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.AW" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.ATOMIC_NUMBER">
+<span class="sig-name descname"><span class="pre">ATOMIC_NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'atomic_number'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.ATOMIC_NUMBER" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.PERIOD">
+<span class="sig-name descname"><span class="pre">PERIOD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'period'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.PERIOD" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.GROUP">
+<span class="sig-name descname"><span class="pre">GROUP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.GROUP" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.MEND_NUM">
+<span class="sig-name descname"><span class="pre">MEND_NUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Mendeleev_number'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.MEND_NUM" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.VAL_TOTAL">
+<span class="sig-name descname"><span class="pre">VAL_TOTAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'valencee_total'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.VAL_TOTAL" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.UNPARIED_E">
+<span class="sig-name descname"><span class="pre">UNPARIED_E</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'unpaired_electrons'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.UNPARIED_E" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.GILMAN">
+<span class="sig-name descname"><span class="pre">GILMAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Gilman'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.GILMAN" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.Z_EFF">
+<span class="sig-name descname"><span class="pre">Z_EFF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Z_eff'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.Z_EFF" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.ION_ENERGY">
+<span class="sig-name descname"><span class="pre">ION_ENERGY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ionization_energy'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.ION_ENERGY" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.COORD_NUM">
+<span class="sig-name descname"><span class="pre">COORD_NUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'coordination_number'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.COORD_NUM" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.RATIO_CLOSEST">
+<span class="sig-name descname"><span class="pre">RATIO_CLOSEST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ratio_closest'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.RATIO_CLOSEST" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.POLYHEDRON_DISTORT">
+<span class="sig-name descname"><span class="pre">POLYHEDRON_DISTORT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'polyhedron_distortion'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.POLYHEDRON_DISTORT" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.CIF_RADIUS">
+<span class="sig-name descname"><span class="pre">CIF_RADIUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CIF_radius'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.CIF_RADIUS" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.PAULING_RADIUS_CN12">
+<span class="sig-name descname"><span class="pre">PAULING_RADIUS_CN12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pauling_radius_CN12'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.PAULING_RADIUS_CN12" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.PAULING_EN">
+<span class="sig-name descname"><span class="pre">PAULING_EN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pauling_EN'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.PAULING_EN" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.MARTYNOV_BATSANOV_EN">
+<span class="sig-name descname"><span class="pre">MARTYNOV_BATSANOV_EN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Martynov_Batsanov_EN'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.MARTYNOV_BATSANOV_EN" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.MELTING_POINT_K">
+<span class="sig-name descname"><span class="pre">MELTING_POINT_K</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'melting_point_K'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.MELTING_POINT_K" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.DENSITY">
+<span class="sig-name descname"><span class="pre">DENSITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'density'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.DENSITY" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.SPECIFIC_HEAT">
+<span class="sig-name descname"><span class="pre">SPECIFIC_HEAT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'specific_heat'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.SPECIFIC_HEAT" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.COHESIVE_ENERGY">
+<span class="sig-name descname"><span class="pre">COHESIVE_ENERGY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cohesive_energy'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.COHESIVE_ENERGY" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.BULK_MODULUS">
+<span class="sig-name descname"><span class="pre">BULK_MODULUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bulk_modulus'</span></em><a class="headerlink" href="#cifkit.sources.oliynyk.Property.BULK_MODULUS" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.display">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cifkit.sources.oliynyk.Property.display" title="Link to this definition">#</a></dt>
+<dd><p>Display the available elemental properties in a user-friendly
+format.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Property</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+<span class="go">Available elemental properties:</span>
+<span class="go">  1. AW - atomic_weight</span>
+<span class="go">  2. ATOMIC_NUMBER - atomic_number</span>
+<span class="go">  ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cifkit.sources.oliynyk.Property.select">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cifkit.sources.oliynyk.Property.select" title="Link to this definition">#</a></dt>
+<dd><p>Prompt the user to select an elemental property from the
+available options. Returns the selected property.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selected_property</span> <span class="o">=</span> <span class="n">Property</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+<span class="go">Available elemental properties:</span>
+<span class="go">  1. AW - atomic_weight</span>
+<span class="go">  2. ATOMIC_NUMBER - atomic_number</span>
+<span class="go">  ...</span>
+</pre></div>
+</div>
+<p>Enter the number of the property to use: 1</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./api"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="coordination.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Coordination</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="formula.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Formula</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sangjoon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sangjoon Lee.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
