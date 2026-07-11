@@ -1,8 +1,8 @@
 # Installation
 
-`cifkit` is published on [PyPI](https://pypi.org/project/cifkit/). It is
-pure Python and supports Python 3.12 through 3.14 on macOS, Linux, and
-Windows.
+cifkit is published on [PyPI](https://pypi.org/project/cifkit/). The
+package itself is pure Python and supports **Python 3.12 through 3.14**
+on macOS, Linux, and Windows.
 
 ## pip
 
@@ -20,13 +20,20 @@ pip install -e .
 
 ## Dependencies
 
-`cifkit` pulls in a small scientific stack automatically:
+`pip install cifkit` pulls a small scientific stack automatically
+(`requirements/pip.txt`):
 
-- `gemmi` - CIF parsing and symmetry operations
-- `numpy`, `scipy` - distance and geometry math
-- `pandas`, `openpyxl` - the Excel-backed Oliynyk elemental database
-- `matplotlib` - histograms
-- `pyvista` - 3D polyhedron rendering
+| Package | Role |
+|---|---|
+| **gemmi** | CIF parsing and symmetry operations |
+| **numpy**, **scipy** | Distance and geometry math |
+| **pandas**, **openpyxl** | Excel-backed Oliynyk elemental database (OLED) |
+| **matplotlib** | Histograms (`CifEnsemble`) |
+| **pyvista** | 3D polyhedron rendering |
+
+No extra install step is required for ICSD / COD / PCD-style CIFs - those
+are handled by cifkit's preprocess and `db_source` detection, not by
+separate packages.
 
 ## Verify
 
@@ -40,7 +47,7 @@ print(cif.formula)
 ```
 
 ```text
-1.2.1
+1.2.2
 GdSb
 ```
 
