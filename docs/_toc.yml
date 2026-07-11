@@ -16,8 +16,6 @@ parts:
   - caption: API reference
     chapters:
       - file: api/index
-      - file: api/quick-reference
-        title: Quick reference (LLM)
       - file: api/cif
       - file: api/cif-ensemble
       - file: api/coordination
@@ -25,6 +23,8 @@ parts:
       - file: api/formula
       - file: api/element-sorter
       - file: api/sources
+      - file: api/quick-reference
+        title: Quick reference (LLM)
   - caption: Maintainers
     chapters:
       - file: maintainer/release
